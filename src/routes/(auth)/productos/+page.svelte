@@ -1,6 +1,4 @@
 <script>
-	//import { enhance } from '$app/forms';
-	
 	export let data;
 	export let form;
 	export const { productos} = data;
@@ -11,26 +9,35 @@ function toggleModal() {
   isOpen = !isOpen;
 }
 
+let selectedProducto;
+let selectedNombre;
+let selectedPrecio;
 
 </script>
 
 <main class="container">	
 <table>
   <tr>
-	<th scope="col">Producto_id</th>
-	<th scope="col">Nombre</th>
-	<th scope="col">Precio</th>
-	<th scope="col">Accion</th>
+	<th>Producto_id</th>
+	<th>Nombre</th>
+	<th>Precio</th>
+	<th>Accion</th>
 </tr>
 
-{#each productos as prod (prod.producto_id) }
+{#each productos as prod}
 <tbody>
-	<td  >{prod.producto_id}</td>
-	<td  >{prod.nombre}</td>
-	<td  >{prod.precio}</td>
+	<tr>
+	<td>{prod.producto_id}</td>
+	<td>{prod.nombre}</td>
+	<td>{prod.precio}</td>
 	<td>
 		<!---------------------------------------------------------------------------Modal para editar-------->
-	 <button on:click={toggleModal} class="outline"> Editar</button> 
+		<button on:click={()=>{ 
+			selectedProducto=prod.producto_id;
+			selectedNombre=prod.nombre;
+			selectedPrecio=prod.precio;
+			toggleModal();}} class="outline">Editar</button>
+
 		 {#if isOpen}
 			<dialog open>
 				<article>
@@ -38,32 +45,27 @@ function toggleModal() {
 						<a href="#close" aria-label="Close" class="close" on:click={toggleModal}></a>
 							Porfavor edite el producto!!
 					</header>	
-					<form method="POST" action="?/editar" >
-							<input type="hidden" name="producto_id" bind:value={prod.producto_id} >	
-							<input type="text" name="nombre" bind:value={prod.nombre} />
-							<input type="text" name="precio"  bind:value={prod.precio}/>
-							<button  on:click={toggleModal}>Cancelar</button>
-							<button type="submit" >Confirmar</button>
+					<form method="POST" action="?/editar">
+							<input type="hidden" name="producto_id" bind:value={selectedProducto}>	
+							<input type="text" name="nombre" placeholder={selectedNombre}/>
+							<input type="text" name="precio" placeholder={selectedPrecio}/>
+							<button on:click={toggleModal}>Cancelar</button>
+							<button type="submit">Confirmar</button>
 					    </form>
 					</article>
 				</dialog>
 				{/if}
 			
-			  <!-----------------Elimina el producto--------------------->
-			 <div> 
-			  <form method="POST" action="?/delete" >
-				<input type="hidden" name="producto_id" >	
-                <button type="submit"> Eliminar</button> 
-				
+<!----------------------------------Elimina el producto--------------------->
+			  <form method="POST" action="?/delete" on:submit={()=>{selectedProducto=prod.producto_id;}}>
+				<input type="hidden" name="producto_id" bind:value={selectedProducto}>	
+                <button type="submit">Eliminar</button> 	
               </form>	
-			</div>
 			</td>
+		  </tr>
 		</tbody>
-    {/each}	
-	
-    
-    
-</table>
+      {/each}	
+   </table>
 </main>
 
 <main class="container">

@@ -1,7 +1,9 @@
  //import { redirect } from '@sveltejs/kit';
+
 import { error } from '@sveltejs/kit';
 import { BASE_URL } from '../../../lib/utils.js';
 import {fetchApi} from '../../../lib/fetchApi.js';
+
 
 
 export const load = async ({ locals }) => {
@@ -16,7 +18,7 @@ export const load = async ({ locals }) => {
 
 
 
-export const actions = {
+export const actions= {
   addProd: async ({ request, locals }) => {
     const formData = await request.formData();
     const nombre = formData.get('nombre');
