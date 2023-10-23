@@ -1,0 +1,27 @@
+// Está es la URL donde está desplegada la API
+@baseUrl = https://fg-api-rest.fly.dev
+
+// Aquí es para chequear que el servicio esté funcionando y devuelve la versión activa
+GET {{baseUrl}}/
+
+###
+// para hacer login de un usuario, los usuarios de prueba son a@a.com y b@b.com con la misma clave
+// esto devuelve un token que deberás utilizarlo en todos los llamados en el header Authorization: Bearer {{token}}
+// de esta manera la API identifica al usuario, con sus permisos.
+// Para hacer logout, solo debes borrar en tu app el token y hacer login nuevamente.
+POST {{baseUrl}}/usuarios/login 
+Content-Type: application/json
+
+{
+  "email": "a@a.com",
+  "clave": "123"
+}
+
+
+###
+@token = eyJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvX2lkIjoxLCJub21icmUiOiJhQGEuY29tIiwiaWF0IjoxNjk3NDY0MTAzfQ.Jx6HocdoKz8H7kxPqrVjmEqYBLmjODjw3CHoWdxjLGs
+
+// para recuperar los datos del usuario, es el perfil
+// más adelante agregaremos los los permisos y definiremos las opciones de menu
+GET {{baseUrl}}/usuarios/perfil HTTP/1.1 
+Authorization: Bearer {{token}}

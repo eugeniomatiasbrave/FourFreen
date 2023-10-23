@@ -1,0 +1,43 @@
+@baseUrl = https://fg-api-rest.fly.dev
+@token = eyJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvX2lkIjoxLCJub21icmUiOiJhQGEuY29tIiwiaWF0IjoxNjk3NDY0MTAzfQ.Jx6HocdoKz8H7kxPqrVjmEqYBLmjODjw3CHoWdxjLGs
+
+// Recupera todos los productos
+GET {{baseUrl}}/productos HTTP/1.1 
+Authorization: Bearer {{token}}
+
+###
+// recupera todos los productos con la opción limit y offset para realizar paginado (en principio por la cantidad de items no hace falta)
+GET {{baseUrl}}/productos?limit=5&offset=2 HTTP/1.1 
+Authorization: Bearer {{token}}
+
+###
+// recuperda los datos de un producto en particular con su :id en el path
+GET {{baseUrl}}/productos/7 HTTP/1.1 
+Authorization: Bearer {{token}}
+
+###
+// para dar de alta un producto, en el boy va el json y devuelve los datos enviados más el id del producto
+POST {{baseUrl}}/productos HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "Cerezas",
+  "precio": 120.52
+}
+
+###
+// para actualizar nombre y/o precio del producto, va el :id en el path y los campos en el body
+PATCH {{baseUrl}}/productos/22 HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "Cerezas",
+  "precio": 1200.52
+}
+
+###
+//para eliminar un producto, va el :id en el path
+DELETE {{baseUrl}}/productos/48 HTTP/1.1
+Authorization: Bearer {{token}}
