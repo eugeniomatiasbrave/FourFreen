@@ -1,20 +1,26 @@
 <script>
-	import '../style.css';
-	export let form;
+import '../style.css';
+export let form;
+
+let isOpen = false;
+
+function toggleModal() {
+  isOpen = !isOpen;
+}
+
 </script>
 
 	
 <div class="grid">
 <div></div>
-
 <!-----------login--------------->
 <div>
   <main class="container">
 	<article class="grid">
 		<div>
 			<hgroup>
-				<h1>Sign in</h1>
-				<h2>A minimalist layout for Login pages</h2>
+				<h1>Login</h1>
+				<h2>Por favor ingrese sus datos si esta logueado</h2>
 			  </hgroup>
     <form method="POST">
 	 <input type="text" name="username" placeholder="Usuario" />
@@ -24,7 +30,27 @@
 		<span>Logueado</span>
 	{/if}
 	</form>
-	<a href="#1">Registrarse</a>
+	<!----------------------------------------------------------------Modal de Registro-------->
+	<a href="#1" on:click={toggleModal}>Registrarse</a>
+ {#if isOpen}
+	<dialog open>
+		<article>
+			<div>
+			<header>
+				<a href="#close" aria-label="Close" class="close" on:click={toggleModal}></a>
+				<h3>Registro</h3>
+			</header>	
+			<form method="POST" action="?/registrarse">
+					<input type="hidden" name="producto_id">	
+					<input type="text" name="username" placeholder="Usuario" />
+					<input type="password" name="password" placeholder="Contraseña" />
+					<button type="submit" class="outline">Crear Cuenta</button>
+			    </form>
+			</div>
+		</article>
+		</dialog>
+		{/if}
+	
  </div>
 	
 	</article>	

@@ -1,9 +1,9 @@
 <script>
-	export let data;
-	export let form;
-	export const { productos} = data;
+export let data;
+export let form;
+export const { productos} = data;
 
-	let isOpen = false;
+let isOpen = false;
 
 function toggleModal() {
   isOpen = !isOpen;
