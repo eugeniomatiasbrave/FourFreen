@@ -24,7 +24,7 @@
 		<span>Logueado</span>
 	{/if}
 	</form>
-	<a href="">Registrarse</a>
+	<a href="#1">Registrarse</a>
  </div>
 	
 	</article>	
