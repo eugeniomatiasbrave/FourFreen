@@ -10,7 +10,12 @@
 <!-----------login--------------->
 <div>
   <main class="container">
-	<article>
+	<article class="grid">
+		<div>
+			<hgroup>
+				<h1>Sign in</h1>
+				<h2>A minimalist layout for Login pages</h2>
+			  </hgroup>
     <form method="POST">
 	 <input type="text" name="username" placeholder="Usuario" />
 	 <input type="password" name="password" placeholder="Contraseña" />
@@ -20,6 +25,8 @@
 	{/if}
 	</form>
 	<a href="">Registrarse</a>
+ </div>
+	
 	</article>	
   </main>
 </div>
