@@ -14,10 +14,8 @@ let selectedNombre;
 let selectedPrecio;
 
 </script>
-
+<h1>Productos</h1>
 <main>	
-
-  
   <table class="container">
   <tr>
 	<th>Producto_id</th>

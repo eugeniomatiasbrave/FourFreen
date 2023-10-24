@@ -3,18 +3,64 @@
 	export let data;
 </script>
 
- <main>
-  <nav class="container-fluid">
-		<div><a href="/" >Showcase</a></div>
-		{#if data.usuario === undefined}
-		<div><a href="/login" >Login</a></div>
-		{:else}
-		<p>{data.usuario.nombre}</p>
-		<div><a href="/productos">productos</a></div>
-		<div><a href="/logout" >Logout</a></div>
-		{/if}
+
+<nav>
+	<ul>
+	  <li><strong>Brand</strong></li>
+	</ul>
+	<ul>
+	  <li>
+		<ul>
+			<li><a href="/" >Showcase</a></li>
+			{#if data.usuario === undefined}
+			<li><a href="/login" >Login</a></li>
+			{:else}
+			<li><a href="/productos">Productos</a></li>
+			<li><a href="/pedidos">Pedidos</a></li>
+			<li><a href="/clientes">Clientes</a></li>
+			<li><a href="/logout" >Logout</a></li>
+			{/if}
+		</ul>
+	  </li>
+	</ul>
   </nav>
-</main>
+  
+	
+	  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	  
 
 <slot />
 

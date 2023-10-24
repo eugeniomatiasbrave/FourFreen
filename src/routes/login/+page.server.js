@@ -2,7 +2,7 @@ import { error, redirect } from '@sveltejs/kit';
 import { BASE_URL } from '../../lib/utils.js';
 
 export const actions = {
-	default: async ({ cookies, request }) => {
+	login: async ({ cookies, request }) => {
 		const formData = await request.formData();
 		const username = formData.get('username');
 		const password = formData.get('password');
