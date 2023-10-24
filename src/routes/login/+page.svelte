@@ -1,9 +1,15 @@
 <script>
+	import '../style.css';
 	export let form;
 </script>
 
+	
+<div class="grid">
+<div></div>
 
-<main class="container">
+<!-----------login--------------->
+<div>
+  <main class="container">
 	<article>
     <form method="POST">
 	 <input type="text" name="username" placeholder="Usuario" />
@@ -13,5 +19,16 @@
 		<span>Logueado</span>
 	{/if}
 	</form>
-	</article>
-</main>
+	<a href="">Registrarse</a>
+	</article>	
+  </main>
+</div>
+
+<div></div>
+</div>
+
+
+
+<style>
+	
+</style>

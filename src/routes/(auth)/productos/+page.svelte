@@ -15,8 +15,10 @@ let selectedPrecio;
 
 </script>
 
-<main class="container">	
-<table>
+<main>	
+
+  
+  <table class="container">
   <tr>
 	<th>Producto_id</th>
 	<th>Nombre</th>
@@ -52,7 +54,7 @@ let selectedPrecio;
 							<button on:click={toggleModal}>Cancelar</button>
 							<button type="submit">Confirmar</button>
 					    </form>
-					</article>
+				</article>
 				</dialog>
 				{/if}
 			
@@ -66,22 +68,22 @@ let selectedPrecio;
 		</tbody>
       {/each}	
    </table>
-</main>
 
-<main class="container">
-	<article>
+
+	
+	<div class="container">
     <form method="POST" action="?/addProd" >
 	 <input type="text" name="nombre" placeholder="escribe aqui el producto" />
 	 <input type="text" name="precio" placeholder="escribe aqui el precio" />
 	 <button type="submit">add Productos</button>
-	 
-	
 	 {#if form?.success}
 	 <span>Agregado</span>
      {/if}
-	
 	</form>
-	</article>
+   </div>
+	
+ 
+
 </main>
 
 
