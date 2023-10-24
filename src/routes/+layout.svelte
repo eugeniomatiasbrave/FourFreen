@@ -3,7 +3,6 @@
 	export let data;
 </script>
 
-
 <nav>
 	<ul>
 	  <li><strong>Brand</strong></li>

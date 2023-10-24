@@ -16,8 +16,6 @@ export const load = async ({ locals }) => {
 
 }  
 
-
-
 export const actions= {
   addProd: async ({ request, locals }) => {
     const formData = await request.formData();

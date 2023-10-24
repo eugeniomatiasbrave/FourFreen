@@ -26,6 +26,8 @@ body>main {
   h1 {
 	font-size: 2rem;
 	text-align: center;
+	padding: 0 ;
+	margin: 0;
 }
 
  h2 {
@@ -45,9 +47,22 @@ body>main {
   }
   
   article div {
-	padding: 1rem;
+	padding: 0rem;
   }
   
+
+
+  @media (min-width: 375px) {
+	body>main {
+	  padding: 1rem 0;
+	}
+
+	.grid>div:nth-of-type(2) {
+		display: block;
+	  }
+}
+
+
   @media (min-width: 576px) {
 	body>main {
 	  padding: 1.25rem 0;
@@ -56,6 +71,10 @@ body>main {
 	article div {
 	  padding: 1.25rem;
 	}
+
+	.grid>div:nth-of-type(2) {
+		display: block;
+	  }
   }
   
   @media (min-width: 768px) {
@@ -77,9 +96,14 @@ body>main {
 	  padding: 1.75rem 0;
 	}
   
+	
 	article div {
 	  padding: 1.75rem;
 	}
+
+	.grid>div:nth-of-type(2) {
+		display: block;
+	  }
   }
   
   @media (min-width: 1200px) {
@@ -95,19 +119,14 @@ body>main {
   nav [role="link"].secondary:is([aria-current], :hover, :active, :focus) {
 	background-color: transparent;
 	color: var(--secondary-hover);
+	margin: 0 20px 0 2px;
   }
   
   article div:nth-of-type(2) {
 	display: none;
-	background-color: #374956;
+	background-color: #fcfdfd;
 	background-position: center;
 	background-size: cover;
-  }
-  
-  @media (min-width: 992px) {
-	.grid>div:nth-of-type(2) {
-	  display: block;
-	}
   }
   
   body>footer {
