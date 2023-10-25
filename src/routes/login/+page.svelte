@@ -41,9 +41,10 @@ function toggleModal() {
 				<h3>Registro</h3>
 			</header>	
 			<form method="POST" action="?/registro">
-					<input type="hidden" name="producto_id">	
+					
 					<input type="text" name="username" placeholder="Usuario" />
-					<input type="password" name="password" placeholder="Contraseña" />
+					<input type="text" name="password" placeholder="Contraseña" />
+					
 					<button type="submit" class="outline">Crear Cuenta</button>
 			    </form>
 			</div>

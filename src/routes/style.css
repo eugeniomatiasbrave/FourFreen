@@ -34,6 +34,14 @@ body>main {
 	font-size: 1rem;
 }
 
+ul, li {
+	padding: 0;
+	margin: 0;
+}
+
+
+
+
 /*
   h1, h2, p {
 	font-weight: 400; }
@@ -60,6 +68,10 @@ body>main {
 	.grid>div:nth-of-type(2) {
 		display: block;
 	  }
+
+	  img {
+		width: 25%;
+	}
 }
 
 
@@ -75,6 +87,10 @@ body>main {
 	.grid>div:nth-of-type(2) {
 		display: block;
 	  }
+
+	  img {
+		width: 25%;
+	  }
   }
   
   @media (min-width: 768px) {
@@ -89,6 +105,10 @@ body>main {
 	h1 {
 		font-size: 2.4rem;
 	}
+
+	img {
+		width: 25%;
+	  }
   }
   
   @media (min-width: 992px) {
@@ -96,13 +116,16 @@ body>main {
 	  padding: 1.75rem 0;
 	}
   
-	
 	article div {
 	  padding: 1.75rem;
 	}
 
 	.grid>div:nth-of-type(2) {
 		display: block;
+	  }
+
+	  img {
+	    width: 25%;
 	  }
   }
   
@@ -114,6 +137,10 @@ body>main {
 	article div {
 	  padding: 2rem;
 	}
+
+	img {
+		width: 25%;
+	  }
   }
   
   nav [role="link"].secondary:is([aria-current], :hover, :active, :focus) {

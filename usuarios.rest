@@ -17,7 +17,6 @@ Content-Type: application/json
   "clave": "123"
 }
 
-
 ###
 @token = eyJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvX2lkIjoxLCJub21icmUiOiJhQGEuY29tIiwiaWF0IjoxNjk3NDY0MTAzfQ.Jx6HocdoKz8H7kxPqrVjmEqYBLmjODjw3CHoWdxjLGs
 
@@ -25,3 +24,9 @@ Content-Type: application/json
 // más adelante agregaremos los los permisos y definiremos las opciones de menu
 GET {{baseUrl}}/usuarios/perfil HTTP/1.1 
 Authorization: Bearer {{token}}
+
+
+
+
+
+
