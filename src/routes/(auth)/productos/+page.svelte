@@ -1,13 +1,11 @@
 <script>
+import logo3 from '$lib/img/LogoFourGreen2.png';
 export let data;
 export let form;
-export const { productos} = data;
-
+export const {productos}=data;
 
 let isOpen = false;
 let isOpenAdd = false;
-
-
 
 function toggleModal() {
   isOpen = !isOpen;
@@ -31,7 +29,7 @@ function filterProductos() {
      });	 
  }
 
- let searchTerm = '';
+let searchTerm = '';
 
 function reset() {
 searchTerm = '';
@@ -45,13 +43,12 @@ filteredProductos = productos;
 	<div class="grid">
 	    <div>
           <input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search">
-		  <button  on:click|preventDefault={filterProductos}>Filtrar</button>
+		</div>
+		<div>
+		  <button  on:click|preventDefault={filterProductos} >Filtrar</button>
 		  <button  on:click|preventDefault={reset}>Reset</button>
-		 <!-- Search -->
-	    </div>
-	    <div>
-	      <button on:click={ModalAdd} class="outline">add Productos</button> <!-----------------------------------------Modal para crear Prod-------->
-	    </div>
+	      <button  on:click={ModalAdd} class="outline" >add Productos</button> <!-----------------------------------------Modal para crear Prod-------->
+		</div>
 	</div>	
 	  {#if isOpenAdd}
 		 <dialog open >
@@ -65,8 +62,8 @@ filteredProductos = productos;
 			 <input type="text" name="nombre" placeholder="escribe aqui el producto" />
 			 <input type="text" name="precio" placeholder="escribe aqui el precio" />
 			 <footer>
-				<a on:click={ModalAdd} href="#cancel" role="button" class="secondary">Cancel</a>
-				<a type="submit" href="#confirm" role="button">Confirm</a>
+				<button on:click={ModalAdd} class="secondary">Cancel</button>
+				<button type="submit">Confirm</button>
 			  </footer>
 			</form>
 			{#if form?.success}
@@ -79,15 +76,18 @@ filteredProductos = productos;
 	
   <table class="container">
   <tr>
+	<th>Img</th>
 	<th>Producto_id</th>
 	<th>Nombre</th>
 	<th>Precio</th>
-	<th>Accion</th>
+	<th>Editar</th>
+	<th>Eliminar</th>
   </tr>
 
 {#each filteredProductos as prod}
  <tbody>
 	<tr>
+	<td><img src={logo3} alt='logo3' width="25%"/></td>
 	<td>{prod.producto_id}</td>
 	<td>{prod.nombre}</td>
 	<td>{prod.precio}</td>
@@ -96,7 +96,7 @@ filteredProductos = productos;
 			selectedProducto=prod.producto_id;
 			selectedNombre=prod.nombre;
 			selectedPrecio=prod.precio;
-			toggleModal();}} class="outline">Editar</button>
+			toggleModal()}} >Editar</button>
 		 {#if isOpen}
 			<dialog open>
 				<article>
@@ -107,23 +107,25 @@ filteredProductos = productos;
 					</header>	
 					<form method="POST" action="?/editar">
 							<input type="hidden" name="producto_id" bind:value={selectedProducto}>	
-							<input type="text" name="nombre" placeholder={selectedNombre}/>
-							<input type="text" name="precio" placeholder={selectedPrecio}/>
+							<input type="text" name="nombre" value={selectedNombre}/>
+							<input type="text" name="precio" value={selectedPrecio}/>
 							<footer>
-								<a on:click={toggleModal} href="#cancel" role="button" class="secondary">Cancel</a>
-								<a type="submit" href="#confirm" role="button">Confirm</a>
-							  </footer>			
+								<button on:click={toggleModal}  class="secondary">Cancel</button>
+								<button type="submit" >Confirm</button>
+							</footer>  		
 					    </form>
 					</div>
 				</article>
 				</dialog>
 				{/if}
-			
+			</td>
 <!----------------------------------Elimina el producto--------------------->
-			  <form method="POST" action="?/delete" on:submit={()=>{selectedProducto=prod.producto_id;}}>
-				<input type="hidden" name="producto_id" bind:value={selectedProducto}>	
-                <button type="submit">Eliminar</button> 	
-              </form>	
+             <td>
+			  <form method="POST" action="?/delete" on:submit={()=>{selectedProducto=prod.producto_id}}  >
+				<input type="hidden"  name="producto_id" bind:value={selectedProducto}>	
+				<button  type="submit">Eliminar</button> 
+              </form>
+			  	
 			</td>
 		  </tr>
 		</tbody>
@@ -131,6 +133,13 @@ filteredProductos = productos;
    </table>
 </article>
 
+
+<style>
+
+	
+	
+	
+</style>
 
 
 
