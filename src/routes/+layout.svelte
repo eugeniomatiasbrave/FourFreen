@@ -1,11 +1,12 @@
 <script>
 	import './style.css';
+	import logo from '$lib/img/LogoFourGreens2021.png';
 	export let data;
 </script>
 
 <nav>
 	<ul>
-	  <li><strong>Brand</strong></li>
+	  <li><a href="#1"><img src={logo} alt='logo1' width="25%"/></a></li>
 	</ul>
 	<ul>
 	  <li>
@@ -23,48 +24,17 @@
 	  </li>
 	</ul>
   </nav>
-  
-	
-	  
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	  
+
 
 <slot />
 
-
-
 <style>
-	
+	img{
+		padding: 0;
+		margin: 0;
+	}
 </style>
+
+
+
+
