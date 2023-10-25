@@ -3,8 +3,11 @@ export let data;
 export let form;
 export const { productos} = data;
 
+
 let isOpen = false;
 let isOpenAdd = false;
+
+
 
 function toggleModal() {
   isOpen = !isOpen;
@@ -18,18 +21,37 @@ function ModalAdd() {
   isOpenAdd = !isOpenAdd;
 }
 
+let filteredProductos = productos;
+
+function filterProductos() {
+     filteredProductos = productos.filter(prod => {
+         return prod.producto_id.toString().includes(searchTerm.toString()) ||
+                prod.nombre.toString().includes(searchTerm.toString()) ||
+                prod.precio.toString().includes(searchTerm.toString()) ;       
+     });	 
+ }
+
+ let searchTerm = '';
+
+function reset() {
+searchTerm = '';
+filteredProductos = productos;
+}
 </script>
 
 <h1>Productos</h1>
 	
 <article class="container">	
 	<div class="grid">
-	  <div>
-        <input type="search" id="search" name="search" placeholder="Search"> <!-- Search -->
-	  </div>
-	  <div>
-	    <button on:click={ModalAdd} class="outline">add Productos</button> <!-----------------------------------------Modal para crear Prod-------->
-	  </div>
+	    <div>
+          <input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search">
+		  <button  on:click|preventDefault={filterProductos}>Filtrar</button>
+		  <button  on:click|preventDefault={reset}>Reset</button>
+		 <!-- Search -->
+	    </div>
+	    <div>
+	      <button on:click={ModalAdd} class="outline">add Productos</button> <!-----------------------------------------Modal para crear Prod-------->
+	    </div>
 	</div>	
 	  {#if isOpenAdd}
 		 <dialog open >
@@ -63,7 +85,7 @@ function ModalAdd() {
 	<th>Accion</th>
   </tr>
 
-{#each productos as prod}
+{#each filteredProductos as prod}
  <tbody>
 	<tr>
 	<td>{prod.producto_id}</td>
@@ -108,6 +130,7 @@ function ModalAdd() {
       {/each}	
    </table>
 </article>
+
 
 
 
