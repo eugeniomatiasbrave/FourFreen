@@ -1,12 +1,66 @@
 <script>
-import logo3 from '$lib/img/LogoFourGreen2.png';
+//import logo3 from '$lib/img/LogoFourGreen2.png';
+export let form;
 export let data;
 export const { perfil} = data;
 
+const clientes = [{
+	img: "img",
+    cliente_id: "1",
+    nombre: "Clara Brave",
+    email: "c@c.com",
+    telefono: "1577777777",
+    diereccion: "Habana 3355",
+    textArea: "Compra mucho en FourGreen",
+}];
+
+const cliente={ 
+	  img: "",
+      cliente_id: "",
+      nombre: "",
+      email: "",
+      telefono: "",
+      diereccion: "",
+      textArea: ""
+};
+
+
+
 let isOpen = false;
+let isOpenAdd = false;
+let isOpenEd = false;
 
 function toggleModal() {
   isOpen = !isOpen;
+}
+
+let selectedCliente_id;
+let selectedNombre;
+let selectedEmail;
+
+function ModalAdd() {
+  isOpenAdd = !isOpenAdd;
+}
+
+function ModalEd() {
+  isOpenEd = !isOpenEd;
+}
+
+let filteredClientes = clientes;
+
+function filterClientes() {
+     filteredClientes = clientes.filter(client => {
+         return client.cliente_id.toString().includes(searchTerm.toString()) ||
+		        client.nombre.toString().includes(searchTerm.toString()) ||
+		        client.email.toString().includes(searchTerm.toString()) ;       
+     });	 
+ }
+
+let searchTerm = '';
+
+function reset() {
+searchTerm = '';
+filteredClientes = clientes;
 }
 
 
@@ -35,51 +89,135 @@ function toggleModal() {
 		</dialog>
 		{/if} 
 	</div>
-	
 
-	<article class="container">
-	  <table role="grid">
-		<thead>
-	  <tr>
-		<th scope="col">Img</th>
-		<th scope="col">#Pedido</th>
-		<th scope="col">Producto</th>
-		<th scope="col">Cantidad</th>
-		<th scope="col">Precio</th>
-		<th scope="col">SubTotal</th>
-		<th scope="col">Check</th>
-		<th scope="col">Accion</th>
-	  </tr>
-	</thead>
-	 <!---{#each filteredProductos as prod}--->
-	 <tbody>
-		<tr>
-		<th scope="row"><img src={logo3} alt='logo3' width="25%"/></th>
-		<td>#54776</td>
-		<td>Lechuga</td>
-		<td>2</td>
-		<td>$ 300</td>
-		<td>$ 600</td>
-		<td>Check</td>
-		<td>Accion</td>
-		</tr>
+    <main class="container-xl">
+	<div class="grid">
+     <aside>
+	<figure>
+    <div>
+		<input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search">
+	  </div>
+	  <div>
+		<button  on:click|preventDefault={filterClientes} >Filtrar</button>
+		<button  on:click|preventDefault={reset}>Reset</button>
+	</figure>
+</aside>
+<section>
+ <article >	
+	<div>
+	<div>
+	    <button  on:click={ModalAdd} class="outline" >add Clientes</button> <!-----------------------------------------Modal para crear Prod-------->
+	</div>
+	  {#if isOpenAdd}
+		 <dialog open >
+			<article>
+			<div>
+				<header>
+					<a href="#close" aria-label="Close" class="close" on:click={ModalAdd}></a>
+					<p>Porfavor Agregar nuevo cliente!!</p>
+				</header>	
+			<form method="POST" >
+			 <input type="text" name="nombre" placeholder="escribe aqui el nombre" />
+			 <input type="email" name="email" placeholder="escribe aqui el email" />
+			 <footer>
+				<button on:click={ModalAdd} class="secondary">Cancel</button>
+				<button type="submit">Confirm</button>
+			  </footer>
+			</form>
+			{#if form?.success}
+			<span>Agregado</span>
+			{/if}
+		</div>
+		</article>
+		</dialog>
+      {/if}	
+	</div>
+	  
+<figure>
+  <table role="grid">
+	<thead>
+  <tr>
+<th scope="col">Img</th>
+<th scope="col">#Cliente</th>
+<th scope="col">Nombre</th>
+<th scope="col">Email</th>
+<th scope="col">Telefono</th>
+<th scope="col">Diereccion</th>
+<th scope="col">Text Area</th>
+<th scope="col">Editar</th>
+<th scope="col">Eliminar</th>
+</tr>
+</thead>
+{#each filteredClientes as cli}
+ <tbody>
+	<tr>
+	<th scope="row">img</th>
+	<td>{cli.cliente_id}</td>
+    <td>{cli.nombre}</td>
+    <td>{cli.email}</td>
+    <td>{cli.telefono}</td>
+    <td>{cli.diereccion}</td>
+    <td>{cli.textArea}</td>
+	<td>	
+	<button on:click={()=>{   //<!-----------------------------------------Modal para editar-------->
+			selectedCliente_id=cli.cliente_id;
+			selectedNombre=cli.nombre;
+			selectedEmail=cli.email;
+			ModalEd()}} >Editar</button>
+
+		 {#if isOpenEd}
+			<dialog open>
+				<article>
+					<div>
+					<header>
+						<a href="#close" aria-label="Close" class="close" on:click={ModalEd}></a>
+							<p>Porfavor edite el cliente!!</p>
+					</header>	
+					<form method="POST" >
+							<input type="hidden" name="cliente_id" bind:value={selectedCliente_id}>	
+							<input type="text" name="nombre" value={selectedNombre}/>
+							<input type="text" name="email" value={selectedEmail}/>
+							<footer>
+								<button on:click={ModalEd}  class="secondary">Cancel</button>
+								<button type="submit">Confirm</button>
+							</footer>  		
+					    </form>
+					</div>
+				</article>
+				</dialog>
+				{/if}
+			</td>
+<!----------------------------------Elimina el cliente--------------------->
+             <td>
+			  <form method="POST" on:submit={()=>{selectedCliente_id=cli.cliente_id}}  >
+				<input type="hidden"  name="cliente_id" bind:value={selectedCliente_id}>	
+				<button  type="submit">Eliminar</button> 
+              </form>	  	
+			</td>
+		  </tr>
 		</tbody>
-	   <!---{/each}---->  
-	   <tfoot>
-		<tr>
-		  <th scope="col"></th>
-		  <td >Total</td>
-		  <td >Total</td>
-		  <td >Total</td>
-		  <td >Total</td>
-		  <td >Total</td>
-		  <td >Total</td>
-		  <td >Total</td>
-		</tr>
-	  </tfoot> 	
-	   </table>
-	</article>
-	</main>
+      {/each}	
+   </table>
+   <tfoot>
+</tfoot> 	
+   </figure>
+</article>
+</section>
+</div>
+</main>
+
+</main>
+
+<style>
+
+main .grid {
+	grid-column-gap: var(--spacing-1);
+	grid-template-columns: 20% auto;
+	padding: 0 6rem 0 6rem ;
+ }
+	
+	
+</style>
 	
 	
 

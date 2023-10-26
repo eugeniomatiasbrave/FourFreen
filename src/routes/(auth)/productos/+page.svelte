@@ -133,8 +133,7 @@ filteredProductos = productos;
 			  <form method="POST" action="?/delete" on:submit={()=>{selectedProducto=prod.producto_id}}  >
 				<input type="hidden"  name="producto_id" bind:value={selectedProducto}>	
 				<button  type="submit">Eliminar</button> 
-              </form>
-			  	
+              </form> 	
 			</td>
 		  </tr>
 		</tbody>
