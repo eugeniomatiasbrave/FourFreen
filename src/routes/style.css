@@ -129,11 +129,7 @@ ul, li {
 	    width: 25%;
 	  }
 
-	  main .grid {
-		grid-column-gap: var(--spacing-1);
-		grid-template-columns: 20% auto;
-		padding: 0 6rem 0 6rem ;
-	  }
+	
   }
   
   @media (min-width: 1200px) {

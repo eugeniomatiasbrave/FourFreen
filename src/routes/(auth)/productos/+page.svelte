@@ -52,9 +52,9 @@ filteredProductos = productos;
 </aside>
 <section>
  <article >	
-	<div class="grid">
-    <div></div>
-    <div></div>
+	<div >
+    
+    
 	<div>
 	    <button  on:click={ModalAdd} class="outline" >add Productos</button> <!-----------------------------------------Modal para crear Prod-------->
 	</div>
@@ -150,7 +150,11 @@ filteredProductos = productos;
 
 <style>
 
-	
+main .grid {
+	grid-column-gap: var(--spacing-1);
+	grid-template-columns: 20% auto;
+	padding: 0 6rem 0 6rem ;
+ }
 	
 	
 </style>
