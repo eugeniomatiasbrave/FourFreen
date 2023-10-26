@@ -1,8 +1,6 @@
 <script>
 import logo3 from '$lib/img/LogoFourGreen2.png';
 
-
-
 </script>
 
 <h1>Clientes</h1>

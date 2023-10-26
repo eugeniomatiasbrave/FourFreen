@@ -17,13 +17,13 @@
 		<ul >
 			<li class="menu"><a href="/" >Showcase</a></li>
 			{#if data.usuario === undefined}
-			<li><a href="/login" >Login</a></li>
+			<li><a href="/login">Login</a></li>
 			{:else}
 			<li><a href="/productos">Productos</a></li>
 			<li><a href="/pedidos">Pedidos</a></li>
 			<li><a href="/clientes">Clientes</a></li>
 			<li><a href="/perfil">Perfil</a></li>
-			<li><a href="/logout" >Logout</a></li>
+			<li><a href="/logout">Logout</a></li>
 			{/if}
 		</ul>
 	  </li>

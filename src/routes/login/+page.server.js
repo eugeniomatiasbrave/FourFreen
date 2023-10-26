@@ -5,7 +5,7 @@ import { BASE_URL } from '../../lib/utils.js';
 
 
 export const actions = {
-	login: async ({ cookies, request }) => {
+	default: async ({ cookies, request }) => {
 		const formData = await request.formData();
 		const username = formData.get('username');
 		const password = formData.get('password');
