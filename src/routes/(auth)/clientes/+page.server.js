@@ -7,7 +7,7 @@ export const load = async ({ locals }) => {
 	  return  await fetchApi.get({url: BASE_URL + "/usuarios/perfil", token: locals.token, resStatus: 200})
 	}
 	return {
-	  perfil: getUsuario(),
+	  perfil: getUsuario()
 	}
   
   }  

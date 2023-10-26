@@ -1,12 +1,42 @@
 <script>
 import logo3 from '$lib/img/LogoFourGreen2.png';
+export let data;
+export const { perfil} = data;
+
+let isOpen = false;
+
+function toggleModal() {
+  isOpen = !isOpen;
+}
+
 
 </script>
 
+<main>
 <h1>Clientes</h1>
+<div>
+	<a href="#10" on:click={toggleModal}>Datos Usuario</a>
+	 {#if isOpen}
+	   <dialog open>
+		<article>
+			<div>
+			<header>
+				<a href="#close" aria-label="Close" class="close" on:click={toggleModal}></a>	
+				<div>
+					<h6>Datos Usuario</h6>
+					<p>{perfil.nombre}</p>
+					<p>{perfil.email}</p>
+					<p>{perfil.creado}</p>
+				</div>
+			</header>	
+			<button on:click={toggleModal} class="outline">Volver</button>  
+			</div>
+		</article>
+		</dialog>
+		{/if} 
+	</div>
+	
 
-
-	<main >
 	<article class="container">
 	  <table role="grid">
 		<thead>
@@ -51,8 +81,13 @@ import logo3 from '$lib/img/LogoFourGreen2.png';
 	</article>
 	</main>
 	
-	<style>
 	
-		
-	</style>
+
+
+
+
+
+
+   
+	
 
