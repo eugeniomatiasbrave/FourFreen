@@ -12,6 +12,7 @@
 	--color-text: rgba(0, 0, 0, 0.7);
 	font-family: var(--font-body);
 	color: var(--color-text);
+	--spacing-1: 3rem;
 }
 
 body>main {
@@ -127,15 +128,25 @@ ul, li {
 	  img {
 	    width: 25%;
 	  }
+
+	  main .grid {
+		grid-column-gap: var(--spacing-1);
+		grid-template-columns: 20% auto;
+		padding: 0 6rem 0 6rem ;
+	  }
   }
   
   @media (min-width: 1200px) {
 	body>main {
-	  padding: 2rem 0;
+	  padding: 2rem 0 ;
+	}
+
+	aside>figure {
+		padding-top: 4rem;
 	}
   
 	article div {
-	  padding: 2rem;
+	  padding: 0.3rem;
 	}
 
 	img {

@@ -38,18 +38,26 @@ filteredProductos = productos;
 </script>
 
 <h1>Productos</h1>
-	
-<article class="container">	
+<main class="container-xl">
 	<div class="grid">
-	    <div>
-          <input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search">
-		</div>
-		<div>
-		  <button  on:click|preventDefault={filterProductos} >Filtrar</button>
-		  <button  on:click|preventDefault={reset}>Reset</button>
-	      <button  on:click={ModalAdd} class="outline" >add Productos</button> <!-----------------------------------------Modal para crear Prod-------->
-		</div>
-	</div>	
+     <aside>
+	<figure>
+    <div>
+		<input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search">
+	  </div>
+	  <div>
+		<button  on:click|preventDefault={filterProductos} >Filtrar</button>
+		<button  on:click|preventDefault={reset}>Reset</button>
+	</figure>
+</aside>
+<section>
+ <article >	
+	<div class="grid">
+    <div></div>
+    <div></div>
+	<div>
+	    <button  on:click={ModalAdd} class="outline" >add Productos</button> <!-----------------------------------------Modal para crear Prod-------->
+	</div>
 	  {#if isOpenAdd}
 		 <dialog open >
 			<article>
@@ -73,21 +81,24 @@ filteredProductos = productos;
 		</article>
 		</dialog>
       {/if}	
-	
-  <table class="container">
+	</div>
+	  
+<figure>
+  <table role="grid">
+	<thead>
   <tr>
-	<th>Img</th>
-	<th>Producto_id</th>
-	<th>Nombre</th>
-	<th>Precio</th>
-	<th>Editar</th>
-	<th>Eliminar</th>
+	<th scope="col">Img</th>
+	<th scope="col">Id</th>
+	<th scope="col">Nombre</th>
+	<th scope="col">Precio</th>
+	<th scope="col">Editar</th>
+	<th scope="col">Eliminar</th>
   </tr>
-
+</thead>
 {#each filteredProductos as prod}
  <tbody>
 	<tr>
-	<td><img src={logo3} alt='logo3' width="25%"/></td>
+	<th scope="row"><img src={logo3} alt='logo3' width="25%"/></th>
 	<td>{prod.producto_id}</td>
 	<td>{prod.nombre}</td>
 	<td>{prod.precio}</td>
@@ -131,8 +142,11 @@ filteredProductos = productos;
 		</tbody>
       {/each}	
    </table>
+   </figure>
 </article>
-
+</section>
+</div>
+</main>
 
 <style>
 
