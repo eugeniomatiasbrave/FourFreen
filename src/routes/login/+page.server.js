@@ -1,7 +1,8 @@
 import { error, redirect } from '@sveltejs/kit';
 import { BASE_URL } from '../../lib/utils.js';
-import {fetchApi} from '../../lib/fetchApi.js';
 //import { date } from 'zod';
+
+
 
 export const actions = {
 	login: async ({ cookies, request }) => {
@@ -48,25 +49,7 @@ export const actions = {
 		}
 		throw redirect(303, '/');
 
-	},
+	}
 
-	registro: async ({ request, locals }) => {
-		const formData = await request.formData();
-		const email = formData.get('username');
-		const clave = formData.get('password');
-		
-		
-		try {
-	  // quité el const res = ...//
-		  await fetchApi.post({url: BASE_URL + "/usuarios/login", token: locals.token, body:{
-			 "email": email,
-			 "clave": clave
-			
-			}, resStatus: 200})
-			return { success: true }
-		} catch (err) {
-		  console.log('Error: ', err);
-		  throw error(500, 'Something went wrong logging in');
-		}
-	  }
+
 };

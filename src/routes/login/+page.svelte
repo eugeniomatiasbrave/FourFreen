@@ -1,20 +1,13 @@
 <script>
 import '../style.css';
 export let form;
-
-let isOpen = false;
-
-function toggleModal() {
-  isOpen = !isOpen;
-}
-
 </script>
 
 	
 <div class="grid">
-<div></div>
-<!----------------------------login--------------->
-<div>
+<div></div> <!---------------------col.1-->
+
+<div> <!---------------------------col.2  Login-->
   <main class="container">
 	<article class="grid">
 		<div>
@@ -29,36 +22,15 @@ function toggleModal() {
 	{#if form?.success}
 		<span>Logueado</span>
 	{/if}
-	</form>
-	<!----------------------------------------------------------------Modal de Registro-------->
-	<a href="#1" on:click={toggleModal}>Registrarse</a>
- {#if isOpen}
-	<dialog open>
-		<article>
-			<div>
-			<header>
-				<a href="#close" aria-label="Close" class="close" on:click={toggleModal}></a>
-				<h3>Registro</h3>
-			</header>	
-			<form method="POST" action="?/registro">
-					
-					<input type="text" name="username" placeholder="Usuario" />
-					<input type="text" name="password" placeholder="Contraseña" />
-					
-					<button type="submit" class="outline">Crear Cuenta</button>
-			    </form>
-			</div>
-		</article>
-		</dialog>
-		{/if}	
+	
+
+	</form>	
     </div>
   </article>	
   </main>
 </div>
-
-<div></div>
+<div></div> <!----------------------------col.3-->
 </div>
-
 
 
 <style>

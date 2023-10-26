@@ -52,9 +52,7 @@ filteredProductos = productos;
 </aside>
 <section>
  <article >	
-	<div >
-    
-    
+	<div>
 	<div>
 	    <button  on:click={ModalAdd} class="outline" >add Productos</button> <!-----------------------------------------Modal para crear Prod-------->
 	</div>
