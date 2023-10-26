@@ -21,22 +21,23 @@ const cliente={
       email: "",
       telefono: "",
       diereccion: "",
-      textArea: ""
-};
+      textArea: "" };
 
-
+let searchTerm = '';
 
 let isOpen = false;
 let isOpenAdd = false;
 let isOpenEd = false;
-
-function toggleModal() {
-  isOpen = !isOpen;
-}
+let isOpenTxtEd = false;
 
 let selectedCliente_id;
 let selectedNombre;
 let selectedEmail;
+let selectedTextArea;
+
+function toggleModal() {
+  isOpen = !isOpen;
+}
 
 function ModalAdd() {
   isOpenAdd = !isOpenAdd;
@@ -44,6 +45,10 @@ function ModalAdd() {
 
 function ModalEd() {
   isOpenEd = !isOpenEd;
+}
+
+function ModalTxtEd(){
+	isOpenTxtEd = !isOpenTxtEd;
 }
 
 let filteredClientes = clientes;
@@ -55,8 +60,6 @@ function filterClientes() {
 		        client.email.toString().includes(searchTerm.toString()) ;       
      });	 
  }
-
-let searchTerm = '';
 
 function reset() {
 searchTerm = '';
@@ -106,7 +109,7 @@ filteredClientes = clientes;
  <article >	
 	<div>
 	<div>
-	    <button  on:click={ModalAdd} class="outline" >add Clientes</button> <!-----------------------------------------Modal para crear Prod-------->
+	    <button  on:click={ModalAdd} class="outline" >add Clientes</button> <!---------------Modal para crear Prod-------->
 	</div>
 	  {#if isOpenAdd}
 		 <dialog open >
@@ -163,31 +166,51 @@ filteredClientes = clientes;
 			selectedCliente_id=cli.cliente_id;
 			selectedNombre=cli.nombre;
 			selectedEmail=cli.email;
+			selectedTextArea=cli.textArea;
 			ModalEd()}} >Editar</button>
 
 		 {#if isOpenEd}
 			<dialog open>
 				<article>
 					<div>
-					<header>
-						<a href="#close" aria-label="Close" class="close" on:click={ModalEd}></a>
-							<p>Porfavor edite el cliente!!</p>
-					</header>	
-					<form method="POST" >
-							<input type="hidden" name="cliente_id" bind:value={selectedCliente_id}>	
-							<input type="text" name="nombre" value={selectedNombre}/>
-							<input type="text" name="email" value={selectedEmail}/>
-							<footer>
-								<button on:click={ModalEd}  class="secondary">Cancel</button>
-								<button type="submit">Confirm</button>
-							</footer>  		
-					    </form>
+					 
+					<form method="POST">
+						<input type="hidden" name="cliente_id" bind:value={selectedCliente_id}>
+						<!-- Grid -->
+						<div>
+						  <label for="nombre">
+							Nombre
+							<input type="text" name="nombre" >
+						  </label>
+					  
+						  <label for="lastname">
+							Telefono
+							<input type="text" name="telefono" >
+						  </label>
+						</div>
+					    <div>
+						 <label for="email">
+							Email address
+						 <input type="email" name="email"  >
+						</label>
+						
+						 <label for="text">
+							Text Area
+						 <input type="text" name="text" >	
+						</label>
+					  </div>			  
+						<!-- Button -->
+						
+							<button on:click={ModalEd}  class="secondary">Cancel</button>
+							<button type="submit">Confirm</button>
+						 					  
+					  </form>
 					</div>
 				</article>
 				</dialog>
 				{/if}
 			</td>
-<!----------------------------------Elimina el cliente--------------------->
+            <!----------------------------------Elimina el cliente--------------------->
              <td>
 			  <form method="POST" on:submit={()=>{selectedCliente_id=cli.cliente_id}}  >
 				<input type="hidden"  name="cliente_id" bind:value={selectedCliente_id}>	
@@ -198,8 +221,8 @@ filteredClientes = clientes;
 		</tbody>
       {/each}	
    </table>
-   <tfoot>
-</tfoot> 	
+   <tfoot><!-------foother de tabla-->
+   </tfoot> 	
    </figure>
 </article>
 </section>
@@ -215,8 +238,8 @@ main .grid {
 	grid-template-columns: 20% auto;
 	padding: 0 6rem 0 6rem ;
  }
-	
-	
+
+
 </style>
 	
 	
