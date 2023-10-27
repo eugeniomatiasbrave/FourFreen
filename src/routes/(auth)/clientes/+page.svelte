@@ -1,39 +1,20 @@
 <script>
-//import logo3 from '$lib/img/LogoFourGreen2.png';
 export let form;
 export let data;
-export const { perfil} = data;
-
-const clientes = [{
-	img: "img",
-    cliente_id: "1",
-    nombre: "Clara Brave",
-    email: "c@c.com",
-    telefono: "1577777777",
-    diereccion: "Habana 3355",
-    textArea: "Compra mucho en FourGreen",
-}];
-
-const cliente={ 
-	  img: "",
-      cliente_id: "",
-      nombre: "",
-      email: "",
-      telefono: "",
-      diereccion: "",
-      textArea: "" };
+export const { perfil, clientes} = data;
+	  
 
 let searchTerm = '';
 
 let isOpen = false;
 let isOpenAdd = false;
 let isOpenEd = false;
-let isOpenTxtEd = false;
+
 
 let selectedCliente_id;
-let selectedNombre;
+let selectedRazon_social;
 let selectedEmail;
-let selectedTextArea;
+
 
 function toggleModal() {
   isOpen = !isOpen;
@@ -47,16 +28,20 @@ function ModalEd() {
   isOpenEd = !isOpenEd;
 }
 
-function ModalTxtEd(){
-	isOpenTxtEd = !isOpenTxtEd;
-}
 
 let filteredClientes = clientes;
+console.log(filteredClientes)
 
 function filterClientes() {
      filteredClientes = clientes.filter(client => {
          return client.cliente_id.toString().includes(searchTerm.toString()) ||
-		        client.nombre.toString().includes(searchTerm.toString()) ||
+		        client.razon_social.toString().includes(searchTerm.toString()) ||
+				client.cuit.toString().includes(searchTerm.toString()) ||
+				client.domicilio_calle.toString().includes(searchTerm.toString()) ||
+				client.domicilio_altura.toString().includes(searchTerm.toString()) ||
+				client.localidad.toString().includes(searchTerm.toString()) ||
+				client.codigo_postal.toString().includes(searchTerm.toString()) ||
+				client.telefono.toString().includes(searchTerm.toString()) ||
 		        client.email.toString().includes(searchTerm.toString()) ;       
      });	 
  }
@@ -71,7 +56,8 @@ filteredClientes = clientes;
 
 <main>
 <h1>Clientes</h1>
-<div>
+
+   <div>
 	<a href="#10" on:click={toggleModal}>Datos Usuario</a>
 	 {#if isOpen}
 	   <dialog open>
@@ -92,24 +78,27 @@ filteredClientes = clientes;
 		</dialog>
 		{/if} 
 	</div>
-
-    <main class="container-xl">
-	<div class="grid">
-     <aside>
-	<figure>
-    <div>
+</main>	
+<main> 
+<div class="grid">
+  <div>
+	<aside>
+		<figure>
+      <div>
 		<input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search">
 	  </div>
 	  <div>
 		<button on:click|preventDefault={filterClientes} class="outline">Filtrar</button>
 		<button on:click|preventDefault={reset} class="outline">Reset</button>
+	 </div>
 	</figure>
-</aside>
-<section>
- <article >	
+	</aside>
+  </div>
+  <div>
+ <article>	
 	<div>
 	<div>
-	    <button  on:click={ModalAdd} class="outline">add Clientes</button> <!---------------Modal para crear Clientes-------->
+	    <button  on:click={ModalAdd} class="outline">add Clientes</button> <!----Modal crear Clientes-------->
 	</div>
 	  {#if isOpenAdd}
 		 <dialog open >
@@ -119,9 +108,15 @@ filteredClientes = clientes;
 					<a href="#close" aria-label="Close" class="close" on:click={ModalAdd}></a>
 					<p>Porfavor Agregar nuevo cliente!!</p>
 				</header>	
-			<form method="POST" >
-			 <input type="text" name="nombre" placeholder="escribe aqui el nombre" />
-			 <input type="email" name="email" placeholder="escribe aqui el email" />
+			<form method="POST" action="?/addClient">
+			 <input type="text" name="razon_social" placeholder="escribe aqui razon_social"/>
+			 <input type="text" name="cuit" placeholder="escribe aqui el cuit"/>
+			 <input type="text" name="domicilio_calle" placeholder="escribe aqui calle"/>
+			 <input type="text" name="domicilio_altura" placeholder="escribe aqui altura"/>
+			 <input type="text" name="localidad" placeholder="escribe aqui localidad"/>
+			 <input type="text" name="codigo_postal" placeholder="escribe aqui codigo postal"/>
+			 <input type="text" name="telefono" placeholder="escribe aqui el telefono"/>
+			 <input type="email" name="email" placeholder="escribe aqui el email"/>
 			 <footer>
 				<button on:click={ModalAdd} class="secondary">Cancel</button>
 				<button type="submit">Confirm</button>
@@ -140,13 +135,15 @@ filteredClientes = clientes;
   <table role="grid">
 	<thead>
   <tr>
-<th scope="col">Img</th>
-<th scope="col">#Cliente</th>
-<th scope="col">Nombre</th>
-<th scope="col">Email</th>
-<th scope="col">Telefono</th>
-<th scope="col">Diereccion</th>
-<th scope="col">Text Area</th>
+<th scope="col">cliente_id</th>
+<th scope="col">razon_social</th>
+<th scope="col">cuit</th>
+<th scope="col">domicilio_calle</th>
+<th scope="col">domicilio_altura</th>
+<th scope="col">localidad</th>
+<th scope="col">codigo_postal</th>
+<th scope="col">telefono</th>
+<th scope="col">email</th>
 <th scope="col">Editar</th>
 <th scope="col">Eliminar</th>
 </tr>
@@ -154,31 +151,31 @@ filteredClientes = clientes;
 {#each filteredClientes as cli}
  <tbody>
 	<tr>
-	<th scope="row">img</th>
 	<td>{cli.cliente_id}</td>
-    <td>{cli.nombre}</td>
-    <td>{cli.email}</td>
-    <td>{cli.telefono}</td>
-    <td>{cli.diereccion}</td>
-    <td>{cli.textArea}</td>
+    <td>{cli.razon_social}</td>
+    <td>{cli.cuit}</td>
+    <td>{cli.domicilio_calle}</td>
+    <td>{cli.domicilio_altura}</td>
+    <td>{cli.localidad}</td>
+	<td>{cli.codigo_postal}</td>
+	<td>{cli.telefono}</td>
+	<td>{cli.email}</td>
 	<td>	
-	<button on:click={()=>{   //<!-----------------------------------------Modal para editar-------->
+	<button on:click={()=>{   //<!----------------------------------Modal para edita cliente-------->
 			selectedCliente_id=cli.cliente_id;
-			selectedNombre=cli.nombre;
+			selectedRazon_social=cli.razon_social;
 			selectedEmail=cli.email;
-			selectedTextArea=cli.textArea;
 			ModalEd()}} class="outline">Editar</button>
 
 		 {#if isOpenEd}
 			<dialog open>
 				<article>	
 					<div>
-					<form method="POST">
+					<form method="POST" action="?/editClient">
 						  <input type="hidden" name="cliente_id" bind:value={selectedCliente_id}>
 						  <label for="nombre">Nombre<input type="text" name="nombre"/></label>
 						  <label for="lastname">Telefono<input type="text" name="telefono"/></label>
-						  <label for="email">Email addre<input type="email" name="email"/></label>						
-						  <label for="text">Text Area<input type="text" name="text"/></label>					 			  						
+						  <label for="email">Email addre<input type="email" name="email"/></label>										 			  						
 						<button on:click={ModalEd} class="secondary">Cancel</button>
 						<button type="submit">Confirm</button>						 					  
 					  </form>
@@ -186,12 +183,11 @@ filteredClientes = clientes;
 					</article>
 				</dialog>
 				{/if}
-			</td>
-            <!----------------------------------Elimina el cliente--------------------->
-             <td>
-			  <form method="POST" on:submit={()=>{selectedCliente_id=cli.cliente_id}}  >
+			</td>         
+             <td><!---------------------Elimina el cliente--------------------->
+			  <form method="POST" action="?/deleteClient" on:submit={()=>{selectedCliente_id=cli.cliente_id}}  >
 				<input type="hidden"  name="cliente_id" bind:value={selectedCliente_id}>	
-				<button  type="submit" class="outline">Eliminar</button> 
+				<button type="submit" class="outline">Eliminar</button> 
               </form>	  	
 			</td>
 		  </tr>
@@ -202,11 +198,11 @@ filteredClientes = clientes;
    </tfoot> 	
    </figure>
 </article>
-</section>
+  </div>
 </div>
 </main>
 
-</main>
+
 
 <style>
 

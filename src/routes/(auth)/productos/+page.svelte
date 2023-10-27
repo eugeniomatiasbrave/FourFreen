@@ -39,17 +39,18 @@ filteredProductos = productos;
 
 <h1>Productos</h1>
 <main class="container-xl">
-	<div class="grid">
+	<div class="grid"> <!-------GRID col.1-->
      <aside>
-	<figure>
-    <div>
+	  <figure>
+       <div>
 		<input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search">
-	  </div>
-	  <div>
+	   </div>
+	   <div>
 		<button  on:click|preventDefault={filterProductos} class="outline">Filtrar</button>
 		<button  on:click|preventDefault={reset} class="outline">Reset</button>
+	   </div>
 	</figure>
-</aside>
+     </aside>
 <section>
  <article >	
 	<div>

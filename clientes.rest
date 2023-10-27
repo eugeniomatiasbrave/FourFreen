@@ -1,0 +1,56 @@
+@baseUrl = https://fg-api-rest.fly.dev
+# @baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvX2lkIjoxLCJub21icmUiOiJhQGEuY29tIiwiaWF0IjoxNjk3NDY0MTAzfQ.Jx6HocdoKz8H7kxPqrVjmEqYBLmjODjw3CHoWdxjLGs
+
+// Recupera todos los productos
+GET {{baseUrl}}/clientes HTTP/1.1 
+Authorization: Bearer {{token}}
+
+###
+// recupera todos los productos con la opción limit y offset para realizar paginado (en principio por la cantidad de items no hace falta)
+GET {{baseUrl}}/clientes?limit=5&offset=2 HTTP/1.1 
+Authorization: Bearer {{token}}
+
+###
+// recuperda los datos de un producto en particular con su :id en el path
+GET {{baseUrl}}/clientes/1 HTTP/1.1 
+Authorization: Bearer {{token}}
+
+###
+// para dar de alta un producto, en el boy va el json y devuelve los datos enviados más el id del producto
+POST {{baseUrl}}/clientes HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "razon_social": "nuevo Onda Azul S.A",
+  "cuit": 20215739012,
+  "domicilio_calle": "Avda. Conturbis",
+  "domicilio_altura": "3212",
+  "localidad": "Coronell Súarez",
+  "codigo_postal": "754",
+  "telefono": "292645444",
+  "email": "c@c.net"
+}
+
+###
+// para actualizar nombre y/o precio del producto, va el :id en el path y los campos en el body
+PATCH {{baseUrl}}/clientes/2 HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "razon_social": "la banana loca S.A",
+  "domicilio_calle": "Avda. Casey",
+  "domicilio_altura": "321",
+  "localidad": "Coronel Súarez",
+  "codigo_postal": "7540",
+  "cuit": 20215739076,
+  "telefono": "2926454545",
+  "email": "lbl@hotmail.com"
+}
+
+###
+//para eliminar un producto, va el :id en el path
+DELETE {{baseUrl}}/clientes/3 HTTP/1.1
+Authorization: Bearer {{token}}

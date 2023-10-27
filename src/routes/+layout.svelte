@@ -7,42 +7,25 @@
 
 <nav class="grid">
 	<div>
-	<ul>
-	  <li><a href="#1"><img src={logo} alt='logo1' width="25%"/></a></li>
-	</ul>
-   </div>
-   <div>
-	<ul>
-	  <li >
-		<ul >
-			<li class="menu"><a href="/" >Showcase</a></li>
-			{#if data.usuario === undefined}
-			<li><a href="/login">Login</a></li>
-			{:else}
-			<li><a href="/productos">Productos</a></li>
-			<li><a href="/pedidos">Pedidos</a></li>
-			<li><a href="/clientes">Clientes</a></li>
-			<li><a href="/logout">Logout</a></li>
-			{/if}
-		</ul>
-	  </li>
-	</ul>
-  </div>
+	  <a href="#1"><img src={logo} alt='logo1' width="25%"/></a>
+    </div>
+    <div>
+		<a href="/" >Showcase</a>
+		{#if data.usuario === undefined}
+		<a href="/login">Login</a>
+		{:else}
+		<a href="/productos">Productos</a>
+		<a href="/pedidos">Pedidos</a>
+		<a href="/clientes">Clientes</a>
+		<a href="/logout">Logout</a>
+		{/if}	
+    </div>
   </nav>
 
 <slot/>
 
-
-
 <style>
-	img , ul , li {
-		padding: 0;
-		margin: 0;
-	}
-	
-.menu , li {
-	margin: 0 20px 0 20px ;
-}
+
 
 </style>
 
