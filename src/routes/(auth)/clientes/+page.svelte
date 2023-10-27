@@ -101,15 +101,15 @@ filteredClientes = clientes;
 		<input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search">
 	  </div>
 	  <div>
-		<button  on:click|preventDefault={filterClientes} >Filtrar</button>
-		<button  on:click|preventDefault={reset}>Reset</button>
+		<button on:click|preventDefault={filterClientes} class="outline">Filtrar</button>
+		<button on:click|preventDefault={reset} class="outline">Reset</button>
 	</figure>
 </aside>
 <section>
  <article >	
 	<div>
 	<div>
-	    <button  on:click={ModalAdd} class="outline" >add Clientes</button> <!---------------Modal para crear Prod-------->
+	    <button  on:click={ModalAdd} class="outline">add Clientes</button> <!---------------Modal para crear Clientes-------->
 	</div>
 	  {#if isOpenAdd}
 		 <dialog open >
@@ -167,46 +167,23 @@ filteredClientes = clientes;
 			selectedNombre=cli.nombre;
 			selectedEmail=cli.email;
 			selectedTextArea=cli.textArea;
-			ModalEd()}} >Editar</button>
+			ModalEd()}} class="outline">Editar</button>
 
 		 {#if isOpenEd}
 			<dialog open>
-				<article>
+				<article>	
 					<div>
-					 
 					<form method="POST">
-						<input type="hidden" name="cliente_id" bind:value={selectedCliente_id}>
-						<!-- Grid -->
-						<div>
-						  <label for="nombre">
-							Nombre
-							<input type="text" name="nombre" >
-						  </label>
-					  
-						  <label for="lastname">
-							Telefono
-							<input type="text" name="telefono" >
-						  </label>
-						</div>
-					    <div>
-						 <label for="email">
-							Email address
-						 <input type="email" name="email"  >
-						</label>
-						
-						 <label for="text">
-							Text Area
-						 <input type="text" name="text" >	
-						</label>
-					  </div>			  
-						<!-- Button -->
-						
-							<button on:click={ModalEd}  class="secondary">Cancel</button>
-							<button type="submit">Confirm</button>
-						 					  
+						  <input type="hidden" name="cliente_id" bind:value={selectedCliente_id}>
+						  <label for="nombre">Nombre<input type="text" name="nombre"/></label>
+						  <label for="lastname">Telefono<input type="text" name="telefono"/></label>
+						  <label for="email">Email addre<input type="email" name="email"/></label>						
+						  <label for="text">Text Area<input type="text" name="text"/></label>					 			  						
+						<button on:click={ModalEd} class="secondary">Cancel</button>
+						<button type="submit">Confirm</button>						 					  
 					  </form>
-					</div>
-				</article>
+					</div> 
+					</article>
 				</dialog>
 				{/if}
 			</td>
@@ -214,7 +191,7 @@ filteredClientes = clientes;
              <td>
 			  <form method="POST" on:submit={()=>{selectedCliente_id=cli.cliente_id}}  >
 				<input type="hidden"  name="cliente_id" bind:value={selectedCliente_id}>	
-				<button  type="submit">Eliminar</button> 
+				<button  type="submit" class="outline">Eliminar</button> 
               </form>	  	
 			</td>
 		  </tr>
@@ -233,11 +210,6 @@ filteredClientes = clientes;
 
 <style>
 
-main .grid {
-	grid-column-gap: var(--spacing-1);
-	grid-template-columns: 20% auto;
-	padding: 0 6rem 0 6rem ;
- }
 
 
 </style>

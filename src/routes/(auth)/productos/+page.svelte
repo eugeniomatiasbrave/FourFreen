@@ -46,8 +46,8 @@ filteredProductos = productos;
 		<input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search">
 	  </div>
 	  <div>
-		<button  on:click|preventDefault={filterProductos} >Filtrar</button>
-		<button  on:click|preventDefault={reset}>Reset</button>
+		<button  on:click|preventDefault={filterProductos} class="outline">Filtrar</button>
+		<button  on:click|preventDefault={reset} class="outline">Reset</button>
 	</figure>
 </aside>
 <section>
@@ -105,7 +105,7 @@ filteredProductos = productos;
 			selectedProducto=prod.producto_id;
 			selectedNombre=prod.nombre;
 			selectedPrecio=prod.precio;
-			toggleModal()}} >Editar</button>
+			toggleModal()}} class="outline">Editar</button>
 		 {#if isOpen}
 			<dialog open>
 				<article>
@@ -132,7 +132,7 @@ filteredProductos = productos;
              <td>
 			  <form method="POST" action="?/delete" on:submit={()=>{selectedProducto=prod.producto_id}}  >
 				<input type="hidden"  name="producto_id" bind:value={selectedProducto}>	
-				<button  type="submit">Eliminar</button> 
+				<button  type="submit" class="outline">Eliminar</button> 
               </form> 	
 			</td>
 		  </tr>
@@ -147,13 +147,7 @@ filteredProductos = productos;
 
 <style>
 
-main .grid {
-	grid-column-gap: var(--spacing-1);
-	grid-template-columns: 20% auto;
-	padding: 0 6rem 0 6rem ;
- }
-	
-	
+
 </style>
 
 

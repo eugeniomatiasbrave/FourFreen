@@ -4,7 +4,7 @@
 	import logo from '$lib/img/LogoFourGreens2021.png';
 	export let data;
 </script>
-<div>
+
 <nav class="grid">
 	<div>
 	<ul>
@@ -32,7 +32,7 @@
 
 <slot/>
 
-</div>
+
 
 <style>
 	img , ul , li {

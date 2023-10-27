@@ -40,9 +40,6 @@ ul, li {
 	margin: 0;
 }
 
-
-
-
 /*
   h1, h2, p {
 	font-weight: 400; }
@@ -60,17 +57,13 @@ ul, li {
   }
   
 
-
   @media (min-width: 375px) {
+
 	body>main {
 	  padding: 1rem 0;
 	}
 
-	.grid>div:nth-of-type(2) {
-		display: block;
-	  }
-
-	  img {
+	img {
 		width: 25%;
 	}
 }

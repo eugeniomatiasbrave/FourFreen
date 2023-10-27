@@ -1,6 +1,16 @@
 <script>
 import logo3 from '$lib/img/LogoFourGreen2.png';
-	
+
+const clientes = [{
+	img: "img",
+    pedido_id: 1,
+    producto_id: "Lechuga",
+    cantidad: 2,
+    precio_ud: 300,
+    valor_compra: "Habana 3355",
+    textArea: "Compra mucho en FourGreen",
+}];
+
 </script>
 
 
@@ -13,7 +23,7 @@ import logo3 from '$lib/img/LogoFourGreen2.png';
 	<thead>
   <tr>
 	<th scope="col">Img</th>
-	<th scope="col">#Pedido</th>
+	<th scope="col">#Pedido_id</th>
 	<th scope="col">Producto</th>
 	<th scope="col">Cantidad</th>
 	<th scope="col">Precio</th>
