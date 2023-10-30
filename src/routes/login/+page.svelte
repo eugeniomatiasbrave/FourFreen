@@ -1,6 +1,12 @@
 <script>
 import '../style.css';
 export let form;
+
+
+
+
+
+
 </script>
 
 	
@@ -13,12 +19,13 @@ export let form;
 			<h2>Por favor ingrese sus datos si esta logueado</h2>
 		</hgroup>
         <form method="POST" >
-	     <input type="text" name="username" placeholder="Usuario" />
-	     <input type="password" name="password" placeholder="Contraseña" />
+	     <input type="text" name="username" placeholder="Usuario"  required/>
+	     <input type="password" name="password" placeholder="Contraseña" required/>
 	     <button type="submit">login</button>
 	     {#if form?.success}
-	 	 <span>Logueado</span>
+		 <span>Logueado</span>
 	     {/if}
+
 	   </form>	
       </div>
    </article>	

@@ -77,13 +77,12 @@ function handleResponse(response, resStatus) {
           message: JSON.stringify(data.error)
         });
       }
-
+      
       if (resStatus !== 0 && resStatus !== response.status) {
         throw error(response.status, {
           message: `${JSON.stringify(data)} - Esperado: ${resStatus}`
         });
       }
-
       return data;
   });
 }

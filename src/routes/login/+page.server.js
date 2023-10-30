@@ -40,8 +40,7 @@ export const actions = {
 					maxAge: 60 * 60 * 24 // 1 day
 				})
 			} else {
-				return {success: false}
-				
+				return {success: false}		
 			}
 		} catch (err) {
 			console.log('Error: ', err);

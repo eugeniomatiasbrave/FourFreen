@@ -3,6 +3,8 @@
 	import './style.css';
 	import logo from '$lib/img/LogoFourGreens2021.png';
 	export let data;
+
+
 </script>
 
 <nav class="grid">
@@ -11,7 +13,7 @@
     </div>
     <div>
 		<a href="/" >Showcase</a>
-		{#if data.usuario === undefined}
+		{#if data.usuario === undefined }
 		<a href="/login">Login</a>
 		{:else}
 		<a href="/productos">Productos</a>
