@@ -142,15 +142,15 @@ filteredClientes = clientes;
   <table role="grid">
 	<thead>
   <tr>
-<th scope="col">cliente_id</th>
-<th scope="col">razon_social</th>
-<th scope="col">cuit</th>
-<th scope="col">domicilio_calle</th>
-<th scope="col">domicilio_altura</th>
-<th scope="col">localidad</th>
-<th scope="col">codigo_postal</th>
-<th scope="col">telefono</th>
-<th scope="col">email</th>
+<th scope="col">id</th>
+<th scope="col">Nombre</th>
+<th scope="col">Cuit</th>
+<th scope="col">Calle</th>
+<th scope="col">Altura</th>
+<th scope="col">Loc.</th>
+<th scope="col">CP.</th>
+<th scope="col">Telefono</th>
+<th scope="col">Email</th>
 <th scope="col">Editar</th>
 <th scope="col">Eliminar</th>
 </tr>
