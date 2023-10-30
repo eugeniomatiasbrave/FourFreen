@@ -13,6 +13,12 @@ let isOpenEd = false;
 
 let selectedCliente_id;
 let selectedRazon_social;
+let selectedCuit;
+let selectedLocalidad;
+let selectedDomicilio_calle;
+let selectedDomicilio_altura;
+let selectedCodigo_postal;
+let selectedTelefono;
 let selectedEmail;
 
 
@@ -36,13 +42,13 @@ function filterClientes() {
      filteredClientes = clientes.filter(client => {
          return client.cliente_id.toString().includes(searchTerm.toString()) ||
 		        client.razon_social.toString().includes(searchTerm.toString()) ||
-				client.cuit.toString().includes(searchTerm.toString()) ||
-				client.domicilio_calle.toString().includes(searchTerm.toString()) ||
-				client.domicilio_altura.toString().includes(searchTerm.toString()) ||
-				client.localidad.toString().includes(searchTerm.toString()) ||
-				client.codigo_postal.toString().includes(searchTerm.toString()) ||
-				client.telefono.toString().includes(searchTerm.toString()) ||
-		        client.email.toString().includes(searchTerm.toString()) ;       
+				client.cuit.toString().includes(searchTerm.toString()) 
+				//client.domicilio_calle.toString().includes(searchTerm.toString()) ||
+				//client.domicilio_altura.toString().includes(searchTerm.toString()) ||
+				//client.localidad.toString().includes(searchTerm.toString()) ||
+				//client.codigo_postal.toString().includes(searchTerm.toString()) ||
+				//client.telefono.toString().includes(searchTerm.toString()) ||
+		        //client.email.toString().includes(searchTerm.toString()) ;      
      });	 
  }
 
@@ -121,6 +127,7 @@ filteredClientes = clientes;
 				<button on:click={ModalAdd} class="secondary">Cancel</button>
 				<button type="submit">Confirm</button>
 			  </footer>
+			
 			</form>
 			{#if form?.success}
 			<span>Agregado</span>
@@ -164,6 +171,12 @@ filteredClientes = clientes;
 	<button on:click={()=>{   //<!----------------------------------Modal para edita cliente-------->
 			selectedCliente_id=cli.cliente_id;
 			selectedRazon_social=cli.razon_social;
+			selectedCuit=cli.cuit;
+            selectedLocalidad=cli.localidad;
+            selectedDomicilio_calle=cli.domicilio_calle;
+            selectedDomicilio_altura=cli.domicilio_altura;
+            selectedCodigo_postal=cli.codigo_postal;
+            selectedTelefono=cli.telefono;
 			selectedEmail=cli.email;
 			ModalEd()}} class="outline">Editar</button>
 
@@ -173,9 +186,14 @@ filteredClientes = clientes;
 					<div>
 					<form method="POST" action="?/editClient">
 						  <input type="hidden" name="cliente_id" bind:value={selectedCliente_id}>
-						  <label for="nombre">Nombre<input type="text" name="nombre"/></label>
-						  <label for="lastname">Telefono<input type="text" name="telefono"/></label>
-						  <label for="email">Email addre<input type="email" name="email"/></label>										 			  						
+						  <label for="nombre">Razon Social<input type="text" name="razon_social" value={selectedRazon_social}/>
+						  <label for="cuit">Cuit<input type="text" name="cuit"  value={selectedCuit}/>
+						  <label for="domicilio_calle">Calle<input type="text" name="domicilio_calle" value={selectedDomicilio_calle} />
+						  <label for="domicilio_altura">Altura<input type="text" name="domicilio_altura" value={selectedDomicilio_altura} />
+						  <label for="localidad">Localidad<input type="text" name="localidad" value={selectedLocalidad} />
+						  <label for="codigo_postal">Codigo Postal<input type="text" name="codigo_postal" value={selectedCodigo_postal} />
+						  <label for="telefono">Telefono<input type="text" name="telefono" value={selectedTelefono}/>
+						  <label for="email">Email<input type="email" name="email" value={selectedEmail}/>										 			  						
 						<button on:click={ModalEd} class="secondary">Cancel</button>
 						<button type="submit">Confirm</button>						 					  
 					  </form>

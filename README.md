@@ -1,24 +1,39 @@
 
-## Creating a project
 
 
-***** APP FOUR GREEN **********
+************************************* APP FOUR GREEN *******************************************************
 
+********** PRIMERA ETAPA: **********
 
-**** RESPOSIVE: *****************************
+**** LOGIN ****** 
+**** LOGOUT *****
+**** AUTH *******
+**** API REST ***
+    * usuarios.rest
+	* productos.rest
+	* clientes.rest
 
-* @media query ok..faltan retoques.
+**** HOOKS*******
+**** FUNCION FETCH + UTILS***
+
+**** RESPOSIVE: ************
+    * @media query ok..faltan retoques...reveer con nueva libreria CSS
   
-**** CRUD: *********************************
+**** CRUD: *****************
+    * Productos: GET,POST,EDITE,DELETE,PATCH + filtro......ok 
+	   -Se puede mejor el codigo: 
+	       * Funcion que simplifiquen el selected
+		   * TRY
+    * Pedidos:
+    * Clientes: GET,POST,EDITE,DELETE,PATCH + filtro.  (se puede mejor el codigoidem productos)
+    * Perfil:
 
-* Productos.
-* Cliente.
-* Perfil.
-* Carga de pedido.
-  
-**** CSS **********************************
+**** LOGO: ****
+    *Colores de marca:
 
-* Por ultimo.
+
+**** CSS LIBRERIA **********
+    * En otra etapa.
 
 
 

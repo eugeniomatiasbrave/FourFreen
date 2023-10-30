@@ -33,20 +33,15 @@ export const actions= {
       console.log('Error: ', err);
       throw error(500, 'Something went wrong logging in');
     }
-
   },
 
   delete: async ({ request, locals }) => {
     const formData = await request.formData();
     const id = formData.get('producto_id');
-    //const nombre = formData.get('nombre');
-    //const precio = formData.get('precio');
     try {
   // quité el const res = ...//
       await fetchApi.delete({url: BASE_URL + `/productos/${id}`, token: locals.token, body:{
         "id": id,
-         // "nombre": nombre,
-         // "precio": parseFloat(precio)
         }, resStatus: 200})
         return { success: true }
     } catch (err) {
@@ -54,7 +49,6 @@ export const actions= {
       throw error(500, 'Something went wrong logging in');
     }
   },
-
 
   editar: async ({ request, locals }) => {
     const formData = await request.formData();
@@ -64,7 +58,6 @@ export const actions= {
     
     try {
       await fetchApi.patch({url: BASE_URL +`/productos/${id}`, token: locals.token, body:{
-          //"id": id,
           "nombre": nombre,
           "precio": parseFloat(precio)
         }, resStatus: 200})

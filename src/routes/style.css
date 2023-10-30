@@ -73,6 +73,16 @@ article {
 article div {
 	padding: 0rem;
   }
+
+
+  @media (min-width: 320px) {
+
+	th img {
+		height: 50px;
+		width: 50px;
+	}
+
+  }
   
 
 @media (min-width: 375px) {
@@ -91,6 +101,11 @@ nav a {
 
 img {
 		width: 70%;
+	}
+
+th img {
+		height: 50px;
+		width: 50px;
 	}
 
 }
@@ -113,6 +128,11 @@ article div {
 	img {
 		width: 70%;
 	  }
+
+	  th img {
+		height: 50px;
+		width: 50px;
+	}
   }
   
   @media (min-width: 768px) {
@@ -136,6 +156,11 @@ article div {
 		width: 50%;
 		padding: 0%;
 	  }
+
+	  th img {
+		height: 50px;
+		width: 50px;
+	}
   }
   
   @media (min-width: 992px) {
@@ -159,6 +184,11 @@ article div {
 	 .grid {
 		grid-template-columns: 20% auto;
 	  }
+
+	  th img {
+		height: 50px;
+		width: 50px;
+	}
 
   }
   
@@ -184,7 +214,10 @@ article div {
 		grid-template-columns: 20% auto;
 	 }
 	
-	
+	th img {
+		height: 50px;
+		width: 50px;
+	}
   }
   
   
