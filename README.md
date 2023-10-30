@@ -23,7 +23,7 @@
     * Productos: GET,POST,EDITE,DELETE,PATCH + filtro......ok 
 	   -Se puede mejor el codigo: 
 	       * Funcion que simplifiquen el selected
-		   * TRY
+		   * TRY: En productos y clientes. A mejorar...
     * Pedidos:
     * Clientes: GET,POST,EDITE,DELETE,PATCH + filtro.  (se puede mejor el codigoidem productos)
     * Perfil:
