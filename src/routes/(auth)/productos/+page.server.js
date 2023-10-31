@@ -1,4 +1,4 @@
- //import { redirect } from '@sveltejs/kit';
+ 
 
 import { error } from '@sveltejs/kit';
 import { BASE_URL } from '../../../lib/utils.js';
@@ -53,7 +53,7 @@ export const actions= {
     } catch (err) {
       console.log('Error: ', err);
       throw error(500, 'Algo salió mal al agregar el producto');
-    }
+    }  
    },
 
   delete: async ({ request, locals, cookies }) => {
@@ -132,6 +132,7 @@ export const actions= {
       console.log('Error: ', err);
       throw error(500, 'Algo salió mal al actualizar el producto'); 
     }
+   
    }
 };
 

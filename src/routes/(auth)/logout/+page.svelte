@@ -2,6 +2,10 @@
 	export let form;
 </script>
 
+<svelte:head>
+	<title>Logout</title>
+	<meta name="description" content="Logout" />
+</svelte:head>
 
 <div class="grid">
 	<div></div>

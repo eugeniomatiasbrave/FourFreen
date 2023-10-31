@@ -32,18 +32,23 @@ function filterProductos() {
 let searchTerm = '';
 
 function reset() {
-searchTerm = '';
-filteredProductos = productos;
+  searchTerm = '';
+  filteredProductos = productos;
 }
 </script>
 
-<h1>Productos</h1>
+<svelte:head>
+	<title>Productos</title>
+	<meta name="description" content="Productos" />
+</svelte:head>
+
+<h2>Tabla de Productos</h2>
 <main class="container-xl">
 	<div class="grid"> <!-------GRID col.1-->
      <aside>
 	  <figure>
        <div>
-		<input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search">
+		<input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search" required>
 	   </div>
 	   <div>
 		<button  on:click|preventDefault={filterProductos} class="outline">Filtrar</button>
@@ -62,12 +67,11 @@ filteredProductos = productos;
 			<article>
 			<div>
 				<header>
-					<a href="#close" aria-label="Close" class="close" on:click={ModalAdd}></a>
 					<p>Porfavor Agregar nuevo producto!!</p>
 				</header>	
 			<form method="POST" action="?/addProd" >
-			 <input type="text" name="nombre" placeholder="escribe aqui el producto" />
-			 <input type="text" name="precio" placeholder="escribe aqui el precio" />
+			 <input type="text" name="nombre" placeholder="escribe aqui el producto" required/>
+			 <input type="text" name="precio" placeholder="escribe aqui el precio" required/>
 			 <footer>
 				<button on:click={ModalAdd} class="secondary">Cancel</button>
 				<button type="submit">Confirm</button>
@@ -116,9 +120,9 @@ filteredProductos = productos;
 							<p>Porfavor edite el producto!!</p>
 					</header>	
 					<form method="POST" action="?/editar">
-							<input type="hidden" name="producto_id" bind:value={selectedProducto}>	
-							<input type="text" name="nombre" value={selectedNombre}/>
-							<input type="text" name="precio" value={selectedPrecio}/>
+							<input type="hidden" name="producto_id" bind:value={selectedProducto} required>	
+							<input type="text" name="nombre" value={selectedNombre} required/>
+							<input type="text" name="precio" value={selectedPrecio} required/>
 							<footer>
 								<button on:click={toggleModal}  class="secondary">Cancel</button>
 								<button type="submit" >Confirm</button>
@@ -133,7 +137,7 @@ filteredProductos = productos;
              <td>
 			  <form method="POST" action="?/delete" on:submit={()=>{selectedProducto=prod.producto_id}}  >
 				<input type="hidden"  name="producto_id" bind:value={selectedProducto}>	
-				<button  type="submit" class="outline">Eliminar</button> 
+				<button type="submit" class="outline">Eliminar</button> 
               </form> 	
 			</td>
 		  </tr>

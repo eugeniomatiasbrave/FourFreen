@@ -56,12 +56,16 @@ function reset() {
 searchTerm = '';
 filteredClientes = clientes;
 }
-
-
 </script>
 
+
+<svelte:head>
+	<title>Tabla de Cliente</title>
+	<meta name="description" content="Clientes" />
+</svelte:head>
+
 <main>
-<h1>Clientes</h1>
+<h2>Tabla de Clientes</h2>
 
    <div>
 	<a href="#10" on:click={toggleModal}>Datos Usuario</a>
@@ -91,7 +95,7 @@ filteredClientes = clientes;
 	<aside>
 		<figure>
       <div>
-		<input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search">
+		<input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search" required>
 	  </div>
 	  <div>
 		<button on:click|preventDefault={filterClientes} class="outline">Filtrar</button>
@@ -104,7 +108,7 @@ filteredClientes = clientes;
  <article>	
 	<div>
 	<div>
-	    <button  on:click={ModalAdd} class="outline">add Clientes</button> <!----Modal crear Clientes-------->
+	    <button on:click={ModalAdd} class="outline">add Clientes</button> <!----Modal crear Clientes-------->
 	</div>
 	  {#if isOpenAdd}
 		 <dialog open >
@@ -115,14 +119,14 @@ filteredClientes = clientes;
 					<p>Porfavor Agregar nuevo cliente!!</p>
 				</header>	
 			<form method="POST" action="?/addClient">
-			 <input type="text" name="razon_social" placeholder="escribe aqui razon_social"/>
-			 <input type="text" name="cuit" placeholder="escribe aqui el cuit"/>
-			 <input type="text" name="domicilio_calle" placeholder="escribe aqui calle"/>
-			 <input type="text" name="domicilio_altura" placeholder="escribe aqui altura"/>
-			 <input type="text" name="localidad" placeholder="escribe aqui localidad"/>
-			 <input type="text" name="codigo_postal" placeholder="escribe aqui codigo postal"/>
-			 <input type="text" name="telefono" placeholder="escribe aqui el telefono"/>
-			 <input type="email" name="email" placeholder="escribe aqui el email"/>
+			 <input type="text" name="razon_social" placeholder="escribe aqui razon_social" required/>
+			 <input type="text" name="cuit" placeholder="escribe aqui el cuit" required/>
+			 <input type="text" name="domicilio_calle" placeholder="escribe aqui calle" required/>
+			 <input type="text" name="domicilio_altura" placeholder="escribe aqui altura" required/>
+			 <input type="text" name="localidad" placeholder="escribe aqui localidad" required/>
+			 <input type="text" name="codigo_postal" placeholder="escribe aqui codigo postal" required/>
+			 <input type="text" name="telefono" placeholder="escribe aqui el telefono" required/>
+			 <input type="email" name="email" placeholder="escribe aqui el email" required/>
 			 <footer>
 				<button on:click={ModalAdd} class="secondary">Cancel</button>
 				<button type="submit">Confirm</button>
@@ -186,14 +190,14 @@ filteredClientes = clientes;
 					<div>
 					<form method="POST" action="?/editClient">
 						  <input type="hidden" name="cliente_id" bind:value={selectedCliente_id}>
-						  <label for="nombre">Razon Social<input type="text" name="razon_social" value={selectedRazon_social}/>
-						  <label for="cuit">Cuit<input type="text" name="cuit"  value={selectedCuit}/>
-						  <label for="domicilio_calle">Calle<input type="text" name="domicilio_calle" value={selectedDomicilio_calle} />
-						  <label for="domicilio_altura">Altura<input type="text" name="domicilio_altura" value={selectedDomicilio_altura} />
-						  <label for="localidad">Localidad<input type="text" name="localidad" value={selectedLocalidad} />
-						  <label for="codigo_postal">Codigo Postal<input type="text" name="codigo_postal" value={selectedCodigo_postal} />
-						  <label for="telefono">Telefono<input type="text" name="telefono" value={selectedTelefono}/>
-						  <label for="email">Email<input type="email" name="email" value={selectedEmail}/>										 			  						
+						  <label for="nombre">Razon Social<input type="text" name="razon_social" value={selectedRazon_social} required/>
+						  <label for="cuit">Cuit<input type="text" name="cuit"  value={selectedCuit} required/>
+						  <label for="domicilio_calle">Calle<input type="text" name="domicilio_calle" value={selectedDomicilio_calle} required />
+						  <label for="domicilio_altura">Altura<input type="text" name="domicilio_altura" value={selectedDomicilio_altura} required/>
+						  <label for="localidad">Localidad<input type="text" name="localidad" value={selectedLocalidad} required/>
+						  <label for="codigo_postal">Codigo Postal<input type="text" name="codigo_postal" value={selectedCodigo_postal} required/>
+						  <label for="telefono">Telefono<input type="text" name="telefono" value={selectedTelefono} required/>
+						  <label for="email">Email<input type="email" name="email" value={selectedEmail} required/>										 			  						
 						<button on:click={ModalEd} class="secondary">Cancel</button>
 						<button type="submit">Confirm</button>						 					  
 					  </form>
@@ -204,7 +208,7 @@ filteredClientes = clientes;
 			</td>         
              <td><!---------------------Elimina el cliente--------------------->
 			  <form method="POST" action="?/deleteClient" on:submit={()=>{selectedCliente_id=cli.cliente_id}}  >
-				<input type="hidden"  name="cliente_id" bind:value={selectedCliente_id}>	
+				<input type="hidden"  name="cliente_id" bind:value={selectedCliente_id} required>	
 				<button type="submit" class="outline">Eliminar</button> 
               </form>	  	
 			</td>

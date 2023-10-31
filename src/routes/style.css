@@ -51,6 +51,9 @@ h1 {
 
 h2 {
 	font-size: 1rem;
+	text-align: center;
+    padding: 0 ;
+    margin: 0;
 }
 
 ul, li {
@@ -72,6 +75,18 @@ article {
   
 article div {
 	padding: 0rem;
+  }
+
+  td , th , tr{
+	font-size: 15px;
+  }
+
+  td , th , tr{
+	padding: 3px;
+ }
+   select, button, input{
+	font-size: 15px;
+	padding: 15px;
   }
 
 
