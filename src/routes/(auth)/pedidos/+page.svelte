@@ -2,7 +2,7 @@
 
 
 export let data;
-export let form;
+//export let form;
 export const {productos, clientes}=data;
 
 const pedidos = [{
