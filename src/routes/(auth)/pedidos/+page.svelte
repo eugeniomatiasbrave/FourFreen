@@ -1,13 +1,20 @@
 <script>
-
+	
 export let data;
 export let form;
 export const { productos, clientes}=data;
 
 
-
-let selectedProdPrecio;
+let selectedRazonSocial;
+let selectedProducto;
 let selectedCantidad;
+let precio;
+
+  function handleProductoChange(event) {
+    const selectedIndex = event.target.selectedIndex;
+    const selectedOption = event.target.options[selectedIndex];
+    precio = selectedOption.getAttribute('data-precio');
+  }
 
 </script>
 
@@ -22,32 +29,24 @@ let selectedCantidad;
  <article>
 <article class="container">
 	<form method="POST" >
-	
 		<input type="date" name="date">
 		<input type="date" name="date2">
-		<input type="text" name="pedido" value={Math.floor((Math.random()*(10000-1))+1)}/>
-		
-		<select name="razon_social" id="clentes" required>
-			<option selected>Clientes</option>
-			{#each data.clientes as cli}
-			  <option value={cli.id}>
-				<li>{cli.razon_social}</li>
-				</option>
+		<input type="text" name="pedido_id" value={Math.floor((Math.random()*(10000-1))+1)}/>
+		<select name="selectedRazonSocial" bind:value={selectedRazonSocial} required>
+			<option selected >Clientes</option>
+			{#each data.clientes as cli} 
+			  <option value={cli.razon_social}>{cli.razon_social}</option>
 			{/each}
 		</select>
-
-		 <select bind:value={selectedProdPrecio} required>
-			<option>Productos</option>
+		<select name="selectedProducto" bind:value={selectedProducto} on:change={handleProductoChange} required>
+			<option selected>Productos</option>
 			{#each data.productos as prod}
-			<option selected value={prod.precio} >
-				{prod.nombre}
-			</option>
+			  <option value={prod.nombre} data-precio={prod.precio}>{prod.nombre}</option>
 			{/each}
-		
-		 </select>
+		  </select>
 		<input type="text" name="cantidad" bind:value={selectedCantidad} required />
-		<input type="text" name="precio" value={selectedProdPrecio} required />
-		<input type="number" name="subtotal" value={selectedCantidad*selectedProdPrecio} />
+		<input type="text" name="precio" bind:value={precio} required />
+		<input type="number" name="subtotal" value={selectedCantidad*precio} />
 		<button type="submit">add</button>
 	</form>
 </article>

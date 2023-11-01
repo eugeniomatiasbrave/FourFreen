@@ -2,7 +2,7 @@
 import { BASE_URL } from '../../../lib/utils.js';
 import {fetchApi} from '../../../lib/fetchApi.js';
 
-let pedidos=[{
+/* let pedidos=[{
 	date: '07/07/2023',
 	date2:'08/07/2023',
 	pedido:6,
@@ -13,6 +13,7 @@ let pedidos=[{
 	subtotal:600,
     }
 ];
+*/
 
 
 
@@ -27,28 +28,26 @@ export const load = async ({ locals }) => {
 	  return {
 		productos: getProductos(),
 		clientes: getClientes(),
-		pedidos
+		//pedidos
 	  } 
   }  
 
  
-
-/*
   export const actions= {
 	default: async ({ request}) => {
 	  const formData = await request.formData();
-	 
-	  let date = formData.get('date');
+	  const date = formData.get('date');
 	  const date2 = formData.get('date2');
-	  const pedido = formData.get('pedido');
-	  const razon_social = formData.get('razo_social');
-	  const producto = formData.get('producto');
-	  const cantidad = formData.get('precio');
+	  const pedido_id = formData.get('pedido_id');
+	  const razon_social = formData.get('selectedRazonSocial');
+	  const producto = formData.get('selectedProducto');
+	  const cantidad = formData.get('cantidad');
 	  const precio = formData.get('precio');
 	  const subtotal = formData.get('subtotal');
 	  
-    const pedidos= await fetch (formData)
+     console.log( date, date2, pedido_id, razon_social, producto, cantidad, precio, subtotal)
 
-	*/
+	}
+}
 
 
