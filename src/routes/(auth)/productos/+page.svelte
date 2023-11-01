@@ -43,7 +43,7 @@ function reset() {
 </svelte:head>
 
 <h2>Tabla de Productos</h2>
-<main class="container-xl">
+<main class="container">
 	<div class="grid"> <!-------GRID col.1-->
      <aside>
 	  <figure>

@@ -89,7 +89,7 @@ filteredClientes = clientes;
 		{/if} 
 	</div>
 </main>	
-<main> 
+<main > 
 <div class="grid">
   <div>
 	<aside>
@@ -105,7 +105,7 @@ filteredClientes = clientes;
 	</aside>
   </div>
   <div>
- <article>	
+ <article class="container">	
 	<div>
 	<div>
 	    <button on:click={ModalAdd} class="outline">add Clientes</button> <!----Modal crear Clientes-------->

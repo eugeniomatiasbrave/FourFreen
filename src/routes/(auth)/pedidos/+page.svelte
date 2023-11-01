@@ -1,21 +1,13 @@
 <script>
 
-
 export let data;
-//export let form;
-export const {productos, clientes}=data;
+export let form;
+export const { productos, clientes}=data;
 
-const pedidos = [{
-	f_ingeso: "",
-	f_entrega: "",
-	pedido_id: "random",
-	cliente: "",
-    producto_id: "",
-    cantidad: "",
-    precio_ud: 300,
-    valor_compra: "",
-    check: true
-}];
+
+
+let selectedProdPrecio;
+let selectedCantidad;
 
 </script>
 
@@ -25,10 +17,42 @@ const pedidos = [{
 </svelte:head>
 
 <h2>Gestion de Pedidos</h2>
+
 <main>
  <article>
-  <form method="POST" action="?/addPedidos">
-   <table role="grid">
+<article class="container">
+	<form method="POST" >
+	
+		<input type="date" name="date">
+		<input type="date" name="date2">
+		<input type="text" name="pedido" value={Math.floor((Math.random()*(10000-1))+1)}/>
+		
+		<select name="razon_social" id="clentes" required>
+			<option selected>Clientes</option>
+			{#each data.clientes as cli}
+			  <option value={cli.id}>
+				<li>{cli.razon_social}</li>
+				</option>
+			{/each}
+		</select>
+
+		 <select bind:value={selectedProdPrecio} required>
+			<option>Productos</option>
+			{#each data.productos as prod}
+			<option selected value={prod.precio} >
+				{prod.nombre}
+			</option>
+			{/each}
+		
+		 </select>
+		<input type="text" name="cantidad" bind:value={selectedCantidad} required />
+		<input type="text" name="precio" value={selectedProdPrecio} required />
+		<input type="number" name="subtotal" value={selectedCantidad*selectedProdPrecio} />
+		<button type="submit">add</button>
+	</form>
+</article>
+
+   <table role="grid" class="container">
     <thead>
      <tr>
 	<th scope="col">F_Ing.</th>
@@ -45,31 +69,10 @@ const pedidos = [{
   </tr>
 </thead>
 
-<tbody>		
-	<tr>
-	<td><input type="date" id="date" name="date1" ></td>
-	<td><input type="date" id="date" name="date2" ></td>
-	<td><input type="text" name="#Pedido"/></td>
-	<td><select id="fruit" required>
-		<option value="" selected>Select cliente</option>
-		<option>…</option>
-	  </select></td>
-	  <td><select id="fruit" required>
-		<option value="" selected>Select producto</option>
-		<option>…</option>
-	  </select></td>
-	<td><input type="text" name="cantidad"   /></td>
-	<td><input type="text" name="precio"   /></td>
-	<td><input type="text" name="subtotal"  /></td>
-	<td><button type="submit">add</button></td>
-	<td></td>
-	</tr>
-	</tbody>
-	
- <!---{#each filteredProductos as prod}--->
+<!---- {#each data as dat}---->
  <tbody>
 	<tr>
-    <td>7/7/2023</td>
+    <td>1</td>
 	<td>7/7/2023</td>
 	<td>#54776</td>
 	<td>cliente</td>
@@ -86,7 +89,7 @@ const pedidos = [{
 	</tr>
 	</tbody>
 
-   <!---{/each}---->  
+   <!----{/each}-->
    <tfoot>
     <tr>
       <th scope="col"></th>
@@ -102,7 +105,7 @@ const pedidos = [{
     </tr>
   </tfoot> 	
    </table>
-</form>
+
 </article>
 
 </main>
