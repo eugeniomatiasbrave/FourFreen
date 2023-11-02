@@ -1,14 +1,21 @@
 <script>
 	export let data;
 	export let form;
-	export const { productos, clientes } = data;
-  console.log(form)
+	export const {productos,clientes}=data;
+    console.log(form)
 
-	let selectedRazonSocial;
+
+    let isOpen=false;
+	let selectedDate2;
+    let selectedPedido_id;
+	let selectedEditCantidad;
+	let selectedRazonSocial;//seleccionan en el add
 	let selectedProducto;
 	let selectedCantidad;
 	let precio;
-	let formData = [
+
+
+	let formData=[
 		{
 		date: "7/7/2023",
 		date2:"9/7/2023",
@@ -18,8 +25,7 @@
 		selectedCantidad: 2,
 		precio:300,
 		subtotal:600 
-	  },
-	  {
+	    },{
 		date: "8/7/2023",
 		date2:"10/7/2023",
 		pedido_id:2 ,
@@ -52,6 +58,13 @@
 	  formData = [...formData, newFormData];
 	  console.log(formData);
 	}
+
+    function toggleModal() {
+    isOpen = !isOpen;
+    }
+
+
+	
   </script>
   
   <svelte:head>
@@ -62,8 +75,8 @@
   <h2>Gestion de Pedidos</h2>
   
   <main class="container">
-<article>
-	<form method="POST" on:submit={handleSubmit}>
+  <article>
+	<form method="POST" action="?/addPedido"  on:submit={handleSubmit}>
 	<table>
 		<thead>
 		  <tr>
@@ -77,12 +90,11 @@
 			<th>SubTotal</th>
 			<th>Acción</th>
 		  </tr>
-		</thead>
-		
+		</thead>		
 		<tbody>
 		  <tr>
 			<td>
-			  <input type="text" name="date" value={new Intl.DateTimeFormat('es', { day: 'numeric', month: 'numeric', year: 'numeric' }).format(new Date())}>
+			  <input type="text" name="date" value={new Intl.DateTimeFormat('es',{day:'numeric',month:'numeric',year:'numeric'}).format(new Date())}>
 			</td>
 			<td>
 			  <input type="date" name="date2">
@@ -119,8 +131,7 @@
 			  <button type="submit">add</button>
 			</td>
 		  </tr>
-		</tbody>
-	
+		</tbody>	
 	  </table>  
 	</form>
 	  <table role="grid" >
@@ -147,11 +158,44 @@
 			  <td>{formD.pedido_id}</td>
 			  <td>{formD.selectedRazonSocial}</td>
 			  <td>{formD.selectedProducto}</td>
-			  <td >{formD.selectedCantidad}</td>
-			  <td >{formD.precio}</td>
-			  <td >{formD.subtotal}</td>
-			  <td><button type="submit">Editar</button></td>
-			  <td><button type="submit">Eliminar</button></td>
+			  <td>{formD.selectedCantidad}</td>
+			  <td>{formD.precio}</td>
+			  <td>{formD.subtotal}</td>
+			  <td>
+
+				<button on:click={()=>{   //<!-----------------------------------------Modal para editar-------->
+					selectedPedido_id=formD.pedido_id;
+					selectedDate2=formD.date2;
+					selectedEditCantidad=formD.cantidad;
+					toggleModal()}} class="outline">Editar</button>
+				 {#if isOpen}
+					<dialog open>
+						<article>
+							<div>
+							<header>
+								<a href="#close" aria-label="Close" class="close" on:click={toggleModal}></a>
+									<p>Porfavor edite el producto!!</p>
+							</header>	
+							<form method="POST" action="?/editar">
+									<input type="hidden" name="pedido_id" bind:value={selectedPedido_id} required>	
+									<input type="text" name="date2" value={selectedDate2} required/>
+									<input type="text" name="cantidad" value={selectedEditCantidad} required/>
+									<footer>
+										<button on:click={toggleModal}  class="secondary">Cancel</button>
+										<button type="submit" >Confirm</button>
+									</footer>  		
+								</form>
+							</div>
+						</article>
+						</dialog>
+						{/if}
+
+			  </td>
+			  <td>
+				<form method="POST" action="?/delete" on:submit={()=>{selectedPedido_id=formD.pedido_id}}  >
+					<input type="hidden"  name="pedido_id" bind:value={selectedPedido_id}>	
+					<button type="submit">Eliminar</button> 
+				  </form>	
 			  <td>
 				<label for="switch">
 				  <input type="checkbox" id="switch" name="switch" role="switch">
@@ -178,7 +222,7 @@
 	</article>
   </main>
 
-	<style>
+<style>
   tr,
   td,
   th,

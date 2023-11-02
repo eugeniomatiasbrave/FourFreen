@@ -89,23 +89,22 @@ filteredClientes = clientes;
 		{/if} 
 	</div>
 </main>	
-<main > 
-<div class="grid">
-  <div>
+<main class="container-fluid" > 
+ <div class="grid">
 	<aside>
-		<figure>
-      <div>
-		<input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search" required>
-	  </div>
+	  <figure>
+       <div>
+		 <input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search" required>
+	   </div>
 	  <div>
 		<button on:click|preventDefault={filterClientes} class="outline">Filtrar</button>
 		<button on:click|preventDefault={reset} class="outline">Reset</button>
-	 </div>
+	  </div>
 	</figure>
 	</aside>
-  </div>
-  <div>
- <article class="container">	
+  
+  <section>
+ <article>	
 	<div>
 	<div>
 	    <button on:click={ModalAdd} class="outline">add Clientes</button> <!----Modal crear Clientes-------->
@@ -220,7 +219,7 @@ filteredClientes = clientes;
    </tfoot> 	
    </figure>
 </article>
-  </div>
+</section>
 </div>
 </main>
 

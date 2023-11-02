@@ -48,7 +48,7 @@ function reset() {
      <aside>
 	  <figure>
        <div>
-		<input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search" required>
+		<input type="search" bind:value={searchTerm} name="search" placeholder="Search" required>
 	   </div>
 	   <div>
 		<button  on:click|preventDefault={filterProductos} class="outline">Filtrar</button>

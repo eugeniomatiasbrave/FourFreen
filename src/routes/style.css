@@ -30,12 +30,7 @@ nav [role="link"].secondary:is([aria-current], :hover, :active, :focus) {
 	margin: 0 20px 0 2px;
 }
   
-article div:nth-of-type(2) {
-	display: none;
-	background-color: #fcfdfd;
-	background-position: center;
-	background-size: cover;
-}
+
   
 body>footer {
 	padding: 1rem 0;
@@ -61,33 +56,76 @@ ul, li {
 	margin: 0;
 }
 
-/*
-  h1, h2, p {
-	font-weight: 400; }
-  p {
-	line-height: 1.5; }
-*/
- 
 article {
 	padding: 0;
 	overflow: hidden;
   }
   
-article div {
-	padding: 0rem;
+  tr,
+  td,
+  th,
+  input,
+  select,
+  option,
+  button {
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+    
   }
 
-  td , th , tr{
-	font-size: 15px;
+  table {
+    border-collapse: collaps;
+    width: 100%;
   }
 
-  td , th , tr{
-	padding: 3px;
- }
-   select, button, input{
-	font-size: 15px;
-	padding: 15px;
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
   }
+
+  thead th {
+    background-color:  #f2f2f2
+  }
+
+  tbody tr:nth-child(even) {
+    background-color:  #f2f2f2
+  }
+
+  tfoot th {
+    text-align: right;
+  }
+
+  button {
+    cursor: pointer;
+  }
+  
+  
+  input[type="text"],
+  input[type="date"],
+  select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px;
+	height: 40px;
+  }
+
+  input[type="search"]{
+	border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px;
+	height: 35px;
+  }
+ 
+
+ 
+
+ 
+ 
+
+
+ 
 
 
   @media (min-width: 320px) {
