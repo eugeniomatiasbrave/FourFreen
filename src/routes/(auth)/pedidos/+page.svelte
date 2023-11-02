@@ -2,12 +2,34 @@
 	export let data;
 	export let form;
 	export const { productos, clientes } = data;
-  
+  console.log(form)
+
 	let selectedRazonSocial;
 	let selectedProducto;
 	let selectedCantidad;
 	let precio;
-	let formData = [];
+	let formData = [
+		{
+		date: "7/7/2023",
+		date2:"9/7/2023",
+		pedido_id:1 ,
+		selectedRazonSocial:"El ceibo sa",
+		selectedProducto: "Lechuga azul",
+		selectedCantidad: 2,
+		precio:300,
+		subtotal:600 
+	  },
+	  {
+		date: "8/7/2023",
+		date2:"10/7/2023",
+		pedido_id:2 ,
+		selectedRazonSocial:"El Tilo sa",
+		selectedProducto: "Repollo",
+		selectedCantidad: 2,
+		precio:300,
+		subtotal:600 
+	  }
+	];
   
 	function handleProductoChange(event) {
 	  const selectedIndex = event.target.selectedIndex;
@@ -41,31 +63,69 @@
   
   <h2>Gestion de Pedidos</h2>
   
-  <main>
-	<article class="container">
-	  <form method="POST" on:submit={handleSubmit}>
-		<input type="text" name="date" value={new Intl.DateTimeFormat('es', { day: 'numeric', month: 'numeric', year: 'numeric' }).format(new Date())}>
-		<input type="date" name="date2">
-		<input type="text" name="pedido_id" value={Math.floor((Math.random() * (10000 - 1)) + 1)} />
-		<select name="selectedRazonSocial" bind:value={selectedRazonSocial} required>
-		  <option selected>Clientes</option>
-		  {#each data.clientes as cli}
-			<option value={cli.razon_social}>{cli.razon_social}</option>
-		  {/each}
-		</select>
-		<select name="selectedProducto" bind:value={selectedProducto} on:change={handleProductoChange} required>
-		  <option selected>Productos</option>
-		  {#each data.productos as prod}
-			<option value={prod.nombre} data-precio={prod.precio}>{prod.nombre}</option>
-		  {/each}
-		</select>
-		<input type="text" name="selectedCantidad" bind:value={selectedCantidad} required />
-		<input type="text" name="precio" value={precio} readonly />
-		<input type="text" name="subtotal" value={selectedCantidad * precio} readonly />
-		<button type="submit">add</button>
-	  </form>
-  
-	  <table role="grid" class="container">
+  <main class="container">
+<article>
+	<form method="POST" on:submit={handleSubmit}>
+	<table>
+		<thead>
+		  <tr>
+			<th>Fecha</th>
+			<th>Fecha2</th>
+			<th>Pedido ID</th>
+			<th>Cliente</th>
+			<th>Producto</th>
+			<th>Cantidad</th>
+			<th>Precio</th>
+			<th>SubTotal</th>
+			<th>Acción</th>
+		  </tr>
+		</thead>
+		
+		<tbody>
+		  <tr>
+			<td>
+			  <input type="text" name="date" value={new Intl.DateTimeFormat('es', { day: 'numeric', month: 'numeric', year: 'numeric' }).format(new Date())}>
+			</td>
+			<td>
+			  <input type="date" name="date2">
+			</td>
+			<td>
+			  <input type="text" name="pedido_id" value={Math.floor((Math.random() * (10000 - 1)) + 1)} />
+			</td>
+			<td>
+			  <select name="selectedRazonSocial" bind:value={selectedRazonSocial} required>
+				<option selected>Clientes</option>
+				{#each data.clientes as cli}
+				  <option value={cli.razon_social}>{cli.razon_social}</option>
+				{/each}
+			  </select>
+			</td>
+			<td>
+			  <select name="selectedProducto" bind:value={selectedProducto} on:change={handleProductoChange} required>
+				<option selected>Productos</option>
+				{#each data.productos as prod}
+				  <option value={prod.nombre} data-precio={prod.precio}>{prod.nombre}</option>
+				{/each}
+			  </select>
+			</td>
+			<td>
+			  <input type="text" name="selectedCantidad" bind:value={selectedCantidad} required />
+			</td>
+			<td>
+			  <input type="text" name="precio" value={precio} readonly />
+			</td>
+			<td>
+			  <input type="text" name="subtotal" value={selectedCantidad * precio} readonly />
+			</td>
+			<td>
+			  <button type="submit">add</button>
+			</td>
+		  </tr>
+		</tbody>
+	
+	  </table>  
+	</form>
+	  <table role="grid" >
 		<thead>
 		  <tr>
 			<th scope="col">Fecha</th>
@@ -119,7 +179,55 @@
 	  </table>
 	</article>
   </main>
-  
-  <style>
-	
-  </style>
+
+	<style>
+  tr,
+  td,
+  th,
+  input,
+  select,
+  option,
+  button {
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+  }
+
+  thead th {
+    background-color: #f2f2f2;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tfoot th {
+    text-align: right;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px;
+	height: 40px;
+  }
+</style>
+ 

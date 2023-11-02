@@ -152,9 +152,8 @@ function reset() {
 
 <style>
 
-
-</style>
-
+  
+  </style>
 
 
   
