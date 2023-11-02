@@ -51,8 +51,6 @@
 	  };
 	  formData = [...formData, newFormData];
 	  console.log(formData);
- 
-
 	}
   </script>
   
