@@ -3,6 +3,7 @@
 	export let form;
 	export const {productos,clientes}=data;
     
+	console.log(form)
 
     let isOpen=false;
 	let selectedDate2;
