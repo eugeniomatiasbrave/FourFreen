@@ -2,8 +2,7 @@
 	export let data;
 	export let form;
 	export const {productos,clientes}=data;
-    console.log(form)
-
+    
 
     let isOpen=false;
 	let selectedDate2;
@@ -63,8 +62,6 @@
     isOpen = !isOpen;
     }
 
-
-	
   </script>
   
   <svelte:head>
@@ -75,6 +72,7 @@
   <h2>Gestion de Pedidos</h2>
   
   <main class="container">
+
   <article>
 	<form method="POST" action="?/addPedido"  on:submit={handleSubmit}>
 	<table>

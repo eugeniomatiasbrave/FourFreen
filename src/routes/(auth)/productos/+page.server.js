@@ -1,4 +1,3 @@
- 
 
 import { error } from '@sveltejs/kit';
 import { BASE_URL } from '../../../lib/utils.js';
@@ -11,7 +10,6 @@ export const load = async ({ locals }) => {
   return {
     productos: getProductos(),
   }
-
 }  
 
 export const actions= {
@@ -31,7 +29,7 @@ export const actions= {
         },
         resStatus: 200
       });
-    
+      
       if (res.status === 200) {
         const datos = await res.json();
         
@@ -45,15 +43,16 @@ export const actions= {
            sameSite: 'strict',
            maxAge: 60 * 60 * 24 // 1 day
          })
-        
-        return { success: true };
+            
       } else {
-        return { success: false };
+       //return { success: false };
       }
     } catch (err) {
       console.log('Error: ', err);
       throw error(500, 'Algo salió mal al agregar el producto');
-    }  
+    } 
+
+    return { success: true, message: 'Producto agregado correctamente!!!'} 
    },
 
   delete: async ({ request, locals, cookies }) => {
@@ -82,15 +81,16 @@ export const actions= {
           sameSite: 'strict',
           maxAge: 60 * 60 * 24 // se requiere??
           })
-        
-        return { success: true };
+           
       } else {
-        return { success: false };
+        //return { success: false };
       }
     } catch (err) {
       console.log('Error: ', err);
       throw error(500, 'Algo salió mal al eliminar el producto');
     }
+
+    return { success: true, message: 'Producto eliminado correctamente!!!' };
   },
 
   editar: async ({ request, locals, cookies }) => {
@@ -98,7 +98,7 @@ export const actions= {
     const id = formData.get('producto_id');
     const nombre = formData.get('nombre');
     const precio = formData.get('precio');
-    
+      
     try {
       const res = await fetchApi.patch({
         url: BASE_URL + `/productos/${id}`,
@@ -107,9 +107,9 @@ export const actions= {
           "nombre": nombre,
           "precio": parseFloat(precio)
         },
-        resStatus: 200
+        resStatus: 200       
       });
-    
+      
       if (res.status === 200) {
         const datos = await res.json();
       
@@ -123,17 +123,18 @@ export const actions= {
         sameSite: 'strict',
         maxAge: 60 * 60 * 24 // se requiere???
         })
-        
-        return { success: true };
+       
       } else {
-        return { success: false };
+        //return { success: false };
       }
     } catch (err) {
       console.log('Error: ', err);
       throw error(500, 'Algo salió mal al actualizar el producto'); 
     }
-   
+    
+    return { success: true, message: 'Producto actualizado correctamente!!!' }
    }
+   
 };
 
 

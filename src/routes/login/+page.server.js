@@ -38,19 +38,14 @@ export const actions = {
 					secure: true,
 					sameSite: 'strict',
 					maxAge: 60 * 60 * 24 // 1 day
-				})
-				
+				})			
 			} else {
-				return {success: false}		
-				
+				return {success: false}						
 			}
 		} catch (err) {
 			console.log('Error: ', err);
-			throw error(500, 'Something went wrong logging in');
-			
+			throw error(500, 'Something went wrong logging in');	
 		}
-
-	
 		throw redirect(303, '/');
         
 	}

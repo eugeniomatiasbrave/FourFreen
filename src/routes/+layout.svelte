@@ -24,7 +24,7 @@
 </header>
 
 <main>
-<slot/>
+ <slot/>
 	
 </main>
 

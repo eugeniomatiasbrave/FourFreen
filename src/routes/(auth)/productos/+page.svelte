@@ -1,4 +1,4 @@
-<script>
+<script>		
 import logo3 from '$lib/img/LogoFourGreen2.png';
 export let data;
 export let form;
@@ -14,6 +14,7 @@ function toggleModal() {
 let selectedProducto;
 let selectedNombre;
 let selectedPrecio;
+
 
 function ModalAdd() {
   isOpenAdd = !isOpenAdd;
@@ -35,6 +36,7 @@ function reset() {
   searchTerm = '';
   filteredProductos = productos;
 }
+
 </script>
 
 <svelte:head>
@@ -57,17 +59,23 @@ function reset() {
 	</figure>
      </aside>
 <section>
- <article >	
+ 
+ <article>
 	<div>
-	<div>
-	    <button  on:click={ModalAdd} class="outline" >add Productos</button> <!-----------------------------------------Modal para crear Prod-------->
-	</div>
+     <div>		
+	   {#if form?.success}
+		<span style="background-color: greenyellow;">{form.message}</span>
+	   {/if}
+	  </div>
+	 <div>
+	    <button  on:click={ModalAdd} class="outline" >add Productos</button> <!-----------------------------------------Modal para crear Prod-------->	
+	 </div>
 	  {#if isOpenAdd}
 		 <dialog open >
 			<article>
 			<div>
 				<header>
-					<p>Porfavor Agregar nuevo producto!!</p>
+				 <p>Porfavor Agregar nuevo producto!!</p>
 				</header>	
 			<form method="POST" action="?/addProd" >
 			 <input type="text" name="nombre" placeholder="escribe aqui el producto" required/>
@@ -76,14 +84,11 @@ function reset() {
 				<button on:click={ModalAdd} class="secondary">Cancel</button>
 				<button type="submit">Confirm</button>
 			  </footer>
-			</form>
-			{#if form?.success}
-			<span>Agregado</span>
-			{/if}
+			</form>	
 		</div>
 		</article>
 		</dialog>
-      {/if}	
+      {/if}		  
 	</div>
 	  
 <figure>

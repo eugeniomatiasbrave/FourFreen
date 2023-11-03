@@ -30,8 +30,9 @@ export const actions = {
     const precio = formData.get('precio');
     const subtotal = formData.get('subtotal');
 
-    console.log ( "Pedido:",id,date, date2, razon_social, producto, cantidad, precio, subtotal, locals.token,BASE_URL)
+   console.log ( "Pedido:",id,date, date2, razon_social, producto, cantidad, precio, subtotal, locals.token,BASE_URL)
    
+       
     },
 /*
   try {
@@ -122,7 +123,7 @@ editar: async ({ request, locals }) => {
   // otros campos a editar ...
   
   console.log("Pedido:",id,date2,cantidad,locals.token,BASE_URL)
-}
+},
   /*
   try {
     const res = await fetchApi.patch({

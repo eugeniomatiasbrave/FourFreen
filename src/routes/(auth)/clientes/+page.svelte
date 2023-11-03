@@ -104,8 +104,13 @@ filteredClientes = clientes;
 	</aside>
   
   <section>
- <article>	
+   <article>	
 	<div>
+		<div>		
+			{#if form?.success}
+			  <span style="background-color: greenyellow;">{form.message}</span>
+			{/if}
+		</div>
 	<div>
 	    <button on:click={ModalAdd} class="outline">add Clientes</button> <!----Modal crear Clientes-------->
 	</div>

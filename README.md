@@ -22,6 +22,7 @@
 	   -Se puede mejor el codigo: 
 	       * Funcion que simplifiquen el selected
 		   * TRY: En productos y clientes. A mejorar...
+           * Success y message: Respuesta al CRUD en /clientes y /pedidos. A mejorar, hacer un alert().
     * Gestion de Pedidos: Tabla , campos (fecha alta, fecha entrega, id pedido, cliente, producto, cantidad, precio y total), 
                           la base a la espera de la API Pedidos y comprender mejor el proceso de gestion.
                           ACCIONES: Crea: pedidos en [] a la espera de la API. .. .cliente y servidor a completar con Api.

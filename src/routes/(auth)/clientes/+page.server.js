@@ -1,4 +1,4 @@
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import { BASE_URL } from '../../../lib/utils.js';
 import {fetchApi} from '../../../lib/fetchApi.js';
 
@@ -63,13 +63,14 @@ export const load = async ({ locals }) => {
 			     maxAge: 60 * 60 * 24 // 1 day
 			  })		  
 			} else {
-			  return { success: false };
+			  //return { success: false };
 			}
 		  } catch (err) {
 			console.log('Error: ', err);
 			throw error(500, 'Algo salió mal al agregar el cliente');
+			//throw redirect(303, '/clientes')
 		  }
-		  throw redirect(303, '/clientes')
+		  return { success: true, message: 'Cliente agregado correctamente!!!'} 
 	},
 	
 	deleteClient: async ({request,locals,cookies}) => {
@@ -99,14 +100,14 @@ export const load = async ({ locals }) => {
 			  maxAge: 60 * 60 * 24 // 1 day  
 			  })
 
-		    return { success: true };
 			}else{
-				return { success: false };
+				//return { success: false };
 			  }	
 			}catch (err) {
 				console.log('Error: ', err);
 				throw error(500, 'Algo salió mal al eliminar el cliente');
 		}
+		return { success: true, message: 'Cliente eliminado correctamente!!!'}
 	},
 		
 	editClient: async ({ request, locals, cookies }) => {
@@ -157,14 +158,15 @@ export const load = async ({ locals }) => {
 						sameSite: 'strict',
 						maxAge: 60 * 60 * 24 // 1 day
 						})		  
-					return { success: true };
+					
 					 } else {
 						return { success: false };
 					}
 					} catch (err) {
 					console.log('Error: ', err);
 					throw error(500, 'Algo salió mal al actualizar el cliente');
-				}						
+				}	
+				return { success: true, message: 'Cliente editado correctamente!!!'}					
 			}
         };
 							
