@@ -65,7 +65,6 @@ filteredClientes = clientes;
 </svelte:head>
 
 <main>
-<h2>Tabla de Clientes</h2>
 
    <div>
 	<a href="#10" on:click={toggleModal}>Datos Usuario</a>
@@ -90,6 +89,7 @@ filteredClientes = clientes;
 	</div>
 </main>	
 <main class="container-fluid Cli-main" > 
+	<h2>Tabla de Clientes</h2>
  <div class="grid">
 	<aside >
 	  <figure>
@@ -104,7 +104,9 @@ filteredClientes = clientes;
 	</aside>
   
   <section>
+	
    <article>	
+	
 	<div>
 		<div>		
 			{#if form?.success}

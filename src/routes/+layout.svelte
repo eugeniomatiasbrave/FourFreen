@@ -1,5 +1,6 @@
 
 <script>
+	
 	import './style.css';
 	import logo from '$lib/img/LogoFourGreens2021.png';
 	export let data;
@@ -17,7 +18,7 @@
 		{:else}
 		<a href="/productos">Tabla de Productos</a>
 		<a href="/pedidos">Gestion de Pedidos</a>
-		<a href="/clientes">Tabla de Clientes</a>
+		<a href="/clientes">Tabla de Clentes</a>
 		<a href="/logout">Logout</a>
 		{/if}	
     </div>
@@ -28,9 +29,9 @@
  <slot/>
 	
 
-
-
-
+<style>
+	
+</style>
 
 
 
