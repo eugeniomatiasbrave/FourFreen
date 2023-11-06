@@ -89,12 +89,12 @@ filteredClientes = clientes;
 		{/if} 
 	</div>
 </main>	
-<main class="container-fluid" > 
+<main class="container-fluid Cli-main" > 
  <div class="grid">
-	<aside>
+	<aside >
 	  <figure>
        <div>
-		 <input type="search" id="search" bind:value={searchTerm} name="search" placeholder="Search" required>
+		 <input type="text" id="search" bind:value={searchTerm} name="search" placeholder="Search" required>
 	   </div>
 	  <div>
 		<button on:click|preventDefault={filterClientes} class="outline">Filtrar</button>
@@ -232,7 +232,9 @@ filteredClientes = clientes;
 
 <style>
 
-
+.Cli-main {
+  padding: 0 100px 0 100px;
+}
 
 </style>
 	

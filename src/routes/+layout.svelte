@@ -1,3 +1,4 @@
+
 <script>
 	import './style.css';
 	import logo from '$lib/img/LogoFourGreens2021.png';
@@ -23,10 +24,23 @@
   </nav>
 </header>
 
-<main>
+
  <slot/>
 	
-</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
