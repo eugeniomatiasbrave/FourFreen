@@ -16,7 +16,7 @@
 	* clientes.rest
     * Pedidos.rest.....
        - Primero armar el cliente.
-           * Cabecera y detalle
+          
 
 **** HOOKS*******
 **** FUNCION FETCH + UTILS***

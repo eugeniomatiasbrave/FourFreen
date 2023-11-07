@@ -6,6 +6,7 @@
 	console.log(form);
 
 	let isOpen = false;
+	let isOpenDel=false;
 	let selectedDate2;
 	let selectedPedido_id;
 	let selectedEditCantidad;
@@ -37,15 +38,24 @@
 		}
 	];
 
-	function handleProductoChange(event) {
-		const selectedIndex = event.target.selectedIndex;
-		const selectedOption = event.target.options[selectedIndex];
-		precio = selectedOption.getAttribute('data-precio');
+
+function toggleModal() {
+	isOpen = !isOpen;
+}
+
+function ModalDelete() {
+  isOpenDel = !isOpenDel;
+}
+
+function handleProductoChange(event) {
+	const selectedIndex = event.target.selectedIndex;
+	const selectedOption = event.target.options[selectedIndex];
+	precio = selectedOption.getAttribute('data-precio');
 	}
 
-	function handleSubmit(event) {
-		event.preventDefault();
-		const newFormData = {
+function handleSubmit(event) {
+	event.preventDefault();
+	const newFormData = {
 			date: event.target.date.value,
 			date2: event.target.date2.value,
 			pedido_id: event.target.pedido_id.value,
@@ -59,9 +69,6 @@
 		console.log(formData);
 	}
 
-	function toggleModal() {
-		isOpen = !isOpen;
-	}
 </script>
 
 <svelte:head>
@@ -183,8 +190,7 @@
 									selectedEditCantidad = formD.cantidad;
 									toggleModal();
 								}}
-								class="outline">Editar</button
-							>
+								class="outline">Editar</button>
 							{#if isOpen}
 								<dialog open>
 									<article>
@@ -213,20 +219,33 @@
 							{/if}
 						</td>
 						<td>
-							<form
-								method="POST"
-								action="?/delete"
-								on:submit={() => {
-									selectedPedido_id = formD.pedido_id;
-								}}
-							>
-								<input type="hidden" name="pedido_id" bind:value={selectedPedido_id} />
-								<button type="submit">Eliminar</button>
-							</form>
-						</td><td>
-							<label for="switch">
-								<input type="checkbox" id="switch" name="switch" role="switch" />
-							</label>
+							<button on:click={()=>{   //<!-----------------------------------------Modal para elimanar-------->
+								selectedPedido_id = formD.pedido_id;
+								ModalDelete()}} class="outline">Eliminar</button>
+							 {#if isOpenDel}
+								<dialog open>
+									<article>
+										<div>
+										<header>
+											<a href="#close" aria-label="Close" class="close" on:click={ModalDelete}></a>
+												<p>Porfavor confirmar la eliminacion el producto!!</p>
+										</header>	
+																										
+									<form method="POST" action="?/delete"
+										  on:submit={() => {selectedPedido_id = formD.pedido_id;}}>
+										<input type="hidden" name="pedido_id" bind:value={selectedPedido_id} />
+										<button on:click={ModalDelete}  class="outline">Cancel</button>
+										<button type="submit" class="outline">Confirmar</button> 
+									</form>												
+								</div>
+									</article>
+									</dialog>
+									{/if}		
+						</td>
+						<td>
+						  <label for="switch">
+						   <input type="checkbox" id="switch" name="switch" role="switch" />
+						  </label>
 						</td>
 					</tr>
 				{/each}
@@ -263,8 +282,7 @@
 	button {
 		font-size: 15px;
 		margin: 0;
-		padding: 0;
-		border: none;
+		padding: 0;	
 	}
 
 	table {

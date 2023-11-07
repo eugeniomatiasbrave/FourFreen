@@ -6,38 +6,42 @@
 	
 	let isOpen = false;
 	let isOpenAdd = false;
-	
-	function toggleModal() {
-	  isOpen = !isOpen;
-	}
+	let isOpenDel=false;
 	
 	let selectedProducto;
 	let selectedNombre;
 	let selectedPrecio;
-	
-	
-	function ModalAdd() {
-	  isOpenAdd = !isOpenAdd;
-	}
-	
+
 	let filteredProductos = productos.datos;
 	
-	function filterProductos() {
-		 filteredProductos = productos.datos.filter(prod => {
-			 return prod.producto_id.toString().includes(searchTerm.toString()) ||
-					prod.nombre.toString().includes(searchTerm.toString()) ||
-					prod.precio.toString().includes(searchTerm.toString()) ;       
+function toggleModal() {
+  isOpen = !isOpen;
+}
+	
+function ModalAdd() {
+  isOpenAdd = !isOpenAdd;
+	}
+
+function ModalDelete() {
+  isOpenDel = !isOpenDel;
+}
+
+function filterProductos() {
+	filteredProductos = productos.datos.filter(prod => {
+		return prod.producto_id.toString().includes(searchTerm.toString()) ||
+			   prod.nombre.toString().includes(searchTerm.toString()) ||
+			   prod.precio.toString().includes(searchTerm.toString()) ;       
 		 });	 
 	 }
 	
-	let searchTerm = '';
+let searchTerm = '';
 	
-	function reset() {
-	  searchTerm = '';
-	  filteredProductos = productos.datos;
+function reset() {
+	searchTerm = '';
+	filteredProductos = productos.datos;
 	}
 	
-	</script>
+</script>
 	
 	<svelte:head>
 		<title>Productos</title>
@@ -140,10 +144,29 @@
 				</td>
 	<!----------------------------------Elimina el producto--------------------->
 				 <td>
-				  <form method="POST" action="?/delete" on:submit={()=>{selectedProducto=prod.producto_id}}  >
-					<input type="hidden"  name="producto_id" bind:value={selectedProducto}>	
-					<button type="submit" class="outline">Eliminar</button> 
-				  </form> 	
+					<button on:click={()=>{   //<!-----------------------------------------Modal para elimanar-------->
+						selectedProducto=prod.producto_id;
+						ModalDelete()}} class="outline">Eliminar</button>
+					 {#if isOpenDel}
+						<dialog open>
+							<article>
+								<div>
+								<header>
+									<a href="#close" aria-label="Close" class="close" on:click={ModalDelete}></a>
+										<p>Porfavor confirmar la eliminacion el producto!!</p>
+								</header>	
+															
+								<form method="POST" action="?/delete" on:submit={()=>{selectedProducto=prod.producto_id}}  >
+									<input type="hidden"  name="producto_id" bind:value={selectedProducto}>	
+									<button on:click={ModalDelete}  class="outline">Cancel</button>
+									<button type="submit" class="outline">Confirmar</button> 
+								</form> 	
+								
+								</div>
+							</article>
+							</dialog>
+							{/if}
+
 				</td>
 			  </tr>
 			</tbody>

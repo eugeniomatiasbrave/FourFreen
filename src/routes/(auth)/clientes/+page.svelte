@@ -3,13 +3,12 @@ export let form;
 export let data;
 export const { perfil, clientes} = data;
 	  
-
 let searchTerm = '';
 
 let isOpen = false;
 let isOpenAdd = false;
 let isOpenEd = false;
-
+let isOpenDel=false;
 
 let selectedCliente_id;
 let selectedRazon_social;
@@ -20,6 +19,8 @@ let selectedDomicilio_altura;
 let selectedCodigo_postal;
 let selectedTelefono;
 let selectedEmail;
+
+let filteredClientes = clientes;
 
 
 function toggleModal() {
@@ -34,8 +35,10 @@ function ModalEd() {
   isOpenEd = !isOpenEd;
 }
 
+function ModalDelete() {
+  isOpenDel = !isOpenDel;
+}
 
-let filteredClientes = clientes;
 console.log(filteredClientes)
 
 function filterClientes() {
@@ -213,10 +216,28 @@ filteredClientes = clientes;
 				{/if}
 			</td>         
              <td><!---------------------Elimina el cliente--------------------->
-			  <form method="POST" action="?/deleteClient" on:submit={()=>{selectedCliente_id=cli.cliente_id}}  >
-				<input type="hidden"  name="cliente_id" bind:value={selectedCliente_id} required>	
-				<button type="submit" class="outline">Eliminar</button> 
-              </form>	  	
+
+				<button on:click={()=>{   //<!-----------------------------------------Modal para editar-------->
+					selectedCliente_id=cli.cliente_id
+					ModalDelete()}} class="outline">Eliminar</button>
+				 {#if isOpenDel}
+					<dialog open>
+						<article>
+							<div>
+							<header>
+								<a href="#close" aria-label="Close" class="close" on:click={ModalDelete}></a>
+									<p>Porfavor confirmar la eliminacion el producto!!</p>
+							</header>	
+																				
+							<form method="POST" action="?/deleteClient" on:submit={()=>{selectedCliente_id=cli.cliente_id}}  >
+								<input type="hidden"  name="cliente_id" bind:value={selectedCliente_id} required>	
+								<button on:click={ModalDelete}  class="outline">Cancel</button>
+								<button type="submit" class="outline">Confirmar</button> 
+							 </form>	  										
+							</div>
+						</article>
+						</dialog>
+						{/if}            
 			</td>
 		  </tr>
 		</tbody>
