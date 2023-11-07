@@ -4,6 +4,7 @@ import { BASE_URL } from '../../lib/utils.js';
 
 
 
+
 export const actions = {
 	default: async ({ cookies, request }) => {
 		const formData = await request.formData();
@@ -17,11 +18,14 @@ export const actions = {
 				headers: {"Content-Type": "application/json"},
 				body: JSON.stringify({
 					"email": username,
-					"clave": password
+					"clave": password,
+					
 				})
 			});
 			if (res.status === 200) {
 				const datos = await res.json();
+
+
 				cookies.set('AuthorizationToken', `Bearer ${datos.access_token}`, {
 					httpOnly: true,
 					path: '/',
@@ -32,13 +36,16 @@ export const actions = {
 				cookies.set('Usuario', JSON.stringify({
 					usuario_id: datos.usuario_id,
 					nombre: datos.nombre
+
 				}), {
 					httpOnly: true,
 					path: '/',
 					secure: true,
 					sameSite: 'strict',
 					maxAge: 60 * 60 * 24 // 1 day
-				})			
+				})	
+				
+				
 			} else {
 				return {success: false}						
 			}
@@ -47,7 +54,7 @@ export const actions = {
 			throw error(500, 'Something went wrong logging in');	
 		}
 		throw redirect(303, '/');
-        
+         
 	}
 
 

@@ -98,18 +98,17 @@
 									day: 'numeric',
 									month: 'numeric',
 									year: 'numeric'
-								}).format(new Date())}
-							/>
+								    }).format(new Date())} class="w"/>
 						</td>
 						<td>
-							<input type="date" name="date2" />
+							<input type="date" name="date2"/>
 						</td>
 						<td>
 							<input
 								type="text"
 								name="pedido_id"
 								value={Math.floor(Math.random() * (10000 - 1) + 1)}
-							/>
+								class="w"/>
 						</td>
 						<td>
 							<select name="selectedRazonSocial" bind:value={selectedRazonSocial} required>
@@ -127,19 +126,19 @@
 								required
 							>
 								<option selected>Productos</option>
-								{#each data.productos as prod}
+								{#each data.productos.datos as prod}
 									<option value={prod.nombre} data-precio={prod.precio}>{prod.nombre}</option>
 								{/each}
 							</select>
 						</td>
 						<td>
-							<input type="text" name="selectedCantidad" bind:value={selectedCantidad} required />
+							<input type="text" name="selectedCantidad" bind:value={selectedCantidad} class="w" required />
 						</td>
 						<td>
-							<input type="text" name="precio" value={precio} readonly />
+							<input type="text" name="precio" value={precio} class="w" readonly />
 						</td>
 						<td>
-							<input type="text" name="subtotal" value={selectedCantidad * precio} readonly />
+							<input type="text" name="subtotal" value={selectedCantidad * precio} class="w" readonly />
 						</td>
 						<td>
 							<button type="submit">add</button>
@@ -302,5 +301,9 @@
 		border-radius: 4px;
 		padding: 6px;
 		height: 40px;
+	}
+
+	.w {
+		width: 100px;
 	}
 </style>

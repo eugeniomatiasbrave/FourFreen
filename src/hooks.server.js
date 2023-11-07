@@ -7,7 +7,8 @@ export const handle = async ({event, resolve}) => {
   const token = event.cookies.get('AuthorizationToken');
   const usuario = event.cookies.get("Usuario")
   console.log("cookies:", token, usuario)
-  if (event.route.id.includes("auth")) {
+  
+  if (event.route.id && event.route.id.includes("auth")) {
     // es una ruta protegida
     if (!token || !usuario) {
       console.log("Faltan datos:", token, usuario)

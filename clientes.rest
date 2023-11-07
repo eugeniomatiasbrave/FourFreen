@@ -23,14 +23,14 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "razon_social": "nuevo Onda Azul S.A",
-  "cuit": 20215739012,
-  "domicilio_calle": "Avda. Conturbis",
-  "domicilio_altura": "3212",
+  "razon_social": "Apio verde S.A",
+  "cuit": 20215739016,
+  "domicilio_calle": "Avda. Conturbis22",
+  "domicilio_altura": "3214",
   "localidad": "Coronell Súarez",
   "codigo_postal": "754",
-  "telefono": "292645444",
-  "email": "c@c.net"
+  "telefono": "29264544",
+  "email": "d@c.net"
 }
 
 ###

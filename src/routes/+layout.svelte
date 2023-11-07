@@ -2,36 +2,70 @@
 <script>
 	
 	import './style.css';
-	import logo from '$lib/img/LogoFourGreens2021.png';
 	export let data;
+
 </script>
 
-<header>
-<nav class="grid">
-	<div>
-	  <a href="#1"><img src={logo} alt='logo1' width="25%"/></a>
-    </div>
-    <div>
-		<a href="/" >Showcase</a>
-		{#if data.usuario === undefined }
-		<a href="/login">Login</a>
-		{:else}
-		<a href="/productos">Tabla de Productos</a>
-		<a href="/pedidos">Gestion de Pedidos</a>
-		<a href="/clientes">Tabla de Clentes</a>
-		<a href="/logout">Logout</a>
-		{/if}	
-    </div>
+
+<nav>
+	<a href="/">Home</a>
+	  
+	  {#if data.usuario === undefined}
+		  <a href="/login">Login</a>
+	  {:else}
+	  <ul>
+			  {#each data.menu as {item, icono, tooltip, ruta} }
+			  
+			  <li>
+				  
+				  <a href={ruta}  data-tooltip="{tooltip}" data-placement="left">{item}</a>
+			  </li>	
+			  {/each}
+			  <a href="/logout">Logout</a>
+		  </ul>
+	  {/if}
   </nav>
-</header>
 
 
- <slot/>
-	
 
-<style>
-	
-</style>
+<slot/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

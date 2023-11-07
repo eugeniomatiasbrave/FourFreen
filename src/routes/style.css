@@ -22,7 +22,6 @@ body > main {
 	padding: 0 ;
 	margin: 0;
 }
-
 nav [role='link'].secondary:is([aria-current], :hover, :active, :focus) {
 	background-color: transparent;
 	color: var(--secondary-hover);

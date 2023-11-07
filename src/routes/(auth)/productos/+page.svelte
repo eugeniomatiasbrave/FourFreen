@@ -20,10 +20,10 @@
 	  isOpenAdd = !isOpenAdd;
 	}
 	
-	let filteredProductos = productos;
+	let filteredProductos = productos.datos;
 	
 	function filterProductos() {
-		 filteredProductos = productos.filter(prod => {
+		 filteredProductos = productos.datos.filter(prod => {
 			 return prod.producto_id.toString().includes(searchTerm.toString()) ||
 					prod.nombre.toString().includes(searchTerm.toString()) ||
 					prod.precio.toString().includes(searchTerm.toString()) ;       
@@ -34,7 +34,7 @@
 	
 	function reset() {
 	  searchTerm = '';
-	  filteredProductos = productos;
+	  filteredProductos = productos.datos;
 	}
 	
 	</script>
@@ -81,8 +81,8 @@
 				 <input type="text" name="nombre" placeholder="escribe aqui el producto" required/>
 				 <input type="text" name="precio" placeholder="escribe aqui el precio" required/>
 				 <footer>
-					<button on:click={ModalAdd} class="secondary">Cancel</button>
-					<button type="submit">Confirm</button>
+					<button on:click={ModalAdd} class="outline">Cancel</button>
+					<button type="submit" class="outline">Confirm</button>
 				  </footer>
 				</form>	
 			</div>

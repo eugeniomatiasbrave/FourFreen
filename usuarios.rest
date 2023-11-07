@@ -1,5 +1,6 @@
 // Está es la URL donde está desplegada la API
 @baseUrl = https://fg-api-rest.fly.dev
+#@baseUrl = http://localhost:3000
 
 // Aquí es para chequear que el servicio esté funcionando y devuelve la versión activa
 GET {{baseUrl}}/
@@ -13,9 +14,10 @@ POST {{baseUrl}}/usuarios/login
 Content-Type: application/json
 
 {
-  "email": "a@a.com",
+  "email": "b@b.com",
   "clave": "123"
 }
+
 
 ###
 @token = eyJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvX2lkIjoxLCJub21icmUiOiJhQGEuY29tIiwiaWF0IjoxNjk3NDY0MTAzfQ.Jx6HocdoKz8H7kxPqrVjmEqYBLmjODjw3CHoWdxjLGs
@@ -25,8 +27,8 @@ Content-Type: application/json
 GET {{baseUrl}}/usuarios/perfil HTTP/1.1 
 Authorization: Bearer {{token}}
 
-
-
-
-
-
+###
+// para recuperar el menu de cada usuario
+// más adelante agregaremos los los permisos y definiremos las opciones de menu
+GET {{baseUrl}}/usuarios/menu HTTP/1.1 
+Authorization: Bearer {{token}}
