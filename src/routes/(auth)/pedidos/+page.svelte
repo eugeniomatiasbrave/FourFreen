@@ -8,42 +8,45 @@
 	let isOpen = false;
 	let isOpenDel=false;
 	let isOpenAdd=false;
+
 	let selectedDate2;
 	let selectedPedido_id;
-	let selectedEditCantidad;
 	let selectedRazonSocial; //seleccionan en el add
 	let selectedProducto;
 	let selectedCantidad;
 	let precio;
+	let selectedEditCantidad;
 
-	let formData = [
-		{
-			date: '7/7/2023',
-			date2: '9/7/2023',
-			pedido_id: 1,
-			selectedRazonSocial: 'El ceibo sa',
-			selectedProducto: 'Lechuga azul',
-			selectedCantidad: 2,
-			precio: 300,
-			subtotal: 600
-		},
-		{
-			date: '8/7/2023',
-			date2: '10/7/2023',
-			pedido_id: 2,
-			selectedRazonSocial: 'El Tilo sa',
-			selectedProducto: 'Repollo',
-			selectedCantidad: 2,
-			precio: 300,
-			subtotal: 600
-		}
-	];
+	let formData = 
+		        [ { 
+		          pedido_id: 1,
+		          date: "7/7/2023",
+			      date2: '9/7/2023',
+		          selectedRazonSocial: 'El ceibo sa',
+		          item:{  
+			            selectedProducto: 'Lechuga azul',
+			            selectedCantidad: 2,
+			            precio: 300
+					    }
+				 },
+				{ 
+                pedido_id: 2,
+                date: "9/7/2023",
+                date2: '10/7/2023',
+                selectedRazonSocial: 'El Apio sa',
+                item:{  
+                      selectedProducto: 'Pala',
+                      selectedCantidad: 2,
+                      precio: 500
+		              }
+	               }
+               ]      
+            
 
 
-
-	function ModalAdd() {
+function ModalAdd() {
   isOpenAdd = !isOpenAdd;
-	}
+}
 
 function toggleModal() {
 	isOpen = !isOpen;
@@ -62,17 +65,24 @@ function handleProductoChange(event) {
 function handleSubmit(event) {
 	event.preventDefault();
 	const newFormData = {
+		    pedido_id: event.target.pedido_id.value,
 			date: event.target.date.value,
-			date2: event.target.date2.value,
-			pedido_id: event.target.pedido_id.value,
+			date2: event.target.date2.value,	
 			selectedRazonSocial,
-			selectedProducto,
-			selectedCantidad,
-			precio,
-			subtotal: selectedCantidad * precio
-		};
+			item: { selectedProducto,
+			           selectedCantidad,
+			           precio
+					}	
+		    };
 		formData = [...formData, newFormData];
 		console.log(formData);
+
+    selectedPedido_id = Math.floor(Math.random()*(10000-1)+1); 
+    selectedRazonSocial = 'Clientes';
+    selectedProducto = 'Productos';
+    selectedCantidad = '';
+    precio = '';
+		
 	}
 
 </script>
@@ -94,83 +104,96 @@ function handleSubmit(event) {
 		 <article>		
 		  <div>	
 					
-	       <form method="POST" action="?/addPedido" on:submit={handleSubmit} class="row">
+	       <form method="POST" action="?/addPedido" on:submit={handleSubmit} class="w-2">
 								
-            <!-------cabecera del form----------------->
-			<div class="">
-			<div class="">
-              <p>Cabecera</p>
-			      <label>Fecha
-				  <input type="text" name="date" value={new Intl.DateTimeFormat('es',{day: 'numeric',month: 'numeric',year: 'numeric'}).format(new Date())} class="w"/>
-				</label>
-				  <label>Fecha de entrega
-				  <input type="date" name="date2"/>
-				</label>
-				  <label>Nº Pedido
-				  <input type="text" name="pedido_id" value={Math.floor(Math.random()*(10000-1)+1)} class="w"/>		
-				</label>
+            
+			<div class=""> <!-------Row cabecera del form-----------------> 
+              
+             <div>
+				<label >Nº Pedido
+					<input type="text" name="pedido_id" value={Math.floor(Math.random()*(10000-1)+1)} class="w"/>
+				   </label>
+				</div>
+
+               <div>
+			       <label>Fecha
+				     <input type="text"  name="date" value={new Intl.DateTimeFormat('es',{day: 'numeric',month: 'numeric',year: 'numeric'}).format(new Date())} class="w"/>
+				    </label>
+
+				    <label >Fecha de entrega
+				     <input type="date" name="date2"/>
+				    </label>
+			    </div>
+
+				   <div>
 				  <select name="selectedRazonSocial" bind:value={selectedRazonSocial} required>
 					<option selected>Clientes</option>
 						{#each data.clientes as cli}
 						  <option value={cli.razon_social}>{cli.razon_social}</option>
 						{/each}
 				  </select>
-			  </div>
-			<!-------detalle del form----------------->
-			<div class="">
-                  <p>Detalle</p>
+				</div>
+				
+			<div class=""> <!-------Row detalle del form----------------->
+                  <div>
 				  <select name="selectedProducto" bind:value={selectedProducto} on:change={handleProductoChange} required>
 					<option selected>Productos</option>
 						{#each data.productos.datos as prod}
 						  <option value={prod.nombre} data-precio={prod.precio}>{prod.nombre}</option>
 						{/each}
-				  </select>		
+				  </select>	
+
 				  <label>Cantidad
-				  <input type="text" name="selectedCantidad" bind:value={selectedCantidad} class="w" required />
-				</label>
+				    <input type="text" name="selectedCantidad" bind:value={selectedCantidad} class="w" required />
+				  </label>
+				</div>
+
+				<div>
 				  <label>Precio		
-				  <input type="text" name="precio" value={precio} class="w" readonly />	
-				</label>
-				  <label>SubTotal	
-				  <input type="text" name="subtotal" value={selectedCantidad * precio} class="w" readonly />
-				</label>
+				    <input type="text" name="precio" value={precio} class="w" readonly />	
+				  </label>
+
+				</div>
 			</div>
 		</div>
-				   <!-------descripcion pedido----------------->
-				<div>   
-				   <p>Lista de pedidos</p>
-				  <div id="Area-pedido">
-					<!-------Area de pedidos----------------->
-				  </div>
-				</div>
-                 <!-------footer del form----------------->
-                  <div class>
-				   <footer class="">	
+
+		<div>
+			<button >Agregar</button>
+		</div>
+				   
+			<div>	<!------Row descripcion pedido----------------->
+			 <div id="Area-pedido"> 
+			
+			 </div>
+		   </div>
+                 
+            <div class> <!-------Row footer del form----------------->
+				<footer class="">	
 					 <button on:click={ModalAdd} class="outline">Cancel</button>
                      <button type="submit" class="outline">Confirm</button>
-				   </footer>
-				  </div>
+				</footer>
+		    </div>
 
-				</form>
-				</div>
-			</article>
-		</dialog>
+		</form>
+
+	</div>
+  </article>
+</dialog>
 	
-	{/if}
+{/if}
 		   
 </div>  <!-------------fin de form add-->
 
 		<table role="grid">
 			<thead>
 				<tr>
-					<th scope="col">Fecha</th>
-					<th scope="col">Fecha2</th>
 					<th scope="col">Pedido ID</th>
+					<th scope="col">Fecha</th>
+					<th scope="col">Fecha2</th>			
 					<th scope="col">Cliente</th>
 					<th scope="col">Producto</th>
 					<th scope="col">Cantidad</th>
 					<th scope="col">Precio</th>
-					<th scope="col">SubTotal</th>
 					<th scope="col">Acción</th>
 					<th scope="col">Acción2</th>
 					<th scope="col">Entregado</th>
@@ -179,21 +202,20 @@ function handleSubmit(event) {
 			<tbody>
 				{#each formData as formD}
 					<tr>
-						<td>{formD.date}</td>
-						<td>{formD.date2}</td>
 						<td>{formD.pedido_id}</td>
+						<td>{formD.date}</td>
+						<td>{formD.date2}</td>	
 						<td>{formD.selectedRazonSocial}</td>
-						<td>{formD.selectedProducto}</td>
-						<td>{formD.selectedCantidad}</td>
-						<td>{formD.precio}</td>
-						<td>{formD.subtotal}</td>
+						<td>{formD.item.selectedProducto}</td>
+						<td>{formD.item.selectedCantidad}</td>
+						<td>{formD.item.precio}</td>
 						<td>
 							<button
 								on:click={() => {
 									//<!-----------------------------------------Modal para editar-------->
 									selectedPedido_id = formD.pedido_id;
 									selectedDate2 = formD.date2;
-									selectedEditCantidad = formD.cantidad;
+									selectedEditCantidad = formD.detalle.cantidad;
 									toggleModal();
 								}}
 								class="outline">Editar</button>
@@ -263,7 +285,6 @@ function handleSubmit(event) {
 					<td />
 					<td />
 					<td />
-					<td>Total</td>
 					<td>Total</td>
 					<td>Total</td>
 					<td />
@@ -342,6 +363,10 @@ article{
 	.w {
 		width: 100px;
 	} 
+
+	.w-2{
+		width: 600px;
+	}
 
 	#Area-pedido{
 		background-color: rgb(253, 251, 251);

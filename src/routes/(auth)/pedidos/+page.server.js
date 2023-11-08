@@ -28,9 +28,9 @@ export const actions = {
     const producto = formData.get('selectedProducto');
     const cantidad = formData.get('cantidad');
     const precio = formData.get('precio');
-    const subtotal = formData.get('subtotal');
+   
 
-   console.log ( "Pedido:",id,date, date2, razon_social, producto, cantidad, precio, subtotal, locals.token,BASE_URL)
+   console.log ( "Pedido:",id,date, date2, razon_social, producto, cantidad, precio, locals.token,BASE_URL)
    
        
     },
@@ -46,7 +46,7 @@ export const actions = {
          "producto":producto,
          "cantidad":cantidad,
          "precio":precio,
-         "subtotal":subtotal
+         
       },
       resStatus: 200
       });
@@ -60,7 +60,7 @@ export const actions = {
          producto:datos.producto,
          cantidad:datos.cantidad,
          precio:datos.precio,
-         subtotal:datos.subtotal 
+        
        }), {
          httpOnly: true,
          path: '/',
