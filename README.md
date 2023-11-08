@@ -40,7 +40,9 @@
                                     Edita:.....falta .. .cliente y servidor
                                     Elimina:...falta .. .cliente y servidor
             - En add pedidos : 
-                - Cabecera (hasta cliente) y detalle (a partir de Producto)
+                - Cabecera (hasta cliente) y detalle (a partir de Producto).
+                - esquema del objeto  + items producto.
+                - 
              
     * Tabla de Clientes: 
           - GET,POST,EDITE,DELETE,PATCH + filtro.  (se puede mejor el codigo idem productos).

@@ -8,6 +8,7 @@
 	let isOpen = false;
 	let isOpenDel=false;
 	let isOpenAdd=false;
+	let isOpenItems=false;
 
 	let selectedDate2;
 	let selectedPedido_id;
@@ -42,7 +43,9 @@
 	               }
                ]      
             
-
+function ModalItems() {
+  isOpenItems = !isOpenItems;
+}
 
 function ModalAdd() {
   isOpenAdd = !isOpenAdd;
@@ -95,11 +98,12 @@ function handleSubmit(event) {
 <h2>Gestion de Pedidos</h2>
 
 <main class="container-fluid pedi-main">
-  <article>
-	  <div> <!----------------Form add------------------->
-		<button on:click={ModalAdd} class="outline">Add</button>
-		{#if isOpenAdd}
-
+	<article>
+		<div> <!----------------Form add------------------->
+			<button on:click={ModalAdd} class="outline">Add</button>
+			{#if isOpenAdd}
+			
+			
 	    <dialog open class="">
 		 <article>		
 		  <div>	
@@ -129,60 +133,75 @@ function handleSubmit(event) {
 				  <select name="selectedRazonSocial" bind:value={selectedRazonSocial} required>
 					<option selected>Clientes</option>
 						{#each data.clientes as cli}
-						  <option value={cli.razon_social}>{cli.razon_social}</option>
+						<option value={cli.razon_social}>{cli.razon_social}</option>
 						{/each}
-				  </select>
+					</select>
 				</div>
 				
-			<div class=""> <!-------Row detalle del form----------------->
-                  <div>
-				  <select name="selectedProducto" bind:value={selectedProducto} on:change={handleProductoChange} required>
-					<option selected>Productos</option>
-						{#each data.productos.datos as prod}
-						  <option value={prod.nombre} data-precio={prod.precio}>{prod.nombre}</option>
-						{/each}
-				  </select>	
-
-				  <label>Cantidad
-				    <input type="text" name="selectedCantidad" bind:value={selectedCantidad} class="w" required />
-				  </label>
-				</div>
-
+				
+				<div> <!-------------------------Row Items----------------->
+					
+					<button on:click={ModalItems} class="outline">Add items</button> <!-------Modal item----------------->
+				    
+                    {#if isOpenItems}
+                    <dialog open class="">
+						<article>
+                    <form>  <!-------------------------form item----------------->	
+						<div>		   
+							<select name="selectedProducto" bind:value={selectedProducto} on:change={handleProductoChange} required>
+							  <option selected>Productos</option>
+								  {#each data.productos.datos as prod}
+									<option value={prod.nombre} data-precio={prod.precio}>{prod.nombre}</option>
+								  {/each}
+							</select>	
+							<label>Cantidad
+							  <input type="text" name="selectedCantidad" bind:value={selectedCantidad} placeholder="Nº" class="w" required />
+							</label>
+						   
+						   
+							<label>Precio		
+							  <input type="text" name="precio" value={precio ? precio : ''}  class="w" readonly  required/>	
+							</label>
+							
+						  <div class> <!-------footer Items----------------->
+							<footer class="">	
+								<button on:click={ModalItems} class="outline">Cancel</button>
+								<button type="submit" class="outline">Confirm Item</button>
+							</footer>
+						  </div>
+						</div>
+					</form> <!-------fin form item----------------->
+				</article>
+				  </dialog> <!------------fin modal add----------------->
+				  {/if}
 				<div>
-				  <label>Precio		
-				    <input type="text" name="precio" value={precio} class="w" readonly />	
-				  </label>
-
+			</div>
+			
+				
+				<div id="Area-pedido"> <!------Row descripcion pedido----------------->
+					
 				</div>
 			</div>
-		</div>
-
-		<div>
-			<button >Agregar</button>
-		</div>
-				   
-			<div>	<!------Row descripcion pedido----------------->
-			 <div id="Area-pedido"> 
 			
-			 </div>
-		   </div>
-                 
-            <div class> <!-------Row footer del form----------------->
+			
+			<div class> <!-------Row footer del form 1----------------->
 				<footer class="">	
-					 <button on:click={ModalAdd} class="outline">Cancel</button>
-                     <button type="submit" class="outline">Confirm</button>
+					<button on:click={ModalAdd} class="outline">Cancel</button>
+					<button type="submit" class="outline">Confirm</button>
 				</footer>
-		    </div>
-
-		</form>
-
-	</div>
-  </article>
-</dialog>
+			</div>
+			
+		</div>  <!-------------fin de form add-->
+		
+	</form>
 	
+</article>
+</dialog>
+
 {/if}
-		   
-</div>  <!-------------fin de form add-->
+
+</div>
+     
 
 		<table role="grid">
 			<thead>
@@ -292,7 +311,7 @@ function handleSubmit(event) {
 				</tr>
 			</tfoot>
 		</table>
-	</article>
+  </article>
 </main>
 
 <style>
