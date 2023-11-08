@@ -1,4 +1,5 @@
 <script>
+	
 	export let data;
 	export let form;
 	export const { productos, clientes } = data;
@@ -59,34 +60,47 @@ function ModalDelete() {
   isOpenDel = !isOpenDel;
 }
 
+
 function handleProductoChange(event) {
-	const selectedIndex = event.target.selectedIndex;
-	const selectedOption = event.target.options[selectedIndex];
-	precio = selectedOption.getAttribute('data-precio');
-	}
+const selectedIndex = event.target.selectedIndex;
+const selectedOption = event.target.options[selectedIndex];
+precio = selectedOption.getAttribute('data-precio');
+}
+
+
+function handleItem(event) {
+    event.preventDefault();
+    return {
+        selectedProducto,
+        selectedCantidad,
+        precio
+    };
+}
 
 function handleSubmit(event) {
-	event.preventDefault();
-	const newFormData = {
-		    pedido_id: event.target.pedido_id.value,
-			date: event.target.date.value,
-			date2: event.target.date2.value,	
-			selectedRazonSocial,
-			item: { selectedProducto,
-			           selectedCantidad,
-			           precio
-					}	
-		    };
-		formData = [...formData, newFormData];
-		console.log(formData);
+    event.preventDefault();
+    const newFormData = {
+        pedido_id: event.target.pedido_id.value,
+        date: event.target.date.value,
+        date2: event.target.date2.value,	
+        selectedRazonSocial,
+        item: handleItem(event)
+    };
 
-    selectedPedido_id = Math.floor(Math.random()*(10000-1)+1); 
+    formData = [...formData, newFormData];
+    console.log(formData);    
+	
+	
+	selectedPedido_id = Math.floor(Math.random()*(10000-1)+1); 
     selectedRazonSocial = 'Clientes';
     selectedProducto = 'Productos';
     selectedCantidad = '';
     precio = '';
-		
-	}
+
+} 
+
+// falta que tome los datos del modal item
+
 
 </script>
 
@@ -146,7 +160,7 @@ function handleSubmit(event) {
                     {#if isOpenItems}
                     <dialog open class="">
 						<article>
-                    <form>  <!-------------------------form item----------------->	
+                    <form method="POST" action="?/addPedido" on:submit={handleItem} >  <!-------------------------form item----------------->	
 						<div>		   
 							<select name="selectedProducto" bind:value={selectedProducto} on:change={handleProductoChange} required>
 							  <option selected>Productos</option>
@@ -166,7 +180,7 @@ function handleSubmit(event) {
 						  <div class> <!-------footer Items----------------->
 							<footer class="">	
 								<button on:click={ModalItems} class="outline">Cancel</button>
-								<button type="submit" class="outline">Confirm Item</button>
+								<button  type="submit"  class="outline">Confirm Item</button>
 							</footer>
 						  </div>
 						</div>
@@ -187,7 +201,7 @@ function handleSubmit(event) {
 			<div class> <!-------Row footer del form 1----------------->
 				<footer class="">	
 					<button on:click={ModalAdd} class="outline">Cancel</button>
-					<button type="submit" class="outline">Confirm</button>
+					<button type="submit"  class="outline">Confirm</button>
 				</footer>
 			</div>
 			
