@@ -7,6 +7,7 @@
 
 	let isOpen = false;
 	let isOpenDel=false;
+	let isOpenAdd=false;
 	let selectedDate2;
 	let selectedPedido_id;
 	let selectedEditCantidad;
@@ -38,6 +39,11 @@
 		}
 	];
 
+
+
+	function ModalAdd() {
+  isOpenAdd = !isOpenAdd;
+	}
 
 function toggleModal() {
 	isOpen = !isOpen;
@@ -79,81 +85,81 @@ function handleSubmit(event) {
 <h2>Gestion de Pedidos</h2>
 
 <main class="container-fluid pedi-main">
-	<article>
-		<form method="POST" action="?/addPedido" on:submit={handleSubmit}>
-			<table>
-				<thead>
-					<tr>
-						<th>Fecha</th>
-						<th>Fecha2</th>
-						<th>Pedido ID</th>
-						<th>Cliente</th>
-						<th>Producto</th>
-						<th>Cantidad</th>
-						<th>Precio</th>
-						<th>SubTotal</th>
-						<th>Acción</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<input
-								type="text"
-								name="date"
-								value={new Intl.DateTimeFormat('es', {
-									day: 'numeric',
-									month: 'numeric',
-									year: 'numeric'
-								    }).format(new Date())} class="w"/>
-						</td>
-						<td>
-							<input type="date" name="date2"/>
-						</td>
-						<td>
-							<input
-								type="text"
-								name="pedido_id"
-								value={Math.floor(Math.random() * (10000 - 1) + 1)}
-								class="w"/>
-						</td>
-						<td>
-							<select name="selectedRazonSocial" bind:value={selectedRazonSocial} required>
-								<option selected>Clientes</option>
-								{#each data.clientes as cli}
-									<option value={cli.razon_social}>{cli.razon_social}</option>
-								{/each}
-							</select>
-						</td>
-						<td>
-							<select
-								name="selectedProducto"
-								bind:value={selectedProducto}
-								on:change={handleProductoChange}
-								required
-							>
-								<option selected>Productos</option>
-								{#each data.productos.datos as prod}
-									<option value={prod.nombre} data-precio={prod.precio}>{prod.nombre}</option>
-								{/each}
-							</select>
-						</td>
-						<td>
-							<input type="text" name="selectedCantidad" bind:value={selectedCantidad} class="w" required />
-						</td>
-						<td>
-							<input type="text" name="precio" value={precio} class="w" readonly />
-						</td>
-						<td>
-							<input type="text" name="subtotal" value={selectedCantidad * precio} class="w" readonly />
-						</td>
-						<td>
-							<button type="submit">add</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</form>
+  <article>
+	  <div> <!----------------Form add------------------->
+		<button on:click={ModalAdd} class="outline">Add</button>
+		{#if isOpenAdd}
+
+	    <dialog open class="">
+		 <article>		
+		  <div>	
+					
+	       <form method="POST" action="?/addPedido" on:submit={handleSubmit} class="row">
+								
+            <!-------cabecera del form----------------->
+			<div class="">
+			<div class="">
+              <p>Cabecera</p>
+			      <label>Fecha
+				  <input type="text" name="date" value={new Intl.DateTimeFormat('es',{day: 'numeric',month: 'numeric',year: 'numeric'}).format(new Date())} class="w"/>
+				</label>
+				  <label>Fecha de entrega
+				  <input type="date" name="date2"/>
+				</label>
+				  <label>Nº Pedido
+				  <input type="text" name="pedido_id" value={Math.floor(Math.random()*(10000-1)+1)} class="w"/>		
+				</label>
+				  <select name="selectedRazonSocial" bind:value={selectedRazonSocial} required>
+					<option selected>Clientes</option>
+						{#each data.clientes as cli}
+						  <option value={cli.razon_social}>{cli.razon_social}</option>
+						{/each}
+				  </select>
+			  </div>
+			<!-------detalle del form----------------->
+			<div class="">
+                  <p>Detalle</p>
+				  <select name="selectedProducto" bind:value={selectedProducto} on:change={handleProductoChange} required>
+					<option selected>Productos</option>
+						{#each data.productos.datos as prod}
+						  <option value={prod.nombre} data-precio={prod.precio}>{prod.nombre}</option>
+						{/each}
+				  </select>		
+				  <label>Cantidad
+				  <input type="text" name="selectedCantidad" bind:value={selectedCantidad} class="w" required />
+				</label>
+				  <label>Precio		
+				  <input type="text" name="precio" value={precio} class="w" readonly />	
+				</label>
+				  <label>SubTotal	
+				  <input type="text" name="subtotal" value={selectedCantidad * precio} class="w" readonly />
+				</label>
+			</div>
+		</div>
+				   <!-------descripcion pedido----------------->
+				<div>   
+				   <p>Lista de pedidos</p>
+				  <div id="Area-pedido">
+					<!-------Area de pedidos----------------->
+				  </div>
+				</div>
+                 <!-------footer del form----------------->
+                  <div class>
+				   <footer class="">	
+					 <button on:click={ModalAdd} class="outline">Cancel</button>
+                     <button type="submit" class="outline">Confirm</button>
+				   </footer>
+				  </div>
+
+				</form>
+				</div>
+			</article>
+		</dialog>
+	
+	{/if}
+		   
+</div>  <!-------------fin de form add-->
+
 		<table role="grid">
 			<thead>
 				<tr>
@@ -272,14 +278,17 @@ function handleSubmit(event) {
 	.pedi-main {
 		padding: 0 200px 0 200px;
 	}
-
+	
+article{
+	background-color: rgb(241, 241, 241);
+} 
 	tr,
 	td,
 	th,
 	input,
 	select,
 	option,
-	button {
+	button, p , label{
 		font-size: 15px;
 		margin: 0;
 		padding: 0;	
@@ -313,15 +322,34 @@ function handleSubmit(event) {
 	}
 
 	input[type='text'],
-	input[type='date'],
+	input[type='date'] {
+		border: 1px solid #c5c3c3;
+        border-radius: 4px;
+        padding: 6px;
+        height: 40px;
+		background-color: #fdf9f9;
+	   }
+
+
 	select {
-		border: 1px solid #ccc;
+		border: 1px solid #a8a7a7;
 		border-radius: 4px;
 		padding: 6px;
 		height: 40px;
+		background-color: #f1f1f1;
 	}
 
 	.w {
 		width: 100px;
+	} 
+
+	#Area-pedido{
+		background-color: rgb(253, 251, 251);
+        height: 200px;
+		border: 1px solid #4e4e4e;
+		border-radius: 4px;
+	
 	}
+
+	
 </style>
