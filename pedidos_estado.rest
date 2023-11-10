@@ -1,0 +1,17 @@
+@baseUrl = https://fg-api-rest.fly.dev
+# @baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvX2lkIjoxLCJub21icmUiOiJhQGEuY29tIiwiaWF0IjoxNjk3NDY0MTAzfQ.Jx6HocdoKz8H7kxPqrVjmEqYBLmjODjw3CHoWdxjLGs
+
+// Recupera todos los estados de los pedidos
+GET {{baseUrl}}/pedidos_estado HTTP/1.1 
+Authorization: Bearer {{token}}
+
+###
+// recupera todos los estados de los pedidos con la opción limit y offset para realizar paginado (en principio por la cantidad de items no hace falta)
+GET {{baseUrl}}/pedidos_estado?limit=5&offset=2 HTTP/1.1 
+Authorization: Bearer {{token}}
+
+###
+// recuperda los datos de un estado de pedido en particular con su :id en el path
+GET {{baseUrl}}/pedidos_estado/1 HTTP/1.1 
+Authorization: Bearer {{token}}

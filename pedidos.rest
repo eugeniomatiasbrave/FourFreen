@@ -1,0 +1,41 @@
+@baseUrl = https://fg-api-rest.fly.dev
+#@baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvX2lkIjoxLCJub21icmUiOiJhQGEuY29tIiwiaWF0IjoxNjk3NDY0MTAzfQ.Jx6HocdoKz8H7kxPqrVjmEqYBLmjODjw3CHoWdxjLGs
+
+// Recupera todos los estados de los pedidos
+GET {{baseUrl}}/pedidos HTTP/1.1 
+Authorization: Bearer {{token}}
+
+###
+// recupera todos los estados de los pedidos con la opción limit y offset para realizar paginado (en principio por la cantidad de items no hace falta)
+GET {{baseUrl}}/pedidos?limit=2 HTTP/1.1 
+Authorization: Bearer {{token}}
+
+###
+// Recupera todos los estados de los pedidos
+GET {{baseUrl}}/pedidos/1/detalle HTTP/1.1 
+Authorization: Bearer {{token}}
+
+###
+// Recupera todos los estados de los pedidos.  ADD
+POST {{baseUrl}}/pedidos HTTP/1.1 
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "cliente_id": 2,
+  "fecha": "2023-11-09T13:38:56.000Z",
+  "items": [
+    {
+      "producto_id": 10,
+      "unidades": 1000,
+      "precio": 500.54
+    },
+    {
+      "producto_id": 10,
+      "unidades": 201,
+      "precio": 2520.54
+    }
+
+  ]
+}

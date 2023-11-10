@@ -3,6 +3,11 @@ import { BASE_URL } from '../../../lib/utils.js';
 import { fetchApi } from '../../../lib/fetchApi.js';
 
 export const load = async ({ locals }) => {
+
+  
+  const getPedidos = async () => {
+    return await fetchApi.get({ url: BASE_URL + "/pedidos", token: locals.token, resStatus: 200 });
+  };
   
   const getProductos = async () => {
     return await fetchApi.get({ url: BASE_URL + "/productos", token: locals.token, resStatus: 200 });
@@ -13,6 +18,7 @@ export const load = async ({ locals }) => {
   };
 
   return {
+    pedidos: getPedidos(),
     productos: getProductos(),
     clientes: getClientes(),
   };
@@ -21,19 +27,18 @@ export const load = async ({ locals }) => {
 export const actions = {
   addPedido: async ({ request, locals }) => {
     const formData = await request.formData();
-    const id = formData.get('pedido_id');
-    const date = formData.get('date');
-    const date2 = formData.get('date2');
-    const razon_social = formData.get('selectedRazonSocial');
-    const producto = formData.get('selectedProducto');
-    const cantidad = formData.get('cantidad');
+    const cliente_id = formData.get('selectedCliente_id');
+    const fecha = formData.get('fecha');
+    const producto_id = formData.get('producto_id');
+    const total_unidades = formData.get('total_unidades');
     const precio = formData.get('precio');
+    
    
-
-   console.log ( "Pedido:",id,date, date2, razon_social, producto, cantidad, precio, locals.token,BASE_URL)
+   
+   console.log ( "Pedido:", cliente_id,fecha , producto_id, total_unidades, precio, locals.token,BASE_URL)
    
        
-    },
+    }
 /*
   try {
     const res = await fetchApi.post({
@@ -78,6 +83,7 @@ export const actions = {
   }  
  },
 */
+/*
 delete: async ({ request, locals }) => {
   const formData = await request.formData();
   const id = formData.get('pedido_id');
@@ -114,6 +120,8 @@ delete: async ({ request, locals }) => {
   }
 },
 */
+
+/*
 editar: async ({ request, locals }) => {
   const formData = await request.formData();
   const id = formData.get('pedido_id');

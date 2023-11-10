@@ -1,64 +1,15 @@
 <script>
-	
 	export let data;
 	export let form;
-	export const { productos, clientes } = data;
+	export const { pedidos, productos, clientes } = data;
+    console.log(form)
+	console.log(pedidos.datos);
+	
+	let isOpenAdd = false;
 
-	console.log(form);
+	let selectedCliente_id;
 
-	let isOpen = false;
-	let isOpenDel=false;
-	let isOpenAdd=false;
-	let isOpenItems=false;
 
-	let selectedDate2;
-	let selectedPedido_id;
-	let selectedRazonSocial; //seleccionan en el add
-	let selectedProducto;
-	let selectedCantidad;
-	let precio;
-	let selectedEditCantidad;
-
-	let formData = 
-		        [ { 
-		          pedido_id: 1,
-		          date: "7/7/2023",
-			      date2: '9/7/2023',
-		          selectedRazonSocial: 'El ceibo sa',
-		          item:{  
-			            selectedProducto: 'Lechuga azul',
-			            selectedCantidad: 2,
-			            precio: 300
-					    }
-				 },
-				{ 
-                pedido_id: 2,
-                date: "9/7/2023",
-                date2: '10/7/2023',
-                selectedRazonSocial: 'El Apio sa',
-                item:{  
-                      selectedProducto: 'Pala',
-                      selectedCantidad: 2,
-                      precio: 500
-		              }
-	               }
-               ]      
-            
-function ModalItems() {
-  isOpenItems = !isOpenItems;
-}
-
-function ModalAdd() {
-  isOpenAdd = !isOpenAdd;
-}
-
-function toggleModal() {
-	isOpen = !isOpen;
-}
-
-function ModalDelete() {
-  isOpenDel = !isOpenDel;
-}
 
 
 function handleProductoChange(event) {
@@ -68,246 +19,143 @@ precio = selectedOption.getAttribute('data-precio');
 }
 
 
-function handleItem(event) {
+  let items = [
+    { selectedProducto_id: "1", selectedUnidades: "100", precio: "500" },
+    { selectedProducto_id: "2", selectedUnidades: "200", precio: "503" }
+  ];
+
+  let selectedProducto_id;
+  let selectedUnidades;
+  let precio;
+
+  function handleAdd(event) {
     event.preventDefault();
-    return {
-        selectedProducto,
-        selectedCantidad,
-        precio
+    const newItem = {
+      selectedProducto_id,
+      selectedUnidades,
+      precio
     };
+    items = [...items, newItem];
+  }
+
+	
+
+function ModalAdd() {
+  isOpenAdd=!isOpenAdd;
 }
 
-function handleSubmit(event) {
-    event.preventDefault();
-    const newFormData = {
-        pedido_id: event.target.pedido_id.value,
-        date: event.target.date.value,
-        date2: event.target.date2.value,	
-        selectedRazonSocial,
-        item: handleItem(event)
-    };
-
-    formData = [...formData, newFormData];
-    console.log(formData);    
-	
-	
-	selectedPedido_id = Math.floor(Math.random()*(10000-1)+1); 
-    selectedRazonSocial = 'Clientes';
-    selectedProducto = 'Productos';
-    selectedCantidad = '';
-    precio = '';
-
-} 
-
-// falta que tome los datos del modal item
-
-
 </script>
-
-<svelte:head>
+	
+	<svelte:head>
 	<title>Pedidos</title>
 	<meta name="description" content="Pedidos" />
-</svelte:head>
-
-<h2>Gestion de Pedidos</h2>
-
-<main class="container-fluid pedi-main">
-	<article>
-		<div> <!----------------Form add------------------->
-			<button on:click={ModalAdd} class="outline">Add</button>
-			{#if isOpenAdd}
-			
-			
-	    <dialog open class="">
-		 <article>		
-		  <div>	
-					
-	       <form method="POST" action="?/addPedido" on:submit={handleSubmit} class="w-2">
-								
-            
-			<div class=""> <!-------Row cabecera del form-----------------> 
-              
-             <div>
-				<label >Nº Pedido
-					<input type="text" name="pedido_id" value={Math.floor(Math.random()*(10000-1)+1)} class="w"/>
-				   </label>
-				</div>
-
-               <div>
-			       <label>Fecha
-				     <input type="text"  name="date" value={new Intl.DateTimeFormat('es',{day: 'numeric',month: 'numeric',year: 'numeric'}).format(new Date())} class="w"/>
-				    </label>
-
-				    <label >Fecha de entrega
-				     <input type="date" name="date2"/>
-				    </label>
-			    </div>
-
-				   <div>
-				  <select name="selectedRazonSocial" bind:value={selectedRazonSocial} required>
-					<option selected>Clientes</option>
-						{#each data.clientes as cli}
-						<option value={cli.razon_social}>{cli.razon_social}</option>
-						{/each}
-					</select>
-				</div>
-				
-				
-				<div> <!-------------------------Row Items----------------->
-					
-					<button on:click={ModalItems} class="outline">Add items</button> <!-------Modal item----------------->
-				    
-                    {#if isOpenItems}
-                    <dialog open class="">
-						<article>
-                    <form method="POST" action="?/addPedido" on:submit={handleItem} >  <!-------------------------form item----------------->	
-						<div>		   
-							<select name="selectedProducto" bind:value={selectedProducto} on:change={handleProductoChange} required>
-							  <option selected>Productos</option>
-								  {#each data.productos.datos as prod}
-									<option value={prod.nombre} data-precio={prod.precio}>{prod.nombre}</option>
-								  {/each}
-							</select>	
-							<label>Cantidad
-							  <input type="text" name="selectedCantidad" bind:value={selectedCantidad} placeholder="Nº" class="w" required />
-							</label>
-						   
-						   
-							<label>Precio		
-							  <input type="text" name="precio" value={precio ? precio : ''}  class="w" readonly  required/>	
-							</label>
-							
-						  <div class> <!-------footer Items----------------->
-							<footer class="">	
-								<button on:click={ModalItems} class="outline">Cancel</button>
-								<button  type="submit"  class="outline">Confirm Item</button>
-							</footer>
-						  </div>
-						</div>
-					</form> <!-------fin form item----------------->
-				</article>
-				  </dialog> <!------------fin modal add----------------->
-				  {/if}
-				<div>
-			</div>
-			
-				
-				<div id="Area-pedido"> <!------Row descripcion pedido----------------->
-					
-				</div>
-			</div>
-			
-			
-			<div class> <!-------Row footer del form 1----------------->
-				<footer class="">	
-					<button on:click={ModalAdd} class="outline">Cancel</button>
-					<button type="submit"  class="outline">Confirm</button>
-				</footer>
-			</div>
-			
-		</div>  <!-------------fin de form add-->
-		
-	</form>
+	</svelte:head>
 	
-</article>
-</dialog>
+<h2>Gestion de Pedidos</h2>
+<main class="container-fluid pedi-main">
+  <article> <!--articule general-->
+	<div> <!-------modal add-------------->
+	   <button on:click={ModalAdd} class="outline">Add</button>
 
-{/if}
-
-</div>
-     
-
-		<table role="grid">
+	{#if isOpenAdd}		
+	    <dialog open >
+		 <article>		
+		  <div>					
+	       	
+                <div> <!---------------------cabecera-------------->
+				   <div>
+					  <select  name="selectedCliente_id"  bind:value={selectedCliente_id} required>
+						<option selected>cliente_id</option>
+						{#each clientes as cli}
+						<option  value={cli.cliente_id}>{cli.cliente_id} - {cli.razon_social}</option>
+						{/each}
+						</select>
+					</div>
+					<div>
+						<label>Fecha
+						<input type="text" name="date" value={new Intl.DateTimeFormat('es',{day: 'numeric',month: 'numeric',year: 'numeric'}).format(new Date())} class="w"/>
+						</label>
+					</div>
+			    </div>    
+			      <div> <!----------- add item-------------->
+                       <form  on:submit={handleAdd}>
+						  <div>		   
+							<select name="selectedProducto_id" bind:value={selectedProducto_id} on:change={handleProductoChange} required>
+							<option selected>Productos</option>
+							{#each productos.datos as prod}
+							<option value={prod.producto_id} data-precio={prod.precio}> {prod.producto_id} - {prod.nombre}</option>
+							{/each}
+							</select>	
+							<label>Unidades
+							<input type="text" name="selectedUnidades" bind:value={selectedUnidades} placeholder="Nº" class="w" required />
+							</label>   
+							<label>Precio		
+							<input type="text" name="precio" bind:value={precio}  class="w" readonly required/>	
+							</label>
+						  </div>					 
+						 			  
+						  <button type="submit" class="outline">Add item</button>	
+						</form>
+					 
+					<div id="Area-pedido">	
+						<table role="grid">  <!-------Table-------------->
+							<thead>
+								<tr>
+									<th scope="col">Producto_id</th>
+									<th scope="col">Unidades</th>
+									<th scope="col">Precio</th>
+								</tr>
+							</thead>
+						<tbody>
+							
+								{#each items as item (item.selectedProducto_id)}
+								<tr>
+								<td>{item.selectedProducto_id}</td>
+								<td>{item.selectedUnidades}</td>
+								<td>{item.precio}</td>
+							</tr>
+								{/each}
+							
+							</tbody>
+						</table>
+					 </div>
+				
+	 </article>
+   </dialog>
+ {/if}
+    </div> <!-----------fin de modal add-------------->
+<table role="grid">  <!-------Table-------------->
 			<thead>
 				<tr>
-					<th scope="col">Pedido ID</th>
-					<th scope="col">Fecha</th>
-					<th scope="col">Fecha2</th>			
-					<th scope="col">Cliente</th>
-					<th scope="col">Producto</th>
-					<th scope="col">Cantidad</th>
-					<th scope="col">Precio</th>
-					<th scope="col">Acción</th>
-					<th scope="col">Acción2</th>
-					<th scope="col">Entregado</th>
+					<th scope="col">pedido_cab_id</th>
+					<th scope="col">cliente_id</th>
+					<th scope="col">Razon_Sosial</th>
+					<th scope="col">Fecha</th>			
+					<th scope="col">pedido_estado_id</th>
+					<th scope="col">pedido_estado_nombre</th>
+					<th scope="col">editar</th>
+					<th scope="col">eliminar</th>
+					<th scope="col">usuario_id</th>
+					<th scope="col">item</th>
+					<th scope="col">total_unidades</th>
+					<th scope="col">total_importe</th>
 				</tr>
 			</thead>
 			<tbody>
-				{#each formData as formD}
+				{#each pedidos.datos as pe}
 					<tr>
-						<td>{formD.pedido_id}</td>
-						<td>{formD.date}</td>
-						<td>{formD.date2}</td>	
-						<td>{formD.selectedRazonSocial}</td>
-						<td>{formD.item.selectedProducto}</td>
-						<td>{formD.item.selectedCantidad}</td>
-						<td>{formD.item.precio}</td>
-						<td>
-							<button
-								on:click={() => {
-									//<!-----------------------------------------Modal para editar-------->
-									selectedPedido_id = formD.pedido_id;
-									selectedDate2 = formD.date2;
-									selectedEditCantidad = formD.detalle.cantidad;
-									toggleModal();
-								}}
-								class="outline">Editar</button>
-							{#if isOpen}
-								<dialog open>
-									<article>
-										<div>
-											<header>
-												<a href="#close" aria-label="Close" class="close" on:click={toggleModal} />
-												<p>Porfavor edite el producto!!</p>
-											</header>
-											<form method="POST" action="?/editar">
-												<input
-													type="hidden"
-													name="pedido_id"
-													bind:value={selectedPedido_id}
-													required
-												/>
-												<input type="text" name="date2" value={selectedDate2} required />
-												<input type="text" name="cantidad" value={selectedEditCantidad} required />
-												<footer>
-													<button on:click={toggleModal} class="secondary">Cancel</button>
-													<button type="submit">Confirm</button>
-												</footer>
-											</form>
-										</div>
-									</article>
-								</dialog>
-							{/if}
-						</td>
-						<td>
-							<button on:click={()=>{   //<!-----------------------------------------Modal para elimanar-------->
-								selectedPedido_id = formD.pedido_id;
-								ModalDelete()}} class="outline">Eliminar</button>
-							 {#if isOpenDel}
-								<dialog open>
-									<article>
-										<div>
-										<header>
-											<a href="#close" aria-label="Close" class="close" on:click={ModalDelete}></a>
-												<p>Porfavor confirmar la eliminacion el producto!!</p>
-										</header>	
-																										
-									<form method="POST" action="?/delete"
-										  on:submit={() => {selectedPedido_id = formD.pedido_id;}}>
-										<input type="hidden" name="pedido_id" bind:value={selectedPedido_id} />
-										<button on:click={ModalDelete}  class="outline">Cancel</button>
-										<button type="submit" class="outline">Confirmar</button> 
-									</form>												
-								</div>
-									</article>
-									</dialog>
-									{/if}		
-						</td>
-						<td>
-						  <label for="switch">
-						   <input type="checkbox" id="switch" name="switch" role="switch" />
-						  </label>
-						</td>
+                        <td>{pe.pedido_cab_id}</td>
+						<td>{pe.cliente_id}</td>
+						<td>{pe.razon_social}</td>
+						<td>{pe.fecha}</td>	
+						<td>{pe.pedido_estado_id}</td>
+						<td>{pe.pedido_estado_nombre}</td>
+						<td>{pe.editar}</td>
+						<td>{pe.eliminar}</td>
+						<td>{pe.usuario_id}</td>
+						<td>{pe.items}</td>
+						<td>{pe.total_unidades}</td>
+						<td>{pe.total_importe}</td>		
 					</tr>
 				{/each}
 			</tbody>
@@ -322,6 +170,9 @@ function handleSubmit(event) {
 					<td>Total</td>
 					<td />
 					<td />
+					<td />
+                    <td />
+					<td/>
 				</tr>
 			</tfoot>
 		</table>
@@ -342,7 +193,7 @@ article{
 	input,
 	select,
 	option,
-	button, p , label{
+	button, label {
 		font-size: 15px;
 		margin: 0;
 		padding: 0;	
@@ -375,15 +226,14 @@ article{
 		cursor: pointer;
 	}
 
-	input[type='text'],
-	input[type='date'] {
+	input[type='text']
+	 {
 		border: 1px solid #c5c3c3;
         border-radius: 4px;
         padding: 6px;
         height: 40px;
 		background-color: #fdf9f9;
 	   }
-
 
 	select {
 		border: 1px solid #a8a7a7;
@@ -396,18 +246,17 @@ article{
 	.w {
 		width: 100px;
 	} 
-
+/*
 	.w-2{
 		width: 600px;
 	}
-
+*/
 	#Area-pedido{
 		background-color: rgb(253, 251, 251);
-        height: 200px;
+		max-height: 300px;
 		border: 1px solid #4e4e4e;
 		border-radius: 4px;
-	
-	}
-
-	
+		overflow: scroll;
+			
+	}	
 </style>
