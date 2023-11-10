@@ -1,6 +1,7 @@
 //import { error } from '@sveltejs/kit';
 import { BASE_URL } from '../../../lib/utils.js';
 import { fetchApi } from '../../../lib/fetchApi.js';
+import { error } from '@sveltejs/kit';
 
 export const load = async ({ locals }) => {
 
@@ -29,50 +30,28 @@ export const actions = {
     const formData = await request.formData();
     const cliente_id = formData.get('selectedCliente_id');
     const fecha = formData.get('fecha');
-    const producto_id = formData.get('producto_id');
-    const total_unidades = formData.get('total_unidades');
+    const producto_id = formData.get('selectedProducto_id');
+    const total_unidades = formData.get('selectedUnidades');
     const precio = formData.get('precio');
     
-   
-   
    console.log ( "Pedido:", cliente_id,fecha , producto_id, total_unidades, precio, locals.token,BASE_URL)
    
-       
-    }
-/*
   try {
     const res = await fetchApi.post({
       url: BASE_URL + "/pedidos",
       token: locals.token,
       body: {
-         "date":date,
-         "date2":date2,
-         "razon_social":razon_social,
-         "producto":producto,
-         "cantidad":cantidad,
-         "precio":precio,
+         "fecha":fecha, 
+         "cliente_id":cliente_id,
+         "producto_id":producto_id,
+         "total_unidades":total_unidades,
+         "precio":precio
          
-      },
-      resStatus: 200
+      },resStatus: 200
       });
   
     if (res.status === 200) {
-      const datos = await res.json();
-       cookies.set('Pedido', JSON.stringify({
-         date:datos.date,
-         date2:datos.date2,
-         razon_social:datos.razon_social,
-         producto:datos.producto,
-         cantidad:datos.cantidad,
-         precio:datos.precio,
-        
-       }), {
-         httpOnly: true,
-         path: '/',
-         secure: true,
-         sameSite: 'strict',
-         maxAge: 60 * 60 * 24 // 1 day
-       })   
+     
       return { success: true };
     } else {
       return { success: false };
@@ -81,8 +60,9 @@ export const actions = {
     console.log('Error: ', err);
     throw error(500, 'Algo salió mal al agregar el pedido');
   }  
- },
-*/
+ }
+};
+
 /*
 delete: async ({ request, locals }) => {
   const formData = await request.formData();
@@ -166,4 +146,4 @@ editar: async ({ request, locals }) => {
   }}
 */
 
- };
+

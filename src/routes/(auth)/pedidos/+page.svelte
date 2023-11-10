@@ -7,9 +7,9 @@
 	
 	let isOpenAdd = false;
 
-	let selectedCliente_id;
-
-
+	
+	
+	
 
 
 function handleProductoChange(event) {
@@ -19,11 +19,13 @@ precio = selectedOption.getAttribute('data-precio');
 }
 
 
-  let items = [
-    { selectedProducto_id: "1", selectedUnidades: "100", precio: "500" },
-    { selectedProducto_id: "2", selectedUnidades: "200", precio: "503" }
-  ];
 
+// ------------------------variables cabecera-----
+  let selectedCliente_id;
+  let fecha = new Intl.DateTimeFormat('es',{day: 'numeric',month: 'numeric',year: 'numeric'}).format(new Date());
+
+  let items=[];
+// ------------------------variables detalle items
   let selectedProducto_id;
   let selectedUnidades;
   let precio;
@@ -36,10 +38,19 @@ precio = selectedOption.getAttribute('data-precio');
       precio
     };
     items = [...items, newItem];
+	console.log(items)
   }
 
+  function handleSubmit(event) {
+  event.preventDefault();
+  const pedido = {
+    selectedCliente_id,
+    fecha,
+    items
+  };
+  console.log(pedido);
+}
 	
-
 function ModalAdd() {
   isOpenAdd=!isOpenAdd;
 }
@@ -60,9 +71,10 @@ function ModalAdd() {
 	{#if isOpenAdd}		
 	    <dialog open >
 		 <article>		
-		  <div>					
-	       	
-                <div> <!---------------------cabecera-------------->
+		  	
+
+	       	 
+                <div > <!---------------------cabecera-------------->
 				   <div>
 					  <select  name="selectedCliente_id"  bind:value={selectedCliente_id} required>
 						<option selected>cliente_id</option>
@@ -73,13 +85,16 @@ function ModalAdd() {
 					</div>
 					<div>
 						<label>Fecha
-						<input type="text" name="date" value={new Intl.DateTimeFormat('es',{day: 'numeric',month: 'numeric',year: 'numeric'}).format(new Date())} class="w"/>
+						<input type="text" name="fecha" bind:value={fecha} class="w"/>
 						</label>
 					</div>
-			    </div>    
-			      <div> <!----------- add item-------------->
-                       <form  on:submit={handleAdd}>
-						  <div>		   
+			    </div> <!---------------------fin cabecera-------------->
+			
+			
+
+			      <div> <!--revisar luego siesta demas-->
+                       
+						  <div >	<!----------- detalles items-------------->   
 							<select name="selectedProducto_id" bind:value={selectedProducto_id} on:change={handleProductoChange} required>
 							<option selected>Productos</option>
 							{#each productos.datos as prod}
@@ -93,12 +108,12 @@ function ModalAdd() {
 							<input type="text" name="precio" bind:value={precio}  class="w" readonly required/>	
 							</label>
 						  </div>					 
-						 			  
-						  <button type="submit" class="outline">Add item</button>	
-						</form>
+						  <div>	  
+						     <button  on:click={handleAdd} class="outline">Add item</button>	
+					      </div>	
 					 
-					<div id="Area-pedido">	
-						<table role="grid">  <!-------Table-------------->
+					   <div id="Area-pedido">	<!-------Area items-------------->
+						 <table role="grid">  <!-------Table-------------->
 							<thead>
 								<tr>
 									<th scope="col">Producto_id</th>
@@ -106,19 +121,25 @@ function ModalAdd() {
 									<th scope="col">Precio</th>
 								</tr>
 							</thead>
-						<tbody>
-							
+						     <tbody>	
 								{#each items as item (item.selectedProducto_id)}
 								<tr>
-								<td>{item.selectedProducto_id}</td>
-								<td>{item.selectedUnidades}</td>
-								<td>{item.precio}</td>
-							</tr>
+								 <td>{item.selectedProducto_id}</td>
+								 <td>{item.selectedUnidades}</td>
+								 <td>{item.precio}</td>
+							    </tr>
 								{/each}
-							
 							</tbody>
-						</table>
-					 </div>
+						 </table>
+					   </div> <!-------fin Area items-------------->
+
+					<form method="POST" action="?/addPedido">
+					   <div>	  
+						<button  class="outline">Cancelar</button>
+						<button  class="outline">Reset</button>
+						<button  on:submit={handleSubmit} class="outline">Add Pedido</button>		
+					  </div>
+					</form>	
 				
 	 </article>
    </dialog>
@@ -180,6 +201,12 @@ function ModalAdd() {
 </main>
 
 <style>
+
+
+
+
+
+
 	.pedi-main {
 		padding: 0 200px 0 200px;
 	}
