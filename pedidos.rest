@@ -36,6 +36,6 @@ Content-Type: application/json
       "unidades": 201,
       "precio": 2520.54
     }
-
+    
   ]
 }

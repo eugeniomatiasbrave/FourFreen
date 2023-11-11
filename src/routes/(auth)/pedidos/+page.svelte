@@ -2,15 +2,14 @@
 	export let data;
 	export let form;
 	export const { pedidos, productos, clientes } = data;
+
+	let items=[];
+	
+
     console.log(form)
 	console.log(pedidos.datos);
 	
-	let isOpenAdd = false;
-
-	
-	
-	
-
+let isOpenAdd = false;
 
 function handleProductoChange(event) {
 const selectedIndex = event.target.selectedIndex;
@@ -18,39 +17,27 @@ const selectedOption = event.target.options[selectedIndex];
 precio = selectedOption.getAttribute('data-precio');
 }
 
-
-
 // ------------------------variables cabecera-----
-  let selectedCliente_id;
-  let fecha = new Intl.DateTimeFormat('es',{day: 'numeric',month: 'numeric',year: 'numeric'}).format(new Date());
-
-  let items=[];
+  let cliente_id;
+  let fecha = new Date().toISOString();
 // ------------------------variables detalle items
-  let selectedProducto_id;
-  let selectedUnidades;
+  let unidades;
+  let producto_id;
   let precio;
-
+   
   function handleAdd(event) {
     event.preventDefault();
-    const newItem = {
-      selectedProducto_id,
-      selectedUnidades,
-      precio
-    };
-    items = [...items, newItem];
+
+  const newItem = {
+       producto_id,
+       unidades,
+       precio,
+     };
+       items= [...items, newItem];
 	console.log(items)
   }
 
-  function handleSubmit(event) {
-  event.preventDefault();
-  const pedido = {
-    selectedCliente_id,
-    fecha,
-    items
-  };
-  console.log(pedido);
-}
-	
+
 function ModalAdd() {
   isOpenAdd=!isOpenAdd;
 }
@@ -72,11 +59,10 @@ function ModalAdd() {
 	    <dialog open >
 		 <article>		
 		  	
-
-	       	 
+			<form  method="POST" action="?/addPedido">       	 
                 <div > <!---------------------cabecera-------------->
 				   <div>
-					  <select  name="selectedCliente_id"  bind:value={selectedCliente_id} required>
+					  <select  name="cliente_id"  bind:value={cliente_id} required>
 						<option selected>cliente_id</option>
 						{#each clientes as cli}
 						<option  value={cli.cliente_id}>{cli.cliente_id} - {cli.razon_social}</option>
@@ -85,33 +71,34 @@ function ModalAdd() {
 					</div>
 					<div>
 						<label>Fecha
-						<input type="text" name="fecha" bind:value={fecha} class="w"/>
+						<input type="text" name="fecha" bind:value={fecha} />
 						</label>
 					</div>
 			    </div> <!---------------------fin cabecera-------------->
-			
-			
-
-			      <div> <!--revisar luego siesta demas-->
-                       
+			       <div> <!--revisar luego siesta demas-->
 						  <div >	<!----------- detalles items-------------->   
-							<select name="selectedProducto_id" bind:value={selectedProducto_id} on:change={handleProductoChange} required>
+							<input type="hidden" name="items" value={JSON.stringify( items = items.map(item => ({
+							                                       	...item,
+								                                     precio: Number(item.precio)
+							                                            }))
+							    )}>
+							<select  bind:value={producto_id} on:change={handleProductoChange} required>
 							<option selected>Productos</option>
 							{#each productos.datos as prod}
-							<option value={prod.producto_id} data-precio={prod.precio}> {prod.producto_id} - {prod.nombre}</option>
+							<option value={prod.producto_id} data-precio={prod.precio}>{prod.producto_id} - {prod.nombre}</option>
 							{/each}
 							</select>	
 							<label>Unidades
-							<input type="text" name="selectedUnidades" bind:value={selectedUnidades} placeholder="Nº" class="w" required />
+							<input type="number"  bind:value={unidades} required />
 							</label>   
 							<label>Precio		
-							<input type="text" name="precio" bind:value={precio}  class="w" readonly required/>	
+							<input type="text" bind:value={precio} class="w" readonly required/>	
 							</label>
 						  </div>					 
 						  <div>	  
 						     <button  on:click={handleAdd} class="outline">Add item</button>	
 					      </div>	
-					 
+						
 					   <div id="Area-pedido">	<!-------Area items-------------->
 						 <table role="grid">  <!-------Table-------------->
 							<thead>
@@ -122,24 +109,22 @@ function ModalAdd() {
 								</tr>
 							</thead>
 						     <tbody>	
-								{#each items as item (item.selectedProducto_id)}
+								{#each items as item (item.producto_id)}
 								<tr>
-								 <td>{item.selectedProducto_id}</td>
-								 <td>{item.selectedUnidades}</td>
+								 <td>{item.producto_id}</td>
+								 <td>{item.unidades}</td>
 								 <td>{item.precio}</td>
 							    </tr>
 								{/each}
 							</tbody>
 						 </table>
-					   </div> <!-------fin Area items-------------->
-
-					<form method="POST" action="?/addPedido">
+					   </div> <!-------fin Area items-------------->					
 					   <div>	  
 						<button  class="outline">Cancelar</button>
 						<button  class="outline">Reset</button>
-						<button  on:submit={handleSubmit} class="outline">Add Pedido</button>		
+						<button  type="submit" class="outline">Add Pedido</button>		
 					  </div>
-					</form>	
+				</form>	
 				
 	 </article>
    </dialog>
@@ -253,6 +238,7 @@ article{
 		cursor: pointer;
 	}
 
+	input[type='number'],
 	input[type='text']
 	 {
 		border: 1px solid #c5c3c3;
