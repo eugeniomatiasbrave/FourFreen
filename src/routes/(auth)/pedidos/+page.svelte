@@ -1,15 +1,16 @@
-<script>
+<script >
 	export let data;
 	export let form;
-	export const { pedidos, productos, clientes } = data;
+	export const { pedidos, productos, clientes} = data;
 
-	let items=[];
+
+let items=[];
 	
-
-    console.log(form)
-	console.log(pedidos.datos);
+console.log(form)
+console.log(pedidos.datos);
 	
 let isOpenAdd = false;
+let isOpenDet=false;
 
 function handleProductoChange(event) {
 const selectedIndex = event.target.selectedIndex;
@@ -42,16 +43,29 @@ function ModalAdd() {
   isOpenAdd=!isOpenAdd;
 }
 
+function ModalDetalle() {
+  isOpenDet=!isOpenDet;
+}
+
 </script>
+
 	
 	<svelte:head>
 	<title>Pedidos</title>
 	<meta name="description" content="Pedidos" />
 	</svelte:head>
+
+	
 	
 <h2>Gestion de Pedidos</h2>
 <main class="container-fluid pedi-main">
   <article> <!--articule general-->
+
+	<div>		
+		{#if form?.success}
+		  <span style="background-color: greenyellow;">{form.message}</span>
+		{/if}
+	   </div>
 	<div> <!-------modal add-------------->
 	   <button on:click={ModalAdd} class="outline">Add</button>
 
@@ -120,7 +134,7 @@ function ModalAdd() {
 						 </table>
 					   </div> <!-------fin Area items-------------->					
 					   <div>	  
-						<button  class="outline">Cancelar</button>
+						<button on:click={ModalAdd} class="outline">Cancelar</button>
 						<button  class="outline">Reset</button>
 						<button  type="submit" class="outline">Add Pedido</button>		
 					  </div>
@@ -133,18 +147,19 @@ function ModalAdd() {
 <table role="grid">  <!-------Table-------------->
 			<thead>
 				<tr>
-					<th scope="col">pedido_cab_id</th>
+					<th scope="col">pedido_id</th>
 					<th scope="col">cliente_id</th>
-					<th scope="col">Razon_Sosial</th>
+					<th scope="col">Cliente</th>
 					<th scope="col">Fecha</th>			
-					<th scope="col">pedido_estado_id</th>
-					<th scope="col">pedido_estado_nombre</th>
+					<th scope="col">ped_est_id</th>
+					<th scope="col">ped_est_nomb</th>
 					<th scope="col">editar</th>
 					<th scope="col">eliminar</th>
-					<th scope="col">usuario_id</th>
-					<th scope="col">item</th>
-					<th scope="col">total_unidades</th>
-					<th scope="col">total_importe</th>
+					<th scope="col">us_id</th>
+					<th scope="col">items</th>
+					<th scope="col">Detalle</th>
+					<th scope="col">total_uni</th>
+					<th scope="col">total</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -160,6 +175,53 @@ function ModalAdd() {
 						<td>{pe.eliminar}</td>
 						<td>{pe.usuario_id}</td>
 						<td>{pe.items}</td>
+						<td>
+							<button on:click={ModalDetalle} class="outline">Detalle</button>
+							
+							{#if isOpenDet}
+							  <dialog open>
+								<article>
+									<div>
+								  <header>
+									Modal title
+								  </header>
+								  <p>						 
+									Detalle Item del pedido
+								  </p>
+
+								<table>
+									<thead>
+									  <tr>
+										<th>ID del pedido</th>
+										<th>ID del producto</th>
+										<th>Nombre del producto</th>
+										<th>Unidades</th>
+                                		<th>Precio</th>
+                                		<th>Importe</th>
+									  </tr>
+									</thead>
+									<tbody>
+										
+										<tr>
+										  <td></td>
+										  <td></td>
+										  <td></td>
+										  <td></td>
+										  <td></td>
+										  <td></td>
+										</tr>
+									
+									</tbody>
+								  </table>
+
+								  <footer>
+								  <button on:click={ModalDetalle} class="outline">Volver</button>
+								</footer>
+							</div>
+								 </article>
+							   </dialog>
+							  {/if}
+						</td> <!--detalle pedido-->
 						<td>{pe.total_unidades}</td>
 						<td>{pe.total_importe}</td>		
 					</tr>
@@ -174,6 +236,7 @@ function ModalAdd() {
 					<td />
 					<td>Total</td>
 					<td>Total</td>
+					<td />
 					<td />
 					<td />
 					<td />

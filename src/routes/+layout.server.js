@@ -1,7 +1,6 @@
 import { fetchApi } from '../lib/fetchApi';
 import { BASE_URL } from '../lib/utils.js';
 
-
 export const load = async ({ locals }) => {
    // busco el menu del usuario para generar el nav bar
    const getMenu = async () => {

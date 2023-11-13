@@ -2,7 +2,7 @@
 #@baseUrl = http://localhost:3000
 @token = eyJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvX2lkIjoxLCJub21icmUiOiJhQGEuY29tIiwiaWF0IjoxNjk3NDY0MTAzfQ.Jx6HocdoKz8H7kxPqrVjmEqYBLmjODjw3CHoWdxjLGs
 
-// Recupera todos los estados de los pedidos
+// Recupera todos los estados de los pedidos   ....ok
 GET {{baseUrl}}/pedidos HTTP/1.1 
 Authorization: Bearer {{token}}
 
@@ -13,11 +13,11 @@ Authorization: Bearer {{token}}
 
 ###
 // Recupera todos los estados de los pedidos
-GET {{baseUrl}}/pedidos/1/detalle HTTP/1.1 
+GET {{baseUrl}}/pedidos/38/detalle HTTP/1.1 
 Authorization: Bearer {{token}}
 
 ###
-// Recupera todos los estados de los pedidos.  ADD
+// Recupera todos los estados de los pedidos.  ADD  ...ok
 POST {{baseUrl}}/pedidos HTTP/1.1 
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -36,6 +36,6 @@ Content-Type: application/json
       "unidades": 201,
       "precio": 2520.54
     }
-    
+
   ]
 }
