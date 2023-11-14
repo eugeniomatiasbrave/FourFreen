@@ -1,7 +1,9 @@
 <script >
 	export let data;
 	export let form;
+	
 	export const { pedidos, productos, clientes} = data;
+
 
 
 let items=[];
@@ -10,7 +12,7 @@ console.log(form)
 console.log(pedidos.datos);
 	
 let isOpenAdd = false;
-let isOpenDet=false;
+
 
 function handleProductoChange(event) {
 const selectedIndex = event.target.selectedIndex;
@@ -43,9 +45,7 @@ function ModalAdd() {
   isOpenAdd=!isOpenAdd;
 }
 
-function ModalDetalle() {
-  isOpenDet=!isOpenDet;
-}
+
 
 </script>
 
@@ -55,6 +55,7 @@ function ModalDetalle() {
 	<meta name="description" content="Pedidos" />
 	</svelte:head>
 
+	
 	
 	
 <h2>Gestion de Pedidos</h2>
@@ -147,7 +148,7 @@ function ModalDetalle() {
 <table role="grid">  <!-------Table-------------->
 			<thead>
 				<tr>
-					<th scope="col">pedido_id</th>
+					<th scope="col">pedido_cab_id</th>
 					<th scope="col">cliente_id</th>
 					<th scope="col">Cliente</th>
 					<th scope="col">Fecha</th>			
@@ -176,51 +177,8 @@ function ModalDetalle() {
 						<td>{pe.usuario_id}</td>
 						<td>{pe.items}</td>
 						<td>
-							<button on:click={ModalDetalle} class="outline">Detalle</button>
-							
-							{#if isOpenDet}
-							  <dialog open>
-								<article>
-									<div>
-								  <header>
-									Modal title
-								  </header>
-								  <p>						 
-									Detalle Item del pedido
-								  </p>
+						<a href={`/pedidos/${pe.pedido_cab_id}`}> Detalle:{pe.pedido_cab_id}</a>
 
-								<table>
-									<thead>
-									  <tr>
-										<th>ID del pedido</th>
-										<th>ID del producto</th>
-										<th>Nombre del producto</th>
-										<th>Unidades</th>
-                                		<th>Precio</th>
-                                		<th>Importe</th>
-									  </tr>
-									</thead>
-									<tbody>
-										
-										<tr>
-										  <td></td>
-										  <td></td>
-										  <td></td>
-										  <td></td>
-										  <td></td>
-										  <td></td>
-										</tr>
-									
-									</tbody>
-								  </table>
-
-								  <footer>
-								  <button on:click={ModalDetalle} class="outline">Volver</button>
-								</footer>
-							</div>
-								 </article>
-							   </dialog>
-							  {/if}
 						</td> <!--detalle pedido-->
 						<td>{pe.total_unidades}</td>
 						<td>{pe.total_importe}</td>		

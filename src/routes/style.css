@@ -71,6 +71,8 @@ button {
  height: 30px;
  padding: 4px;
  margin: 0 0 4px 0;
+ background-color: #45a6af;
+ color: #ffffff;
 }
 
 table {
