@@ -6,8 +6,6 @@ console.log(detalle)
   
 </script>
 
-
-
 <main class="container">
 
 <h4>Detalle del Pedido:</h4>
@@ -36,7 +34,7 @@ console.log(detalle)
         {/each}
         <footer>
           <div>
-          <button  class="outline">Volver</button>
+          <button  class="outline"><a href="/pedidos" style="color:white;">Volver</a></button>
         </div>
         <div>
           <button  class="outline">Editar</button>

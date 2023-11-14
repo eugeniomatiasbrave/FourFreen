@@ -5,7 +5,6 @@
 	export const { pedidos, productos, clientes} = data;
 
 
-
 let items=[];
 	
 console.log(form)
@@ -177,7 +176,7 @@ function ModalAdd() {
 						<td>{pe.usuario_id}</td>
 						<td>{pe.items}</td>
 						<td>
-						<a href={`/pedidos/${pe.pedido_cab_id}`}> Detalle:{pe.pedido_cab_id}</a>
+						<button class="outline"><a href={`/pedidos/${pe.pedido_cab_id}`} style="color:white;"> Detalle:{pe.pedido_cab_id}</a></button>
 
 						</td> <!--detalle pedido-->
 						<td>{pe.total_unidades}</td>
