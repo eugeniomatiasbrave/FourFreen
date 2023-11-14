@@ -103,6 +103,7 @@ button {
 	
 }
 
+input[type='number'],
 input[type='text'],
 input[type='date'],
 input[type='password'],
@@ -114,9 +115,6 @@ select {
 	font-size: 15px;
 	
 }
-
-
-
 
 
 @media (min-width: 320px) {

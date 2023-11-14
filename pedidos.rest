@@ -12,7 +12,7 @@ GET {{baseUrl}}/pedidos?limit=2 HTTP/1.1
 Authorization: Bearer {{token}}
 
 ###
-// Recupera todos los estados de los pedidos
+// Recupera el detalle del pedidos id..............ok
 GET {{baseUrl}}/pedidos/38/detalle HTTP/1.1 
 Authorization: Bearer {{token}}
 

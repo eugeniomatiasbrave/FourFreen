@@ -129,7 +129,7 @@ filteredClientes = clientes;
 				</header>	
 			<form method="POST" action="?/addClient">
 			 <input type="text" name="razon_social" placeholder="escribe aqui razon_social" required/>
-			 <input type="text" name="cuit" placeholder="escribe aqui el cuit" required/>
+			 <input type="number" name="cuit" placeholder="escribe aqui el cuit" maxlength="11" required/>
 			 <input type="text" name="domicilio_calle" placeholder="escribe aqui calle" required/>
 			 <input type="text" name="domicilio_altura" placeholder="escribe aqui altura" required/>
 			 <input type="text" name="localidad" placeholder="escribe aqui localidad" required/>

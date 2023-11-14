@@ -45,22 +45,63 @@ function ModalAdd() {
 }
 
 
+let Pedido = pedidos.datos;
+let selectedOption = '';
+let searchTerm = '';
+
+function filter() {
+	Pedido = pedidos.datos.filter(pe => {
+		return (selectedOption === '' || pe.pedido_estado_nombre.toString() === selectedOption) &&
+		       (searchTerm === '' || pe.pedido_cab_id.toString().includes(searchTerm.toString()));
+	});	 
+}
+
+function reset() {
+	searchTerm = '';
+	selectedOption = '';
+	Pedido = pedidos.datos;
+}
+
+
+
 
 </script>
 
-	
 	<svelte:head>
 	<title>Pedidos</title>
 	<meta name="description" content="Pedidos" />
 	</svelte:head>
 
-	
-	
-	
+
+	<a href="/estado">Estados de pedidos</a>
+
 <h2>Gestion de Pedidos</h2>
 <main class="container-fluid pedi-main">
   <article> <!--articule general-->
 
+<div> <!--------------filtro x estado--------->
+	<aside>	
+			<div>
+				<h3>Filtrar por estado</h3>
+			<select bind:value={selectedOption} required>
+				<option selected>Estado_Pedido</option>
+				<option>Pedido Ingresado</option>
+				<option>Pedido Confeccionado</option>
+				<option>Pedido Entregado</option>
+				<option>Pedido Facturado</option>
+				<option>Pedido Cobrado</option>
+				<option>Pedido Anulado</option>	
+			</select>	
+		   </div>
+			<div>
+				<input type="text" bind:value={searchTerm} name="search" placeholder="Search" required>
+			</div>
+			<div>
+				<button on:click|preventDefault={filter} class="outline">Filtrar</button>
+				<button on:click|preventDefault={reset} class="outline">Reset</button>
+			</div>	
+	  </aside>
+	</div>
 	<div>		
 		{#if form?.success}
 		  <span style="background-color: greenyellow;">{form.message}</span>
@@ -146,13 +187,13 @@ function ModalAdd() {
     </div> <!-----------fin de modal add-------------->
 <table role="grid">  <!-------Table-------------->
 			<thead>
-				<tr>
+				<tr >
 					<th scope="col">pedido_cab_id</th>
 					<th scope="col">cliente_id</th>
 					<th scope="col">Cliente</th>
 					<th scope="col">Fecha</th>			
 					<th scope="col">ped_est_id</th>
-					<th scope="col">ped_est_nomb</th>
+					<th scope="col">Estado_pedido</th>
 					<th scope="col">editar</th>
 					<th scope="col">eliminar</th>
 					<th scope="col">us_id</th>
@@ -163,13 +204,13 @@ function ModalAdd() {
 				</tr>
 			</thead>
 			<tbody>
-				{#each pedidos.datos as pe}
+				{#each Pedido as pe}
 					<tr>
                         <td>{pe.pedido_cab_id}</td>
 						<td>{pe.cliente_id}</td>
 						<td>{pe.razon_social}</td>
 						<td>{pe.fecha}</td>	
-						<td>{pe.pedido_estado_id}</td>
+						<td> {pe.pedido_estado_id}</td>
 						<td>{pe.pedido_estado_nombre}</td>
 						<td>{pe.editar}</td>
 						<td>{pe.eliminar}</td>
@@ -206,11 +247,6 @@ function ModalAdd() {
 </main>
 
 <style>
-
-
-
-
-
 
 	.pedi-main {
 		padding: 0 200px 0 200px;
