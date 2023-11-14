@@ -5,8 +5,7 @@
 
 **** LOGIN ****** 
 
-   Mejoras con nuevo menu (adrian)
-     -Layout: Menu segun el usuario. Menu dinamico
+   Menu: segun perfil. Menu dinamico.............................................................................OK
 
 **** LOGOUT *****
 **** AUTH *******
@@ -15,7 +14,8 @@
 	* productos.rest  ... cambios en el objeto productos 
 	* clientes.rest
     * Pedidos.rest.....
-       - Primero armar el cliente.
+    * Pedidos_estado.rest
+       
           
 
 **** HOOKS*******
@@ -25,31 +25,37 @@
     * @media query ok..faltan retoques...reveer con nueva libreria CSS
   
 **** CRUD: *****************
-    * En eliminar agregar un Modal de confirmacion ..OK
+
+    * En eliminar agregar un Modal de confirmacion .....................................................................OK
     
-    * Tabla de Productos: GET,POST,EDITE,DELETE,PATCH + filtro......ok 
+    * Tabla de Productos: GET,POST,EDITE,DELETE,PATCH + filtro..........................................................OK 
 	   -Se puede mejor el codigo: 
 	       * Funcion que simplifiquen el selected
 		   * TRY: En productos y clientes. A mejorar...
-           * Success y message: Respuesta al CRUD en /clientes y /pedidos. A mejorar, hacer un alert().
+           * Success y message: Respuesta al CRUD en /clientes y /pedidos.
+             A mejorar, hacer un alert().
 
-    * Gestion de Pedidos: 
-            - Tabla , campos (fecha alta, fecha entrega, id pedido, cliente, producto, cantidad, precio y total), 
-              la base a la espera de la API Pedidos y comprender mejor el proceso de gestion.
-            - ACCIONES: Crea: pedidos en [] a la espera de la API. .. .cliente y servidor a completar con Api.
-                                    Edita:.....falta .. .cliente y servidor
-                                    Elimina:...falta .. .cliente y servidor
-            - En add pedidos : 
-                - Cabecera (hasta cliente) y detalle (a partir de Producto).
-                - esquema del objeto  + items producto.
-                - 
-             
+    * Tabla de Gestion de Pedidos: 
+
+            - Tabla campos:.............................................................................................OK
+
+            - Accones: 
+                 - Add pedidos: ........................................................................................OK
+                      Nota:Una Cabecera (hasta cliente) y detalle (a partir de Producto). 
+                      * Mas de un item por pedido ......................................................................OK
+                 - Edita (modifica pedido en detalle):.....a espera de Api
+                
+             - Detalle de pedido:.......................................................................................OK
+
+             - Estado de Pedido:    
+            
     * Tabla de Clientes: 
-          - GET,POST,EDITE,DELETE,PATCH + filtro.  (se puede mejor el codigo idem productos).
+          - GET,POST,EDITE,DELETE,PATCH + filtro.  .....................................................................OK
+             Mejoras de codigo: (se puede mejor el codigo idem productos).
           
-          
-          
+              
     * Perfil:..
+
 
 **** LOGO: ****
     *Colores de marca:
