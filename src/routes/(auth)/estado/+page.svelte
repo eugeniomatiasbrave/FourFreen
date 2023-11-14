@@ -15,9 +15,9 @@ console.log(estados)
 
 <div>
 	{#each estados as e }
-		<ul>
-			<a href={`/pedido_estado_id/${e.pedido_estado_id}`}>{e.pedido_estado_id} {e.nombre}</a>
-		</ul>
+		<li>
+			<a href={`/estado/${e.pedido_estado_id}`}>{e.pedido_estado_id} {e.nombre}</a></li>
+		
 	{/each}
 </div>
 
