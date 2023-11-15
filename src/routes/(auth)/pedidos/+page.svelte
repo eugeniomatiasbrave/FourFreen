@@ -1,14 +1,31 @@
 <script >
+	import { page } from '$app/stores';
 	export let data;
 	export let form;
 	
 	export const { pedidos, productos, clientes} = data;
-
+	const estado_id = $page.url.searchParams.get('estado_id') || "0"
+ 
+ let titulo = ""
+ switch (estado_id) {
+	case "0":
+		titulo = "Pedidos"
+		break;
+		case "10":
+		titulo = "Pedidos Ingresados"
+		break;
+		case "20":
+		titulo = "Pedidos confeccionados"
+		break;
+ 
+	default:
+		break;
+ }
 
 let items=[];
 	
-console.log(form)
-console.log(pedidos.datos);
+// console.log(form)
+// console.log(pedidos.datos);
 	
 let isOpenAdd = false;
 
@@ -36,7 +53,7 @@ precio = selectedOption.getAttribute('data-precio');
        precio,
      };
        items= [...items, newItem];
-	console.log(items)
+	// console.log(items)
   }
 
 
@@ -62,20 +79,16 @@ function reset() {
 	Pedido = pedidos.datos;
 }
 
-
-
-
 </script>
 
 	<svelte:head>
-	<title>Pedidos</title>
+	<title>{titulo}</title>
 	<meta name="description" content="Pedidos" />
 	</svelte:head>
 
 
-	<a href="/estado">Estados de pedidos</a>
-
-<h2>Gestion de Pedidos</h2>
+	
+<h2>{titulo}</h2>
 <main class="container-fluid pedi-main">
   <article> <!--articule general-->
 
@@ -210,15 +223,16 @@ function reset() {
 						<td>{pe.cliente_id}</td>
 						<td>{pe.razon_social}</td>
 						<td>{pe.fecha}</td>	
-						<td> {pe.pedido_estado_id}</td>
+						<td> 
+						  <button class="outline"><a href={`/estado_id/${pe.pedido_estado_id}`} style="color:white;">Estado: </a>{pe.pedido_estado_id} de {pe.pedido_cab_id} </button>
+						</td>
 						<td>{pe.pedido_estado_nombre}</td>
 						<td>{pe.editar}</td>
 						<td>{pe.eliminar}</td>
 						<td>{pe.usuario_id}</td>
 						<td>{pe.items}</td>
 						<td>
-						<button class="outline"><a href={`/pedidos/${pe.pedido_cab_id}`} style="color:white;"> Detalle:{pe.pedido_cab_id}</a></button>
-
+						  <button class="outline"><a href={`/pedidos/${pe.pedido_cab_id}`} style="color:white;"> Detalle:{pe.pedido_cab_id}</a></button>
 						</td> <!--detalle pedido-->
 						<td>{pe.total_unidades}</td>
 						<td>{pe.total_importe}</td>		

@@ -13,5 +13,5 @@ Authorization: Bearer {{token}}
 
 ###
 // recuperda los datos de un estado de pedido en particular con su :id en el path
-GET {{baseUrl}}/pedidos_estado/10 HTTP/1.1 
+GET {{baseUrl}}/pedidos_estado/20 HTTP/1.1 
 Authorization: Bearer {{token}}
