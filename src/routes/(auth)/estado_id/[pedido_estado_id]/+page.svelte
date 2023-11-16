@@ -8,14 +8,14 @@ const estadoPedidoId= data.estadoPedidoId
 console.log(form)
 
 
-const estado_id = $page.url.searchParams.get('estado_id') || "0"
+const estado_id = $page.url.searchParams.get('estado_id') || "10"
  
  let titulo = "";
  
  switch (estado_id) {
   
 		case "10":
-		titulo = "Pedidos Ingresados"
+		titulo = "Pedido Ingresado"
 		break;
 		case "20":
 		titulo = "Pedidos Confeccionados"
