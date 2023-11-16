@@ -15,7 +15,8 @@ const estado_id = $page.url.searchParams.get('estado_id') || "10"
  switch (estado_id) {
   
 		case "10":
-		titulo = "Pedido Ingresado"
+		titulo = estadoPedidoId[0].nombre
+   
 		break;
 		case "20":
 		titulo = "Pedidos Confeccionados"
@@ -49,9 +50,7 @@ const estado_id = $page.url.searchParams.get('estado_id') || "10"
   <h4>{titulo}</h4>
   <article>
     <form method="POST" action="?/confeccionado">
-   
-
-              
+        
             <div>
              {#each estadoPedidoId as peEs }
                 <h6> Estado actual:{peEs.pedido_estado_id} </h6><!--info-->
