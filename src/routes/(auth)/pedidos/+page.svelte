@@ -15,9 +15,12 @@
 		titulo = "Pedidos Ingresados"
 		break;
 		case "20":
-		titulo = "Pedidos confeccionados"
+		titulo = "Pedidos Confeccionados"
 		break;
- 
+		case "30":
+		titulo = "Pedidos Entregados"
+		break;
+
 	default:
 		break;
  }
@@ -86,7 +89,6 @@ function reset() {
 	<meta name="description" content="Pedidos" />
 	</svelte:head>
 
-
 	
 <h2>{titulo}</h2>
 <main class="container-fluid pedi-main">
@@ -95,7 +97,7 @@ function reset() {
 <div> <!--------------filtro x estado--------->
 	<aside>	
 			<div>
-				<h3>Filtrar por estado</h3>
+				<h6>Filtrar por estado</h6>
 			<select bind:value={selectedOption} required>
 				<option selected>Estado_Pedido</option>
 				<option>Pedido Ingresado</option>

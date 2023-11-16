@@ -103,6 +103,8 @@ button {
 	
 }
 
+input[type='submit'],
+input[type='button'],
 input[type='number'],
 input[type='text'],
 input[type='date'],
