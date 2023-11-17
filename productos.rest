@@ -1,14 +1,37 @@
 @baseUrl = https://fg-api-rest.fly.dev
+# @baseUrl = http://localhost:3000
 @token = eyJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvX2lkIjoxLCJub21icmUiOiJhQGEuY29tIiwiaWF0IjoxNjk3NDY0MTAzfQ.Jx6HocdoKz8H7kxPqrVjmEqYBLmjODjw3CHoWdxjLGs
 
+###
 // Recupera todos los productos
 GET {{baseUrl}}/productos HTTP/1.1 
 Authorization: Bearer {{token}}
 
 ###
-// recupera todos los productos con la opción limit y offset para realizar paginado (en principio por la cantidad de items no hace falta)
-GET {{baseUrl}}/productos?limit=5&offset=2 HTTP/1.1 
+// Recupera todos los productos ordenados por precios de mayor a menor
+// los campos posibles para ordenar son: nombre, precio, producto_id
+// luego van : -> 1 es para orden ascendente y -1 para descendente
+GET {{baseUrl}}/productos?sort=precio:1 HTTP/1.1 
 Authorization: Bearer {{token}}
+
+###
+// recupera todos los productos que contengan la palabra ELO en el nombre
+GET {{baseUrl}}/productos?search=ELO HTTP/1.1 
+Authorization: Bearer {{token}}
+
+###
+// recupera todos los productos que contengan la palabra ELO en el nombre
+// ordenados por el precio descendente
+GET {{baseUrl}}/productos?search=ELO&sort=precio:-1 HTTP/1.1 
+Authorization: Bearer {{token}}
+
+###
+// recupera todos los productos con limit (cantidad de productos a recuperar) 
+// y offset (los que saltea)
+// ordenados por el id del producto
+GET {{baseUrl}}/productos?offset=5&limit=5&sort=producto_id:1 HTTP/1.1 
+Authorization: Bearer {{token}}
+
 
 ###
 // recuperda los datos de un producto en particular con su :id en el path
@@ -22,22 +45,23 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "nombre": "Cerezas",
-  "precio": 120.52
+  "nombre": "Lechuga Mantecosa",
+  "precio": 420.00
 }
+
 
 ###
 // para actualizar nombre y/o precio del producto, va el :id en el path y los campos en el body
-PATCH {{baseUrl}}/productos/22 HTTP/1.1
+PATCH {{baseUrl}}/productos/110 HTTP/1.1
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "nombre": "Cerezas",
-  "precio": 1200.52
+  "nombre": "Lechuga Mantecosa",
+  "precio": 430.00
 }
 
 ###
 //para eliminar un producto, va el :id en el path
-DELETE {{baseUrl}}/productos/48 HTTP/1.1
+DELETE {{baseUrl}}/productos/104 HTTP/1.1
 Authorization: Bearer {{token}}

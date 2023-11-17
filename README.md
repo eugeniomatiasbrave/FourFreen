@@ -11,7 +11,7 @@
 **** AUTH *******
 **** API REST ***
     * usuarios.rest
-	* productos.rest  ... cambios en el objeto productos 
+	* productos.rest   
 	* clientes.rest
     * Pedidos.rest.....
     * Pedidos_estado.rest
@@ -21,37 +21,43 @@
 **** HOOKS*******
 **** FUNCION FETCH + UTILS***
 
-**** RESPOSIVE: ************
-    * @media query ok..faltan retoques...reveer con nueva libreria CSS
+**** LIBRERIA CSS ************
+    * Libreria CSS: Flowbite svelte
   
 **** CRUD: *****************
 
-    * En eliminar agregar un Modal de confirmacion .....................................................................OK
     
-    * Tabla de Productos: GET,POST,EDITE,DELETE,PATCH + filtro..........................................................OK 
+    
+    * PRODUCTOS: 
+       * /productos : 
+            - Responsive...............Ok
+    
+    
+    -  GET,POST,EDITE,DELETE,PATCH + filtro 
 	   -Se puede mejor el codigo: 
 	       * Funcion que simplifiquen el selected
 		   * TRY: En productos y clientes. A mejorar...
            * Success y message: Respuesta al CRUD en /clientes y /pedidos.
              A mejorar, hacer un alert().
-           * Filtrar  Api  
+           * Filtrar  Api 
+
+
+
 
     * Tabla de Gestion de Pedidos: 
 
-            - Tabla campos:.............................................................................................OK
-
             - Accones: 
-                 - Add pedidos: ........................................................................................OK
+                 - Add pedidos:
                       Nota:Una Cabecera (hasta cliente) y detalle (a partir de Producto). 
-                      * Mas de un item por pedido ......................................................................OK
+                      * Mas de un item por pedido 
                  - Edita (modifica pedido en detalle):.....a espera de Api
                 
-             - Detalle de pedido:.......................................................................................OK
+             - Detalle de pedido:
 
              - Estado de Pedido:    
             
     * Tabla de Clientes: 
-          - GET,POST,EDITE,DELETE,PATCH + filtro.  .....................................................................OK
+          - GET,POST,EDITE,DELETE,PATCH + filtro.
              Mejoras de codigo: (se puede mejor el codigo idem productos).
           
               

@@ -43,27 +43,7 @@ function reset() {
 
 <P size="2xl" align="center">Tabla de Productos</P>
 	
-<main >
-
-		<div> <!----------------------------modal add productos--> 
-			<Button size="xs" on:click={() => (formModal = true)} class=" bg-primary-500 rounded">Add Productos</Button>
-			<Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
-			  <form class="flex flex-col space-y-6"  method="POST" action="?/addProd">	
-				<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Agregar un producto nuevo</h3>
-				<Label class="space-y-2">
-				  <span>Producto</span>
-				  <Input type="text" name="nombre" placeholder="escribe aqui el producto" class="rounded" required/>
-				</Label>
-				<Label class="space-y-2">
-				  <span>precio</span>
-				  <Input type="text" name="precio" placeholder="escribe aqui el precio" class="rounded" required/>
-				</Label> 
-				<Button type="submit" class=" bg-primary-500 w-full1 rounded">Confirmar</Button>
-			  </form>
-			</Modal>
-		  </div> <!----------------------fin de modal add productos-->
-
-		
+<main>
 
    <section > <!--------------------------Seccion tabla --> 
 
@@ -73,18 +53,21 @@ function reset() {
 		{/if}
 	  </div>
 
-  <div> 
+  <div> <!----------------Div contenedor: tabla + add + Filtro--------->
 
-	<div class="mx-auto w-1/2 flex flex-col md:flex-row md:items-center mr-4"> <!----------------Filtro--------->	
-		<div> 
+	<div class="flex justify-between items-center mx-auto w-full md:w-1/2"> 	<!-----cabecera Add + Filtro--------->
+		<div> <!----------------------------modal add productos--> 
+		  <Button size="xs" on:click={() => (formModal = true)} class=" bg-primary-500 rounded">+ Add</Button>
+		  <!-- Resto del código del modal -->
+		</div> <!----------------------fin de modal add productos-->
+	  
+		<div class="flex items-center"> <!----------------Filtro--------->
 		  <Input type="text" bind:value={searchTerm} name="search" placeholder="Search" required class="h-8 rounded" />
-		</div>
-		<div class="mt-2 md:mt-0 md:ml-2">
-		  <Button size="xs" on:click={filterProductos} class="bg-primary-500 h-8 mb-2 md:mb-0 md:mr-2 rounded" >Filtrar</Button>
-		  <Button size="xs" on:click={reset} class="bg-primary-500 h-8 rounded">Reset</Button>
-		</div>
-	  </div> <!----------------------Filtro-------->
-
+		  <Button size="xs" on:click={filterProductos} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded" >Filtrar</Button>
+		  <Button size="xs" on:click={reset} class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
+		</div> <!----------------------Filtro-------->
+	  </div>
+	 <div class="overflow-x-auto"> 
 	  <Table hoverable={true} class="w-1/2 mx-auto mt-2 " > <!--------------------Nueva tabla Flowbite-------> 
 		<TableHead class="bg-primary-500 text-white "> <!------------------------cabecera celdas-->
 		  <TableHeadCell>Img</TableHeadCell>
@@ -146,10 +129,9 @@ function reset() {
 		  </TableBodyRow>
 		  {/each}	
 		</TableBody>
-		
 	  </Table>
-
 	</div>
+  </div> <!----------------fin Div contenedor: tabla + add + Filtro--------->
 	 </section>
 	
 </main>
