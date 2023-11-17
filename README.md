@@ -34,6 +34,7 @@
 		   * TRY: En productos y clientes. A mejorar...
            * Success y message: Respuesta al CRUD en /clientes y /pedidos.
              A mejorar, hacer un alert().
+           * Filtrar  Api  
 
     * Tabla de Gestion de Pedidos: 
 
@@ -65,7 +66,17 @@
     * En otra etapa.
 
 
-****
+****16/11/23****
+
+1) Ver diseño que sea responsive
+
+*  1.b - ver si vale la pena agregar una libreria UI
+
+2) agregar o editar un registro en una página distinta (más allá de que sea modal)
+
+3) Filtrar por nombre (Adrián me debe documentación)
+
+4) Ordenar por click en cabecera de columna precio, nombre y id (Adrián me debe documentación)
 
 
 

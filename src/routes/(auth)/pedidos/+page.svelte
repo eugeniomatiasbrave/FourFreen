@@ -263,7 +263,7 @@ function reset() {
 </main>
 
 <style>
-
+/*
 	.pedi-main {
 		padding: 0 200px 0 200px;
 	}
@@ -335,7 +335,7 @@ article{
 	.w-2{
 		width: 600px;
 	}
-*/
+
 	#Area-pedido{
 		background-color: rgb(253, 251, 251);
 		max-height: 300px;
@@ -344,4 +344,6 @@ article{
 		overflow: scroll;
 			
 	}	
+
+*/
 </style>

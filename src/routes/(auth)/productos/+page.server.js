@@ -1,11 +1,11 @@
 
 import { error } from '@sveltejs/kit';
-import { BASE_URL } from '../../../lib/utils.js';
-import {fetchApi} from '../../../lib/fetchApi.js';
+import { BASE_URL } from '$lib/utils.js';
+import {fetchApi} from '$lib/fetchApi.js';
 
 export const load = async ({ locals }) => {
   const getProductos = async () => {
-    return await fetchApi.get({url: BASE_URL + "/productos", token: locals.token, resStatus: 200})
+    return await fetchApi.get({url: BASE_URL + "/productos?limit=200", token: locals.token, resStatus: 200})
   }
   return {
     productos: getProductos(),

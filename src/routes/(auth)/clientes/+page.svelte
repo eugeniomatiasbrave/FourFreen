@@ -254,11 +254,11 @@ filteredClientes = clientes;
 
 
 <style>
-
+/*
 .Cli-main {
   padding: 0 100px 0 100px;
 }
-
+*/
 </style>
 	
 	
