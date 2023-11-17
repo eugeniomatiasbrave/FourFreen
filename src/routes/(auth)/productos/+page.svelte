@@ -58,7 +58,7 @@ function reset() {
 	<div class="flex justify-between items-center mx-auto w-full md:w-1/2"> 	<!-----cabecera Add + Filtro--------->
 		<div> <!----------------------------modal add productos--> 
 			<a href="productos/add_producto">AddProducto</a>
-			<Button  size="xs" on:click={() => (formModal = true)} class=" bg-primary-500 rounded">+ Add</Button>
+			<a href="productos/add_producto"  size="xs" on:click={() => (formModal = true)} class=" bg-primary-500 rounded">+ Add</a>
 				<Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
 				  <form class="flex flex-col space-y-6"  method="POST" action="?/addProd">	
 					<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Agregar un producto nuevo</h3>
