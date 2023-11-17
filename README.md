@@ -76,7 +76,7 @@
 
 1) Ver diseño que sea responsive
 
-*  1.b - ver si vale la pena agregar una libreria UI
+*  1.b - ver si vale la pena agregar una libreria UI  ...si
 
 2) agregar o editar un registro en una página distinta (más allá de que sea modal)
 

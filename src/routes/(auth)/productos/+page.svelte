@@ -57,8 +57,22 @@ function reset() {
 
 	<div class="flex justify-between items-center mx-auto w-full md:w-1/2"> 	<!-----cabecera Add + Filtro--------->
 		<div> <!----------------------------modal add productos--> 
-		  <Button size="xs" on:click={() => (formModal = true)} class=" bg-primary-500 rounded">+ Add</Button>
-		  <!-- Resto del código del modal -->
+			<a href="productos/add_producto">AddProducto</a>
+			<Button  size="xs" on:click={() => (formModal = true)} class=" bg-primary-500 rounded">+ Add</Button>
+				<Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
+				  <form class="flex flex-col space-y-6"  method="POST" action="?/addProd">	
+					<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Agregar un producto nuevo</h3>
+					<Label class="space-y-2">
+					  <span>Producto</span>
+					  <Input type="text" name="nombre" placeholder="escribe aqui el producto" required/>
+					</Label>
+					<Label class="space-y-2">
+					  <span>precio</span>
+					  <Input type="text" name="precio" placeholder="escribe aqui el precio" required/>
+					</Label> 
+					<Button type="submit" class="w-full1">Confirmar</Button>
+				  </form>
+				</Modal>
 		</div> <!----------------------fin de modal add productos-->
 	  
 		<div class="flex items-center"> <!----------------Filtro--------->
