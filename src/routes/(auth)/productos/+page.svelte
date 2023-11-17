@@ -2,7 +2,7 @@
 import logo3 from '$lib/img/LogoFourGreen2.png';
 import { Input, Button,P, Modal,  Label, Table,
 		     TableBody, TableBodyCell, TableBodyRow,
-			 TableHead, TableHeadCell, Search } from 'flowbite-svelte';
+			 TableHead, TableHeadCell } from 'flowbite-svelte';
 	
 
 export let data;
@@ -42,7 +42,17 @@ function reset() {
 </svelte:head>
 
 <P size="2xl" align="center">Tabla de Productos</P>
-	
+<div>
+<ul>
+  <li>
+    <a href="productos/registros/add_productos">Add Productos</a>
+  </li>
+  <li>
+    <a href="productos/registros/edit_productos">Edit Productos</a>
+  </li>
+</ul>
+</div>
+
 <main>
 
    <section > <!--------------------------Seccion tabla --> 
@@ -57,22 +67,10 @@ function reset() {
 
 	<div class="flex justify-between items-center mx-auto w-full md:w-1/2"> 	<!-----cabecera Add + Filtro--------->
 		<div> <!----------------------------modal add productos--> 
-			<a href="productos/add_producto">AddProducto</a>
-			<a href="productos/add_producto"  size="xs" on:click={() => (formModal = true)} class=" bg-primary-500 rounded">+ Add</a>
-				<Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
-				  <form class="flex flex-col space-y-6"  method="POST" action="?/addProd">	
-					<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Agregar un producto nuevo</h3>
-					<Label class="space-y-2">
-					  <span>Producto</span>
-					  <Input type="text" name="nombre" placeholder="escribe aqui el producto" required/>
-					</Label>
-					<Label class="space-y-2">
-					  <span>precio</span>
-					  <Input type="text" name="precio" placeholder="escribe aqui el precio" required/>
-					</Label> 
-					<Button type="submit" class="w-full1">Confirmar</Button>
-				  </form>
-				</Modal>
+			
+			<Button  href="productos/registros/add_productos" size="xs"  class=" bg-primary-500 rounded">+ Add</Button>
+			
+				
 		</div> <!----------------------fin de modal add productos-->
 	  
 		<div class="flex items-center"> <!----------------Filtro--------->
@@ -104,7 +102,7 @@ function reset() {
 		    <TableBodyCell>{prod.nombre}</TableBodyCell>
 		    <TableBodyCell>{prod.precio}</TableBodyCell>
 			<TableBodyCell>
-			<a href="#b" on:click={()=>{formModalEdit=true;  
+			<a href="#9" on:click={()=>{formModalEdit=true;  
 					                selectedProducto=prod.producto_id;
 					                selectedNombre=prod.nombre;
 					                selectedPrecio=prod.precio;}}><svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">

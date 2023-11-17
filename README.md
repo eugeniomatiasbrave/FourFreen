@@ -30,8 +30,9 @@
     
     * PRODUCTOS: 
        * /productos : 
-            - Responsive...............Ok
-    
+            - Responsive.....................................................................Ok
+            - GET............................................................................OK
+            * ADD productos desde otra pagina /registro/add_productos  ......................ok
     
     -  GET,POST,EDITE,DELETE,PATCH + filtro 
 	   -Se puede mejor el codigo: 
