@@ -13,11 +13,8 @@ let formModal = true;
 
 <Button href="#ref" onclick="location.reload();" class=" bg-primary-500 rounded">+ Add</Button>
 
-<div> <!----------------------------modal add productos--> 
-			
-    
+<div> <!----------------------------modal add productos-->  
         <Modal bind:open={formModal}  size="xs" autoclose={false}  class="w-full">  <!--dejar en false el autoclose-->
-
           <div><!----------------------------Alert de la Accion -->
             {#if form?.success}
              <span style="background-color: greenyellow;">{form.message}</span>
@@ -33,8 +30,9 @@ let formModal = true;
               <span>precio</span>
               <Input type="text" name="precio" placeholder="escribe aqui el precio" required/>
             </Label> 
-            <Button type="submit"  class=" bg-primary-500 rounded w-full1">Confirmar</Button>
+            <Button type="submit" class=" bg-primary-500 rounded w-full1">Confirmar</Button>
+            <Button  href="/productos" class=" bg-primary-500 rounded w-full1">Volver</Button>
+           
           </form>
-
         </Modal>
 </div> <!----------------------fin de modal add productos-->

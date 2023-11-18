@@ -1,20 +1,14 @@
 <script>		
-import logo3 from '$lib/img/LogoFourGreen2.png';
-import { Input, Button,P, Modal,  Label, Table,
-		     TableBody, TableBodyCell, TableBodyRow,
-			 TableHead, TableHeadCell } from 'flowbite-svelte';
-	
 
+import { Input,Button,P,Modal,Table,TableBody,TableBodyCell,TableBodyRow,
+			 TableHead,TableHeadCell } from 'flowbite-svelte';
+import { selectedProducto, selectedNombre, selectedPrecio } from './store';			
 export let data;
 export let form;
 export const {productos}=data;
-		
-let selectedProducto;
-let selectedNombre;
-let selectedPrecio;
 
-let formModal = false;
-let formModalEdit = false;
+		
+
 let formModalDelete=false;
 
 let filteredProductos = productos.datos;
@@ -24,7 +18,8 @@ function filterProductos() {
 		return prod.producto_id.toString().includes(searchTerm.toString()) ||
 			   prod.nombre.toString().includes(searchTerm.toString()) ||
 			   prod.precio.toString().includes(searchTerm.toString()) ;       
-		 });	 
+		 }
+		 );	 
 	 }
 	
 let searchTerm = '';
@@ -45,10 +40,10 @@ function reset() {
 <div>
 <ul>
   <li>
-    <a href="productos/registros/add_productos">Add Productos</a>
+    <a href="productos/add_productos">Add Productos</a>
   </li>
   <li>
-    <a href="productos/registros/edit_productos">Edit Productos</a>
+    <a href="productos/edit_productos">Edit Productos</a>
   </li>
 </ul>
 </div>
@@ -68,7 +63,7 @@ function reset() {
 	<div class="flex justify-between items-center mx-auto w-full md:w-1/2"> 	<!-----cabecera Add + Filtro--------->
 		<div> <!----------------------------modal add productos--> 
 			
-			<Button  href="productos/registros/add_productos" size="xs"  class=" bg-primary-500 rounded">+ Add</Button>
+		<Button  href="productos/add_productos" size="xs"  class=" bg-primary-500 rounded">+ Add</Button>
 			
 				
 		</div> <!----------------------fin de modal add productos-->
@@ -102,38 +97,29 @@ function reset() {
 		    <TableBodyCell>{prod.nombre}</TableBodyCell>
 		    <TableBodyCell>{prod.precio}</TableBodyCell>
 			<TableBodyCell>
-			<a href="#9" on:click={()=>{formModalEdit=true;  
-					                selectedProducto=prod.producto_id;
-					                selectedNombre=prod.nombre;
-					                selectedPrecio=prod.precio;}}><svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">
-    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.418 17.861 1 20l2.139-6.418m4.279 4.279 10.7-10.7a3.027 3.027 0 0 0-2.14-5.165c-.802 0-1.571.319-2.139.886l-10.7 10.7m4.279 4.279-4.279-4.279m2.139 2.14 7.844-7.844m-1.426-2.853 4.279 4.279"/>
-  </svg></a> <!------------------------------------------------------------------modal editar-->
-
-			<Modal bind:open={formModalEdit} size="xs" autoclose={false} class="w-full">
-			  <form class="flex flex-col space-y-6" method="POST" action="?/editar" >	
-				<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Porfavor edite el producto!!</h3>
-				  <input type="hidden" name="producto_id" bind:value={selectedProducto} required>
-				<Label class="space-y-2">
-				  <span>Nombre</span>
-				  <input type="text" name="nombre" value={selectedNombre} class="rounded" required/>
-				</Label> 
-				<Label class="space-y-2">
-				  <span>Precio</span>
-				  <input type="text" name="precio" value={selectedPrecio} class="rounded" required/>
-			    </Label>
-				<Button type="submit" class="bg-primary-500 w-full1 rounded">Confirmar</Button>
-			  </form>
-			</Modal>
+				<a href="productos/edit_productos" on:click={()=>{
+					selectedProducto.set(prod.producto_id);
+                    selectedNombre.set(prod.nombre);
+                    selectedPrecio.set(prod.precio);
+					}} 
+					 class="font-medium text-primary-600 hover:underline dark:text-primary-500">
+				     <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" 
+					 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">
+                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+					 d="M7.418 17.861 1 20l2.139-6.418m4.279 4.279 10.7-10.7a3.027 3.027 0 0 0-2.14-5.165c-.802 0-1.571.319-2.139.886l-10.7 10.7m4.279 4.279-4.279-4.279m2.139 2.14 7.844-7.844m-1.426-2.853 4.279 4.279"/>
+                     </svg>
+				Edit</a>
+			
 			</TableBodyCell>
 			<TableBodyCell>
 			<!-------------------------------------modal Eliminar------------------------------------->
-			<a href="#a" role="button" on:click={() => { selectedProducto=prod.producto_id; formModalDelete = true; }}><svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+			<a href="#a" role="button"><svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
 				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"/>
 			  </svg></a> 
 			<Modal bind:open={formModalDelete} size="xs" autoclose={false} class="w-full">
-			  <form class="flex flex-col space-y-6" method="POST" action="?/delete" on:submit={()=>{selectedProducto=prod.producto_id}} >	
-				<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">{selectedProducto}Porfavor confirmar la eliminacion el producto !!</h3>
-				<input type="hidden"  name="producto_id" bind:value={selectedProducto}>	
+			  <form class="flex flex-col space-y-6" method="POST" action="?/delete"  >	
+				<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Porfavor confirmar la eliminacion el producto !!</h3>
+				<input type="hidden"  name="producto_id" >	
 				<Button type="submit"  class=" bg-primary-500 w-full1 rounded">Confirmar</Button>
 			  </form>
 			</Modal>
