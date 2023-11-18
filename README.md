@@ -28,13 +28,18 @@
 
     
     
-    * PRODUCTOS: 
+    * TABLA DE PRODUCTOS: 
        * /productos : 
             - Responsive.....................................................................Ok
             - GET............................................................................OK
-            * ADD productos desde otra pagina /registro/add_productos  ......................ok
-    
-    -  GET,POST,EDITE,DELETE,PATCH + filtro 
+            * ADD productos desde otra pagina /productos/add_productos ......................ok
+            * EDIT productos desde otra pagina /productos/add_productos .....................ok
+            * DELETE productos desde otra pagina /productos/add_productos ...................ok
+            * Filtrar x nombre
+            * Ordenar por click en cabecera de columna precio, nombre y id 
+
+
+     *
 	   -Se puede mejor el codigo: 
 	       * Funcion que simplifiquen el selected
 		   * TRY: En productos y clientes. A mejorar...
@@ -80,6 +85,7 @@
 *  1.b - ver si vale la pena agregar una libreria UI  ...si
 
 2) agregar o editar un registro en una página distinta (más allá de que sea modal)
+
 
 3) Filtrar por nombre (Adrián me debe documentación)
 
