@@ -49,33 +49,25 @@ function reset() {
 </div>
 
 <main>
-
    <section > <!--------------------------Seccion tabla --> 
-
 	  <div><!----------------------------Alert de la Accion -->
 		{#if form?.success}
 		 <span style="background-color: greenyellow;">{form.message}</span>
 		{/if}
 	  </div>
-
-  <div> <!----------------Div contenedor: tabla + add + Filtro--------->
-
-	<div class="flex justify-between items-center mx-auto w-full md:w-1/2"> 	<!-----cabecera Add + Filtro--------->
-		<div> <!----------------------------modal add productos--> 
-			
-		<Button  href="productos/add_productos" size="xs"  class=" bg-primary-500 rounded">+ Add</Button>
-			
-				
-		</div> <!----------------------fin de modal add productos-->
-	  
+   <div><!----------------Div contenedor: tabla + add + Filtro--------->
+	 <div class="flex justify-between items-center mx-auto w-full md:w-1/2"> <!-----cabecera Add + Filtro--------->
+		<div> <!----------------------------boton add productos--------> 		
+		  <Button href="productos/add_productos" size="xs" class="bg-primary-500 rounded">+ Add</Button>		
+		</div>
 		<div class="flex items-center"> <!----------------Filtro--------->
 		  <Input type="text" bind:value={searchTerm} name="search" placeholder="Search" required class="h-8 rounded" />
 		  <Button size="xs" on:click={filterProductos} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded" >Filtrar</Button>
 		  <Button size="xs" on:click={reset} class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
-		</div> <!----------------------Filtro-------->
+		</div> 
 	  </div>
-	 <div class="overflow-x-auto"> 
-	  <Table hoverable={true} class="w-1/2 mx-auto mt-2 " > <!--------------------Nueva tabla Flowbite-------> 
+	 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
+	  <Table hoverable={true} class="w-1/2 mx-auto mt-2"> 
 		<TableHead class="bg-primary-500 text-white "> <!------------------------cabecera celdas-->
 		  <TableHeadCell>Img</TableHeadCell>
 		  <TableHeadCell>Id</TableHeadCell>
@@ -88,7 +80,6 @@ function reset() {
 			<span class="sr-only">Eliminar</span>
 		  </TableHeadCell>
 		</TableHead><!----------------------fin cabecera celdas-->
-		
 		<TableBody class="divide-y">
 			{#each filteredProductos as prod}
 		  <TableBodyRow class="hover:bg-hover-gray-light">
@@ -108,8 +99,7 @@ function reset() {
                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
 					 d="M7.418 17.861 1 20l2.139-6.418m4.279 4.279 10.7-10.7a3.027 3.027 0 0 0-2.14-5.165c-.802 0-1.571.319-2.139.886l-10.7 10.7m4.279 4.279-4.279-4.279m2.139 2.14 7.844-7.844m-1.426-2.853 4.279 4.279"/>
                      </svg>
-				Edit</a>
-			
+				Edit</a>			
 			</TableBodyCell>
 			<TableBodyCell>
 			<!-------------------------------------modal Eliminar------------------------------------->
@@ -130,15 +120,11 @@ function reset() {
 	  </Table>
 	</div>
   </div> <!----------------fin Div contenedor: tabla + add + Filtro--------->
-	 </section>
-	
+</section>	
 </main>
-
-
 
 <style>
  
-
 </style>
 
 	

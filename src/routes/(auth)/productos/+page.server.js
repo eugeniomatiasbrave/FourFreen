@@ -13,8 +13,6 @@ export const load = async ({ locals }) => {
 }  
 
 export const actions= {
- 
-
   delete: async ({ request, locals, cookies }) => {
     const formData = await request.formData();
     const id = formData.get('producto_id');
