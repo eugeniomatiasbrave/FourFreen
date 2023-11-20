@@ -2,10 +2,11 @@
 
 import { Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,
 			 TableHead,TableHeadCell } from 'flowbite-svelte';
-import { selectedProducto, selectedNombre, selectedPrecio } from './store';			
+import { selectedProducto, selectedNombre, selectedPrecio, formModal, formModalEdit, formModalDelete } from './store';			
 export let data;
 
 export const {productos}=data;
+
 
 
 let filteredProductos = productos.datos;
@@ -34,19 +35,6 @@ function reset() {
 </svelte:head>
 
 <P size="2xl" align="center">Tabla de Productos</P>
-<div>
-  <ul>
-   <li>
-    <a href="/productos/add_productos">Add Productos</a>
-   </li>
-   <li>
-    <a href="/productos/edit_productos">Edit Productos</a>
-   </li>
-   <li>
-	<a href="/productos/delete_productos">Delete Productos</a>
-   </li>
- </ul>
-</div>
 
 <main>
    <section > <!--------------------------Seccion tabla --> 
@@ -54,7 +42,7 @@ function reset() {
    <div><!----------------Div contenedor: tabla + add + Filtro--------->
 	 <div class="flex justify-between items-center mx-auto w-full md:w-1/2"> <!-----cabecera Add + Filtro--------->
 		<div> <!----------------------------boton add productos--------> 		
-		  <Button href="productos/add_productos" size="xs" class="bg-primary-500 rounded">+ Add</Button>		
+		  <Button href="/productos/registros" size="xs" class="bg-primary-500 rounded" on:click={()=>{formModal.set(true)}}>+ Add</Button>		
 		</div>
 		<div class="flex items-center"> <!----------------Filtro--------->
 		  <Input type="text" bind:value={searchTerm} name="search" placeholder="Search" required class="h-8 rounded" />
@@ -85,32 +73,21 @@ function reset() {
 		    <TableBodyCell>{prod.precio}</TableBodyCell>
 			<TableBodyCell>
 				<!------------------------------------------------------Editar producto--------------------->
-				<a href="/productos/edit_productos" on:click={()=>{
+				<a href="/productos/registros" on:click={()=>{
 					selectedProducto.set(prod.producto_id);
                     selectedNombre.set(prod.nombre);
                     selectedPrecio.set(prod.precio);
+					formModalEdit.set(true);
 					}}  
-					class="font-medium text-primary-600 hover:underline dark:text-primary-500">
-				     <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" 
-					 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">
-                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-					 d="M7.418 17.861 1 20l2.139-6.418m4.279 4.279 10.7-10.7a3.027 3.027 0 0 0-2.14-5.165c-.802 0-1.571.319-2.139.886l-10.7 10.7m4.279 4.279-4.279-4.279m2.139 2.14 7.844-7.844m-1.426-2.853 4.279 4.279"/>
-                     </svg>
-				Edit</a>			
+					class="font-medium text-primary-600 hover:underline dark:text-primary-500">Edit</a>			
 			</TableBodyCell>
-			<TableBodyCell>
-				
-				<a href="/productos/delete_productos" on:click={() => {
+			<TableBodyCell>		
+				<a href="/productos/registros" on:click={() => {
 					           selectedProducto.set(prod.producto_id);
 							   selectedNombre.set(prod.nombre);
-				                 }}
-					class="font-medium text-primary-600 hover:underline dark:text-primary-500">
-				    <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" 
-					xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-				    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-					d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"/>
-			        </svg>
-			    Eliminar</a> 
+							   formModalDelete.set(true);
+				                 }} 
+					class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a> 
 		   </TableBodyCell>
 		  </TableBodyRow>
 		  {/each}	
