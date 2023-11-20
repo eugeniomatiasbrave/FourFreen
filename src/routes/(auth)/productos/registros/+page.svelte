@@ -1,5 +1,5 @@
 <script>
-import { Input, Button,P, Modal, Label, Alert } from 'flowbite-svelte';	
+import { Input, Button,P, Modal, Label } from 'flowbite-svelte';	
 import { selectedProducto, selectedNombre, selectedPrecio, formModal, formModalEdit, formModalDelete } from '../store';
 import { onMount } from 'svelte';
 import { goto } from '$app/navigation';
@@ -8,13 +8,22 @@ export let form;
 console.log(form)
 
 onMount(() => {
-    if (form.success) {
-      setTimeout(() => {
+  if (form?.success) {
+    Swal.fire({
+      icon: 'success',
+      title: form.message,
+      text: 'Producto: ',
+      backdrop: true,
+      confirmButtonText: 'Volver',
+      confirmButtonColor: 'bg-primary-500'
+    }).then((result) => {
+      if (result.isConfirmed) {
         goto('/productos');
-      }, 2500);
-    }
-  });
-	
+      }
+    });
+  }
+});
+    
 </script>
 
 <div> <!----------------------------modal add productos-->  
@@ -30,17 +39,11 @@ onMount(() => {
 				  <Input type="text" name="precio" placeholder="escribe aqui el precio" required/>
 				</Label> 
 				<Button type="submit" class=" bg-primary-500 rounded w-full1">Confirmar</Button>
-				<Button  href="/productos" class=" bg-primary-500 rounded w-full1">Volver</Button>	   
+				<Button   on:click={() => goto('/productos')} class=" bg-primary-500 rounded w-full1">Volver</Button>	   
 			</form>
 			</Modal>
          
-       <div class="centered-alert"> <!--------Alert productos-->  
-		{#if form?.success}
-			<Alert color="green" size="2xl">
-			 <span class="font-medium">{form.message}</span>
-			</Alert>
-		{/if}
-      </div>	
+       
 </div> <!----------------------fin de modal add productos-->
 	
 	<div><!--editar-->
@@ -57,7 +60,7 @@ onMount(() => {
 				<Input type="text" name="precio" value={$selectedPrecio} class="rounded" required/>
 			  </Label>
 			  <Button type="submit" class="bg-primary-500 w-full1 rounded">Confirmar</Button>
-			  <Button  href="/productos" class=" bg-primary-500 rounded w-full1">Volver</Button>
+			  <Button   on:click={() => goto('/productos')} class=" bg-primary-500 rounded w-full1">Volver</Button>
 			</Modal>
 		  </form>
 		</div><!--editar-->
@@ -68,17 +71,9 @@ onMount(() => {
 				  <P value={$selectedNombre}>Producto: {$selectedNombre}</P>   
 				  <Input type="hidden" name="producto_id" value={$selectedProducto}/>	   
 				  <Button type="submit" class="bg-primary-500 w-full1 rounded">Confirmar</Button>
-				  <Button  href="/productos" class=" bg-primary-500 rounded w-full1">Volver</Button>
+				  <Button   on:click={() => goto('/productos')} class=" bg-primary-500 rounded w-full1">Volver</Button>
 				</Modal>
 			</form>
 		</div><!--eliminar-->
 
-<style>
-  .centered-alert {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 60vh;
-		}
-</style>
-
+	
