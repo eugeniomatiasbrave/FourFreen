@@ -11,12 +11,12 @@ Authorization: Bearer {{token}}
 // Recupera todos los productos ordenados por precios de mayor a menor
 // los campos posibles para ordenar son: nombre, precio, producto_id
 // luego van : -> 1 es para orden ascendente y -1 para descendente
-GET {{baseUrl}}/productos?sort=precio:1 HTTP/1.1 
+GET {{baseUrl}}/productos?sort=precio:-1 HTTP/1.1 
 Authorization: Bearer {{token}}
 
 ###
-// recupera todos los productos que contengan la palabra ELO en el nombre
-GET {{baseUrl}}/productos?search=ELO HTTP/1.1 
+// recupera todos los productos que contengan la palabra ELO en el nombre . Ordena por nombre
+GET {{baseUrl}}/productos?search= HTTP/1.1 
 Authorization: Bearer {{token}}
 
 ###
