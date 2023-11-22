@@ -1,35 +1,33 @@
-<script>			
-	
-	import { Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,
-				 TableHead,TableHeadCell, Modal } from 'flowbite-svelte';
-				
-	import { selectedProducto, selectedNombre, selectedPrecio, formModal, formModalEdit, formModalDelete } from './store';			
+<script>				
+	import { invalidate } from '$app/navigation';
+	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+
+	import { Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,
+				 TableHead,TableHeadCell } from 'flowbite-svelte';			
+	import { selectedProducto, selectedNombre, selectedPrecio, formModal, formModalEdit, formModalDelete } from './store';			
 	export let data;
-	export const {productos }=data;
-	
-	
-	let scrollingModal = false;
-	function applyFilter(param) {
-		let search= param
-		
-		Productos = productos.datos.filter(prod => prod.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
-		goto(`/productos?search=${search}`);	
-		
-	}
-	
-	let Productos= productos.datos
-	
+	export const { productos }  = data;
 	
 	let searchTerm = ''; 
 	
-		
-	function reset() {   //----- funcion reset
-		searchTerm = '';
-
-		applyFilter()
 	
-		}	
+	onMount(() => {
+		filteredProductos = productos.datos;	
+        goto('/productos?search='); 
+			
+	});
+	
+ let filteredProductos = productos.datos
+
+  function applyFilter(param) {
+  let search= param
+  filteredProductos = productos.datos.filter(prod => prod.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
+  invalidate('/productos').then(() => {
+    goto(`/productos?search=${search}`);
+	
+  });     
+}
 	</script>
 		
 	<svelte:head>
@@ -39,9 +37,6 @@
 	
 	<main>
 	<P size="2xl" align="center">Tabla de Productos</P>
-
-	
-	
 
 	   <div > <!--------------------------Seccion tabla --> 
 		
@@ -53,7 +48,7 @@
 			<div class="flex items-center"> <!----------------Filtro--------->
 			  <Input type="text" bind:value={searchTerm} name="searchTerm" placeholder="Search" required class="h-8 rounded" />
 			  <Button size="xs" on:click={() => applyFilter(searchTerm)} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded" >Filtrar</Button>
-			  <Button size="xs" on:click={reset} class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
+			  <Button size="xs" on:click={() => applyFilter(searchTerm="")} class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
 			</div> 
 		  </div>
 		 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
@@ -72,7 +67,7 @@
 			</TableHead><!----------------------fin cabecera celdas-->
 			
 			<TableBody class="divide-y">
-				{#each Productos as prod}
+				{#each filteredProductos as prod}
 				<TableBodyRow class="hover:bg-hover-gray-light">
 				<TableBodyCell>Img</TableBodyCell>
 				<TableBodyCell>{prod.producto_id}</TableBodyCell>

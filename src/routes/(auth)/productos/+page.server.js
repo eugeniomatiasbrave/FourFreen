@@ -10,7 +10,8 @@ export const load = async ({ locals,url }) => {
     
       return await fetchApi.get({url: BASE_URL + `/productos?search=${search}`, token: locals.token, resStatus: 200})
     }
-    
+
+
     return {
       productos: getProductos(),
       

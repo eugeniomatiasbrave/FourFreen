@@ -18,7 +18,7 @@ onMount(() => {
       confirmButtonColor: 'bg-primary-500'
     }).then((result) => {
       if (result.isConfirmed) {
-        goto('/productos');
+        goto('/productos?search=');
       }
     });
   }
@@ -39,7 +39,7 @@ onMount(() => {
 				  <Input type="text" name="precio" placeholder="escribe aqui el precio" required/>
 				</Label> 
 				<Button type="submit" class=" bg-primary-500 rounded w-full1">Confirmar</Button>
-				<Button   on:click={() => goto('/productos')} class=" bg-primary-500 rounded w-full1">Volver</Button>	   
+				<Button   on:click={() => goto('/productos?search=')} class=" bg-primary-500 rounded w-full1">Volver</Button>	   
 			</form>
 			</Modal>
          
@@ -60,7 +60,7 @@ onMount(() => {
 				<Input type="text" name="precio" value={$selectedPrecio} class="rounded" required/>
 			  </Label>
 			  <Button type="submit" class="bg-primary-500 w-full1 rounded">Confirmar</Button>
-			  <Button   on:click={() => goto('/productos')} class=" bg-primary-500 rounded w-full1">Volver</Button>
+			  <Button   on:click={() => goto('/productos?search=')} class=" bg-primary-500 rounded w-full1">Volver</Button>
 			</Modal>
 		  </form>
 		</div><!--editar-->
@@ -71,7 +71,7 @@ onMount(() => {
 				  <P value={$selectedNombre}>Producto: {$selectedNombre}</P>   
 				  <Input type="hidden" name="producto_id" value={$selectedProducto}/>	   
 				  <Button type="submit" class="bg-primary-500 w-full1 rounded">Confirmar</Button>
-				  <Button   on:click={() => goto('/productos')} class=" bg-primary-500 rounded w-full1">Volver</Button>
+				  <Button   on:click={() => goto('/productos?search=')} class=" bg-primary-500 rounded w-full1">Volver</Button>
 				</Modal>
 			</form>
 		</div><!--eliminar-->
