@@ -1,30 +1,35 @@
-<script>		
-
+<script>			
+	
 	import { Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,
-				 TableHead,TableHeadCell } from 'flowbite-svelte';
+				 TableHead,TableHeadCell, Modal } from 'flowbite-svelte';
+				
 	import { selectedProducto, selectedNombre, selectedPrecio, formModal, formModalEdit, formModalDelete } from './store';			
 	import { goto } from '$app/navigation';
 	export let data;
+	export const {productos }=data;
 	
-	export const {productos}=data;
-
-	let Productos = productos.datos;
 	
-	function applyFilter(params) {
-       searchTerm = params;
-       Productos = productos.datos.filter(prod => prod.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
-
-       goto(`/productos?search=${params}`);
-	   
-     }
+	let scrollingModal = false;
+	function applyFilter(param) {
+		let search= param
+		
+		Productos = productos.datos.filter(prod => prod.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
+		goto(`/productos?search=${search}`);	
+		
+	}
+	
+	let Productos= productos.datos
+	
 	
 	let searchTerm = ''; 
+	
 		
 	function reset() {   //----- funcion reset
 		searchTerm = '';
-		Productos = productos.datos;
-		}
-		
+
+		applyFilter()
+	
+		}	
 	</script>
 		
 	<svelte:head>
@@ -32,10 +37,13 @@
 		<meta name="description" content="Productos" />
 	</svelte:head>
 	
-	<P size="2xl" align="center">Tabla de Productos</P>
-	
 	<main>
-	   <section > <!--------------------------Seccion tabla --> 
+	<P size="2xl" align="center">Tabla de Productos</P>
+
+	<Button on:click={() => (scrollingModal = true)} autoclose>Scrolling modal</Button>
+	<Modal title="Terms of Service" bind:open={scrollingModal}>
+
+	   <div > <!--------------------------Seccion tabla --> 
 		
 	   <div><!----------------Div contenedor: tabla + add + Filtro--------->
 		 <div class="flex justify-between items-center mx-auto w-full md:w-1/2"> <!-----cabecera Add + Filtro--------->
@@ -43,7 +51,7 @@
 			  <Button href="/productos/registros" size="xs" class="bg-primary-500 rounded" on:click={()=>{formModal.set(true)}}>+ Add</Button>		
 			</div>
 			<div class="flex items-center"> <!----------------Filtro--------->
-			  <Input type="text" bind:value={searchTerm} name="search" placeholder="Search" required class="h-8 rounded" />
+			  <Input type="text" bind:value={searchTerm} name="searchTerm" placeholder="Search" required class="h-8 rounded" />
 			  <Button size="xs" on:click={() => applyFilter(searchTerm)} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded" >Filtrar</Button>
 			  <Button size="xs" on:click={reset} class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
 			</div> 
@@ -54,7 +62,7 @@
 			  <TableHeadCell>Img</TableHeadCell>
 			  <TableHeadCell>Id</TableHeadCell>
 			  <TableHeadCell>Nombre</TableHeadCell>
-			  <TableHeadCell>Precio</TableHeadCell>
+			  <TableHeadCell >+  Precio -</TableHeadCell>
 			  <TableHeadCell>Editar
 				<span class="sr-only">Editar</span>
 			  </TableHeadCell>
@@ -62,9 +70,10 @@
 				<span class="sr-only">Eliminar</span>
 			  </TableHeadCell>
 			</TableHead><!----------------------fin cabecera celdas-->
+			
 			<TableBody class="divide-y">
 				{#each Productos as prod}
-			  <TableBodyRow class="hover:bg-hover-gray-light">
+				<TableBodyRow class="hover:bg-hover-gray-light">
 				<TableBodyCell>Img</TableBodyCell>
 				<TableBodyCell>{prod.producto_id}</TableBodyCell>
 				<TableBodyCell>{prod.nombre}</TableBodyCell>
@@ -87,14 +96,17 @@
 									 }} 
 						class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a> 
 			   </TableBodyCell>
-			  </TableBodyRow>
-			  {/each}	
+			</TableBodyRow>
+			{/each}	
 			</TableBody>
 		  </Table>
 		</div>
 	  </div> <!----------------fin Div contenedor: tabla + add + Filtro--------->
-	</section>	
-	</main>
+	</div>	
+	
+	
+</Modal>
+</main>
 	
 	<style>
 		

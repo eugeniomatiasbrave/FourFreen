@@ -6,7 +6,7 @@
 	import '../app.postcss';
 	export let data;
 
-	console.log(data.usuario)
+	//console.log(data.usuario)
 	
 	
 	$: activeUrl = $page.url.pathname;

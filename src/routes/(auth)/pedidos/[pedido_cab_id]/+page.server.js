@@ -1,5 +1,5 @@
-import { BASE_URL } from '../../../../lib/utils.js';
-import { fetchApi } from '../../../../lib/fetchApi.js';
+import { BASE_URL } from '$lib/utils.js';
+import { fetchApi } from '$lib/fetchApi.js';
 
 export const load = async ( { locals, params }) => {
 

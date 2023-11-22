@@ -39,7 +39,7 @@ function ModalDelete() {
   isOpenDel = !isOpenDel;
 }
 
-console.log(filteredClientes)
+//console.log(filteredClientes)
 
 function filterClientes() {
      filteredClientes = clientes.filter(client => {
