@@ -40,8 +40,8 @@
 	<main>
 	<P size="2xl" align="center">Tabla de Productos</P>
 
-	<Button on:click={() => (scrollingModal = true)} autoclose>Scrolling modal</Button>
-	<Modal title="Terms of Service" bind:open={scrollingModal}>
+	
+	
 
 	   <div > <!--------------------------Seccion tabla --> 
 		
@@ -105,7 +105,7 @@
 	</div>	
 	
 	
-</Modal>
+
 </main>
 	
 	<style>
