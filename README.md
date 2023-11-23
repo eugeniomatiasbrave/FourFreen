@@ -27,9 +27,9 @@
             * ADD productos desde otra pagina /productos/add_productos ......................ok
             * EDIT productos desde otra pagina /productos/add_productos .....................ok
             * DELETE productos desde otra pagina /productos/add_productos ...................ok
-            * Filtrar x nombre   ............................................................ok revisar con Adrian requiere mejoras
+            * Filtrar x nombre   ............................................................revisar con Adrian requiere mejoras
             * Ordenar por click en cabecera de columna:
-                                                  * precio...................................OK revisar con adrian requiere mejoras
+                                                  * precio...................................revisar con adrian requiere mejoras
                                                   * Nombre...................................
                                                   * id ......................................
 
