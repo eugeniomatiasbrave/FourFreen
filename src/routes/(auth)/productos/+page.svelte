@@ -73,7 +73,7 @@ const Order =(params)=>{
 			  <TableHeadCell>Img</TableHeadCell>
 			  <TableHeadCell>Id</TableHeadCell>
 			  <TableHeadCell>Nombre</TableHeadCell>
-			  <TableHeadCell ><Button on:click={() => Order(sortOrder === 1 ? -1 : 1)}>+ Precio -</Button></TableHeadCell>
+			  <TableHeadCell ><Button on:click={() => Order(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded">+ Precio -</Button></TableHeadCell>
 			  <TableHeadCell>Editar
 				<span class="sr-only">Editar</span>
 			  </TableHeadCell>

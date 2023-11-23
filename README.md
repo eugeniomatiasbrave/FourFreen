@@ -1,6 +1,7 @@
 
 ************************************* APP FOUR GREEN *******************************************************
 
+App en Versel  https://four-green-p9ha6v7dw-eugeniomatiasbrave.vercel.app/
 
 **** LOGIN ****** 
      * Menu: segun perfil. Menu dinamico......................................................OK
@@ -29,9 +30,52 @@
             * DELETE productos desde otra pagina /productos/add_productos ...................ok
             * Filtrar x nombre   ............................................................revisar con Adrian requiere mejoras
             * Ordenar por click en cabecera de columna:
-                                                  * precio...................................revisar con adrian requiere mejoras
-                                                  * Nombre...................................
-                                                  * id ......................................
+                   * precio...................................revisar con adrian requiere mejoras
+                   * Nombre...................................
+                   * id ......................................
+
+***API Productos.rest ****   
+
+###
+Recupera todos los productos
+GET {{baseUrl}}/productos HTTP/1.1 
+
+### 
+Recupera todos los productos ordenados por precios de mayor a menor
+los campos posibles para ordenar son: nombre, precio, producto_id
+luego van : -> 1 es para orden ascendente y -1 para descendente
+GET {{baseUrl}}/productos?sort=precio:-1 HTTP/1.1  
+
+### 
+// Recupera todos los productos que contengan la palabra ELO en el nombre. Ordena por nombre
+GET {{baseUrl}}/productos?search=ELO HTTP/1.1 
+
+###
+// recupera todos los productos que contengan la palabra ELO en el nombre
+// ordenados por el precio descendente
+GET {{baseUrl}}/productos?search=ELO&sort=precio:-1
+
+###
+// recupera todos los productos con limit (cantidad de productos a recuperar) 
+// y offset (los que saltea)
+// ordenados por el id del producto
+GET {{baseUrl}}/productos?offset=5&limit=5&sort=producto_id:1  
+
+###
+// recuperda los datos de un producto en particular con su :id en el path
+GET {{baseUrl}}/productos/10
+
+###
+// para dar de alta un producto, en el boy va el json y devuelve los datos enviados más el id del producto
+POST {{baseUrl}}/productos 
+
+###
+// para actualizar nombre y/o precio del producto, va el :id en el path y los campos en el body
+PATCH {{baseUrl}}/productos/110 
+
+###
+//para eliminar un producto, va el :id en el path
+DELETE {{baseUrl}}/productos/104 
 
 
 
