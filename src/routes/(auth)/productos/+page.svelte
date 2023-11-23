@@ -7,27 +7,43 @@
 				 TableHead,TableHeadCell } from 'flowbite-svelte';			
 	import { selectedProducto, selectedNombre, selectedPrecio, formModal, formModalEdit, formModalDelete } from './store';			
 	export let data;
-	export const { productos }  = data;
+	export const { productos, sortPrecio }  = data;
 	
-	let searchTerm = ''; 
-	
+	let searchTerm = '';
+	let sortOrder = 1; 
 	
 	onMount(() => {
 		filteredProductos = productos.datos;	
-        goto('/productos?search='); 
-			
+        goto('/productos?search='); 		
 	});
 	
  let filteredProductos = productos.datos
 
-  function applyFilter(param) {
-  let search= param
+  function applyFilter(params) {
+  let search= params;
   filteredProductos = productos.datos.filter(prod => prod.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
   invalidate('/productos').then(() => {
-    goto(`/productos?search=${search}`);
-	
+    goto(`/productos?search=${search}`);	
   });     
 }
+console.log(sortPrecio.datos)
+
+let filteredPrecio = sortPrecio.datos
+
+const Order =(params)=>{
+	sortOrder = -sortOrder;
+	let sort=params
+	if (sort === 1) {
+		filteredPrecio = sortPrecio.datos.sort((valorA, valorB) => valorA.precio - valorB.precio);
+	} else if (sort === -1) {
+		filteredPrecio = sortPrecio.datos.sort((valorA, valorB) => valorB.precio - valorA.precio);
+  }
+  filteredProductos = filteredPrecio;
+  
+  goto(`/productos?sort=precio:${sort}`);
+
+}
+
 	</script>
 		
 	<svelte:head>
@@ -57,7 +73,7 @@
 			  <TableHeadCell>Img</TableHeadCell>
 			  <TableHeadCell>Id</TableHeadCell>
 			  <TableHeadCell>Nombre</TableHeadCell>
-			  <TableHeadCell >+  Precio -</TableHeadCell>
+			  <TableHeadCell ><Button on:click={() => Order(sortOrder === 1 ? -1 : 1)}>+ Precio -</Button></TableHeadCell>
 			  <TableHeadCell>Editar
 				<span class="sr-only">Editar</span>
 			  </TableHeadCell>
@@ -98,13 +114,8 @@
 		</div>
 	  </div> <!----------------fin Div contenedor: tabla + add + Filtro--------->
 	</div>	
-	
-	
-
 </main>
 	
-	<style>
-		
-	</style>
+	
 	
 		
