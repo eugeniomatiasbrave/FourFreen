@@ -19,25 +19,28 @@ export const load = async ({ locals,url }) => {
     return await fetchApi.get({url: BASE_URL + `/productos?sort=precio:${sort}`, token: locals.token, resStatus: 200})
     }
 
-    const getSSP = async () => {
-      return await fetchApi.get({url: BASE_URL + `/productos?search=${search}&sort=precio:${sort}`, token: locals.token, resStatus: 200})
+  const getSSP = async () => {
+    return await fetchApi.get({url: BASE_URL + `/productos?search=${search}&sort=precio:${sort}`, token: locals.token, resStatus: 200})
       }
+
+  const getSortNombre = async () => {
+    return await fetchApi.get({url: BASE_URL + '/productos?sort=nombre:1', token: locals.token, resStatus: 200})
+     }  
 
     return {
       productos: getProductos(),
       productosSearch: getProductosSearch(),
       sortPrecio: getSortPrecio(),
-      searchSortPrecio: getSSP()
+      searchSortPrecio: getSSP(),
+      sortNombre: getSortNombre()
       
     }
   }  
 
 
-/*
-// recupera todos los productos con limit (cantidad de productos a recuperar) 
-// y offset (los que saltea)
-// ordenados por el id del producto
-GET {{baseUrl}}/productos?offset=5&limit=5&sort=producto_id:1  
 
-*/
+
+
+
+
 

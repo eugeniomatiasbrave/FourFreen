@@ -5,7 +5,7 @@
 	import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';			
 	import {selectedProducto,selectedNombre,selectedPrecio,formModal,formModalEdit,formModalDelete} from './store';			
 	export let data;
-	export const {productos,productosSearch,sortPrecio, searchSortPrecio}=data;
+	export const {productos,productosSearch,sortPrecio, searchSortPrecio, sortNombre}=data;
 
 	let searchTerm='';
 	let sortOrder= 1; 
@@ -37,8 +37,7 @@
 		}); 
 	}
 	
-
-	const Order=(params)=>{
+	const OrderedPrecio=(params)=>{
 			sortOrder= -sortOrder;
 			let sort=params
 			if (sort === 1) {
@@ -50,7 +49,12 @@
 				goto(`/productos?sort=precio:${sort}`);
 			}
 		
-	
+	const SortedNombre =()=> {
+      let sort= -1
+	  let filteredSortNombre=sortNombre.datos
+		  Productos=filteredSortNombre;
+		  goto(`/productos?sort==nombre:${sort}`);
+     }
 
 	</script>
 			
@@ -70,9 +74,9 @@
 				</div>
 				<div  class="flex items-center"> <!----------------Filtro--------->
 				<Input  type="text" bind:value={searchTerm} name="searchTerm" placeholder="Search" required class="h-8 rounded"  />
-				  <Button size="xs" on:click={() => applyFilter(searchTerm)} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded" >Filtrar x nombre</Button>
-				  <Button size="xs" on:click={() => applySSP(searchTerm)} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded" >Filtrar x nombre&precio</Button>
-				  <Button size="xs"  class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
+				  <Button size="xs" on:click={()=> applyFilter(searchTerm)} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded" >Filtrar x nombre</Button>
+				  <Button size="xs" on:click={()=> applySSP(searchTerm)} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded" >Filtrar x nombre&precio</Button>
+				  <Button size="xs" on:click={()=> Productos=productos.datos } class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
 				</div> 
 			  </div>
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
@@ -80,8 +84,8 @@
 				<TableHead class="bg-primary-500 text-white "> <!------------------------cabecera celdas-->
 				  <TableHeadCell>Img</TableHeadCell>
 				  <TableHeadCell>Id</TableHeadCell>
-				  <TableHeadCell>Nombre</TableHeadCell>
-				  <TableHeadCell ><Button on:click={() => Order(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded">+ Precio -</Button></TableHeadCell>
+				  <TableHeadCell><Button on:click={SortedNombre} class="bg-primary-500 hover:bg-primary-500 rounded">Nombre</Button></TableHeadCell> 
+				  <TableHeadCell ><Button on:click={() => OrderedPrecio(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded">+ Precio -</Button></TableHeadCell>
 				  <TableHeadCell>Editar
 					<span class="sr-only">Editar</span>
 				  </TableHeadCell>

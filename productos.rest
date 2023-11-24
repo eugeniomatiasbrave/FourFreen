@@ -29,7 +29,7 @@ Authorization: Bearer {{token}}
 // recupera todos los productos con limit (cantidad de productos a recuperar) 
 // y offset (los que saltea)
 // ordenados por el id del producto
-GET {{baseUrl}}/productos?offset=5&limit=5&sort=producto_id:1 HTTP/1.1 
+GET {{baseUrl}}/productos?offset=5&limit=5&sort=nombre:1 HTTP/1.1 
 Authorization: Bearer {{token}}
 
 
