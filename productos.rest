@@ -1,5 +1,5 @@
 @baseUrl = https://fg-api-rest.fly.dev
-# @baseUrl = http://localhost:3000
+ @baseUrl = http://localhost:3000
 @token = eyJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvX2lkIjoxLCJub21icmUiOiJhQGEuY29tIiwiaWF0IjoxNjk3NDY0MTAzfQ.Jx6HocdoKz8H7kxPqrVjmEqYBLmjODjw3CHoWdxjLGs
 
 ###
