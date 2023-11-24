@@ -75,6 +75,12 @@ const SortedProducto_id =(params)=> {
 		goto(`/productos?sort=producto_id:${sort}`);
 	}
 
+
+	const reset=()=>{
+		let searchTerm='';
+		Productos=productos.datos
+	}
+
 	</script>
 			
 	<svelte:head>
@@ -95,7 +101,7 @@ const SortedProducto_id =(params)=> {
 				<Input  type="text" bind:value={searchTerm} name="searchTerm" placeholder="Search" required class="h-8 rounded"  />
 				  <Button size="xs" on:click={()=> applyFilter(searchTerm)} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded" >Filtrar x nombre</Button>
 				  <Button size="xs" on:click={()=> applySSP(searchTerm)} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded" >Filtrar x nombre&precio</Button>
-				  <Button size="xs" on:click={()=> Productos=productos.datos } class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
+				  <Button size="xs" on:click={reset} class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
 				</div> 
 			  </div>
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
