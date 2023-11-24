@@ -5,10 +5,10 @@
 	import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';			
 	import {selectedProducto,selectedNombre,selectedPrecio,formModal,formModalEdit,formModalDelete} from './store';			
 	export let data;
-	export const {productos,productosSearch,sortPrecio, searchSortPrecio, sortNombre}=data;
+	export const {productos,productosSearch,sortPrecio, searchSortPrecio, sortNombre, sortProducto_id}=data;
 
 	let searchTerm='';
-	let sortOrder= 1; 
+	let sortOrder= 1
 	//console.log(productos)
 			
 	let Productos=productos.datos
@@ -41,20 +41,39 @@
 			sortOrder= -sortOrder;
 			let sort=params
 			if (sort === 1) {
-				filteredPrecio=sortPrecio.datos.sort((valorA,valorB)=>valorA.precio - valorB.precio);
-				} else if (sort === -1) {
-					filteredPrecio=sortPrecio.datos.sort((valorA,valorB)=> valorB.precio - valorA.precio);
+				filteredPrecio=sortPrecio.datos.sort((a,b)=>a.precio - b.precio);
+			} else if (sort === -1) {
+				filteredPrecio=sortPrecio.datos.sort((a,b)=>b.precio - a.precio);
 				}
 				Productos=filteredPrecio;
 				goto(`/productos?sort=precio:${sort}`);
 			}
 		
-	const SortedNombre =()=> {
-      let sort= -1
-	  let filteredSortNombre=sortNombre.datos
-		  Productos=filteredSortNombre;
-		  goto(`/productos?sort==nombre:${sort}`);
-     }
+			let filteredSortNombre=sortNombre.datos
+const SortedNombre =(params)=> {
+		sortOrder= -sortOrder;
+        let sort= params
+		if (sort === 1) {
+			filteredSortNombre=sortNombre.datos.sort((c,d)=>c.nombre.localeCompare(d.nombre));
+	       } else if (sort === -1) {
+		    filteredSortNombre=sortNombre.datos.sort((c,d)=>d.nombre.localeCompare(c.nombre));
+	        }
+		    Productos=filteredSortNombre;
+		    goto(`/productos?sort=nombre:${sort}`);
+        }
+
+		let filteredSortedId=sortProducto_id.datos
+const SortedProducto_id =(params)=> {
+	sortOrder= -sortOrder;
+	let sort=params
+	if (sort === 1) {
+		filteredSortedId=sortProducto_id.datos.sort((a,b)=>a.precio - b.precio);
+		} else if (sort === -1) {
+		filteredSortedId=sortProducto_id.datos.sort((a,b)=>b.precio - a.precio);
+		}
+		Productos=filteredSortedId;
+		goto(`/productos?sort=producto_id:${sort}`);
+	}
 
 	</script>
 			
@@ -83,9 +102,9 @@
 			  <Table hoverable={true} class="w-1/2 mx-auto mt-2"> 
 				<TableHead class="bg-primary-500 text-white "> <!------------------------cabecera celdas-->
 				  <TableHeadCell>Img</TableHeadCell>
-				  <TableHeadCell>Id</TableHeadCell>
-				  <TableHeadCell><Button on:click={SortedNombre} class="bg-primary-500 hover:bg-primary-500 rounded">Nombre</Button></TableHeadCell> 
-				  <TableHeadCell ><Button on:click={() => OrderedPrecio(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded">+ Precio -</Button></TableHeadCell>
+				  <TableHeadCell><Button on:click={ ()=>SortedProducto_id(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded">ID</Button></TableHeadCell>
+				  <TableHeadCell><Button on:click={ ()=>SortedNombre(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded">NOMBRE A-Z</Button></TableHeadCell> 
+				  <TableHeadCell ><Button on:click={()=>OrderedPrecio(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded">+ Precio -</Button></TableHeadCell>
 				  <TableHeadCell>Editar
 					<span class="sr-only">Editar</span>
 				  </TableHeadCell>
