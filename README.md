@@ -28,8 +28,8 @@ App en Versel  https://four-green-p9ha6v7dw-eugeniomatiasbrave.vercel.app/
             * ADD productos desde otra pagina /productos/add_productos ......................ok
             * EDIT productos desde otra pagina /productos/add_productos .....................ok
             * DELETE productos desde otra pagina /productos/add_productos ...................ok
-            * Filtrar x nombre   ............................................................revisar con Adrian requiere mejoras
-            * Sume x nombre&precio...........................................................revisar con Adrian requiere mejoras
+            * Filtrar x nombre   ............................................................ok
+            * Sume x nombre&precio........................................................... ?
             * Ordenar por click en cabecera de columna:
                    * precio..................................................................ok
                    * Nombre..................................................................ok
