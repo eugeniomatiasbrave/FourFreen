@@ -9,11 +9,11 @@ export const load=async({locals,url})=>{
   const datos=url.searchParams.get('datos'); //datos: precio, nombre, producto_id
 
   const getProductos=async()=>{
-    return await fetchApi.get({url:BASE_URL+'/productos?',token:locals.token,resStatus:200})
+    return await fetchApi.get({url:BASE_URL+'/productos',token:locals.token,resStatus:200})
     }
 
   const getProductosSearch=async()=>{
-    return await fetchApi.get({url:BASE_URL+`/productos?search=${search}`,token:locals.token,resStatus:200})
+    return await fetchApi.get({url:BASE_URL+'/productos?search=',token:locals.token,resStatus:200})
     }
 
   const getSSP=async()=>{
