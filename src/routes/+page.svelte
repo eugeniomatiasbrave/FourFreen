@@ -7,6 +7,5 @@
 	<meta name="description" content="Showcase" />
 </svelte:head>
 
-
-<P size="4xl" align="center">Test API</P>
+<P size="3xl" align="center">Test API</P>
 	

@@ -81,17 +81,17 @@ const SortedProducto_id=(params)=>{
 	<meta name="description" content="Productos" />
 </svelte:head>
 		
-<main>
+<main class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
 
 	<P size="2xl" align="center">Tabla de Productos</P>
-		<div> <!--------------------------Seccion tabla --> 	
-		   <div><!----------------Div contenedor: tabla + add + Filtro--------->
-			 <div class="flex justify-between items-center mx-auto w-full md:w-1/2"> <!-----cabecera Add + Filtro--------->
+	<!--------------------------Seccion tabla --> 	
+		   <div class="mt-8"><!----------------Div contenedor: tabla + add + Filtro--------->
+			 <div class=" flex justify-between items-center mx-auto w-full md:w-1/2"> <!-----cabecera Add + Filtro--------->
 				<div> <!----------------------------boton add productos--------> 		
 				  <Button href="/productos/registros" size="xs" class="bg-primary-500 rounded" on:click={()=>{formModal.set(true)}}>+ Add</Button>		
 				</div>
 				<div class="flex items-center"> <!----------------Filtro--------->
-		         <Input type="text" bind:value={searchTerm} name="searchTerm" placeholder="Search" required class="h-8 rounded"  /> 
+		         <Input type="text" bind:value={searchTerm} name="searchTerm" placeholder="Search" required class=" bg-white h-8 rounded"  /> 
 			     <Button size="xs" on:click={()=> applyFilter(searchTerm)} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Buscar</Button> 
 			<!--  <Button size="xs" on:click={()=> applySSP(searchTerm)} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded" >Filtrar x nombre&precio</Button> -->
 			     <Button size="xs" on:click={reset} class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
@@ -99,11 +99,11 @@ const SortedProducto_id=(params)=>{
 			  </div>
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
 			  <Table hoverable={true} class="w-1/2 mx-auto mt-2"> 		
-				<TableHead class="bg-primary-500 text-white "> <!------------------------cabecera celdas-->
+				<TableHead class="bg-primary-500 text-white"> <!------------------------cabecera celdas-->
 				  <TableHeadCell>Img</TableHeadCell>
-				  <TableHeadCell><Button on:click={()=>SortedProducto_id(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded">ID</Button></TableHeadCell>
-				  <TableHeadCell><Button on:click={()=>SortedNombre(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded">NOMBRE A-Z</Button></TableHeadCell> 
-				  <TableHeadCell><Button on:click={()=>OrderedPrecio(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded">+ Precio -</Button></TableHeadCell>
+				  <TableHeadCell><Button on:click={()=>SortedProducto_id(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded m-0 p-0" size="xs">+ ID -</Button></TableHeadCell>
+				  <TableHeadCell><Button on:click={()=>SortedNombre(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded m-0 p-0" size="xs">A- NOMBRE -Z</Button></TableHeadCell> 
+				  <TableHeadCell><Button on:click={()=>OrderedPrecio(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded m-0 p-0" size="xs">+ PRECIO -</Button></TableHeadCell>
 				  <TableHeadCell>Editar
 					<span class="sr-only">Editar</span>
 				  </TableHeadCell>
@@ -143,7 +143,8 @@ const SortedProducto_id=(params)=>{
 			  </Table>
 			</div>
 		  </div> <!----------------fin Div contenedor: tabla + add + Filtro--------->
-		</div>	
+			
+		
 	</main>
 
 
