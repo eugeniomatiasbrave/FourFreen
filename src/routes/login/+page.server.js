@@ -1,5 +1,5 @@
 import { error, redirect } from '@sveltejs/kit';
-import { BASE_URL } from '../../lib/utils.js';
+import { BASE_URL } from '$lib/utils.js';
 //import { date } from 'zod';
 
 export const actions = {
