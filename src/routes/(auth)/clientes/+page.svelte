@@ -1,17 +1,6 @@
 <script>
-	import {
-		Input,
-		Button,
-		P,
-		Label,
-		Modal,
-		Table,
-		TableBody,
-		TableBodyCell,
-		TableBodyRow,
-		TableHead,
-		TableHeadCell
-	} from 'flowbite-svelte';
+	import {Input,Button,P,Label,Modal,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
+	import {onMount} from 'svelte';
 	export let form;
 	export let data;
 	export const { clientes } = data;
@@ -21,7 +10,6 @@
 	let formModalAdd = false;
 	let formModalEdit = false;
 	let formModalDelete = false;
-
 
 	let selectedCliente_id;
 	let selectedRazon_social;
@@ -35,9 +23,20 @@
 
 	let filteredClientes = clientes;
 
-
 	//console.log(filteredClientes)
 
+ onMount(() => {
+   if (form?.success) {
+    Swal.fire({
+      icon: 'success',
+      title: form.message,
+      text: 'Cliente: ',
+      backdrop: true,
+      confirmButtonText: 'Volver',
+      confirmButtonColor: 'rgb(69, 166, 175)'
+    })}
+    });
+  
 	function filterClientes() {
 		filteredClientes = clientes.filter((client) => {
 			return (
@@ -58,6 +57,7 @@
 		searchTerm = '';
 		filteredClientes = clientes;
 	}
+
 </script>
 
 <svelte:head>
@@ -65,35 +65,21 @@
 	<meta name="description" content="Clientes" />
 </svelte:head>
 
-<main  class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-	<P size="2xl" align="center">Tabla de Clientes</P>
+<main class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
+  <P size="2xl" align="center">Tabla de Clientes</P>
 	<div class="mt-8"> <!----------------Div contenedor: tabla + add + Filtro--------->
-		<div class=" flex justify-between items-center mx-auto w-full md:w-1/2"><!-----cabecera Add + Filtro--------->
-					{#if form?.success}
-						<span style="background-color: greenyellow;">{form.message}</span>
-					{/if}
-				  <div class="flex flex-wrap items-center">
-					<Button on:click={() => (formModalAdd = true)} class="bg-primary-500 h-8 ml-2 rounded">+ add</Button>
-					<Modal bind:open={formModalAdd} size="xs" autoclose={false} class="w-full">
-						<form method="POST" action="?/addClient">
-						<p>Porfavor Agregar nuevo cliente!!</p>
-						<Label class="space-y-2">
-							<span>Nombre</span>
-									<Input
-										type="text"
-										name="razon_social"
-										placeholder="escribe aqui razon_social" class="bg-white h-8 rounded"
-										required/>
-								</Label>
-								<Label class="space-y-2">
-									<span>Cuit</span>
-									<Input
-										type="number"
-										name="cuit"
-										placeholder="escribe aqui el cuit" class="bg-white h-8 rounded"
-										maxlength="11"
-										required/>
-								</Label>
+	   <div class=" flex justify-between items-center mx-auto w-full md:w-1/2"><!-----cabecera Add + Filtro--------->
+		  <div class="flex flex-wrap items-center">
+			  <Button on:click={() => (formModalAdd = true)} class="bg-primary-500 h-8 ml-2 rounded">+ add</Button>
+				<Modal bind:open={formModalAdd} size="xs" autoclose={false} class="w-full">
+				  <form method="POST" action="?/addClient">
+					<p>Porfavor Agregar nuevo cliente!!</p>
+					<Label class="space-y-2"><span>Nombre</span>
+					 <Input type="text" name="razon_social" placeholder="escribe aqui razon_social" class="bg-white h-8 rounded" required/>
+					</Label>
+					<Label class="space-y-2"><span>Cuit</span>
+					  <Input type="number" name="cuit" placeholder="escribe aqui el cuit" class="bg-white h-8 rounded" maxlength="11" required/>			
+					</Label>
 								<Label class="space-y-2">
 									<span>Calle</span>
 									<Input
@@ -323,15 +309,13 @@
 						{/each}
 					</Table>
 				
-			
-		
+
+				
+				
+				
 	</div>
 </main>
 
 <style>
-	/*
-.Cli-main {
-  padding: 0 100px 0 100px;
-}
-*/
+
 </style>

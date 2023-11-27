@@ -15,7 +15,7 @@ onMount(() => {
       text: 'Producto: ',
       backdrop: true,
       confirmButtonText: 'Volver',
-      confirmButtonColor: 'bg-primary-500'
+      confirmButtonColor: 'rgb(69, 166, 175)'
     }).then((result) => {
       if (result.isConfirmed) {
         goto('/productos?search=');
@@ -82,7 +82,5 @@ onMount(() => {
 		</div><!--eliminar-->
 
 	<style>
-		/* your styles go here */
 		
-	
-		</style>
+	</style>

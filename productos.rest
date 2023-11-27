@@ -32,7 +32,10 @@ Authorization: Bearer {{token}}
 GET {{baseUrl}}/productos?offset=5&limit=5&sort=nombre:1 HTTP/1.1 
 Authorization: Bearer {{token}}
 
-
+###
+// hecho por mi probando
+GET {{baseUrl}}/productos?limit=5&offset=2 HTTP/1.1 
+Authorization: Bearer {{token}}
 ###
 // recuperda los datos de un producto en particular con su :id en el path
 GET {{baseUrl}}/productos/10 HTTP/1.1 

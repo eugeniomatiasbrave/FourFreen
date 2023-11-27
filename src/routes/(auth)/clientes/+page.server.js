@@ -161,7 +161,7 @@ const getClientes = async()=>{
 						})		  
 					
 					 } else {
-						return { success: false };
+						//return { success: false };
 					}
 					} catch (err) {
 					console.log('Error: ', err);
