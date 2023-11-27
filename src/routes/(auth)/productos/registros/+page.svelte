@@ -23,11 +23,15 @@ onMount(() => {
     });
   }
 });
+
+const ModalClose =()=>{
+	goto('/productos')
+}
     
 </script>
 
 <div> <!----------------------------modal add productos-->  
-		<Modal bind:open={$formModal} size="xs" autoclose={false}  class="w-full">  <!--dejar en false el autoclose-->
+		<Modal bind:open={$formModal} size="xs" autoclose={false} on:close="{ModalClose}" class="w-full">  <!--dejar en false el autoclose-->
 			<form class="flex flex-col space-y-6"  method="POST" action="?/addProd">	
 				<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Agregar un producto nuevo</h3>
 				<Label class="space-y-2">
@@ -50,7 +54,7 @@ onMount(() => {
 	
 	<div><!--editar-->
 		<form class="flex flex-col space-y-6" method="POST" action="?/editar" >	 <!-----------modal editar-->
-		<Modal bind:open={$formModalEdit} size="xs" autoclose={false} class="w-full"  >
+		<Modal bind:open={$formModalEdit} size="xs" autoclose={false} on:close="{ModalClose}" class="w-full"  >
 			
 			  <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Porfavor edite el producto!!</h3>
 				<Input type="hidden" name="producto_id" value={$selectedProducto} class="bg-white h-8 rounded" required />
@@ -71,12 +75,12 @@ onMount(() => {
 		</div><!--editar-->
 		<div> <!--eliminar-->
 		<form class="flex flex-col space-y-6" method="POST" action="?/delete" on:submit={$selectedProducto}>
-			<Modal bind:open={$formModalDelete} size="xs"  autoclose={false} class="w-full" > 		
+			<Modal bind:open={$formModalDelete} size="xs" autoclose={false} class="w-full" on:close="{ModalClose}" > 		
 				  <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> Confirmar la eliminación  !!</h3>
 				  <P value={$selectedNombre}>Producto: {$selectedNombre}</P>   
 				  <Input type="hidden" name="producto_id" value={$selectedProducto}  class="bg-white h-8 rounded"/>	   
 				  <Button type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Confirmar</Button>
-				  <Button   on:click={() => goto('/productos?search=')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Volver</Button>
+				  <Button on:click={() => goto('/productos?search=')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Volver</Button>
 				</Modal>
 			</form>
 		</div><!--eliminar-->
