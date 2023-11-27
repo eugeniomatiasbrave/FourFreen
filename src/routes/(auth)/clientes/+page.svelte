@@ -66,9 +66,9 @@
 </svelte:head>
 
 <main class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-  <P size="2xl" align="center">Tabla de Clientes</P>
-	<div class="mt-8"> <!----------------Div contenedor: tabla + add + Filtro--------->
-	   <div class=" flex justify-between items-center mx-auto w-full md:w-1/2"><!-----cabecera Add + Filtro--------->
+  <P size="2xl" align="center" class="mb-8">Tabla de Clientes</P>
+	<div class=""> <!----------------Div contenedor: tabla + add + Filtro--------->
+	   <div class=" flex justify-between items-center mx-auto w-full md:w-1/2 "><!-----cabecera Add + Filtro--------->
 		  <div class="flex flex-wrap items-center">
 			  <Button on:click={() => (formModalAdd = true)} class="bg-primary-500 h-8 ml-2 rounded">+ add</Button>
 				<Modal bind:open={formModalAdd} size="xs" autoclose={false} class="w-full">
@@ -138,27 +138,30 @@
 			         <Button on:click={filterClientes} class="bg-primary-500 h-8 ml-2 rounded">Buscar</Button>
 				     <Button on:click={reset} class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
 				    </div>
-				</div>
-			    
-		</div> <!-----fin de cabecera Add + Filtro--------->
-				
+				</div>			    
+		</div><!-----fin de cabecera Add + Filtro--------->
+				<div class="overflow-x-auto">
 					<Table hoverable={true} class="w-1/2 mx-auto mt-2">
 						<TableHead class="bg-primary-500 text-white">
-							<TableHeadCell scope="col">id</TableHeadCell>
-							<TableHeadCell scope="col">Nombre</TableHeadCell>
-							<TableHeadCell scope="col">Cuit</TableHeadCell>
-							<TableHeadCell scope="col">Calle</TableHeadCell>
-							<TableHeadCell scope="col">Altura</TableHeadCell>
-							<TableHeadCell scope="col">Loc.</TableHeadCell>
-							<TableHeadCell scope="col">CP.</TableHeadCell>
-							<TableHeadCell scope="col">Telefono</TableHeadCell>
-							<TableHeadCell scope="col">Email</TableHeadCell>
-							<TableHeadCell scope="col">Editar</TableHeadCell>
-							<TableHeadCell scope="col">Eliminar</TableHeadCell>
+							<TableHeadCell>id</TableHeadCell>
+							<TableHeadCell>Nombre</TableHeadCell>
+							<TableHeadCell>Cuit</TableHeadCell>
+							<TableHeadCell>Calle</TableHeadCell>
+							<TableHeadCell>Altura</TableHeadCell>
+							<TableHeadCell>Loc.</TableHeadCell>
+							<TableHeadCell>CP.</TableHeadCell>
+							<TableHeadCell>Telefono</TableHeadCell>
+							<TableHeadCell>Email</TableHeadCell>
+							<TableHeadCell>Editar
+								<span class="sr-only">Editar</span>
+							</TableHeadCell>
+							<TableHeadCell>Eliminar								
+                                <span class="sr-only">Eliminar</span>
+							</TableHeadCell>
 						</TableHead>
-						{#each filteredClientes as cli}
-							<TableBody>
-								<TableBodyRow>
+						<TableBody class="divide-y">
+								{#each filteredClientes as cli}
+								<TableBodyRow class="hover:bg-hover-gray-light">
 									<TableBodyCell>{cli.cliente_id}</TableBodyCell>
 									<TableBodyCell>{cli.razon_social}</TableBodyCell>
 									<TableBodyCell>{cli.cuit}</TableBodyCell>
@@ -286,7 +289,7 @@
 											    on:submit={() => {
 												selectedCliente_id = cli.cliente_id;
 											    }}>
-											<Modal  bind:open={formModalDelete} size="xs" autoclose={false} class="w-full">
+											<Modal bind:open={formModalDelete} size="xs" autoclose={false} class="w-full">
 													<div>
 														<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> Confirmar la eliminación  !!</h3>
 														<P value={cli.razon_social}>Cliente:{cli.razon_social}</P> 
@@ -298,22 +301,16 @@
 																required/>
 															<Button on:click={formModalDelete} class="bg-primary-500 h-8 ml-2 rounded">Cancel</Button>
 															<Button type="submit" class="bg-primary-500 h-8 ml-2 rounded">Confirmar</Button>
-														</div>
-														
-													</Modal>
-												</form>
-										
-									</TableBodyCell>
-								</TableBodyRow>
-							</TableBody>
-						{/each}
-					</Table>
-				
-
-				
-				
-				
-	</div>
+					</div>													
+				 </Modal>
+				</form>									
+				</TableBodyCell>
+			 </TableBodyRow>
+			{/each}
+		 </TableBody>
+	  </Table>
+	</div>		
+  </div>
 </main>
 
 <style>
