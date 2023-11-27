@@ -88,13 +88,13 @@ const SortedProducto_id=(params)=>{
 		   <div class="mt-8"><!----------------Div contenedor: tabla + add + Filtro--------->
 			 <div class=" flex justify-between items-center mx-auto w-full md:w-1/2"> <!-----cabecera Add + Filtro--------->
 				<div> <!----------------------------boton add productos--------> 		
-				  <Button href="/productos/registros" size="xs" class="bg-primary-500 rounded  px-1" on:click={()=>{formModal.set(true)}}>+ Add</Button>		
+				  <Button href="/productos/registros" size="xs" class="bg-primary-500 rounded  px-2" on:click={()=>{formModal.set(true)}}>+ Add</Button>		
 				</div>
 				<div class="flex items-center"> <!----------------Filtro--------->
 		         <Input type="text" bind:value={searchTerm} name="searchTerm" placeholder="Search" required class=" bg-white h-8 rounded"  /> 
-			     <Button size="xs" on:click={()=> applyFilter(searchTerm)} class="bg-primary-500 h-8 ml-1 rounded">Buscar</Button> 
+			     <Button size="xs" on:click={()=> applyFilter(searchTerm)} class="bg-primary-500 h-8 ml-1 px-2 rounded">Buscar</Button> 
 			<!--  <Button size="xs" on:click={()=> applySSP(searchTerm)} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded" >Filtrar x nombre&precio</Button> -->
-			     <Button size="xs" on:click={reset} class="bg-primary-500 h-8 ml-1 rounded">Reset</Button>
+			     <Button size="xs" on:click={reset} class="bg-primary-500 h-8 ml-1 px-2 rounded">Reset</Button>
 				</div> 
 			  </div>
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
