@@ -3,14 +3,15 @@ import { BASE_URL } from '$lib/utils.js';
 import {fetchApi} from '$lib/fetchApi.js';
 
 export const load = async ({ locals }) => {
-	const getUsuario = async () => {
-	  return  await fetchApi.get({url: BASE_URL + "/usuarios/perfil", token: locals.token, resStatus: 200})
-	}
-	const getClientes = async () => {
-	  return await fetchApi.get({url: BASE_URL + "/clientes", token: locals.token, resStatus: 200})
-	}
-	  return {
-		perfil: getUsuario(),
+
+const getClientes = async()=>{
+		try {
+		  return await fetchApi.get({ url: BASE_URL +  "/clientes", token: locals.token, resStatus: 200 });  
+		  } catch (err) {
+		   console.error('Error: ', err);
+		   throw error(500, 'Algo salio mal con la peticion de los clientes', err);
+		  }}
+	    return {
 		clientes: getClientes()
 	  } 
   }  

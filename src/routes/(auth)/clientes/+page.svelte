@@ -14,16 +14,14 @@
 	} from 'flowbite-svelte';
 	export let form;
 	export let data;
-	export const { perfil, clientes } = data;
+	export const { clientes } = data;
 
 	let searchTerm = '';
 
 	let formModalAdd = false;
+	let formModalEdit = false;
+	let formModalDelete = false;
 
-	let isOpen = false;
-	let isOpenAdd = false;
-	let isOpenEd = false;
-	let isOpenDel = false;
 
 	let selectedCliente_id;
 	let selectedRazon_social;
@@ -37,15 +35,6 @@
 
 	let filteredClientes = clientes;
 
-	
-
-	function ModalEd() {
-		isOpenEd = !isOpenEd;
-	}
-
-	function ModalDelete() {
-		isOpenDel = !isOpenDel;
-	}
 
 	//console.log(filteredClientes)
 
@@ -79,14 +68,12 @@
 <main  class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
 	<P size="2xl" align="center">Tabla de Clientes</P>
 	<div class="mt-8"> <!----------------Div contenedor: tabla + add + Filtro--------->
-		<div class="flex justify-between items-center mx-auto w-full md:w-1/2"><!-----cabecera Add + Filtro--------->
-				
+		<div class=" flex justify-between items-center mx-auto w-full md:w-1/2"><!-----cabecera Add + Filtro--------->
 					{#if form?.success}
 						<span style="background-color: greenyellow;">{form.message}</span>
 					{/if}
-				
 				  <div class="flex flex-wrap items-center">
-					<Button on:click={() => (formModalAdd = true)} class="bg-primary-500 h-8 ml-2 rounded">add Clientes</Button>
+					<Button on:click={() => (formModalAdd = true)} class="bg-primary-500 h-8 ml-2 rounded">+ add</Button>
 					<Modal bind:open={formModalAdd} size="xs" autoclose={false} class="w-full">
 						<form method="POST" action="?/addClient">
 						<p>Porfavor Agregar nuevo cliente!!</p>
@@ -157,13 +144,15 @@
 					</Modal>
 				  </div>
 
+                 <div class="flex flex-wrap justify-end items-start">
 					<div class="ml-2">
 			     	  <Input type="text" id="search" bind:value={searchTerm} name="search" class="bg-white h-8 rounded"	placeholder="Search" required/>
 				    </div>
-			       <div class="ml-2">
-			        <Button on:click={filterClientes} class="bg-primary-500 h-8 ml-2 rounded">Buscar</Button>
-				    <Button on:click={reset} class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
-				  </div>
+			        <div class="ml-2">
+			         <Button on:click={filterClientes} class="bg-primary-500 h-8 ml-2 rounded">Buscar</Button>
+				     <Button on:click={reset} class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
+				    </div>
+				</div>
 			    
 		</div> <!-----fin de cabecera Add + Filtro--------->
 				
@@ -206,94 +195,96 @@
 												selectedCodigo_postal = cli.codigo_postal;
 												selectedTelefono = cli.telefono;
 												selectedEmail = cli.email;
-												ModalEd();
-											}}
-											class="outline">Editar</Button
-										>
-
-										{#if isOpenEd}
-											<dialog open>
-												<article>
-													<div>
-														<form method="POST" action="?/editClient">
-															<input
+												
+											}}  on:click={() => (formModalEdit = true)}
+											class="bg-primary-500 h-8 ml-2 rounded">Editar</Button>
+											
+										
+											<form method="POST" action="?/editClient">
+											<Modal  bind:open={formModalEdit} size="xs" autoclose={false} class="w-full">		
+																
+															<Input
 																type="hidden"
 																name="cliente_id"
-																bind:value={selectedCliente_id}
-															/>
-															<label for="nombre"
-																>Razon Social<input
+																bind:value={selectedCliente_id}/>
+
+																<Label class="space-y-2">
+																	<span>Razon Social</span>
+																<Input
 																	type="text"
 																	name="razon_social"
-																	value={selectedRazon_social}
+																	value={selectedRazon_social} class="bg-white h-8 rounded"
 																	required
 																/>
-																<label for="cuit"
-																	>Cuit<input
+															</Label>
+																<Label class="space-y-2">
+																	<span>Cuit</span>
+																
+																	<Input
 																		type="text"
 																		name="cuit"
-																		value={selectedCuit}
+																		value={selectedCuit} class="bg-white h-8 rounded"
 																		required
 																	/>
-																	<label for="domicilio_calle"
-																		>Calle<input
+																</Label>
+																	<Label class="space-y-2">
+																		<span>Dom</span>
+																	<Input
 																			type="text"
 																			name="domicilio_calle"
-																			value={selectedDomicilio_calle}
+																			value={selectedDomicilio_calle} class="bg-white h-8 rounded"
 																			required
 																		/>
-																		<label for="domicilio_altura"
-																			>Altura<input
+																	</Label>
+																		<Label class="space-y-2">
+																			<span>Dom. calle</span>
+																		<Input
 																				type="text"
 																				name="domicilio_altura"
-																				value={selectedDomicilio_altura}
+																				value={selectedDomicilio_altura} class="bg-white h-8 rounded"
 																				required
 																			/>
-																			<label for="localidad"
-																				>Localidad<input
+																		</Label>
+																			<Label class="space-y-2">
+																				<span>Loc.</span>
+																			<Input
 																					type="text"
 																					name="localidad"
-																					value={selectedLocalidad}
+																					value={selectedLocalidad} class="bg-white h-8 rounded"
 																					required
 																				/>
-																				<label for="codigo_postal"
-																					>Codigo Postal<input
+																			</Label>
+																				<Label class="space-y-2">
+																					<span>C.p</span>
+																				<Input
 																						type="text"
 																						name="codigo_postal"
-																						value={selectedCodigo_postal}
+																						value={selectedCodigo_postal} class="bg-white h-8 rounded"
 																						required
 																					/>
-																					<label for="telefono"
-																						>Telefono<input
+																				</Label>
+																					<Label class="space-y-2">
+																						<span>Tel</span>
+																					<Input
 																							type="text"
 																							name="telefono"
-																							value={selectedTelefono}
+																							value={selectedTelefono} class="bg-white h-8 rounded"
 																							required
 																						/>
-																						<label for="email"
-																							>Email<input
+																					</Label>
+																						<Label class="space-y-2">
+																							<span>Email</span>
+																						<Input
 																								type="email"
 																								name="email"
-																								value={selectedEmail}
-																								required
-																							/>
-																							<button on:click={ModalEd} class="secondary"
-																								>Cancel</button
-																							>
-																							<button type="submit">Confirm</button>
-																						</label></label
-																					></label
-																				></label
-																			></label
-																		></label
-																	></label
-																></label
-															>
-														</form>
-													</div>
-												</article>
-											</dialog>
-										{/if}
+																								value={selectedEmail} class="bg-white h-8 rounded"
+																								required/>
+												                                     	</Label>
+											<Button on:click={formModalEdit} class="bg-primary-500 h-8 ml-2 rounded">Cancel</Button>
+											<Button type="submit" class="bg-primary-500 h-8 ml-2 rounded">Confirm</Button>																																		
+										</Modal>
+									</form>
+										
 									</TableBodyCell>
 									<TableBodyCell
 										><!---------------------Elimina el cliente--------------------->
@@ -301,44 +292,31 @@
 											on:click={() => {
 												//<!-----------------------------------------Modal para editar-------->
 												selectedCliente_id = cli.cliente_id;
-												ModalDelete();
-											}}
-											class="outline">Eliminar</Button
-										>
-										{#if isOpenDel}
-											<dialog open>
-												<article>
-													<div>
-														<header>
-															<a
-																href="#close"
-																aria-label="Close"
-																class="close"
-																on:click={ModalDelete}
-															/>
-															<p>Porfavor confirmar la eliminacion el producto!!</p>
-														</header>
+												
+											}} on:click={() => (formModalDelete = true)}
+											class="bg-primary-500 h-8 ml-2 rounded">Eliminar</Button>
 
-														<form
-															method="POST"
-															action="?/deleteClient"
-															on:submit={() => {
-																selectedCliente_id = cli.cliente_id;
-															}}
-														>
-															<input
+										<form method="POST" action="?/deleteClient"
+											    on:submit={() => {
+												selectedCliente_id = cli.cliente_id;
+											    }}>
+											<Modal  bind:open={formModalDelete} size="xs" autoclose={false} class="w-full">
+													<div>
+														<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> Confirmar la eliminación  !!</h3>
+														<P value={cli.razon_social}>Cliente:{cli.razon_social}</P> 
+														
+															<Input
 																type="hidden"
 																name="cliente_id"
 																bind:value={selectedCliente_id}
-																required
-															/>
-															<button on:click={ModalDelete} class="outline">Cancel</button>
-															<button type="submit" class="outline">Confirmar</button>
-														</form>
-													</div>
-												</article>
-											</dialog>
-										{/if}
+																required/>
+															<Button on:click={formModalDelete} class="bg-primary-500 h-8 ml-2 rounded">Cancel</Button>
+															<Button type="submit" class="bg-primary-500 h-8 ml-2 rounded">Confirmar</Button>
+														</div>
+														
+													</Modal>
+												</form>
+										
 									</TableBodyCell>
 								</TableBodyRow>
 							</TableBody>
