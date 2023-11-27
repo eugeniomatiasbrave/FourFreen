@@ -1,9 +1,12 @@
 <script>
+import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';	
 export let form;
 export let data;
 export const { perfil, clientes} = data;
 	  
 let searchTerm = '';
+
+let formModal = true
 
 let isOpen = false;
 let isOpenAdd = false;
@@ -21,11 +24,6 @@ let selectedTelefono;
 let selectedEmail;
 
 let filteredClientes = clientes;
-
-
-function toggleModal() {
-  isOpen = !isOpen;
-}
 
 function ModalAdd() {
   isOpenAdd = !isOpenAdd;
@@ -67,89 +65,107 @@ filteredClientes = clientes;
 	<meta name="description" content="Clientes" />
 </svelte:head>
 
-<main>
 
-   <div>
-	<a href="#10" on:click={toggleModal}>Datos Usuario</a>
-	 {#if isOpen}
-	   <dialog open>
-		<article>
-			<div>
-			<header>
-				<a href="#close" aria-label="Close" class="close" on:click={toggleModal}></a>	
-				<div>
-					<h6>Datos Usuario</h6>
-					<p>{perfil.nombre}</p>
-					<p>{perfil.email}</p>
-					<p>{perfil.creado}</p>
-				</div>
-			</header>	
-			<button on:click={toggleModal} class="outline">Volver</button>  
-			</div>
-		</article>
-		</dialog>
-		{/if} 
-	</div>
-</main>	
+
 <main class="container-fluid Cli-main" > 
-	<h2>Tabla de Clientes</h2>
- <div class="grid">
-	<aside >
-	  <figure>
+	
+	<P size="2xl" align="center">Tabla de Clientes</P>
+<div class="grid">
+
+	<div class=" flex justify-between items-center mx-auto w-full md:w-1/2"> <!-----cabecera Add + Filtro--------->
+		<div>
+			<div>		
+				{#if form?.success}
+				  <span style="background-color: greenyellow;">{form.message}</span>
+				{/if}
+			</div>
+		  <div>
+			<Button on:click={() => (formModal = true)} class="outline">add Clientes</Button> <!----Modal crear Clientes-------->
+		  </div>
+		  {#if isOpenAdd}
+			 <dialog open >
+				<article>
+				<div>
+					<header>
+						<a href="#close" aria-label="Close" class="close" on:click={ModalAdd}></a>
+						<p>Porfavor Agregar nuevo cliente!!</p>
+					</header>	
+				<form method="POST" action="?/addClient">
+				 <input type="text" name="razon_social" placeholder="escribe aqui razon_social" required/>
+				 <input type="number" name="cuit" placeholder="escribe aqui el cuit" maxlength="11" required/>
+				 <input type="text" name="domicilio_calle" placeholder="escribe aqui calle" required/>
+				 <input type="text" name="domicilio_altura" placeholder="escribe aqui altura" required/>
+				 <input type="text" name="localidad" placeholder="escribe aqui localidad" required/>
+				 <input type="text" name="codigo_postal" placeholder="escribe aqui codigo postal" required/>
+				 <input type="text" name="telefono" placeholder="escribe aqui el telefono" required/>
+				 <input type="email" name="email" placeholder="escribe aqui el email" required/>
+				 <footer>
+					<button on:click={ModalAdd} class="secondary">Cancel</button>
+					<button type="submit">Confirm</button>
+				  </footer>
+				
+				</form>
+				{#if form?.success}
+				<span>Agregado</span>
+				{/if}
+			</div>
+			</article>
+			</dialog>
+		  {/if}	
+		</div>
+
        <div>
-		 <input type="text" id="search" bind:value={searchTerm} name="search" placeholder="Search" required>
+		 <Input type="text" id="search" bind:value={searchTerm} name="search" placeholder="Search" required/>
 	   </div>
-	  <div>
-		<button on:click|preventDefault={filterClientes} class="outline">Filtrar</button>
-		<button on:click|preventDefault={reset} class="outline">Reset</button>
-	  </div>
-	</figure>
-	</aside>
-  
+	   <div>
+		<Button on:click={filterClientes} class="outline">Buscar</Button>
+		<Button on:click={reset} class="outline">Reset</Button>
+	   </div>
+  </div>
   <section>
 	
    <article>	
 	
-	<div>
-		<div>		
-			{#if form?.success}
-			  <span style="background-color: greenyellow;">{form.message}</span>
-			{/if}
-		</div>
-	<div>
-	    <button on:click={ModalAdd} class="outline">add Clientes</button> <!----Modal crear Clientes-------->
-	</div>
-	  {#if isOpenAdd}
-		 <dialog open >
-			<article>
-			<div>
-				<header>
-					<a href="#close" aria-label="Close" class="close" on:click={ModalAdd}></a>
-					<p>Porfavor Agregar nuevo cliente!!</p>
-				</header>	
-			<form method="POST" action="?/addClient">
-			 <input type="text" name="razon_social" placeholder="escribe aqui razon_social" required/>
-			 <input type="number" name="cuit" placeholder="escribe aqui el cuit" maxlength="11" required/>
-			 <input type="text" name="domicilio_calle" placeholder="escribe aqui calle" required/>
-			 <input type="text" name="domicilio_altura" placeholder="escribe aqui altura" required/>
-			 <input type="text" name="localidad" placeholder="escribe aqui localidad" required/>
-			 <input type="text" name="codigo_postal" placeholder="escribe aqui codigo postal" required/>
-			 <input type="text" name="telefono" placeholder="escribe aqui el telefono" required/>
-			 <input type="email" name="email" placeholder="escribe aqui el email" required/>
-			 <footer>
-				<button on:click={ModalAdd} class="secondary">Cancel</button>
-				<button type="submit">Confirm</button>
-			  </footer>
-			
-			</form>
-			{#if form?.success}
-			<span>Agregado</span>
-			{/if}
-		</div>
-		</article>
-		</dialog>
-      {/if}	
-	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
 	  
 <figure>
   <table role="grid">

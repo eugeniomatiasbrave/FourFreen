@@ -32,5 +32,11 @@
 	  {/if}
 	</NavUl>
 </Navbar>
+ 
+ <slot/>
 
-<slot />
+
+
+
+
+

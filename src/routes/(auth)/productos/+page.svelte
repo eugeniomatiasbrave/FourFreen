@@ -142,10 +142,10 @@ const SortedProducto_id=(params)=>{
 				</TableBody>
 			  </Table>
 			</div>
-		  </div> <!----------------fin Div contenedor: tabla + add + Filtro--------->
-			
-		
+		  </div> <!----------------fin Div contenedor: tabla + add + Filtro--------->	
 	</main>
+
+
 
 
 

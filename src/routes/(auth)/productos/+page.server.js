@@ -12,7 +12,7 @@ const getProductos = async () => {
     try {
       return await fetchApi.get({ url: BASE_URL + '/productos', token: locals.token, resStatus: 200 });  
       } catch (err) {
-       console.log('Error: ', err);
+       console.error('Error: ', err);
        throw error(500, 'Algo salio mal con la peticion de los productos', err);
       }     
     }
@@ -21,8 +21,8 @@ const getProductosSearch=async()=>{
     try {
       return await fetchApi.get({url:BASE_URL+'/productos?search=',token:locals.token,resStatus:200}) 
       } catch (err) {
-        console.log('Error: ', err);
-      throw error(500, 'Algo salio mal alfiltrar por nombre de producto' , err);
+        console.error('Error: ', err);
+      throw error(500, 'Algo salio mal al filtrar por nombre de producto' , err);
      }     
    }
 
@@ -31,7 +31,7 @@ const getSSP=async()=>{
     try {
       return await fetchApi.get({url:BASE_URL+`/productos?search=${search}&sort=precio:${sort}`,token:locals.token,resStatus:200}) 
       } catch (err) {
-        console.log('Error: ', err);
+        console.error('Error: ', err);
       throw error(500, 'Algo salio mal al ordenar por nombre y precio', err);
      }     
    }
@@ -40,7 +40,7 @@ const getSort=async()=>{
     try {
       return await fetchApi.get({url:BASE_URL+`/productos?sort=${datos}:${sort}`,token:locals.token,resStatus:200});
       } catch (err) {
-        console.log('Error: ', err);
+        console.error('Error: ', err);
       throw error(500, 'Algo salio mal al ordenar los productos', err);
      }     
    }
