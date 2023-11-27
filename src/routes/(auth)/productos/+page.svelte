@@ -88,7 +88,7 @@ const SortedProducto_id=(params)=>{
 		   <div class="mt-8"><!----------------Div contenedor: tabla + add + Filtro--------->
 			 <div class=" flex justify-between items-center mx-auto w-full md:w-1/2"> <!-----cabecera Add + Filtro--------->
 				<div> <!----------------------------boton add productos--------> 		
-				  <Button href="/productos/registros" size="xs" class="bg-primary-500 rounded  px-2" on:click={()=>{formModal.set(true)}}>+ Add</Button>		
+				  <Button href="/productos/registros" size="xs" class="bg-primary-500 rounded px-2" on:click={()=>{formModal.set(true)}}>Add</Button>		
 				</div>
 				<div class="flex items-center"> <!----------------Filtro--------->
 		         <Input type="text" bind:value={searchTerm} name="searchTerm" placeholder="Search" required class=" bg-white h-8 rounded"  /> 
