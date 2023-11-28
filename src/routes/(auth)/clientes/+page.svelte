@@ -65,12 +65,14 @@
 	<meta name="description" content="Clientes" />
 </svelte:head>
 
-<main class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
+<main class="bg-gray-50 dark:bg-gray-900 sm:p-3">
   <P size="2xl" align="center" class="mb-8">Tabla de Clientes</P>
-	<div class=""> <!----------------Div contenedor: tabla + add + Filtro--------->
-	   <div class=" flex justify-between items-center mx-auto w-full md:w-1/2 "><!-----cabecera Add + Filtro--------->
-		  <div class="flex flex-wrap items-center">
-			  <Button on:click={() => (formModalAdd = true)} class="bg-primary-500 h-8 ml-2 rounded">+ add</Button>
+	<div class=" bg-white mx-auto p-1 pt-2 border rounded shadow-md w-3/4"> <!----------------Div contenedor: tabla + add + Filtro--------->
+	   <div class=" flex justify-between items-center mx-auto w-full"><!-----cabecera Add + Filtro--------->
+		  <div class=""> <!-----Modal Add--------->
+			  <div>
+			   <Button on:click={() => (formModalAdd = true)} class="bg-primary-500 rounded p-2">Add</Button>
+			  </div>
 				<Modal bind:open={formModalAdd} size="xs" autoclose={false} class="w-full">
 				  <form method="POST" action="?/addClient">
 					<p>Porfavor Agregar nuevo cliente!!</p>
@@ -82,62 +84,41 @@
 					</Label>
 					<Label class="space-y-2">
 						<span>Calle</span>
-					  <Input type="text" name="domicilio_calle" placeholder="escribe aqui calle" class="bg-white h-8 rounded" required/>
+					    <Input type="text" name="domicilio_calle" placeholder="escribe aqui calle" class="bg-white h-8 rounded" required/>
 					</Label>
 					<Label class="space-y-2">
 						<span>Altura</span>
-					 <Input
-						type="text"
-						name="domicilio_altura"
-						placeholder="escribe aqui altura" class="bg-white h-8 rounded"
-						required/>
+					    <Input type="text" name="domicilio_altura" placeholder="escribe aqui altura" class="bg-white h-8 rounded" required/>
 					</Label>
 					<Label class="space-y-2">
-									<span>Loc..</span>
-									<Input
-										type="text"
-										name="localidad"
-										placeholder="escribe aqui localidad" class="bg-white h-8 rounded"
-										required/>
-								</Label>
-								<Label class="space-y-2">
-									<span>Cp.</span>
-									<Input
-										type="text"
-										name="codigo_postal"
-										placeholder="escribe aqui codigo postal" class="bg-white h-8 rounded"
-										required/>
-								</Label>
-									<Label class="space-y-2">
-										<span>Tel</span>
-									<Input
-										type="text"
-										name="telefono"
-										placeholder="escribe aqui el telefono" class="bg-white h-8 rounded"
-										required/>
-								</Label>
-									<Label class="space-y-2">
-										<span>Email</span>
-									<Input type="email" name="email" placeholder="escribe aqui el email" class="bg-white h-8 rounded" required />
-								</Label>		
-								<Button class="bg-primary-500 h-8 ml-2 mt-2 rounded">Cancel</Button>
-								<Button type="submit" class="bg-primary-500 h-8 ml-2 mt-2 rounded">Confirm</Button>												
-								</form>	
-					</Modal>
-				  </div>
-
-                 <div class="flex flex-wrap justify-end items-start">
-					<div class="ml-2">
-			     	  <Input type="text" id="search" bind:value={searchTerm} name="search" class="bg-white h-8 rounded"	placeholder="Search" required/>
-				    </div>
-			        <div class="ml-2">
-			         <Button on:click={filterClientes} class="bg-primary-500 h-8 ml-2 rounded">Buscar</Button>
-				     <Button on:click={reset} class="bg-primary-500 h-8 ml-2 rounded">Reset</Button>
-				    </div>
-				</div>			    
+						<span>Loc..</span>
+					    <Input type="text" name="localidad" placeholder="escribe aqui localidad" class="bg-white h-8 rounded" required/>
+					</Label>
+					<Label class="space-y-2">
+						<span>Cp.</span>
+					<Input type="text" name="codigo_postal" placeholder="escribe aqui codigo postal" class="bg-white h-8 rounded" required/>
+					</Label>
+					<Label class="space-y-2">
+						<span>Tel</span>
+						<Input type="text" name="telefono" placeholder="escribe aqui el telefono" class="bg-white h-8 rounded" required/>
+					</Label>
+					<Label class="space-y-2">
+						<span>Email</span>
+						<Input type="email" name="email" placeholder="escribe aqui el email" class="bg-white h-8 rounded" required />
+					</Label>		
+					<Button class="bg-primary-500 h-8 ml-2 mt-2 rounded">Cancel</Button>
+					<Button type="submit" class="bg-primary-500 h-8 ml-2 mt-2 rounded">Confirm</Button>												
+				</form>	
+			 </Modal>
+			</div>
+            <div class="flex items-center">
+			  <Input type="text" id="search" bind:value={searchTerm} name="search" class="bg-white h-8 rounded" placeholder="Search" required/>
+			  <Button on:click={filterClientes} class="bg-primary-500 h-8 ml-1 px-2 rounded">Buscar</Button>
+			  <Button on:click={reset} class="bg-primary-500 h-8 ml-1 px-2 rounded">Reset</Button>		
+		    </div>			    
 		</div><!-----fin de cabecera Add + Filtro--------->
-				<div class="overflow-x-auto">
-					<Table hoverable={true} class="w-1/2 mx-auto mt-2">
+				<div class="">
+					<Table hoverable={true} class=" mt-2">
 						<TableHead class="bg-primary-500 text-white">
 							<TableHeadCell>id</TableHeadCell>
 							<TableHeadCell>Nombre</TableHeadCell>

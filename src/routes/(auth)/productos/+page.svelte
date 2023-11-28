@@ -1,6 +1,6 @@
 <script>
 	import {goto} from '$app/navigation';
-	import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';	
+	import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell, Pagination} from 'flowbite-svelte';	
 	import { ChevronDownSolid } from 'flowbite-svelte-icons';		
 	import {selectedProducto,selectedNombre,selectedPrecio,formModal,formModalEdit,formModalDelete} from './store';			
 	export let data;
@@ -26,7 +26,7 @@ const reset=()=>{
 	Productos=productos.datos;
 	}
 	
-	/*
+	/* ------ funcion Filtrar x nombre & precio----///
 	const applySSP=(params)=>{
 	  let search= params;
 	  let sort=-1;
@@ -35,8 +35,7 @@ const reset=()=>{
 	  Productos=filteredSSP; 
 	  goto(`/productos?search=${search}&sort=precio:${sort}`)
    }
-   
-*/
+   */
 	
 const OrderedPrecio=(params)=>{
 	sortOrder= -sortOrder;
@@ -75,6 +74,30 @@ const SortedProducto_id=(params)=>{
 		goto(`/productos?sort=producto_id:${sort}`);
 	}
 
+	//----------Pagianacion  ?????------------////////
+	/*
+	$: activeUrl = $page.url.searchParams.get('page');	
+	$: {  pages.forEach((page) => {
+			let splitUrl = page.href.split('?');
+			let queryString = splitUrl.slice(1).join('?');
+			const hrefParams = new URLSearchParams(queryString);
+			let hrefValue = hrefParams.get('page');
+			if (hrefValue === activeUrl) {
+				page.active = true;
+			} else {
+				page.active = false;
+			}
+		});
+		pages = pages;
+	}
+    const previous = () => {
+    alert('Previous btn clicked. Make a call to your server to fetch data.');
+    };
+    const next = () => {
+    alert('Next btn clicked. Make a call to your server to fetch data.');
+    };
+  */
+
 </script>
 			
 <svelte:head>
@@ -82,12 +105,13 @@ const SortedProducto_id=(params)=>{
 	<meta name="description" content="Productos" />
 </svelte:head>
 		
-<main class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-
+<main class="bg-gray-50 dark:bg-gray-900 sm:p-3">
+  <div class="my-4">
 	<P size="2xl" align="center">Tabla de Productos</P>
+  </div>
 	<!--------------------------Seccion tabla --> 	
-		   <div class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5"><!----------------Div contenedor: tabla + add + Filtro--------->
-			 <div class=" flex justify-between items-center mx-auto w-full md:w-1/2"> <!-----cabecera Add + Filtro--------->
+	  <div class=" bg-white mx-auto p-1 pt-2 border rounded shadow-md w-3/4 "><!----------------Div contenedor: tabla + add + Filtro--------->
+			 <div class=" flex justify-between items-center mx-auto w-full"> <!-----cabecera Add + Filtro--------->
 				<div> <!----------------------------boton add productos--------> 		
 				  <Button href="/productos/registros" size="xs" class="bg-primary-500 rounded px-2" on:click={()=>{formModal.set(true)}}>Add</Button>		
 				</div>
@@ -99,7 +123,7 @@ const SortedProducto_id=(params)=>{
 				</div> 
 			  </div>
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
-			  <Table hoverable={true} class="w-1/2 mx-auto mt-2 "> 		
+			  <Table hoverable={true} class=" mx-auto mt-2 "> 		
 				<TableHead class="bg-primary-500 text-white"> <!------------------------cabecera celdas-->
 				  <TableHeadCell>Img</TableHeadCell>
 				  <TableHeadCell><Button on:click={()=>SortedProducto_id(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded m-0 p-0" size="xs">ID<ChevronDownSolid class="w-3 h-3 ml-2 text-white dark:text-white"/></Button></TableHeadCell>
@@ -143,6 +167,22 @@ const SortedProducto_id=(params)=>{
 				</TableBody>
 			  </Table>
 			</div>
+
+			<!------------------Pagianacion  ?????-------------->
+			
+		<!--<div>
+				<Pagination {pages} on:previous={previous} on:next={next} icon>
+					<svelte:fragment slot="prev">
+					  <span class="sr-only">Previous</span>
+					  <ChevronLeftOutline class="w-2.5 h-2.5" />
+					</svelte:fragment>
+					<svelte:fragment slot="next">
+					  <span class="sr-only">Next</span>
+					  <ChevronRightOutline class="w-2.5 h-2.5" />
+					</svelte:fragment>
+				  </Pagination>
+			</div>  -->
+
 		  </div> <!----------------fin Div contenedor: tabla + add + Filtro--------->	
 	</main>
 
