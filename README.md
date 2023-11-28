@@ -49,10 +49,22 @@ DELETE {{baseUrl}}/productos/104
       
 **************************** TABLA DE CLIENTES:************************************************
        
-       * /clientes :
+          * /clientes :
+           * Responsive.....................................................................ok
+           * GET............................................................................ok
+           * ADD clientes ..................................................................ok
+           * EDIT clientes .................................................................ok
+           * DELETE clientes ...............................................................ok
+           * Filtrar clientes x nombre......................................................
 
-       - GET,POST,EDITE,DELETE,PATCH + filtro.
-          Mejoras de codigo: (se puede mejor el codigo idem productos).
+  
+GET {{baseUrl}}/clientes  // Recupera todos los productos
+GET {{baseUrl}}/clientes?limit=5&offset=2  recupera todos los productos con la opción limit y offset
+GET {{baseUrl}}/clientes/1  // recuperda los datos de un producto en particular con su :id en el path
+POST {{baseUrl}}/clientes  // para dar de alta un producto, en el boy va el json y devuelve los datos enviados más el id del producto
+PATCH {{baseUrl}}/clientes/2  // para actualizar nombre y/o precio del producto, va el :id en el path y los campos en el body
+DELETE {{baseUrl}}/clientes/3 //para eliminar un producto, va el :id en el path
+    
 
 
 *********************************************************************************************
