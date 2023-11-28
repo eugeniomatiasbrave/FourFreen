@@ -1,6 +1,7 @@
 <script>
 	import {Navbar,NavBrand,NavLi,NavUl,NavHamburger} from 'flowbite-svelte';
 	import {page} from '$app/stores';
+	//import logo1 from '$lib/img/LogoFourGreens2021.png';
 	import './style.css';
 	import '../app.postcss';
 	export let data;
@@ -13,10 +14,10 @@
 
 <Navbar class="p-0">
 	<NavBrand href="/">
-	  <img src="" class="mr-3 h-6 sm:h-9" alt="" />
-	  <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">FourGreens</span>
+		<img src="" class="mr-3 h-6 sm:h-9" alt="" />
+		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">FourGreens</span>
 	</NavBrand>
-	<NavHamburger />
+	<NavHamburger class="" />
 	<NavUl {activeUrl}>
 	  {#if data.usuario === undefined}
 		<NavLi href="/login">Login</NavLi>
@@ -36,7 +37,9 @@
  <slot/>
 
 
+<style>
 
+</style>
 
 
 
