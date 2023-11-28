@@ -1,15 +1,19 @@
 <script >
-	import { page } from '$app/stores';
-	export let data;
-	export let form;
+import { page } from '$app/stores';
+import {Input,Button,P,Label,Modal,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
+import {onMount} from 'svelte';
+import { goto } from '$app/navigation';
+export let data;
+export let form;
 	
-	export const { pedidos, productos, clientes} = data;
-	const estado_id = $page.url.searchParams.get('estado_id') || "0"
+export const { pedidos, productos, clientes} = data;
+
+const estado_id = $page.url.searchParams.get('estado_id') || "0"
  
  let titulo = ""
  switch (estado_id) {
 	case "0":
-		titulo = "Pedidos"
+		titulo = "Tabla de Pedidos"
 		break;
 		case "10":
 		titulo = "Pedidos Ingresados"
@@ -20,17 +24,35 @@
 		case "30":
 		titulo = "Pedidos Entregados"
 		break;
-
 	default:
 		break;
  }
 
+
 let items=[];
-	
+let isOpenAdd = false;
+// ------------------------variables cabecera-----
+let cliente_id;
+let fecha = new Date().toISOString();
+// ------------------------variables detalle items
+let unidades;
+let producto_id;
+let precio;	
 // console.log(form)
 // console.log(pedidos.datos);
+let formModalAdd = false;
 	
-let isOpenAdd = false;
+onMount(() => {
+  if (form?.success) {
+   Swal.fire({
+     icon: 'success',
+     title: form.message,
+     text: 'Cliente: ',
+     backdrop: true,
+     confirmButtonText: 'Volver',
+     confirmButtonColor: 'rgb(69, 166, 175)'
+   })}
+   });
 
 
 function handleProductoChange(event) {
@@ -38,17 +60,9 @@ const selectedIndex = event.target.selectedIndex;
 const selectedOption = event.target.options[selectedIndex];
 precio = selectedOption.getAttribute('data-precio');
 }
-
-// ------------------------variables cabecera-----
-  let cliente_id;
-  let fecha = new Date().toISOString();
-// ------------------------variables detalle items
-  let unidades;
-  let producto_id;
-  let precio;
-   
-  function handleAdd(event) {
-    event.preventDefault();
+  
+function handleAdd(event) {
+    event.prevenTableBodyCellefault();
 
   const newItem = {
        producto_id,
@@ -69,66 +83,41 @@ let Pedido = pedidos.datos;
 let selectedOption = '';
 let searchTerm = '';
 
-function filter() {
+const filteredPedidos=()=> {
 	Pedido = pedidos.datos.filter(pe => {
 		return (selectedOption === '' || pe.pedido_estado_nombre.toString() === selectedOption) &&
 		       (searchTerm === '' || pe.pedido_cab_id.toString().includes(searchTerm.toString()));
 	});	 
 }
 
-function reset() {
+const reset=()=> {
 	searchTerm = '';
 	selectedOption = '';
 	Pedido = pedidos.datos;
+}
+
+const ModalClose =()=>{
+	formModalAdd = false;
 }
 
 </script>
 
 	<svelte:head>
 	<title>{titulo}</title>
-	<meta name="description" content="Pedidos" />
+	<meta name="description" content="Tabla de Pedidos"/>
 	</svelte:head>
 
+<main class="bg-gray-50 dark:bg-gray-900 sm:p-3">
 	
-<h2>{titulo}</h2>
-<main class="container-fluid pedi-main">
-  <article> <!--articule general-->
-
-<div> <!--------------filtro x estado--------->
-	<aside>	
-			<div>
-				<h6>Filtrar por estado</h6>
-			<select bind:value={selectedOption} required>
-				<option selected>Estado_Pedido</option>
-				<option>Pedido Ingresado</option>
-				<option>Pedido Confeccionado</option>
-				<option>Pedido Entregado</option>
-				<option>Pedido Facturado</option>
-				<option>Pedido Cobrado</option>
-				<option>Pedido Anulado</option>	
-			</select>	
-		   </div>
-			<div>
-				<input type="text" bind:value={searchTerm} name="search" placeholder="Search" required>
-			</div>
-			<div>
-				<button on:click|preventDefault={filter} class="outline">Filtrar</button>
-				<button on:click|preventDefault={reset} class="outline">Reset</button>
-			</div>	
-	  </aside>
-	</div>
-	<div>		
-		{#if form?.success}
-		  <span style="background-color: greenyellow;">{form.message}</span>
-		{/if}
+<P size="2xl" align="center" class="mb-8">{titulo}</P>
+  
+<div class=" bg-white mx-auto p-1 pt-2 border rounded shadow-md w-4/5"> <!----------------Div contenedor: tabla + add + Filtro--------->
+  <div class=" flex justify-between items-center mx-auto w-full"><!-----cabecera Add + Filtro--------->
+	<div class=""> <!-------modal add-------------->
+	   <div>
+	     <Button on:click={() => (formModalAdd = true)} class="bg-primary-500 rounded h-8 p-2">Add</Button>
 	   </div>
-	<div> <!-------modal add-------------->
-	   <button on:click={ModalAdd} class="outline">Add</button>
-
-	{#if isOpenAdd}		
-	    <dialog open >
-		 <article>		
-		  	
+	   <Modal bind:open={formModalAdd} size="xs" autoclose={false} class="w-full">			
 			<form  method="POST" action="?/addPedido">       	 
                 <div > <!---------------------cabecera-------------->
 				   <div>
@@ -140,202 +129,133 @@ function reset() {
 						</select>
 					</div>
 					<div>
-						<label>Fecha
-						<input type="text" name="fecha" bind:value={fecha} />
-						</label>
+						<Label>Fecha
+						<Input type="text" name="fecha" bind:value={fecha} />
+						</Label>
 					</div>
 			    </div> <!---------------------fin cabecera-------------->
 			       <div> <!--revisar luego siesta demas-->
 						  <div >	<!----------- detalles items-------------->   
-							<input type="hidden" name="items" value={JSON.stringify( items = items.map(item => ({
+							<Input type="hidden" name="items" value={JSON.stringify( items = items.map(item => ({
 							                                       	...item,
 								                                     precio: Number(item.precio)
 							                                            }))
-							    )}>
+							    )}/>
 							<select  bind:value={producto_id} on:change={handleProductoChange} required>
 							<option selected>Productos</option>
 							{#each productos.datos as prod}
 							<option value={prod.producto_id} data-precio={prod.precio}>{prod.producto_id} - {prod.nombre}</option>
 							{/each}
 							</select>	
-							<label>Unidades
-							<input type="number"  bind:value={unidades} required />
-							</label>   
-							<label>Precio		
-							<input type="text" bind:value={precio} class="w" readonly required/>	
-							</label>
+							<Label>Unidades
+							<Input type="number"  bind:value={unidades} required />
+							</Label>   
+							<Label>Precio		
+							<Input type="text" bind:value={precio} class="w" readonly required/>	
+							</Label>
 						  </div>					 
 						  <div>	  
-						     <button  on:click={handleAdd} class="outline">Add item</button>	
+						     <Button  on:click={handleAdd} class="bg-primary-500 h-8 ml-1 px-2 rounded">Add item</Button>	
 					      </div>	
 						
 					   <div id="Area-pedido">	<!-------Area items-------------->
-						 <table role="grid">  <!-------Table-------------->
-							<thead>
-								<tr>
-									<th scope="col">Producto_id</th>
-									<th scope="col">Unidades</th>
-									<th scope="col">Precio</th>
-								</tr>
-							</thead>
-						     <tbody>	
+						 <Table hoverable={true} class=" mt-2 border">  <!-------Table-------------->
+							<TableHead class="bg-primary-500 text-white">
+								<TableBodyRow>
+									<TableHeadCell>Producto_id</TableHeadCell>
+									<TableHeadCell>Unidades</TableHeadCell>
+									<TableHeadCell>Precio</TableHeadCell>
+								</TableBodyRow>
+							</TableHead>
+						     <TableBody class="divide-y">	
 								{#each items as item (item.producto_id)}
-								<tr>
-								 <td>{item.producto_id}</td>
-								 <td>{item.unidades}</td>
-								 <td>{item.precio}</td>
-							    </tr>
+								<TableBodyRow class="hover:bg-hover-gray-light">
+								 <TableBodyCell>{item.producto_id}</TableBodyCell>
+								 <TableBodyCell>{item.unidades}</TableBodyCell>
+								 <TableBodyCell>{item.precio}</TableBodyCell>
+							    </TableBodyRow>
 								{/each}
-							</tbody>
-						 </table>
+							</TableBody>
+						 </Table>
 					   </div> <!-------fin Area items-------------->					
-					   <div>	  
-						<button on:click={ModalAdd} class="outline">Cancelar</button>
-						<button  class="outline">Reset</button>
-						<button  type="submit" class="outline">Add Pedido</button>		
+					   <div>
+						<Button on:click={ModalClose} class="bg-primary-500 h-8 ml-2 mt-2 rounded">Cancelar</Button>				  
+						<Button class="bg-primary-500 h-8 ml-2 mt-2 rounded">Reset</Button>
+						<Button type="submit" class="bg-primary-500 h-8 ml-2 mt-2 rounded">Add Pedido</Button>		
 					  </div>
 				</form>	
-				
-	 </article>
-   </dialog>
- {/if}
+	</Modal>
     </div> <!-----------fin de modal add-------------->
-<table role="grid">  <!-------Table-------------->
-			<thead>
-				<tr >
-					<th scope="col">pedido_cab_id</th>
-					<th scope="col">cliente_id</th>
-					<th scope="col">Cliente</th>
-					<th scope="col">Fecha</th>			
-					<th scope="col">ped_est_id</th>
-					<th scope="col">Estado_pedido</th>
-					<th scope="col">editar</th>
-					<th scope="col">eliminar</th>
-					<th scope="col">us_id</th>
-					<th scope="col">items</th>
-					<th scope="col">Detalle</th>
-					<th scope="col">total_uni</th>
-					<th scope="col">total</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each Pedido as pe}
-					<tr>
-                        <td>{pe.pedido_cab_id}</td>
-						<td>{pe.cliente_id}</td>
-						<td>{pe.razon_social}</td>
-						<td>{pe.fecha}</td>	
-						<td> 
-						  <button class="outline"><a href={`/estado_id/${pe.pedido_estado_id}`} style="color:white;">Estado: </a>{pe.pedido_estado_id} de {pe.pedido_cab_id} </button>
-						</td>
-						<td>{pe.pedido_estado_nombre}</td>
-						<td>{pe.editar}</td>
-						<td>{pe.eliminar}</td>
-						<td>{pe.usuario_id}</td>
-						<td>{pe.items}</td>
-						<td>
-						  <button class="outline"><a href={`/pedidos/${pe.pedido_cab_id}`} style="color:white;"> Detalle:{pe.pedido_cab_id}</a></button>
-						</td> <!--detalle pedido-->
-						<td>{pe.total_unidades}</td>
-						<td>{pe.total_importe}</td>		
-					</tr>
-				{/each}
-			</tbody>
+
+	<div class="flex items-center"><!----- Filtro--------->
+		<Input type="text" id="search" bind:value={searchTerm} name="search" class="bg-white h-8 rounded" placeholder="Search" required/>
+		<Button on:click={()=> filteredPedidos(searchTerm)} class="bg-primary-500 h-8 ml-1 px-2 rounded">Buscar</Button>
+		<Button on:click={reset} class="bg-primary-500 h-8 ml-1 px-2 rounded">Reset</Button>		
+	</div>			    
+  </div> <!-----fin cabecera Add + Filtro--------->
+  <div class="">
+<Table hoverable={true} class=" mt-2 border">  <!-------Table-------------->
+	<TableHead class="bg-primary-500 text-white">
+		<TableHeadCell>Pedido Id</TableHeadCell>
+		<TableHeadCell>Cliente Id</TableHeadCell>
+		<TableHeadCell>Cliente</TableHeadCell>
+		<TableHeadCell>Fecha</TableHeadCell>			
+		<TableHeadCell>Estado Id</TableHeadCell>
+		<TableHeadCell>Estado Pedido</TableHeadCell>
+		<TableHeadCell>Editar</TableHeadCell>
+		<TableHeadCell>Eliminar</TableHeadCell>
+		<TableHeadCell>us id</TableHeadCell>
+		<TableHeadCell>Items</TableHeadCell>
+		<TableHeadCell>Detalle</TableHeadCell>
+		<TableHeadCell>Tot.Uds</TableHeadCell>
+		<TableHeadCell>Total</TableHeadCell>	
+	</TableHead>
+	<TableBody class="divide-y">
+		{#each Pedido as pe}
+		<TableBodyRow class="hover:bg-hover-gray-light">
+            <TableBodyCell class="px-4">{pe.pedido_cab_id}</TableBodyCell>
+			<TableBodyCell class="px-4">{pe.cliente_id}</TableBodyCell>
+			<TableBodyCell class="px-4">{pe.razon_social}</TableBodyCell>
+			<TableBodyCell class="px-2">{pe.fecha}</TableBodyCell>	
+			<TableBodyCell class="px-4"> 
+				<Button class="bg-primary-500 h-8 ml-1 px-2 rounded"><a href={`/estado_id/${pe.pedido_estado_id}`} style="color:white;">Estado:</a> {pe.pedido_estado_id}</Button>
+			</TableBodyCell>
+			<TableBodyCell class="px-4">{pe.pedido_estado_nombre}</TableBodyCell>
+			<TableBodyCell class="px-4">{pe.editar}</TableBodyCell>
+			<TableBodyCell class="px-4">{pe.eliminar}</TableBodyCell>
+			<TableBodyCell class="px-4">{pe.usuario_id}</TableBodyCell>
+			<TableBodyCell class="px-4">{pe.items}</TableBodyCell>
+			<TableBodyCell class="px-4">
+			    <Button class="bg-primary-500 h-8 ml-1 px-2 rounded"><a href={`/pedidos/${pe.pedido_cab_id}`} style="color:white;">Detalle</a></Button>
+			</TableBodyCell> <!--detalle pedido-->
+			<TableBodyCell class="px-4">{pe.total_unidades}</TableBodyCell>
+			<TableBodyCell class="px-4">{pe.total_importe}</TableBodyCell>		
+			</TableBodyRow>
+		{/each}
+		</TableBody>
 			<tfoot>
 				<tr>
-					<th scope="col" />
-					<td />
-					<td />
-					<td />
-					<td />
+					<th/>
+					<td/>
+					<td/>
+					<td/>
+					<td/>
 					<td>Total</td>
 					<td>Total</td>
-					<td />
-					<td />
-					<td />
-					<td />
-                    <td />
+					<td/>
+					<td/>
+					<td/>
+					<td/>
+                    <td/>
 					<td/>
 				</tr>
 			</tfoot>
-		</table>
-  </article>
-</main>
+		</Table>
+	</div>
+  </div><!------------ -Div contenedor: tabla + add + Filtro-->
+</main> 
 
 <style>
-/*
-	.pedi-main {
-		padding: 0 200px 0 200px;
-	}
-	
-article{
-	background-color: rgb(241, 241, 241);
-} 
-	tr,
-	td,
-	th,
-	input,
-	select,
-	option,
-	button, label {
-		font-size: 15px;
-		margin: 0;
-		padding: 0;	
-	}
-
-	table {
-		border-collapse: collapse;
-		width: 100%;
-	}
-
-	th,
-	td {
-		padding: 8px;
-		text-align: left;
-	}
-
-	thead th {
-		background-color: #f2f2f2;
-	}
-
-	tbody tr:nth-child(even) {
-		background-color: #f2f2f2;
-	}
-
-	tfoot th {
-		text-align: right;
-	}
-
-	button {
-		cursor: pointer;
-	}
-
-	input[type='number'],
-	input[type='text']
-	 {
-		border: 1px solid #c5c3c3;
-        border-radius: 4px;
-        padding: 6px;
-        height: 40px;
-		background-color: #fdf9f9;
-	   }
-
-	select {
-		border: 1px solid #a8a7a7;
-		border-radius: 4px;
-		padding: 6px;
-		height: 40px;
-		background-color: #f1f1f1;
-	}
-
-	.w {
-		width: 100px;
-	} 
-/*
-	.w-2{
-		width: 600px;
-	}
-
 	#Area-pedido{
 		background-color: rgb(253, 251, 251);
 		max-height: 300px;
@@ -344,6 +264,4 @@ article{
 		overflow: scroll;
 			
 	}	
-
-*/
 </style>

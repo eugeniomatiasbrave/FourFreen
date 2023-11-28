@@ -56,7 +56,7 @@ DELETE {{baseUrl}}/productos/104
            * EDIT clientes .................................................................ok
            * DELETE clientes ...............................................................ok
            * Ordenar por click en cabecera de columna:
-                  * Nombre..................................................................ok ?? Adrian cree un endpoint se puede?
+                  * Nombre..................................................................ok ?? Adrian. Cree un endpoint se puede?
            * Filtrar clientes x nombre......................................................ok
 
   
@@ -70,8 +70,16 @@ GET {{baseUrl}}/clientes?sort=razon_social:-1 HTTP/1.1.......euge
 GET {{baseUrl}}/clientes?search=ELO HTTP/1.1 ................euge
     
 
-
-*********************************************************************************************
+**************************** TABLA DE PEDIDOS:************************************************
+       
+          * /pedidos :
+           * Responsive.....................................................................
+           * GET............................................................................
+           * ADD pedidos  ..................................................................
+           * EDIT pedidos  .................................................................
+           * DELETE pedidos  ...............................................................
+           * Ordenar por click en cabecera de columna:
+           * Filtrar pedidos x nombre ......................................................
 
             
     * Tabla de Gestion de Pedidos: 
@@ -81,14 +89,26 @@ GET {{baseUrl}}/clientes?search=ELO HTTP/1.1 ................euge
                       * Mas de un item por pedido 
                  - Edita (modifica pedido en detalle):.....a espera de Api  
              - Detalle de pedido:
-             - Estado de Pedido:    
-            
-   
-  * A mejorar:
-	        * Funcion que simplifiquen el selected
-		    * TRY: En productos y clientes.
-            * Success y message: Respuesta al CRUD en /clientes y /pedidos.
-            * A mejorar, hacer un alert()...................................................ok
+             - Estado de Pedido:  
+
+**** Api pedidos *****
+GET {{baseUrl}}/pedidos 
+GET {{baseUrl}}/pedidos?limit=2 //recup. todos los estados de los ped. con la opción limit y offset para realizar paginado 
+                                   (en princ por la cant. de items no hace falta)
+GET {{baseUrl}}/pedidos/38/detalle // Recupera el detalle del pedidos id
+POST {{baseUrl}}/pedidos  
+
+**** Api estados pedido ******* 
+
+GET {{baseUrl}}/pedidos_estado HTTP/1.1 // Recupera todos los estados de los pedidos
+GET {{baseUrl}}/pedidos_estado?limit=5&offset=2  // recupera todos los estados de los pedidos con la opción limit y offset para realizar paginado (en principio por la cantidad de items no hace falta)
+GET {{baseUrl}}/pedidos_estado/20  // recuperda los datos de un estado de pedido en particular con su :id en el path
+
+
+ *******************************************************************************************************  
+  
+
+
 
 **** LOGO: ****
     *Colores de marca:
