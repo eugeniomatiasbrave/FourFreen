@@ -1,6 +1,7 @@
 <script>
 	import {Input,Button,P,Label,Modal,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
 	import {onMount} from 'svelte';
+	import { goto } from '$app/navigation';
 	export let form;
 	export let data;
 	export const { clientes } = data;
@@ -58,6 +59,12 @@
 		filteredClientes = clientes;
 	}
 
+	const ModalClose =()=>{
+		formModalAdd = false;
+		formModalEdit = false;
+        formModalDelete = false;
+}
+
 </script>
 
 <svelte:head>
@@ -71,16 +78,16 @@
 	   <div class=" flex justify-between items-center mx-auto w-full"><!-----cabecera Add + Filtro--------->
 		  <div class=""> <!-----Modal Add--------->
 			  <div>
-			   <Button on:click={() => (formModalAdd = true)} class="bg-primary-500 rounded p-2">Add</Button>
+			   <Button on:click={() => (formModalAdd = true)} class="bg-primary-500 rounded h-8 p-2">Add</Button>
 			  </div>
 				<Modal bind:open={formModalAdd} size="xs" autoclose={false} class="w-full">
 				  <form method="POST" action="?/addClient">
 					<p>Porfavor Agregar nuevo cliente!!</p>
 					<Label class="space-y-2"><span>Nombre</span>
-					 <Input type="text" name="razon_social" placeholder="escribe aqui razon_social" class="bg-white h-8 rounded" required/>
+					 <Input type="text" name="razon_social" placeholder="razon_social" class="bg-white h-8 rounded" required/>
 					</Label>
 					<Label class="space-y-2"><span>Cuit</span>
-					  <Input type="number" name="cuit" placeholder="escribe aqui el cuit" class="bg-white h-8 rounded" maxlength="11" required/>			
+					  <Input type="number" name="cuit" placeholder="cuit" class="bg-white h-8 rounded" maxlength="11" required/>			
 					</Label>
 					<Label class="space-y-2">
 						<span>Calle</span>
@@ -88,26 +95,26 @@
 					</Label>
 					<Label class="space-y-2">
 						<span>Altura</span>
-					    <Input type="text" name="domicilio_altura" placeholder="escribe aqui altura" class="bg-white h-8 rounded" required/>
+					    <Input type="text" name="domicilio_altura" placeholder="altura" class="bg-white h-8 rounded" required/>
 					</Label>
 					<Label class="space-y-2">
 						<span>Loc..</span>
-					    <Input type="text" name="localidad" placeholder="escribe aqui localidad" class="bg-white h-8 rounded" required/>
+					    <Input type="text" name="localidad" placeholder="localidad" class="bg-white h-8 rounded" required/>
 					</Label>
 					<Label class="space-y-2">
 						<span>Cp.</span>
-					<Input type="text" name="codigo_postal" placeholder="escribe aqui codigo postal" class="bg-white h-8 rounded" required/>
+					<Input type="text" name="codigo_postal" placeholder="codigo postal" class="bg-white h-8 rounded" required/>
 					</Label>
 					<Label class="space-y-2">
 						<span>Tel</span>
-						<Input type="text" name="telefono" placeholder="escribe aqui el telefono" class="bg-white h-8 rounded" required/>
+						<Input type="text" name="telefono" placeholder="telefono" class="bg-white h-8 rounded" required/>
 					</Label>
 					<Label class="space-y-2">
 						<span>Email</span>
-						<Input type="email" name="email" placeholder="escribe aqui el email" class="bg-white h-8 rounded" required />
+						<Input type="email" name="email" placeholder="email" class="bg-white h-8 rounded" required />
 					</Label>		
-					<Button class="bg-primary-500 h-8 ml-2 mt-2 rounded">Cancel</Button>
-					<Button type="submit" class="bg-primary-500 h-8 ml-2 mt-2 rounded">Confirm</Button>												
+					<Button on:click={ModalClose} class="bg-primary-500 h-8 ml-2 mt-2 rounded">Cancelar</Button>
+					<Button type="submit" class="bg-primary-500 h-8 ml-2 mt-2 rounded">Confirmar</Button>												
 				</form>	
 			 </Modal>
 			</div>
@@ -118,7 +125,7 @@
 		    </div>			    
 		</div><!-----fin de cabecera Add + Filtro--------->
 				<div class="">
-					<Table hoverable={true} class=" mt-2">
+					<Table hoverable={true} class=" mt-2 border">
 						<TableHead class="bg-primary-500 text-white">
 							<TableHeadCell>id</TableHeadCell>
 							<TableHeadCell>Nombre</TableHeadCell>
@@ -135,8 +142,8 @@
 							<TableHeadCell>Eliminar								
                                 <span class="sr-only">Eliminar</span>
 							</TableHeadCell>
-						</TableHead>
-						<TableBody class="divide-y">
+						    </TableHead>
+					    	<TableBody class="divide-y">
 								{#each filteredClientes as cli}
 								<TableBodyRow class="hover:bg-hover-gray-light">
 									<TableBodyCell>{cli.cliente_id}</TableBodyCell>
@@ -149,9 +156,7 @@
 									<TableBodyCell>{cli.telefono}</TableBodyCell>
 									<TableBodyCell>{cli.email}</TableBodyCell>
 									<TableBodyCell>
-										<Button
-											on:click={() => {
-												//<!----------------------------------Modal para edita cliente-------->
+										<Button on:click={()=>{ //<!----------------------------------Modal para edita cliente-------->
 												selectedCliente_id = cli.cliente_id;
 												selectedRazon_social = cli.razon_social;
 												selectedCuit = cli.cuit;
@@ -160,15 +165,11 @@
 												selectedDomicilio_altura = cli.domicilio_altura;
 												selectedCodigo_postal = cli.codigo_postal;
 												selectedTelefono = cli.telefono;
-												selectedEmail = cli.email;
-												
-											}}  on:click={() => (formModalEdit = true)}
-											class="bg-primary-500 h-8 ml-2 rounded">Editar</Button>
-											
-										
-											<form method="POST" action="?/editClient">
-											<Modal  bind:open={formModalEdit} size="xs" autoclose={false} class="w-full">		
-																
+												selectedEmail = cli.email;				
+											    }} on:click={()=>(formModalEdit = true)}
+											    class="bg-primary-500 h-8 ml-2 rounded">Editar</Button>
+										<Modal bind:open={formModalEdit} size="xs" autoclose={false} class="w-full">		
+											<form method="POST" action="?/editClient">			
 															<Input
 																type="hidden"
 																name="cliente_id"
@@ -246,37 +247,30 @@
 																								value={selectedEmail} class="bg-white h-8 rounded"
 																								required/>
 												                                     	</Label>
-											<Button on:click={formModalEdit} class="bg-primary-500 h-8 ml-2 rounded">Cancel</Button>
-											<Button type="submit" class="bg-primary-500 h-8 ml-2 rounded">Confirm</Button>																																		
+											<Button on:click={ModalClose} class="bg-primary-500 h-8 ml-2 rounded">Cancelar</Button>
+											<Button type="submit" class="bg-primary-500 h-8 ml-2 rounded">Confirmar</Button>																																		
+										</form>
 										</Modal>
-									</form>
 										
 									</TableBodyCell>
-									<TableBodyCell
-										><!---------------------Elimina el cliente--------------------->
-										<Button
-											on:click={() => {
-												//<!-----------------------------------------Modal para editar-------->
-												selectedCliente_id = cli.cliente_id;
-												
-											}} on:click={() => (formModalDelete = true)}
-											class="bg-primary-500 h-8 ml-2 rounded">Eliminar</Button>
+									<TableBodyCell><!---------------------Elimina el cliente--------------------->
+										<Button on:click={() => { //<!-----------------------------------------Modal para eliminar-------->
+												selectedCliente_id = cli.cliente_id;	
+											    }} on:click={() => (formModalDelete = true)}
+											    class="bg-primary-500 h-8 ml-2 rounded">Eliminar</Button>
 
-										<form method="POST" action="?/deleteClient"
-											    on:submit={() => {
-												selectedCliente_id = cli.cliente_id;
-											    }}>
+										<form method="POST" action="?/deleteClient" on:submit={()=>{selectedCliente_id = cli.cliente_id;}}>
 											<Modal bind:open={formModalDelete} size="xs" autoclose={false} class="w-full">
-													<div>
-														<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> Confirmar la eliminación  !!</h3>
-														<P value={cli.razon_social}>Cliente:{cli.razon_social}</P> 
+												<div>
+													<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> Confirmar la eliminación  !!</h3>
+													<P value={cli.razon_social}>Cliente:{cli.razon_social}</P> 
 														
 															<Input
 																type="hidden"
 																name="cliente_id"
 																bind:value={selectedCliente_id}
 																required/>
-															<Button on:click={formModalDelete} class="bg-primary-500 h-8 ml-2 rounded">Cancel</Button>
+															<Button on:click={ModalClose} class="bg-primary-500 h-8 ml-2 rounded">Cancelar</Button>
 															<Button type="submit" class="bg-primary-500 h-8 ml-2 rounded">Confirmar</Button>
 					</div>													
 				 </Modal>

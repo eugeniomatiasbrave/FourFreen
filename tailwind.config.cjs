@@ -7,6 +7,7 @@ const config = {
   
 	theme: {
 	  extend: {
+		borderColor: ['active'],
 		colors: {
 			'hover-gray-light': '#F5F5F5',
 			'hover-gray-dark': '#E0E0E0',
@@ -14,7 +15,7 @@ const config = {
 				50: '#e0f5f6',
 				100: '#b3e6e8',
 				200: '#80d6d9',
-				300: '#45a6af', //border = al color principal
+				300: '#f9fafb', //border hover blanco
 				400: '#1ab7bc',
 				500: '#45a6af', //bg botton
 				600: '#378a91',
