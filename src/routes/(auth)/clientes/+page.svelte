@@ -4,9 +4,10 @@
 	import { goto } from '$app/navigation';
 	export let form;
 	export let data;
-	export const { clientes } = data;
+	export const { clientes,sortrazonsocial, searchclientes } = data;
 
 	let searchTerm = '';
+	let sortOrder= 1
 
 	let formModalAdd = false;
 	let formModalEdit = false;
@@ -23,7 +24,8 @@
 	let selectedEmail;
 
 	let filteredClientes = clientes;
-
+	let SortRazonSocial = sortrazonsocial;
+    let SearchClientes= searchclientes;
 	//console.log(filteredClientes)
 
  onMount(() => {
@@ -37,33 +39,36 @@
       confirmButtonColor: 'rgb(69, 166, 175)'
     })}
     });
-  
-	function filterClientes() {
-		filteredClientes = clientes.filter((client) => {
-			return (
-				client.cliente_id.toString().includes(searchTerm.toString()) ||
-				client.razon_social.toString().includes(searchTerm.toString()) ||
-				client.cuit.toString().includes(searchTerm.toString())
-			);
-			//client.domicilio_calle.toString().includes(searchTerm.toString()) ||
-			//client.domicilio_altura.toString().includes(searchTerm.toString()) ||
-			//client.localidad.toString().includes(searchTerm.toString()) ||
-			//client.codigo_postal.toString().includes(searchTerm.toString()) ||
-			//client.telefono.toString().includes(searchTerm.toString()) ||
-			//client.email.toString().includes(searchTerm.toString()) ;
-		});
-	}
 
-	function reset() {
-		searchTerm = '';
-		filteredClientes = clientes;
-	}
-
-	const ModalClose =()=>{
-		formModalAdd = false;
-		formModalEdit = false;
-        formModalDelete = false;
+const filterClientes=(params)=>{
+	let search=params;
+	SearchClientes=searchclientes.filter(prod=>prod.razon_social.toLowerCase().includes(searchTerm.toLowerCase()));
+	filteredClientes=SearchClientes; 
+	goto(`/clientes?search=${search}`);		
 }
+
+const reset=()=>{
+	searchTerm = '';
+	filteredClientes = clientes;
+}
+
+const ModalClose =()=>{
+	formModalAdd = false;
+	formModalEdit = false;
+    formModalDelete = false;
+}
+
+const SortedRazonSocial=(params)=>{
+  sortOrder= -sortOrder;
+  let sort=params;
+  if (sort===1) {
+	SortRazonSocial=sortrazonsocial.sort((c,d)=>c.razon_social.localeCompare(d.razon_social));
+    } else if (sort===-1) {
+	SortRazonSocial=sortrazonsocial.sort((c,d)=>d.razon_social.localeCompare(c.razon_social));
+    }
+	filteredClientes=SortRazonSocial;
+	goto(`/clientes?sort=razon_social:${sort}`);
+  }
 
 </script>
 
@@ -120,7 +125,7 @@
 			</div>
             <div class="flex items-center">
 			  <Input type="text" id="search" bind:value={searchTerm} name="search" class="bg-white h-8 rounded" placeholder="Search" required/>
-			  <Button on:click={filterClientes} class="bg-primary-500 h-8 ml-1 px-2 rounded">Buscar</Button>
+			  <Button on:click={()=> filterClientes(searchTerm)} class="bg-primary-500 h-8 ml-1 px-2 rounded">Buscar</Button>
 			  <Button on:click={reset} class="bg-primary-500 h-8 ml-1 px-2 rounded">Reset</Button>		
 		    </div>			    
 		</div><!-----fin de cabecera Add + Filtro--------->
@@ -128,7 +133,14 @@
 					<Table hoverable={true} class=" mt-2 border">
 						<TableHead class="bg-primary-500 text-white">
 							<TableHeadCell>id</TableHeadCell>
-							<TableHeadCell>Nombre</TableHeadCell>
+							<TableHeadCell>
+							<div class="flex items-center">	
+								NOMBRE<a href="#5" on:click={()=>SortedRazonSocial(sortOrder === 1 ? -1 : 1)} class=" bg-primary-500 hover:bg-primary-500 rounded" 
+								size="xs"><svg class="w-3.5 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
+							</svg></a>
+						</div>
+							</TableHeadCell>
 							<TableHeadCell>Cuit</TableHeadCell>
 							<TableHeadCell>Calle</TableHeadCell>
 							<TableHeadCell>Altura</TableHeadCell>
@@ -170,88 +182,74 @@
 											    class="bg-primary-500 h-8 ml-2 rounded">Editar</Button>
 										<Modal bind:open={formModalEdit} size="xs" autoclose={false} class="w-full">		
 											<form method="POST" action="?/editClient">			
-															<Input
-																type="hidden"
-																name="cliente_id"
-																bind:value={selectedCliente_id}/>
-
-																<Label class="space-y-2">
-																	<span>Razon Social</span>
-																<Input
-																	type="text"
-																	name="razon_social"
-																	value={selectedRazon_social} class="bg-white h-8 rounded"
-																	required
-																/>
-															</Label>
-																<Label class="space-y-2">
-																	<span>Cuit</span>
-																
-																	<Input
-																		type="text"
-																		name="cuit"
-																		value={selectedCuit} class="bg-white h-8 rounded"
-																		required
-																	/>
-																</Label>
-																	<Label class="space-y-2">
-																		<span>Dom</span>
-																	<Input
-																			type="text"
-																			name="domicilio_calle"
-																			value={selectedDomicilio_calle} class="bg-white h-8 rounded"
-																			required
-																		/>
-																	</Label>
-																		<Label class="space-y-2">
-																			<span>Dom. calle</span>
-																		<Input
-																				type="text"
-																				name="domicilio_altura"
-																				value={selectedDomicilio_altura} class="bg-white h-8 rounded"
-																				required
-																			/>
-																		</Label>
-																			<Label class="space-y-2">
-																				<span>Loc.</span>
-																			<Input
-																					type="text"
-																					name="localidad"
-																					value={selectedLocalidad} class="bg-white h-8 rounded"
-																					required
-																				/>
-																			</Label>
-																				<Label class="space-y-2">
-																					<span>C.p</span>
-																				<Input
-																						type="text"
-																						name="codigo_postal"
-																						value={selectedCodigo_postal} class="bg-white h-8 rounded"
-																						required
-																					/>
-																				</Label>
-																					<Label class="space-y-2">
-																						<span>Tel</span>
-																					<Input
-																							type="text"
-																							name="telefono"
-																							value={selectedTelefono} class="bg-white h-8 rounded"
-																							required
-																						/>
-																					</Label>
-																						<Label class="space-y-2">
-																							<span>Email</span>
-																						<Input
-																								type="email"
-																								name="email"
-																								value={selectedEmail} class="bg-white h-8 rounded"
-																								required/>
-												                                     	</Label>
+												<Input type="hidden" name="cliente_id" bind:value={selectedCliente_id}/>
+												<Label class="space-y-2">
+												  <span>Razon Social</span>
+												<Input name="razon_social"
+												type="text"
+												value={selectedRazon_social} class="bg-white h-8 rounded"
+												required/>
+											   </Label>
+												<Label class="space-y-2">
+												 <span>Cuit</span>	
+												<Input
+												  type="text"
+												  name="cuit"
+												  value={selectedCuit} class="bg-white h-8 rounded"
+												  required/>
+												</Label>
+												<Label class="space-y-2">
+												  <span>Dom</span>
+												<Input
+												type="text"
+												name="domicilio_calle"
+												value={selectedDomicilio_calle} class="bg-white h-8 rounded"
+												required/>
+												</Label>
+												<Label class="space-y-2">
+												<span>Dom. calle</span>
+												<Input
+													type="text"
+													name="domicilio_altura"
+													value={selectedDomicilio_altura} class="bg-white h-8 rounded"
+													required/>
+												</Label>
+												<Label class="space-y-2">
+													<span>Loc.</span>
+												<Input
+												    type="text"
+													name="localidad"
+													value={selectedLocalidad} class="bg-white h-8 rounded"
+													required/>
+												</Label>
+												<Label class="space-y-2">
+													<span>C.p</span>
+												<Input
+												    type="text"
+													name="codigo_postal"
+													value={selectedCodigo_postal} class="bg-white h-8 rounded"
+													required/>
+												</Label>
+												<Label class="space-y-2">
+													<span>Tel</span>
+												<Input
+													type="text"
+													name="telefono"
+													value={selectedTelefono} class="bg-white h-8 rounded"
+													required/>
+												</Label>
+												<Label class="space-y-2">
+													<span>Email</span>
+												<Input
+													type="email"
+													name="email"
+													value={selectedEmail} class="bg-white h-8 rounded"
+													required/>
+												</Label>
 											<Button on:click={ModalClose} class="bg-primary-500 h-8 ml-2 rounded">Cancelar</Button>
 											<Button type="submit" class="bg-primary-500 h-8 ml-2 rounded">Confirmar</Button>																																		
 										</form>
-										</Modal>
-										
+										</Modal>		
 									</TableBodyCell>
 									<TableBodyCell><!---------------------Elimina el cliente--------------------->
 										<Button on:click={() => { //<!-----------------------------------------Modal para eliminar-------->
@@ -264,17 +262,16 @@
 												<div>
 													<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> Confirmar la eliminación  !!</h3>
 													<P value={cli.razon_social}>Cliente:{cli.razon_social}</P> 
-														
-															<Input
-																type="hidden"
-																name="cliente_id"
-																bind:value={selectedCliente_id}
-																required/>
-															<Button on:click={ModalClose} class="bg-primary-500 h-8 ml-2 rounded">Cancelar</Button>
-															<Button type="submit" class="bg-primary-500 h-8 ml-2 rounded">Confirmar</Button>
-					</div>													
-				 </Modal>
-				</form>									
+												<Input
+												type="hidden"
+												name="cliente_id"
+												bind:value={selectedCliente_id}
+												required/>
+												<Button on:click={ModalClose} class="bg-primary-500 h-8 ml-2 rounded">Cancelar</Button>
+												<Button type="submit" class="bg-primary-500 h-8 ml-2 rounded">Confirmar</Button>
+					  </div>													
+				    </Modal>
+				   </form>									
 				</TableBodyCell>
 			 </TableBodyRow>
 			{/each}

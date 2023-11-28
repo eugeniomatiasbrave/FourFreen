@@ -2,18 +2,41 @@ import { error } from '@sveltejs/kit';
 import { BASE_URL } from '$lib/utils.js';
 import {fetchApi} from '$lib/fetchApi.js';
 
-export const load = async ({ locals }) => {
+export const load = async ({locals,url}) => {
 
-const getClientes = async()=>{
+	const sort=url.searchParams.get('sort');
+
+    const getClientes = async()=>{
 		try {
 		  return await fetchApi.get({ url: BASE_URL +  "/clientes", token: locals.token, resStatus: 200 });  
 		  } catch (err) {
 		   console.error('Error: ', err);
 		   throw error(500, 'Algo salio mal con la peticion de los clientes', err);
 		  }}
-	    return {
-		clientes: getClientes()
-	  } 
+
+		  const getClientesSearch=async()=>{
+			try {
+			  return await fetchApi.get({url:BASE_URL+'/clientes?search=',token:locals.token,resStatus:200}) 
+			  } catch (err) {
+				console.error('Error: ', err);
+			  throw error(500, 'Algo salio mal al filtrar por nombre de cliente' , err);
+			 }     
+		   }
+
+	  const getSortcl=async()=>{
+		try {
+		  return await fetchApi.get({url:BASE_URL+`/clientes?sort=razon_social:${sort}`,token:locals.token,resStatus:200});
+		  } catch (err) {
+			console.error('Error: ', err);
+		  throw error(500, 'Algo salio mal al ordenar los clientes', err);
+		 }     
+	   }
+
+	   return {
+		clientes:getClientes(),
+		sortrazonsocial:getSortcl(),
+		searchclientes:getClientesSearch()
+	 } 
   }  
 
   export const actions={

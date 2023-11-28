@@ -55,7 +55,9 @@ DELETE {{baseUrl}}/productos/104
            * ADD clientes ..................................................................ok
            * EDIT clientes .................................................................ok
            * DELETE clientes ...............................................................ok
-           * Filtrar clientes x nombre......................................................
+           * Ordenar por click en cabecera de columna:
+                  * Nombre..................................................................ok ?? Adrian cree un endpoint se puede?
+           * Filtrar clientes x nombre......................................................ok
 
   
 GET {{baseUrl}}/clientes  // Recupera todos los productos
@@ -64,6 +66,8 @@ GET {{baseUrl}}/clientes/1  // recuperda los datos de un producto en particular 
 POST {{baseUrl}}/clientes  // para dar de alta un producto, en el boy va el json y devuelve los datos enviados más el id del producto
 PATCH {{baseUrl}}/clientes/2  // para actualizar nombre y/o precio del producto, va el :id en el path y los campos en el body
 DELETE {{baseUrl}}/clientes/3 //para eliminar un producto, va el :id en el path
+GET {{baseUrl}}/clientes?sort=razon_social:-1 HTTP/1.1.......euge
+GET {{baseUrl}}/clientes?search=ELO HTTP/1.1 ................euge
     
 
 

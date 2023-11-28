@@ -1,5 +1,5 @@
 @baseUrl = https://fg-api-rest.fly.dev
-# @baseUrl = http://localhost:3000
+@baseUrl = http://localhost:3000
 @token = eyJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvX2lkIjoxLCJub21icmUiOiJhQGEuY29tIiwiaWF0IjoxNjk3NDY0MTAzfQ.Jx6HocdoKz8H7kxPqrVjmEqYBLmjODjw3CHoWdxjLGs
 
 // Recupera todos los productos
@@ -53,4 +53,15 @@ Content-Type: application/json
 ###
 //para eliminar un producto, va el :id en el path
 DELETE {{baseUrl}}/clientes/3 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+//  creado x mi....consultar a Adrian
+GET {{baseUrl}}/clientes?sort=razon_social:-1 HTTP/1.1  
+Authorization: Bearer {{token}}
+
+
+### creado por mi...Adrian??
+// recupera todos los productos que contengan la palabra ELO en el nombre . Ordena por nombre
+GET {{baseUrl}}/clientes?search=Ver HTTP/1.1 
 Authorization: Bearer {{token}}
