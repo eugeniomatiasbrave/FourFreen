@@ -80,23 +80,19 @@
 					<Label class="space-y-2"><span>Cuit</span>
 					  <Input type="number" name="cuit" placeholder="escribe aqui el cuit" class="bg-white h-8 rounded" maxlength="11" required/>			
 					</Label>
-								<Label class="space-y-2">
-									<span>Calle</span>
-									<Input
-										type="text"
-										name="domicilio_calle"
-										placeholder="escribe aqui calle" class="bg-white h-8 rounded"
-										required/>
-								</Label>
-								<Label class="space-y-2">
-									<span>Altura</span>
-									<Input
-										type="text"
-										name="domicilio_altura"
-										placeholder="escribe aqui altura" class="bg-white h-8 rounded"
-										required/>
-								</Label>
-								<Label class="space-y-2">
+					<Label class="space-y-2">
+						<span>Calle</span>
+					  <Input type="text" name="domicilio_calle" placeholder="escribe aqui calle" class="bg-white h-8 rounded" required/>
+					</Label>
+					<Label class="space-y-2">
+						<span>Altura</span>
+					 <Input
+						type="text"
+						name="domicilio_altura"
+						placeholder="escribe aqui altura" class="bg-white h-8 rounded"
+						required/>
+					</Label>
+					<Label class="space-y-2">
 									<span>Loc..</span>
 									<Input
 										type="text"

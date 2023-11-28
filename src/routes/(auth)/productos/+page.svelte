@@ -1,6 +1,7 @@
 <script>
 	import {goto} from '$app/navigation';
-	import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';			
+	import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';	
+	import { ChevronDownSolid } from 'flowbite-svelte-icons';		
 	import {selectedProducto,selectedNombre,selectedPrecio,formModal,formModalEdit,formModalDelete} from './store';			
 	export let data;
 	export const {productos,productosSearch,sortPrecio,searchSortPrecio,sortNombre,sortProducto_id}=data;
@@ -85,7 +86,7 @@ const SortedProducto_id=(params)=>{
 
 	<P size="2xl" align="center">Tabla de Productos</P>
 	<!--------------------------Seccion tabla --> 	
-		   <div class="mt-8"><!----------------Div contenedor: tabla + add + Filtro--------->
+		   <div class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5"><!----------------Div contenedor: tabla + add + Filtro--------->
 			 <div class=" flex justify-between items-center mx-auto w-full md:w-1/2"> <!-----cabecera Add + Filtro--------->
 				<div> <!----------------------------boton add productos--------> 		
 				  <Button href="/productos/registros" size="xs" class="bg-primary-500 rounded px-2" on:click={()=>{formModal.set(true)}}>Add</Button>		
@@ -98,12 +99,12 @@ const SortedProducto_id=(params)=>{
 				</div> 
 			  </div>
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
-			  <Table hoverable={true} class="w-1/2 mx-auto mt-2"> 		
+			  <Table hoverable={true} class="w-1/2 mx-auto mt-2 "> 		
 				<TableHead class="bg-primary-500 text-white"> <!------------------------cabecera celdas-->
 				  <TableHeadCell>Img</TableHeadCell>
-				  <TableHeadCell><Button on:click={()=>SortedProducto_id(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded m-0 p-0" size="xs">+ ID -</Button></TableHeadCell>
-				  <TableHeadCell><Button on:click={()=>SortedNombre(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded m-0 p-0" size="xs">A- NOMBRE -Z</Button></TableHeadCell> 
-				  <TableHeadCell><Button on:click={()=>OrderedPrecio(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded m-0 p-0" size="xs">+ PRECIO -</Button></TableHeadCell>
+				  <TableHeadCell><Button on:click={()=>SortedProducto_id(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded m-0 p-0" size="xs">ID<ChevronDownSolid class="w-3 h-3 ml-2 text-white dark:text-white"/></Button></TableHeadCell>
+				  <TableHeadCell><Button on:click={()=>SortedNombre(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded m-0 p-0" size="xs">NOMBRE<ChevronDownSolid class="w-3 h-3 ml-2 text-white dark:text-white"/></Button></TableHeadCell> 
+				  <TableHeadCell><Button on:click={()=>OrderedPrecio(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded m-0 p-0" size="xs">PRECIO<ChevronDownSolid class="w-3 h-3 ml-2 text-white dark:text-white"/></Button></TableHeadCell>
 				  <TableHeadCell>Editar
 					<span class="sr-only">Editar</span>
 				  </TableHeadCell>
