@@ -6,53 +6,64 @@ export const load=async({locals,url})=>{
   
 const search=url.searchParams.get('search');
 const sort=url.searchParams.get('sort');
-const datos=url.searchParams.get('datos'); //datos: precio, nombre, producto_id
 
 const getProductos = async () => {
-    try {
-      return await fetchApi.get({ url: BASE_URL + '/productos', token: locals.token, resStatus: 200 });  
-      } catch (err) {
-       console.error('Error: ', err);
-       throw error(500, 'Algo salio mal con la peticion de los productos', err);
-      }     
-    }
- 
+  try {
+    const productos = await fetchApi.get({ url: BASE_URL + '/productos', token: locals.token, resStatus: 200 });
+    return productos;
+  } catch (err) {
+    console.error('Error original: ', err);
+    throw error(500, 'Algo salio mal con la peticion de los productos', err);
+  }
+};
+
+
 const getProductosSearch=async()=>{
     try {
-      return await fetchApi.get({url:BASE_URL+'/productos?search=',token:locals.token,resStatus:200}) 
-      } catch (err) {
+      const productosSearch = await fetchApi.get({url:BASE_URL+'/productos?search=',token:locals.token,resStatus:200}) 
+      return productosSearch;
+    } catch (err) {
         console.error('Error: ', err);
       throw error(500, 'Algo salio mal al filtrar por nombre de producto' , err);
      }     
    }
 
-const getSSP=async()=>{
- 
+const getSortPrecio=async()=>{
     try {
-      return await fetchApi.get({url:BASE_URL+`/productos?search=${search}&sort=precio:${sort}`,token:locals.token,resStatus:200}) 
-      } catch (err) {
+      const sortPrecio = await fetchApi.get({url:BASE_URL+`/productos?sort=${search}:${sort}`,token:locals.token,resStatus:200});
+      return sortPrecio;
+    } catch (err) {
         console.error('Error: ', err);
-      throw error(500, 'Algo salio mal al ordenar por nombre y precio', err);
+      throw error(500, 'Algo salio mal al ordenar los productos', err);
      }     
    }
 
-const getSort=async()=>{
+   const getSortNombre=async()=>{
     try {
-      return await fetchApi.get({url:BASE_URL+`/productos?sort=${datos}:${sort}`,token:locals.token,resStatus:200});
-      } catch (err) {
+      const sortNombre = await fetchApi.get({url:BASE_URL+`/productos?sort=${search}:${sort}`,token:locals.token,resStatus:200});
+       return sortNombre;  
+    } catch (err) {
+        console.error('Error: ', err);
+      throw error(500, 'Algo salio mal al ordenar los productos', err);
+     }     
+   }
+
+   const getSortProducto_id=async()=>{
+    try {
+      const sortProducto_id = await fetchApi.get({url:BASE_URL+`/productos?sort=${search}:${sort}`,token:locals.token,resStatus:200});
+       return sortProducto_id;  
+    } catch (err) {
         console.error('Error: ', err);
       throw error(500, 'Algo salio mal al ordenar los productos', err);
      }     
    }
 
     return {
-      productos: getProductos(),
-      productosSearch: getProductosSearch(),
-      searchSortPrecio: getSSP(),
-      sortPrecio: getSort('precio'),
-      sortNombre:getSort('nombre'),
-      sortProducto_id:getSort('producto_id')
-      
+      productos: await getProductos(),
+      productosSearch: await getProductosSearch(),
+      sortPrecio: await getSortPrecio(),
+      sortNombre: await getSortNombre(),
+      sortProducto_id: await getSortProducto_id()   
     }
   }  
 

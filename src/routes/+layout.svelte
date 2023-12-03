@@ -5,9 +5,7 @@
 	import './style.css';
 	import '../app.postcss';
 	export let data;
-
-	//console.log(data.usuario)
-	
+	//console.log(data.usuario)	
 	$: activeUrl = $page.url.pathname;
 
 </script>
@@ -20,7 +18,7 @@
 	<NavHamburger class="" />
 	<NavUl {activeUrl}>
 	  {#if data.usuario === undefined}
-		<NavLi href="/login">Login</NavLi>
+		<NavLi href="/login">Inciar sesión</NavLi>
 	  {:else}
 		<NavUl>
 			{#each data.menu as {item, icono, tooltip, ruta} }
@@ -28,7 +26,7 @@
 				<a href={ruta} data-tooltip="Tooltip 1" data-placement="left">{item}</a>
 			</NavLi>
 			{/each}		
-			<NavLi href="/logout">Logout</NavLi>	
+			<NavLi href="/logout">Cerrar sesión</NavLi>	
 		</NavUl>
 	  {/if}
 	</NavUl>
@@ -36,9 +34,7 @@
  
  <slot/>
 
-
 <style>
-
 </style>
 
 

@@ -11,23 +11,25 @@ export const load = async ({ locals, url }) => {
 			localUrl += '?estado_id=' + estadoId;
 		}
 		console.log('url:', localUrl);
-		return await fetchApi.get({ url: BASE_URL + localUrl, token: locals.token, resStatus: 200 });
+		const pedidos = await fetchApi.get({ url: BASE_URL + localUrl, token: locals.token, resStatus: 200 });
+	    return pedidos;
 	};
+
 	const getProductos = async () => {
-		return await fetchApi.get({
-			url: BASE_URL + '/productos',
-			token: locals.token,
-			resStatus: 200
+		const productos = await fetchApi.get({url: BASE_URL + '/productos',token: locals.token,resStatus: 200
 		});
+		return productos;
 	};
+
 	const getClientes = async () => {
-		return await fetchApi.get({ url: BASE_URL + '/clientes', token: locals.token, resStatus: 200 });
+		const clientes = await fetchApi.get({ url: BASE_URL + '/clientes', token: locals.token, resStatus: 200 });
+	     return clientes;
 	};
 
 	return {
-		pedidos: getPedidos(),
-		productos: getProductos(),
-		clientes: getClientes()
+		pedidos: await getPedidos(),
+		productos:await getProductos(),
+		clientes: await getClientes()
 	};
 };
 

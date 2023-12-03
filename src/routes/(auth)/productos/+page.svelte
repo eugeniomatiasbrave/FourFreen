@@ -5,6 +5,7 @@
 	export let data;
 	export const {productos,productosSearch,sortPrecio,searchSortPrecio,sortNombre,sortProducto_id}=data;
 	
+	
 	let searchTerm='';
 	let sortOrder= 1
 	let Productos=productos.datos
@@ -24,17 +25,7 @@ const reset=()=>{
     searchTerm='';
 	Productos=productos.datos;
 	}
-	
-	/* ------ funcion Filtrar x nombre & precio----///
-	const applySSP=(params)=>{
-	  let search= params;
-	  let sort=-1;
-	  let filteredSSP=searchSortPrecio.datos
-	  filteredSSP = searchSortPrecio.datos.filter(prod => prod.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
-	  Productos=filteredSSP; 
-	  goto(`/productos?search=${search}&sort=precio:${sort}`)
-   }
-   */
+
 	
 const OrderedPrecio=(params)=>{
 	sortOrder= -sortOrder;
@@ -109,7 +100,7 @@ const SortedProducto_id=(params)=>{
 	<P size="2xl" align="center">Tabla de Productos</P>
   </div>
 	<!--------------------------Seccion tabla --> 	
-	  <div class=" bg-white mx-auto p-1 pt-2 rounded shadow-md w-3/4 "><!----------------Div contenedor: tabla + add + Filtro--------->
+	  <div class=" bg-white mx-auto p-1 pt-2 rounded border border-gray-200 shadow-md w-3/4"><!----------------Div contenedor: tabla + add + Filtro--------->
 			 <div class=" flex justify-between items-center mx-auto w-full"> <!-----cabecera Add + Filtro--------->
 				<div> <!----------------------------boton add productos--------> 		
 				  <Button href="/productos/registros" size="xs" class="bg-primary-500 rounded px-2" on:click={()=>{formModal.set(true)}}>Add</Button>		
@@ -117,7 +108,6 @@ const SortedProducto_id=(params)=>{
 				<div class="flex items-center"> <!----------------Filtro--------->
 		         <Input type="text" bind:value={searchTerm} name="searchTerm" placeholder="Search" required class=" bg-white h-8 rounded"  /> 
 			     <Button size="xs" on:click={()=> applyFilter(searchTerm)} class="bg-primary-500 h-8 ml-1 px-2 rounded">Buscar</Button> 
-			<!--  <Button size="xs" on:click={()=> applySSP(searchTerm)} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded" >Filtrar x nombre&precio</Button> -->
 			     <Button size="xs" on:click={reset} class="bg-primary-500 h-8 ml-1 px-2 rounded">Reset</Button>
 				</div> 
 			  </div>
@@ -126,7 +116,7 @@ const SortedProducto_id=(params)=>{
 				<TableHead class=" bg-primary-500 text-white"> <!------------------------cabecera celdas-->
 					<TableHeadCell>
 					  <div class="flex items-center">
-						ID<a href="#2" on:click={()=>SortedProducto_id(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded " 
+						ID<a href="#2" on:click={()=>SortedProducto_id(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded" 
 						size="xs"><svg class="w-3.5 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
 					    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
 				        </svg></a>

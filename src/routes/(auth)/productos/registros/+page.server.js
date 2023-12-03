@@ -2,13 +2,13 @@ import { error } from '@sveltejs/kit';
 import { BASE_URL } from '$lib/utils.js';
 import { fetchApi } from '$lib/fetchApi.js';
 
-export const actions = {
-	addProd: async ({ request, locals, cookies }) => {
+export const actions = {	
+	addProd: async ({ request, locals }) => {
 		const formData = await request.formData();
 		const nombre = formData.get('nombre');
 		const precio = parseFloat(formData.get('precio'));
 
-		console.log('producto:', nombre, precio, locals.token, BASE_URL);
+		//console.log('producto:', nombre, precio, locals.token, BASE_URL);
 
 		try {
 			const res = await fetchApi.post({
@@ -24,20 +24,14 @@ export const actions = {
 			if (res.status === 200) {
 				const datos = await res.json();
 
-				cookies.set(
-					'Producto',
-					JSON.stringify({
+				return {
+					success: true,
+					message: 'Producto agregado correctamente!!!',
+					product: {
 						nombre: datos.nombre,
 						precio: datos.precio
-					}),
-					{
-						httpOnly: true,
-						path: '/',
-						secure: true,
-						sameSite: 'strict',
-						maxAge: 60 * 60 * 24 // 1 day
 					}
-				);
+				};
 			} else {
 				//return { success: false };
 			}

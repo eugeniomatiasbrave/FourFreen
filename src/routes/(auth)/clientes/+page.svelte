@@ -33,7 +33,6 @@
     Swal.fire({
       icon: 'success',
       title: form.message,
-      text: 'Cliente: ',
       backdrop: true,
       confirmButtonText: 'Volver',
       confirmButtonColor: 'rgb(69, 166, 175)'
@@ -79,7 +78,7 @@ const SortedRazonSocial=(params)=>{
 
 <main class="bg-gray-50 dark:bg-gray-900 sm:p-3">
   <P size="2xl" align="center" class="mb-8">Tabla de Clientes</P>
-	<div class=" bg-white mx-auto p-1 pt-2 border rounded shadow-md w-3/4"> <!----------------Div contenedor: tabla + add + Filtro--------->
+	<div class=" bg-white mx-auto p-1 pt-2  border rounded shadow-md w-3/4"> <!----------------Div contenedor: tabla + add + Filtro--------->
 	   <div class=" flex justify-between items-center mx-auto w-full"><!-----cabecera Add + Filtro--------->
 		  <div class=""> <!-----Modal Add--------->
 			  <div>
@@ -123,13 +122,13 @@ const SortedRazonSocial=(params)=>{
 				</form>	
 			 </Modal>
 			</div>
-            <div class="flex items-center">
+            <div class="flex items-center"><!----- Filtro x nombre--------->
 			  <Input type="text" id="search" bind:value={searchTerm} name="search" class="bg-white h-8 rounded" placeholder="Search" required/>
 			  <Button on:click={()=> filterClientes(searchTerm)} class="bg-primary-500 h-8 ml-1 px-2 rounded">Buscar</Button>
 			  <Button on:click={reset} class="bg-primary-500 h-8 ml-1 px-2 rounded">Reset</Button>		
 		    </div>			    
 		</div><!-----fin de cabecera Add + Filtro--------->
-				<div class="">
+				<div >
 					<Table hoverable={true} class=" mt-2 border">
 						<TableHead class="bg-primary-500 text-white">
 							<TableHeadCell>id</TableHeadCell>
@@ -168,7 +167,7 @@ const SortedRazonSocial=(params)=>{
 									<TableBodyCell>{cli.telefono}</TableBodyCell>
 									<TableBodyCell>{cli.email}</TableBodyCell>
 									<TableBodyCell>
-										<Button on:click={()=>{ //<!----------------------------------Modal para edita cliente-------->
+										<a href="#editar" on:click={()=>{ //<!----------------------------------Modal para edita cliente-------->
 												selectedCliente_id = cli.cliente_id;
 												selectedRazon_social = cli.razon_social;
 												selectedCuit = cli.cuit;
@@ -179,7 +178,7 @@ const SortedRazonSocial=(params)=>{
 												selectedTelefono = cli.telefono;
 												selectedEmail = cli.email;				
 											    }} on:click={()=>(formModalEdit = true)}
-											    class="bg-primary-500 h-8 ml-2 rounded">Editar</Button>
+											    class="font-medium text-primary-600 hover:underline dark:text-primary-500">Editar</a>
 										<Modal bind:open={formModalEdit} size="xs" autoclose={false} class="w-full">		
 											<form method="POST" action="?/editClient">			
 												<Input type="hidden" name="cliente_id" bind:value={selectedCliente_id}/>
@@ -252,10 +251,10 @@ const SortedRazonSocial=(params)=>{
 										</Modal>		
 									</TableBodyCell>
 									<TableBodyCell><!---------------------Elimina el cliente--------------------->
-										<Button on:click={() => { //<!-----------------------------------------Modal para eliminar-------->
+										<a href="#eliminar" on:click={() => { //<!-----------------------------------------Modal para eliminar-------->
 												selectedCliente_id = cli.cliente_id;	
 											    }} on:click={() => (formModalDelete = true)}
-											    class="bg-primary-500 h-8 ml-2 rounded">Eliminar</Button>
+											   class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a>
 
 										<form method="POST" action="?/deleteClient" on:submit={()=>{selectedCliente_id = cli.cliente_id;}}>
 											<Modal bind:open={formModalDelete} size="xs" autoclose={false} class="w-full">

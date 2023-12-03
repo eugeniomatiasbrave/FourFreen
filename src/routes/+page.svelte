@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Showcase</title>
+	<title>Inicio</title>
 	<meta name="description" content="Showcase" />
 </svelte:head>
 
