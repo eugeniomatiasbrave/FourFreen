@@ -34,7 +34,7 @@ console.log(detalle)
         {/each}
         <footer>
           <div>
-          <button  class="outline"><a href="/pedidos" style="color:white;">Volver</a></button>
+          <button  class="outline"><a href="/pedidos" style="color:white;">Cancelar</a></button>
         </div>
         <div>
           <button  class="outline">Editar</button>

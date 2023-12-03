@@ -76,7 +76,7 @@ const estado_id = $page.url.searchParams.get('estado_id') || "10"
             </div> 
 
               <div>
-                <button  class="outline"><a href="/pedidos?estado_id=10" style="color:white;">Volver</a></button>
+                <button  class="outline"><a href="/pedidos?estado_id=10" style="color:white;">Cancelar</a></button>
               </div>   
            
           </form>

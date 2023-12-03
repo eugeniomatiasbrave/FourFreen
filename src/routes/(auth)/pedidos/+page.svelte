@@ -123,7 +123,12 @@ const ModalClose =()=>{
   <div class=" flex justify-between items-center mx-auto w-full mb-1"><!-----cabecera Add + Filtro--------->
 	<div class=""> <!-------modal add-------------->
 	   <div>
-	     <Button on:click={() => (formModalAdd = true)} class="bg-primary-500 rounded h-8 p-2">+ Nuevo Producto</Button>
+	     <Button on:click={() => (formModalAdd = true)} size="xs" class="bg-primary-500 rounded m-0 px-1">
+			<svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
+			 fill="none" viewBox="0 0 20 20">
+			<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+			 d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+			</svg> Nuevo</Button>		
 	   </div>
 	   <form  method="POST" action="?/addPedido">       	 
 	   <Modal bind:open={formModalAdd} size="xs" autoclose={false} class="w-full">			
@@ -162,7 +167,7 @@ const ModalClose =()=>{
 							</Label>
 						  </div>					 
 						  <div>	  
-						     <Button  on:click={handleAdd} class="bg-primary-500 h-8 ml-1 px-2 my-4 rounded">Add item</Button>	
+						     <Button  on:click={handleAdd} size="xs" class="bg-primary-500 h-8 ml-1 px-2 my-4 rounded">Agregar item</Button>	
 					      </div>	
 						
 					   <div>	
@@ -186,17 +191,17 @@ const ModalClose =()=>{
 						</div>
 					   </div> <!-------fin Area items-------------->					
 					   <div class="mt-2">
-						<Button on:click={ModalClose} class="bg-primary-500 h-8 ml-2 rounded">Cancelar</Button>				  
-						<Button class="bg-primary-500 h-8 ml-2 mt-2 rounded">Reset</Button>
-						<Button type="submit" class="bg-primary-500 h-8 ml-2  rounded">Add Pedido</Button>		
+						<Button on:click={ModalClose} size="xs" class="bg-primary-500 h-8 ml-2 rounded">Cancelar</Button>				  
+						<Button size="xs" class="bg-primary-500 h-8 ml-2 mt-2 rounded">Actualizar</Button>
+						<Button type="submit" size="xs" class="bg-primary-500 h-8 ml-2  rounded">Nuevo Pedido</Button>		
 					  </div>
 					</Modal>
 				</form>	
     </div><!-----------fin de modal add-------------->
 	<div class="flex items-center"><!----- Filtro--------->
-		<Input type="text" id="search" bind:value={searchTerm} name="search" class="bg-white h-8 rounded" placeholder="Search" required/>
-		<Button on:click={()=> filteredPedidos(searchTerm)} class="bg-primary-500 h-8 ml-1 px-2 rounded">Buscar</Button>
-		<Button on:click={reset} class="bg-primary-500 h-8 ml-1 px-2 rounded">Reset</Button>		
+		<Input type="text" id="search" bind:value={searchTerm} name="search" class="bg-white h-8 rounded" placeholder="Buscar pedido" required/>
+		<Button on:click={()=> filteredPedidos(searchTerm)} size="xs" class="bg-primary-500 h-8 ml-1 px-2 rounded">Buscar</Button>
+		<Button on:click={reset} size="xs" class="bg-primary-500 h-8 ml-1 px-2 rounded">Actualizar</Button>		
 	</div>			    
   </div> <!-----fin cabecera Add + Filtro--------->
   <div class="border-gray-900">

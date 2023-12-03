@@ -82,7 +82,12 @@ const SortedRazonSocial=(params)=>{
 	   <div class=" flex justify-between items-center mx-auto w-full"><!-----cabecera Add + Filtro--------->
 		  <div class=""> <!-----Modal Add--------->
 			  <div>
-			   <Button on:click={() => (formModalAdd = true)} class="bg-primary-500 rounded h-8 p-2">Add</Button>
+			   <Button on:click={() => (formModalAdd = true)}  size="xs" class="bg-primary-500 rounded h-8 p-2">
+				<svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
+				fill="none" viewBox="0 0 20 20">
+			   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+				d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+			   </svg> Nuevo</Button>		
 			  </div>
 				<Modal bind:open={formModalAdd} size="xs" autoclose={false} class="w-full">
 				  <form method="POST" action="?/addClient">
@@ -117,15 +122,15 @@ const SortedRazonSocial=(params)=>{
 						<span>Email</span>
 						<Input type="email" name="email" placeholder="email" class="bg-white h-8 rounded" required />
 					</Label>		
-					<Button on:click={ModalClose} class="bg-primary-500 h-8 ml-2 mt-2 rounded">Cancelar</Button>
-					<Button type="submit" class="bg-primary-500 h-8 ml-2 mt-2 rounded">Confirmar</Button>												
+					<Button on:click={ModalClose} size="xs" class="bg-primary-500 h-8 ml-2 mt-2 rounded">Cancelar</Button>
+					<Button type="submit" size="xs" class="bg-primary-500 h-8 ml-2 mt-2 rounded">Confirmar</Button>												
 				</form>	
 			 </Modal>
 			</div>
             <div class="flex items-center"><!----- Filtro x nombre--------->
-			  <Input type="text" id="search" bind:value={searchTerm} name="search" class="bg-white h-8 rounded" placeholder="Search" required/>
-			  <Button on:click={()=> filterClientes(searchTerm)} class="bg-primary-500 h-8 ml-1 px-2 rounded">Buscar</Button>
-			  <Button on:click={reset} class="bg-primary-500 h-8 ml-1 px-2 rounded">Reset</Button>		
+			  <Input type="text" id="search" bind:value={searchTerm} name="search" class="bg-white h-8 rounded" placeholder="Buscar cliente" required/>
+			  <Button on:click={()=> filterClientes(searchTerm)} size="xs" class="bg-primary-500 h-8 ml-1 px-2 rounded">Buscar</Button>
+			  <Button on:click={reset} size="xs" class="bg-primary-500 h-8 ml-1 px-2 rounded">Actualizar</Button>		
 		    </div>			    
 		</div><!-----fin de cabecera Add + Filtro--------->
 				<div >
@@ -214,7 +219,7 @@ const SortedRazonSocial=(params)=>{
 													required/>
 												</Label>
 												<Label class="space-y-2">
-													<span>Loc.</span>
+													<span>Localidad.</span>
 												<Input
 												    type="text"
 													name="localidad"
@@ -222,7 +227,7 @@ const SortedRazonSocial=(params)=>{
 													required/>
 												</Label>
 												<Label class="space-y-2">
-													<span>C.p</span>
+													<span>Cod.postal</span>
 												<Input
 												    type="text"
 													name="codigo_postal"
@@ -230,7 +235,7 @@ const SortedRazonSocial=(params)=>{
 													required/>
 												</Label>
 												<Label class="space-y-2">
-													<span>Tel</span>
+													<span>Telefono</span>
 												<Input
 													type="text"
 													name="telefono"

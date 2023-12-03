@@ -38,12 +38,12 @@ const ModalClose =()=>{
 				  <Input type="text" name="nombre" placeholder="escribe aqui el producto" class="bg-white h-8 rounded" required/>
 				</Label>
 				<Label class="space-y-2">
-				  <span>precio</span>
+				  <span>Precio</span>
 				  <Input type="text" name="precio" placeholder="escribe aqui el precio" class="bg-white h-8 rounded" required/>
 				</Label> 
 				<footer>
 				<Button type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Confirmar</Button>
-				<Button on:click={() => goto('/productos?search=')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Volver</Button>
+				<Button on:click={() => goto('/productos?search=')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancela</Button>
 			   </footer>  
 			</form>
 			</Modal>
@@ -67,7 +67,7 @@ const ModalClose =()=>{
 			  </Label>
 			  <footer> 
 			  <Button type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Confirmar</Button>
-			  <Button on:click={() => goto('/productos?search=')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Volver</Button>
+			  <Button on:click={() => goto('/productos?search=')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancelar</Button>
 			</footer>
 			</Modal>
 		</form>
@@ -79,7 +79,7 @@ const ModalClose =()=>{
 				  <P value={$selectedNombre}>Producto: {$selectedNombre}</P>   
 				  <Input type="hidden" name="producto_id" value={$selectedProducto}  class="bg-white h-8 rounded"/>	   
 				  <Button type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Confirmar</Button>
-				  <Button on:click={() => goto('/productos?search=')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Volver</Button>
+				  <Button on:click={() => goto('/productos?search=')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancelar</Button>
 				</Modal>
 			</form>
 		</div><!--eliminar-->
