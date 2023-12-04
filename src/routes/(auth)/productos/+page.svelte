@@ -26,7 +26,6 @@ const reset=()=>{
 	Productos=productos.datos;
 	}
 
-	
 const OrderedPrecio=(params)=>{
 	sortOrder= -sortOrder;
 	let sort=params;
