@@ -6,6 +6,7 @@
 	export const {productos,productosSearch,sortPrecio,searchSortPrecio,sortNombre,sortProducto_id}=data;
 	
 	
+	
 	let searchTerm='';
 	let sortOrder= 1
 	let Productos=productos.datos
