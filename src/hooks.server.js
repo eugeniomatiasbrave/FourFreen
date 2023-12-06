@@ -23,5 +23,15 @@ export const handle = async ({event, resolve}) => {
   event.locals.usuario = JSON.parse(usuario)
   console.log("ok hook:", event.locals)
   }
+
   return resolve(event)
+  
 }
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 

@@ -1,11 +1,9 @@
 <script>
-	import {goto} from '$app/navigation';
-	import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell, Pagination} from 'flowbite-svelte';			
-	import {selectedProducto,selectedNombre,selectedPrecio,formModal,formModalEdit,formModalDelete} from './store';			
+	import { goto} from '$app/navigation';
+	import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';			
 	export let data;
+	import { selectedProductoId, selectedNombre, selectedPrecio } from './storeProd';
 	export const {productos,productosSearch,sortPrecio,searchSortPrecio,sortNombre,sortProducto_id}=data;
-	
-	
 	
 	let searchTerm='';
 	let sortOrder= 1
@@ -14,6 +12,9 @@
 	let filteredProductos=productosSearch.datos
 	let filteredSortNombre=sortNombre.datos
 	let filteredSortedId=sortProducto_id.datos
+
+
+
 
 const applyFilter=(params)=>{
 	let search=params;
@@ -64,30 +65,6 @@ const SortedProducto_id=(params)=>{
 		goto(`/productos?sort=producto_id:${sort}`);
 	}
 
-	//----------Pagianacion  ?????------------////////
-	/*
-	$: activeUrl = $page.url.searchParams.get('page');	
-	$: {  pages.forEach((page) => {
-			let splitUrl = page.href.split('?');
-			let queryString = splitUrl.slice(1).join('?');
-			const hrefParams = new URLSearchParams(queryString);
-			let hrefValue = hrefParams.get('page');
-			if (hrefValue === activeUrl) {
-				page.active = true;
-			} else {
-				page.active = false;
-			}
-		});
-		pages = pages;
-	}
-    const previous = () => {
-    alert('Previous btn clicked. Make a call to your server to fetch data.');
-    };
-    const next = () => {
-    alert('Next btn clicked. Make a call to your server to fetch data.');
-    };
-  */
-
 </script>
 			
 <svelte:head>
@@ -102,8 +79,10 @@ const SortedProducto_id=(params)=>{
 	<!--------------------------Seccion tabla --> 	
 	  <div class=" bg-white mx-auto p-1 pt-2 rounded border border-gray-200 shadow-md w-3/4"><!----------------Div contenedor: tabla + add + Filtro--------->
 			 <div class=" flex justify-between items-center mx-auto w-full"> <!-----cabecera Add + Filtro--------->
-				<div> <!----------------------------boton add productos--------> 		
-				  <Button href="/productos/registros" size="xs" class="bg-primary-500 rounded m-0 px-1" on:click={()=>{formModal.set(true)}}>
+				<div> <!----------------------------boton add productos--------> 	
+				 
+	                
+				  <Button href={`/productos/${0}/agregar`} size="xs" class="bg-primary-500 rounded m-0 px-1">
 					<svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
 					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
 					 d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
@@ -151,50 +130,36 @@ const SortedProducto_id=(params)=>{
 				</TableHead><!----------------------fin cabecera celdas-->
 				
 				<TableBody class="divide-y">
-					{#each Productos as prod}
+					{#each Productos as {producto_id, precio, nombre }}
 					<TableBodyRow class="hover:bg-hover-gray-light">
-					<TableBodyCell>{prod.producto_id}</TableBodyCell>
-					<TableBodyCell>{prod.nombre}</TableBodyCell>
-					<TableBodyCell>{prod.precio}</TableBodyCell>
+					<TableBodyCell >{producto_id}</TableBodyCell>
+					<TableBodyCell >{nombre}</TableBodyCell>
+					<TableBodyCell >{precio}</TableBodyCell>
 					<TableBodyCell>
 						<!------------------------------------------------------Editar producto--------------------->
-						<a href="/productos/registros" on:click={()=>{
-							selectedProducto.set(prod.producto_id);
-							selectedNombre.set(prod.nombre);
-							selectedPrecio.set(prod.precio);
-							formModalEdit.set(true);
+						<a href={`/productos/${producto_id}/editar`}  
+						on:click={()=>{
+							selectedProductoId.set(producto_id);
+							selectedNombre.set(nombre);
+							selectedPrecio.set(precio);
+							
 							}}  
-							class="font-medium text-primary-600 hover:underline dark:text-primary-500">Editar</a>			
+							 class="font-medium text-primary-600 hover:underline dark:text-primary-500"  
+							
+							>Editar</a>			
 					</TableBodyCell>
 					<TableBodyCell>		
-						<a href="/productos/registros" on:click={() => {
-									   selectedProducto.set(prod.producto_id);
-									   selectedNombre.set(prod.nombre);
-									   formModalDelete.set(true);
-										 }} 
-							class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a> 
+						<a href={`/productos/${producto_id}/eliminar`} 
+						on:click={()=>{
+							selectedProductoId.set(producto_id);}}
+							
+						class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a> 
 				   </TableBodyCell>
 				</TableBodyRow>
 				{/each}	
 				</TableBody>
 			  </Table>
 			</div>
-
-			<!------------------Pagianacion  ?????-------------->
-			
-		<!--<div>
-				<Pagination {pages} on:previous={previous} on:next={next} icon>
-					<svelte:fragment slot="prev">
-					  <span class="sr-only">Previous</span>
-					  <ChevronLeftOutline class="w-2.5 h-2.5" />
-					</svelte:fragment>
-					<svelte:fragment slot="next">
-					  <span class="sr-only">Next</span>
-					  <ChevronRightOutline class="w-2.5 h-2.5" />
-					</svelte:fragment>
-				  </Pagination>
-			</div>  -->
-
 		  </div> <!----------------fin Div contenedor: tabla + add + Filtro--------->	
 	</main>
 

@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { BASE_URL } from '$lib/utils.js';
 import { fetchApi } from '$lib/fetchApi.js';
-//import { productosStore } from '$lib/misStores.js';
+
 
 export const load = async ({ locals, url}) => {
   const search = url.searchParams.get('search');

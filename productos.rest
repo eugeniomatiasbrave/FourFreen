@@ -66,5 +66,5 @@ Content-Type: application/json
 
 ###
 //para eliminar un producto, va el :id en el path
-DELETE {{baseUrl}}/productos/104 HTTP/1.1
+DELETE {{baseUrl}}/productos/177 HTTP/1.1
 Authorization: Bearer {{token}}
