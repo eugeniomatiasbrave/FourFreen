@@ -4,7 +4,7 @@ import { fetchApi } from '$lib/fetchApi.js';
 import { z } from 'zod';
 
 const productoSchema = z.object({
-  nombre: z.string(),
+  nombre: z.string().min(1),
   precio: z.number(),
 });
 

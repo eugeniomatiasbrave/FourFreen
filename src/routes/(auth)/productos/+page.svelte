@@ -29,6 +29,7 @@ onDestroy(() => {
   unsubscribePrecio();
 });
 
+console.log(productos.datos)
 
 let searchTerm='';
 let sortOrder= 1
@@ -100,21 +101,56 @@ const SortedProducto_id=(params)=>{
 	<P size="2xl" align="center">Tabla de Productos</P>
   </div>
 	<!--------------------------Seccion tabla --> 	
-	  <div class=" bg-white mx-auto p-1 pt-2 rounded border border-gray-200 shadow-md w-1/2"><!----------------Div contenedor: tabla + add + Filtro--------->
-			 <div class=" flex justify-between items-center mx-auto w-full"> <!-----cabecera Add + Filtro--------->
-				<div> <!----------------------------boton add productos--------> 	      
-				  <Button href={`/productos/${0}/agregar`} size="xs" class="bg-primary-500 rounded m-0 px-1">
-					<svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-					 d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-				    </svg> Nuevo</Button>		
-				</div>
-				<div class="flex items-center"> <!----------------Filtro--------->
-		         <Input type="text" bind:value={searchTerm} name="searchTerm" placeholder="Buscar Producto" required class=" bg-white h-8 rounded"  /> 
-			     <Button size="xs" on:click={()=> applyFilter(searchTerm)} class="bg-primary-500 h-8 ml-1 px-2 rounded">Buscar</Button> 
-			     <Button size="xs" on:click={reset} class="bg-primary-500 h-8 ml-1 px-2 rounded">Actualizar</Button>
-				</div> 
-			  </div>
+	  <div class=" bg-white mx-auto p-1 pt-2 rounded border border-gray-200 shadow-md w-2/3"><!----------------Div contenedor: tabla + add + Filtro--------->
+	
+		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"> 
+		<div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
+		  <Button href={`/productos/${0}/agregar`} size="xs" class="bg-primary-500 rounded m-0 px-2 w-full sm:w-auto">
+			<svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
+			fill="none" viewBox="0 0 20 20">
+			<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+			 d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+			</svg> Nuevo</Button>    
+		</div>
+		<div class="flex items-center"> 
+		  <Input type="text" bind:value={searchTerm} name="searchTerm" placeholder="Buscar Producto" required class=" bg-white h-8 w-full sm:w-auto rounded"  /> 
+		  <Button size="xs" on:click={()=> applyFilter(searchTerm)} class="bg-primary-500 h-8 ml-1 px-2  rounded">Buscar</Button> 
+		  <Button size="xs" on:click={reset} class="bg-primary-500 h-8 ml-1 px-2 rounded">Actualizar</Button>
+		</div> 
+	  </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
 				<Table hoverable={true} class="mx-auto mt-2 border text-xs" > 		
 				<TableHead class=" bg-primary-500 text-white" > <!------------------------cabecera celdas-->
@@ -162,7 +198,7 @@ const SortedProducto_id=(params)=>{
 						on:click={()=>{
 							          selectedProductoId.set(producto_id);
 							          selectedNombre.set(nombre);
-							          selectedPrecio.set(precio);
+							          selectedPrecio.set(precio.toLocaleString('de-DE', { minimumFractionDigits: 2 }));
 							
 							          }}  
 							 class="font-medium text-primary-600 hover:underline dark:text-primary-500"  
@@ -174,7 +210,7 @@ const SortedProducto_id=(params)=>{
 						on:click={() =>{
 							selectedProductoId.set(producto_id);
 							selectedNombre.set(nombre);
-							selectedPrecio.set(precio);
+							selectedPrecio.set(precio.toLocaleString('de-DE', { minimumFractionDigits: 2 }));
 							}}  	
 						class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a> 
 				   </TableBodyCell>

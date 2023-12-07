@@ -5,7 +5,7 @@ import { z } from 'zod';
 
 const productoSchema = z.object({
   producto_id: z.string(),
-  nombre: z.string(),
+  nombre: z.string().min(1),
   precio: z.number(),
 });
 
