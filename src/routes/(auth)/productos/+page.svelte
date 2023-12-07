@@ -13,9 +13,7 @@
 	let filteredSortNombre=sortNombre.datos
 	let filteredSortedId=sortProducto_id.datos
 
-
-
-
+	
 const applyFilter=(params)=>{
 	let search=params;
 	filteredProductos=productosSearch.datos.filter(prod=>prod.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -139,20 +137,22 @@ const SortedProducto_id=(params)=>{
 						<!------------------------------------------------------Editar producto--------------------->
 						<a href={`/productos/${producto_id}/editar`}  
 						on:click={()=>{
-							selectedProductoId.set(producto_id);
-							selectedNombre.set(nombre);
-							selectedPrecio.set(precio);
+							          selectedProductoId.set(producto_id);
+							          selectedNombre.set(nombre);
+							          selectedPrecio.set(precio);
 							
-							}}  
+							          }}  
 							 class="font-medium text-primary-600 hover:underline dark:text-primary-500"  
 							
 							>Editar</a>			
 					</TableBodyCell>
 					<TableBodyCell>		
 						<a href={`/productos/${producto_id}/eliminar`} 
-						on:click={()=>{
-							selectedProductoId.set(producto_id);}}
-							
+						on:click={() =>{
+							selectedProductoId.set(producto_id);
+							selectedNombre.set(nombre);
+							selectedPrecio.set(precio);
+							}}  	
 						class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a> 
 				   </TableBodyCell>
 				</TableBodyRow>

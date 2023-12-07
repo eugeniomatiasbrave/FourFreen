@@ -5,3 +5,6 @@ export const selectedNombre = writable(null);
 export const selectedPrecio = writable(null);
 
 
+
+
+
