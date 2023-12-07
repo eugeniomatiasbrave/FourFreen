@@ -6,9 +6,6 @@
 	export let form;
 	//console.log(form)
 	
-
-
-
 	onMount(() => {
 	  if (form?.success) {
 		Swal.fire({
@@ -19,7 +16,7 @@
 		  confirmButtonColor: 'rgb(69, 166, 175)'
 		}).then((result) => {
 		  if (result.isConfirmed) {
-			goto('/productos?search=');
+			goto('/productos');
 		  }
 		});
 	  }
@@ -36,11 +33,11 @@
 	  </Label> 
 	  <Label class="space-y-2">
 		<span>Precio</span>
-		<Input type="text" name="precio" value={$selectedPrecio} class="bg-white h-8 rounded" required/>
+		<Input  name="precio" value={$selectedPrecio} class="bg-white h-8 rounded" required/>
     </Label>
     <footer class="text-center"> 
     <Button type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Confirmar</Button>
-    <Button on:click={() => goto('/productos?search=')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancelar</Button>
+    <Button on:click={() => goto('/productos')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancelar</Button>
   </footer>  
   </form>
 </div><!--editar-->

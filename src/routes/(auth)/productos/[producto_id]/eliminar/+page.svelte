@@ -17,7 +17,7 @@
 		  confirmButtonColor: 'rgb(69, 166, 175)'
 		}).then((result) => {
 		  if (result.isConfirmed) {
-			goto('/productos?search=');
+			goto('/productos');
 		  }
 		});
 	  }
@@ -31,7 +31,7 @@
 		   <Input type="hidden"  name="producto_id" value={$selectedProductoId} class="bg-white h-8 rounded"/>
 		   <footer class="text-center">  
 			   <Button type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Confirmar</Button>
-			   <Button on:click={() => goto('/productos?search=')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancelar</Button>
+			   <Button on:click={() => goto('/productos')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancelar</Button>
 		   </footer>
 		</form>
 	</div>

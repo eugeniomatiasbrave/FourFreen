@@ -17,7 +17,7 @@
 		  confirmButtonColor: 'rgb(69, 166, 175)'
 		}).then((result) => {
 		  if (result.isConfirmed) {
-			goto('/productos?search=');
+			goto('/productos');
 		  }
 		});
 	  }
@@ -25,7 +25,6 @@
 	</script>
 <main class="flex items-start justify-center min-h-screen pt-16">
 <div class="bg-white mx-auto p-4 pt-2 my-2 rounded border border-gray-200 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/6"> <!----------------------------modal add productos-->  
-    <!--dejar en false el autoclose-->
       <form class="flex flex-col space-y-6"  method="POST" >	
           <h3 class="mt-4 text-xl text-center font-medium text-gray-900 dark:text-white">Agregar un producto nuevo</h3>
           <Label class="space-y-2">
@@ -34,11 +33,11 @@
           </Label>
           <Label class="space-y-2">
             <span>Precio</span>
-            <Input type="text" name="precio"  placeholder="escribe aqui el precio" class="bg-white h-8 rounded" required/>
+            <Input type="number" name="precio"  placeholder="escribe aqui el precio" class="bg-white h-8 rounded" required/>
           </Label> 
           <footer class="text-center">
           <Button type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Confirmar</Button>
-          <Button on:click={() => goto('/productos?search=')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancelar</Button>
+          <Button on:click={() => goto('/productos')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancelar</Button>
          </footer>  
       </form>   
 </div> <!----------------------fin de modal add productos-->

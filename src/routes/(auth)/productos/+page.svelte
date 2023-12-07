@@ -6,19 +6,17 @@
 	export const {productos,productosSearch,sortPrecio,searchSortPrecio,sortNombre,sortProducto_id}=data;
     import { onDestroy } from 'svelte';
 
-	
 let producto_id;
 let nombre;
 let precio;
 
+// unsubscrib y onDestroy  para podre usar store y no genere leak fuga de memoria ...comprobarlo.
 const unsubscribeProductoId = selectedProductoId.subscribe(value => {
  producto_id = value;
 });
-
 const unsubscribeNombre = selectedNombre.subscribe(value => {
   nombre = value;
 });
-
 const unsubscribePrecio = selectedPrecio.subscribe(value => {
   precio = value;
 });
@@ -29,8 +27,6 @@ onDestroy(() => {
   unsubscribePrecio();
 });
 
-console.log(productos.datos)
-
 let searchTerm='';
 let sortOrder= 1
 let Productos=productos.datos
@@ -39,7 +35,6 @@ let filteredProductos=productosSearch.datos
 let filteredSortNombre=sortNombre.datos
 let filteredSortedId=sortProducto_id.datos
 
-	
 const applyFilter=(params)=>{
 	let search=params;
 	filteredProductos=productosSearch.datos.filter(prod=>prod.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -102,7 +97,6 @@ const SortedProducto_id=(params)=>{
   </div>
 	<!--------------------------Seccion tabla --> 	
 	  <div class=" bg-white mx-auto p-1 pt-2 rounded border border-gray-200 shadow-md w-2/3"><!----------------Div contenedor: tabla + add + Filtro--------->
-	
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"> 
 		<div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
 		  <Button href={`/productos/${0}/agregar`} size="xs" class="bg-primary-500 rounded m-0 px-2 w-full sm:w-auto">
@@ -118,39 +112,6 @@ const SortedProducto_id=(params)=>{
 		  <Button size="xs" on:click={reset} class="bg-primary-500 h-8 ml-1 px-2 rounded">Actualizar</Button>
 		</div> 
 	  </div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
 				<Table hoverable={true} class="mx-auto mt-2 border text-xs" > 		
 				<TableHead class=" bg-primary-500 text-white" > <!------------------------cabecera celdas-->
@@ -184,8 +145,7 @@ const SortedProducto_id=(params)=>{
 				  <TableHeadCell class="">Eliminar
 					<span class="sr-only">Eliminar</span>
 				  </TableHeadCell>
-				</TableHead><!----------------------fin cabecera celdas-->
-				
+				</TableHead><!----------------------fin cabecera celdas-->	
 				<TableBody class="divide-y">
 					{#each Productos as {producto_id, precio, nombre }}
 					<TableBodyRow class="hover:bg-hover-gray-light">
@@ -199,10 +159,8 @@ const SortedProducto_id=(params)=>{
 							          selectedProductoId.set(producto_id);
 							          selectedNombre.set(nombre);
 							          selectedPrecio.set(precio.toLocaleString('de-DE', { minimumFractionDigits: 2 }));
-							
 							          }}  
-							 class="font-medium text-primary-600 hover:underline dark:text-primary-500"  
-							
+							 class="font-medium text-primary-600 hover:underline dark:text-primary-500"  	
 							>Editar</a>			
 					</TableBodyCell>
 					<TableBodyCell>		
