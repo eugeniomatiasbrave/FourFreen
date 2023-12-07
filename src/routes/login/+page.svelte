@@ -1,5 +1,6 @@
 <script>
 	import { Input, Button } from 'flowbite-svelte';
+	import {goto} from '$app/navigation';
 	import '../style.css';
 	export let form;
 </script>
@@ -17,9 +18,13 @@
 				<h2 class="text-lg">Por favor ingrese sus datos</h2>
 			</div>
 			<form method="POST" class="grid gap-4 ">
-				<Input type="text" name="username" placeholder="Usuario" required class=" bg-white h-8 rounded w-full " />
-				<Input type="password" name="password" placeholder="Contraseña" class="bg-white h-8 rounded w-full" required  />
-				<Button type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Inciar sesión</Button>
+				<Input type="text" name="username" placeholder="Usuario" required class=" bg-white h-8 rounded w-full"/>
+				<Input type="password" name="password" placeholder="Contraseña" class="bg-white h-8 rounded w-full" required/>
+				<footer class="text-center ">
+				 <Button type="submit" size="xs" class="bg-primary-500 h-8   rounded">Inciar sesión</Button>				
+				 <Button on:click={() => goto('/')} size="xs" class="bg-primary-500 h-8  rounded">Cancelar</Button>
+					</footer>
+				
 				{#if form?.success}
 					<span>Logueado</span>
 				{/if}
