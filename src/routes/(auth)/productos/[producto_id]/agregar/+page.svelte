@@ -21,13 +21,10 @@
 		  }
 		});
 	  }
-	});
-	
-	
+	});	
 	</script>
 
-
-<div class=" bg-white mx-auto p-1 pt-2 my-2 rounded border border-gray-200 shadow-md w-1/5"> <!----------------------------modal add productos-->  
+<div class="bg-white mx-auto p-4 pt-2 my-2 rounded border border-gray-200 shadow-md md:w-1/2 lg:w-1/3 xl:w-1/4"> <!----------------------------modal add productos-->  
     <!--dejar en false el autoclose-->
       <form class="flex flex-col space-y-6"  method="POST" action="?/addProd" >	
           <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Agregar un producto nuevo</h3>
@@ -41,7 +38,7 @@
           </Label> 
           <footer>
           <Button type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Confirmar</Button>
-          <Button on:click={() => goto('/productos?search=')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancela</Button>
+          <Button on:click={() => goto('/productos?search=')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancelar</Button>
          </footer>  
       </form>   
 </div> <!----------------------fin de modal add productos-->
