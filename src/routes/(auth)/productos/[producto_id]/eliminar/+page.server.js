@@ -3,36 +3,28 @@ import { BASE_URL } from '$lib/utils.js';
 import { fetchApi } from '$lib/fetchApi.js';
 
 export const actions = {
-
-	delete: async ({ request, locals, cookies }) => {
+	default: async ({ request, locals }) => {
 		const formData = await request.formData();
-		const id = formData.get('producto_id');
-		console.log('Producto:', id, locals.token, BASE_URL);
+		const producto_id = formData.get('producto_id');
+		console.log('Producto:',producto_id, locals.token, BASE_URL);
 		try {
 			const res = await fetchApi.delete({
-				url: BASE_URL + `/productos/${id}`,
+				url: BASE_URL + `/productos/${producto_id}`,
 				token: locals.token,
 				body: {
-					id: id
+					producto_id: producto_id
 				},
 				resStatus: 200
 			});
-
 			if (res.status === 200) {
 				const datos = await res.json();
-				cookies.set(
-					'ProductoEliminado',
-					JSON.stringify({
-						id: datos.id
-					}),
-					{
-						httpOnly: true,
-						path: '/',
-						secure: true,
-						sameSite: 'strict',
-						maxAge: 60 * 60 * 24 // se requiere??
-					}
-				);
+				return { 
+				  success: true, 
+				  message:'Producto actualizado correctamente!!!',
+				  productoEliminado: {
+					producto_id: datos.producto_id		
+				  }
+				};	
 			} else {
 				//return { success: false };
 			}
@@ -42,40 +34,4 @@ export const actions = {
 		}
 		return { success: true, message: 'Producto eliminado correctamente!!!' };
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

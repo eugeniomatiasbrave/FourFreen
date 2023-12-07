@@ -4,14 +4,39 @@
 	export let data;
 	import { selectedProductoId, selectedNombre, selectedPrecio } from './storeProd';
 	export const {productos,productosSearch,sortPrecio,searchSortPrecio,sortNombre,sortProducto_id}=data;
+    import { onDestroy } from 'svelte';
+
 	
-	let searchTerm='';
-	let sortOrder= 1
-	let Productos=productos.datos
-	let filteredPrecio=sortPrecio.datos
-	let filteredProductos=productosSearch.datos
-	let filteredSortNombre=sortNombre.datos
-	let filteredSortedId=sortProducto_id.datos
+let producto_id;
+let nombre;
+let precio;
+
+const unsubscribeProductoId = selectedProductoId.subscribe(value => {
+ producto_id = value;
+});
+
+const unsubscribeNombre = selectedNombre.subscribe(value => {
+  nombre = value;
+});
+
+const unsubscribePrecio = selectedPrecio.subscribe(value => {
+  precio = value;
+});
+
+onDestroy(() => {
+  unsubscribeProductoId();
+  unsubscribeNombre();
+  unsubscribePrecio();
+});
+
+
+let searchTerm='';
+let sortOrder= 1
+let Productos=productos.datos
+let filteredPrecio=sortPrecio.datos
+let filteredProductos=productosSearch.datos
+let filteredSortNombre=sortNombre.datos
+let filteredSortedId=sortProducto_id.datos
 
 	
 const applyFilter=(params)=>{
@@ -75,11 +100,9 @@ const SortedProducto_id=(params)=>{
 	<P size="2xl" align="center">Tabla de Productos</P>
   </div>
 	<!--------------------------Seccion tabla --> 	
-	  <div class=" bg-white mx-auto p-1 pt-2 rounded border border-gray-200 shadow-md w-3/4"><!----------------Div contenedor: tabla + add + Filtro--------->
+	  <div class=" bg-white mx-auto p-1 pt-2 rounded border border-gray-200 shadow-md w-1/2"><!----------------Div contenedor: tabla + add + Filtro--------->
 			 <div class=" flex justify-between items-center mx-auto w-full"> <!-----cabecera Add + Filtro--------->
-				<div> <!----------------------------boton add productos--------> 	
-				 
-	                
+				<div> <!----------------------------boton add productos--------> 	      
 				  <Button href={`/productos/${0}/agregar`} size="xs" class="bg-primary-500 rounded m-0 px-1">
 					<svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
 					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
@@ -93,17 +116,17 @@ const SortedProducto_id=(params)=>{
 				</div> 
 			  </div>
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
-				<Table hoverable={true} class="mx-auto mt-2 border"> 		
-				<TableHead class=" bg-primary-500 text-white"> <!------------------------cabecera celdas-->
-					<TableHeadCell>
-					  <div class="flex items-center">
+				<Table hoverable={true} class="mx-auto mt-2 border text-xs" > 		
+				<TableHead class=" bg-primary-500 text-white" > <!------------------------cabecera celdas-->
+					<TableHeadCell class="text-xs " >
+					  <div class="flex items-center ">
 						ID<a href="#2" on:click={()=>SortedProducto_id(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded" 
 						size="xs"><svg class="w-3.5 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
 					    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
 				        </svg></a>
 				      </div>
 				    </TableHeadCell>
-				    <TableHeadCell>
+				    <TableHeadCell >
 					  <div class="flex items-center">	
 					    NOMBRE<a href="#2" on:click={()=>SortedNombre(sortOrder === 1 ? -1 : 1)} class=" bg-primary-500 hover:bg-primary-500 rounded" 
 					    size="xs"><svg class="w-3.5 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -111,8 +134,8 @@ const SortedProducto_id=(params)=>{
 				        </svg></a>
 					  </div>
 				    </TableHeadCell> 
-				    <TableHeadCell>
-						<div class="flex items-center">	
+				    <TableHeadCell >
+						<div class="flex items-center justify-end ">	
 						PRECIO<a href="#3" on:click={()=>OrderedPrecio(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded" 
 					    size="xs"><svg class="w-3.5 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
 					    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
@@ -132,7 +155,7 @@ const SortedProducto_id=(params)=>{
 					<TableBodyRow class="hover:bg-hover-gray-light">
 					<TableBodyCell >{producto_id}</TableBodyCell>
 					<TableBodyCell >{nombre}</TableBodyCell>
-					<TableBodyCell >{precio}</TableBodyCell>
+					<TableBodyCell style="text-align: right;" >${precio.toLocaleString('de-DE', { minimumFractionDigits: 2 })}</TableBodyCell>
 					<TableBodyCell>
 						<!------------------------------------------------------Editar producto--------------------->
 						<a href={`/productos/${producto_id}/editar`}  
