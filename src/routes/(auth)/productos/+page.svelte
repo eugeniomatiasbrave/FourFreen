@@ -6,6 +6,8 @@
 	export const {productos,productosSearch,sortPrecio,searchSortPrecio,sortNombre,sortProducto_id}=data;
     import { onDestroy } from 'svelte';
 
+
+
 let producto_id;
 let nombre;
 let precio;
@@ -159,6 +161,7 @@ const SortedProducto_id=(params)=>{
 							          selectedProductoId.set(producto_id);
 							          selectedNombre.set(nombre);
 							          selectedPrecio.set(precio.toLocaleString('de-DE', { minimumFractionDigits: 2 }));
+									 
 							          }}  
 							 class="font-medium text-primary-600 hover:underline dark:text-primary-500"  	
 							>Editar</a>			

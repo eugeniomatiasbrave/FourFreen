@@ -24,7 +24,6 @@
 				 <Button type="submit" size="xs" class="bg-primary-500 h-8   rounded">Inciar sesión</Button>				
 				 <Button on:click={() => goto('/')} size="xs" class="bg-primary-500 h-8  rounded">Cancelar</Button>
 					</footer>
-				
 				{#if form?.success}
 					<span>Logueado</span>
 				{/if}
