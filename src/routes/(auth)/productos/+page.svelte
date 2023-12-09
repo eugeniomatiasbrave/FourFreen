@@ -60,18 +60,10 @@ const OrderedPrecio=(params)=>{
 		Productos=filteredPrecio;
 		goto(`/productos?sort=precio:${sort}`);
 	}
-		
-const SortedNombre=(params)=>{
-	sortOrder= -sortOrder;
-    let sort=params;
-	if (sort===1) {
-		filteredSortNombre=sortNombre.datos.sort((c,d)=>c.nombre.localeCompare(d.nombre));
-	    } else if (sort===-1) {
-		filteredSortNombre=sortNombre.datos.sort((c,d)=>d.nombre.localeCompare(c.nombre));
-	    }
-		Productos=filteredSortNombre;
-		goto(`/productos?sort=nombre:${sort}`);
-    }
+	
+const alternarSortPre =()=> {
+	OrderedPrecio(sortOrder === 1 ? -1 : 1);
+}
 
 const SortedProducto_id=(params)=>{
 	sortOrder= -sortOrder;
@@ -85,6 +77,32 @@ const SortedProducto_id=(params)=>{
 		Productos=filteredSortedId;
 		goto(`/productos?sort=producto_id:${sort}`);
 	}
+
+const alternarSortId =()=> {
+	SortedProducto_id(sortOrder === 1 ? -1 : 1);
+}
+
+const sortedNombre=(params)=> {
+    sortOrder = -sortOrder;
+	let sort=params;
+    filteredSortNombre=sortNombre.datos.sort((a, b) => {
+      const nameA = a.nombre.toUpperCase();
+      const nameB = b.nombre.toUpperCase();
+      if (nameA < nameB) {
+        return -1 * sortOrder;
+      }
+      if (nameA > nameB) {
+        return 1 * sortOrder;
+      }
+      return 0;
+    });
+	Productos=filteredSortNombre;
+	goto(`/productos?sort=nombre:${sort}`);
+  }
+
+  const alternarSort =()=> {
+    sortedNombre(sortOrder === 1 ? -1 : 1);
+  }
 
 </script>
 			
@@ -119,26 +137,52 @@ const SortedProducto_id=(params)=>{
 				<TableHead class=" bg-primary-500 text-white" > <!------------------------cabecera celdas-->
 					<TableHeadCell class="text-xs " >
 					  <div class="flex items-center ">
-						ID<a href="#2" on:click={()=>SortedProducto_id(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded" 
-						size="xs"><svg class="w-3.5 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-					    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-				        </svg></a>
+						ID<button on:click={alternarSortId} class="bg-primary-500 hover:bg-primary-500 rounded">	
+							{#if sortOrder === 1}
+						<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
+						</svg>
+						{:else}
+						<!-- SVG para la flecha ascendente -->	
+						 <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+						 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
+						 </svg>	
+						 {/if}
+						 </button>			      
 				      </div>
 				    </TableHeadCell>
-				    <TableHeadCell >
-					  <div class="flex items-center">	
-					    NOMBRE<a href="#2" on:click={()=>SortedNombre(sortOrder === 1 ? -1 : 1)} class=" bg-primary-500 hover:bg-primary-500 rounded" 
-					    size="xs"><svg class="w-3.5 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-				        <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-				        </svg></a>
+					<TableHeadCell >
+					<div class="flex items-center">	
+					    NOMBRE
+						<button on:click={alternarSort} class="bg-primary-500 hover:bg-primary-500 rounded">	
+							{#if sortOrder === 1}
+						<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
+						</svg>
+						{:else}
+						<!-- SVG para la flecha ascendente -->	
+						 <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+						 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
+						 </svg>	
+						 {/if}
+						 </button>
 					  </div>
 				    </TableHeadCell> 
 				    <TableHeadCell >
 						<div class="flex items-center justify-end ">	
-						PRECIO<a href="#3" on:click={()=>OrderedPrecio(sortOrder === 1 ? -1 : 1)} class="bg-primary-500 hover:bg-primary-500 rounded" 
-					    size="xs"><svg class="w-3.5 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-					    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-				        </svg></a>
+						PRECIO
+						<button on:click={alternarSortPre} class="bg-primary-500 hover:bg-primary-500 rounded">	
+							{#if sortOrder === 1}
+						<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
+						</svg>
+						{:else}
+						<!-- SVG para la flecha ascendente -->	
+						 <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+						 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
+						 </svg>	
+						 {/if}
+						 </button> 
 					</div>
 				</TableHeadCell>
 				  <TableHeadCell class="">Editar
@@ -160,8 +204,7 @@ const SortedProducto_id=(params)=>{
 						on:click={()=>{
 							          selectedProductoId.set(producto_id);
 							          selectedNombre.set(nombre);
-							          selectedPrecio.set(precio.toLocaleString('de-DE', { minimumFractionDigits: 2 }));
-									 
+							          selectedPrecio.set(precio.toLocaleString('de-DE', { minimumFractionDigits: 2 }));					 
 							          }}  
 							 class="font-medium text-primary-600 hover:underline dark:text-primary-500"  	
 							>Editar</a>			
@@ -182,6 +225,32 @@ const SortedProducto_id=(params)=>{
 			</div>
 		  </div> <!----------------fin Div contenedor: tabla + add + Filtro--------->	
 	</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
