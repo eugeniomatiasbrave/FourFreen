@@ -140,15 +140,14 @@ const sortedNombre=(params)=> {
 					  <div class="flex items-center ">
 						ID<button on:click={alternarSortId} class="bg-primary-500 hover:bg-primary-500 rounded">	
 							{#if sortOrder === 1}
-						<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
-						<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
-						</svg>
-						{:else}
-						<!-- SVG para la flecha ascendente -->	
-						 <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
-						 <path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
-						 </svg>	
-						 {/if}
+							<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+							<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
+							</svg>
+							{:else}
+							<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+							<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
+							</svg>		
+						    {/if}
 						 </button>			      
 				      </div>
 				    </TableHeadCell>
@@ -157,15 +156,15 @@ const sortedNombre=(params)=> {
 					    NOMBRE
 						<button on:click={alternarSort} class="bg-primary-500 hover:bg-primary-500 rounded">	
 							{#if sortOrder === 1}
-						<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
-						<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
-						</svg>
-						{:else}
-						<!-- SVG para la flecha ascendente -->	
-						 <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
-						 <path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
-						 </svg>	
-						 {/if}
+						    <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+						    <path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
+						    </svg>
+						    {:else}
+						    <!-- SVG para la flecha ascendente -->	
+						    <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+						    <path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
+						    </svg>	
+						    {/if}
 						 </button>
 					  </div>
 				    </TableHeadCell> 
@@ -174,15 +173,15 @@ const sortedNombre=(params)=> {
 						PRECIO
 						<button on:click={alternarSortPre} class="bg-primary-500 hover:bg-primary-500 rounded">	
 							{#if sortOrder === 1}
-						<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
-						<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
-						</svg>
-						{:else}
-						<!-- SVG para la flecha ascendente -->	
-						 <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
-						 <path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
-						 </svg>	
-						 {/if}
+						    <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+						    <path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
+						    </svg>
+						    {:else}
+						    <!-- SVG para la flecha ascendente -->	
+						    <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+						    <path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
+						    </svg>	
+						    {/if}
 						 </button> 
 					</div>
 				</TableHeadCell>
@@ -198,14 +197,14 @@ const sortedNombre=(params)=> {
 					<TableBodyRow class="hover:bg-hover-gray-light">
 					<TableBodyCell >{producto_id}</TableBodyCell>
 					<TableBodyCell >{nombre}</TableBodyCell>
-					<TableBodyCell style="text-align: right;" >${precio.toLocaleString('de-DE', { minimumFractionDigits: 2 })}</TableBodyCell>
+					<TableBodyCell style="text-align: right;" >${precio.toFixed(2)}</TableBodyCell>
 					<TableBodyCell>
 						<!------------------------------------------------------Editar producto--------------------->
 						<a href={`/productos/${producto_id}/editar`}  
 						on:click={()=>{
 							          selectedProductoId.set(producto_id);
 							          selectedNombre.set(nombre);
-							          selectedPrecio.set(precio.toLocaleString('de-DE', { minimumFractionDigits: 2 }));					 
+							          selectedPrecio.set(precio);					 
 							          }}  
 							 class="font-medium text-primary-600 hover:underline dark:text-primary-500"  	
 							>Editar</a>			
@@ -215,7 +214,7 @@ const sortedNombre=(params)=> {
 						on:click={() =>{
 							selectedProductoId.set(producto_id);
 							selectedNombre.set(nombre);
-							selectedPrecio.set(precio.toLocaleString('de-DE', { minimumFractionDigits: 2 }));
+							selectedPrecio.set(precio);
 							}}  	
 						class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a> 
 				   </TableBodyCell>
