@@ -9,11 +9,10 @@
 	--color-theme-3: #606062;
 	--color-text: rgba(0, 0, 0, 0.7);
 	color: var(--color-text);
-	--spacing-1: 3rem;	
+		
 } 
 
 body {
-	min-height: 80vh;
 	margin: 0;
 	background-attachment: fixed;
 	background-color: var(--color-bg-2);
