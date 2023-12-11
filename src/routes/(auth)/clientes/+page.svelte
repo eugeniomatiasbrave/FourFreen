@@ -1,51 +1,46 @@
 <script>
-	import {Input,Button,P,Label,Modal,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
-	
-	import { goto } from '$app/navigation';
-	
-	export let data;
-	export const { clientes,sortrazonsocial, searchclientes } = data;
+import {goto} from '$app/navigation';
+import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
+export let data;
+import { selectedClienteId,selectedRazon_social,selectedCuit,
+		selectedLocalidad,selectedDomicilio_calle,selectedDomicilio_altura,
+		selectedCodigo_postal,selectedTelefono,selectedEmail} from './storeCli';
+export const { clientes,sortrazonsocial, searchclientes } = data;
 
-	let searchTerm = '';
-	let sortOrder= 1
+let searchTerm = '';
+let sortOrder= 1
 
-	
-	let formModalEdit = false;
-	let formModalDelete = false;
+/*
+let cliente_id;
+let razon_social;
+let cuit;
+let localidad;
+let domicilio_calle;
+let domicilio_altura;
+let codigo_postal;
+let telefono;
+let email;
+*/
 
-	let selectedCliente_id;
-	let selectedRazon_social;
-	let selectedCuit;
-	let selectedLocalidad;
-	let selectedDomicilio_calle;
-	let selectedDomicilio_altura;
-	let selectedCodigo_postal;
-	let selectedTelefono;
-	let selectedEmail;
-
-	let filteredClientes = clientes;
-	let SortRazonSocial = sortrazonsocial;
-    let SearchClientes= searchclientes;
+let Clientes = clientes;
+let SortRazonSocial = sortrazonsocial;
+let SearchClientes= searchclientes;
 	//console.log(filteredClientes)
 
- 
 
 const filterClientes=(params)=>{
 	let search=params;
 	SearchClientes=searchclientes.filter(prod=>prod.razon_social.toLowerCase().includes(searchTerm.toLowerCase()));
-	filteredClientes=SearchClientes; 
+	Clientes=SearchClientes; 
 	goto(`/clientes?search=${search}`);		
 }
 
 const reset=()=>{
 	searchTerm = '';
-	filteredClientes = clientes;
+	Clientes = clientes;
 }
 
-const ModalClose =()=>{
-	formModalEdit = false;
-    formModalDelete = false;
-}
+
 
 const SortedRazonSocial=(params)=>{
   sortOrder= -sortOrder;
@@ -113,122 +108,39 @@ const SortedRazonSocial=(params)=>{
 							</TableHeadCell>
 						    </TableHead>
 					    	<TableBody class="divide-y">
-								{#each filteredClientes as cli}
+								{#each Clientes as {cliente_id,razon_social,cuit,domicilio_calle,domicilio_altura,localidad,telefono,email, codigo_postal}}
 								<TableBodyRow class="hover:bg-hover-gray-light">
-									<TableBodyCell>{cli.cliente_id}</TableBodyCell>
-									<TableBodyCell>{cli.razon_social}</TableBodyCell>
-									<TableBodyCell>{cli.cuit}</TableBodyCell>
-									<TableBodyCell>{cli.domicilio_calle}</TableBodyCell>
-									<TableBodyCell>{cli.domicilio_altura}</TableBodyCell>
-									<TableBodyCell>{cli.localidad}</TableBodyCell>
-									<TableBodyCell>{cli.codigo_postal}</TableBodyCell>
-									<TableBodyCell>{cli.telefono}</TableBodyCell>
-									<TableBodyCell>{cli.email}</TableBodyCell>
+									<TableBodyCell>{cliente_id}</TableBodyCell>
+									<TableBodyCell>{razon_social}</TableBodyCell>
+									<TableBodyCell>{cuit}</TableBodyCell>
+									<TableBodyCell>{domicilio_calle}</TableBodyCell>
+									<TableBodyCell>{domicilio_altura}</TableBodyCell>
+									<TableBodyCell>{localidad}</TableBodyCell>
+									<TableBodyCell>{codigo_postal}</TableBodyCell>
+									<TableBodyCell>{telefono}</TableBodyCell>
+									<TableBodyCell>{email}</TableBodyCell>
 									<TableBodyCell>
-										<a href="#editar" on:click={()=>{ //<!----------------------------------Modal para edita cliente-------->
-												selectedCliente_id = cli.cliente_id;
-												selectedRazon_social = cli.razon_social;
-												selectedCuit = cli.cuit;
-												selectedLocalidad = cli.localidad;
-												selectedDomicilio_calle = cli.domicilio_calle;
-												selectedDomicilio_altura = cli.domicilio_altura;
-												selectedCodigo_postal = cli.codigo_postal;
-												selectedTelefono = cli.telefono;
-												selectedEmail = cli.email;				
-											    }} on:click={()=>(formModalEdit = true)}
-											    class="font-medium text-primary-600 hover:underline dark:text-primary-500">Editar</a>
-										<Modal bind:open={formModalEdit} size="xs" autoclose={false} class="w-full">		
-											<form method="POST" action="?/editClient">			
-												<Input type="hidden" name="cliente_id" bind:value={selectedCliente_id}/>
-												<Label class="space-y-2">
-												  <span>Razon Social</span>
-												<Input name="razon_social"
-												type="text"
-												value={selectedRazon_social} class="bg-white h-8 rounded"
-												required/>
-											   </Label>
-												<Label class="space-y-2">
-												 <span>Cuit</span>	
-												<Input
-												  type="text"
-												  name="cuit"
-												  value={selectedCuit} class="bg-white h-8 rounded"
-												  required/>
-												</Label>
-												<Label class="space-y-2">
-												  <span>Dom</span>
-												<Input
-												type="text"
-												name="domicilio_calle"
-												value={selectedDomicilio_calle} class="bg-white h-8 rounded"
-												required/>
-												</Label>
-												<Label class="space-y-2">
-												<span>Dom. calle</span>
-												<Input
-													type="text"
-													name="domicilio_altura"
-													value={selectedDomicilio_altura} class="bg-white h-8 rounded"
-													required/>
-												</Label>
-												<Label class="space-y-2">
-													<span>Localidad.</span>
-												<Input
-												    type="text"
-													name="localidad"
-													value={selectedLocalidad} class="bg-white h-8 rounded"
-													required/>
-												</Label>
-												<Label class="space-y-2">
-													<span>Cod.postal</span>
-												<Input
-												    type="text"
-													name="codigo_postal"
-													value={selectedCodigo_postal} class="bg-white h-8 rounded"
-													required/>
-												</Label>
-												<Label class="space-y-2">
-													<span>Telefono</span>
-												<Input
-													type="text"
-													name="telefono"
-													value={selectedTelefono} class="bg-white h-8 rounded"
-													required/>
-												</Label>
-												<Label class="space-y-2">
-													<span>Email</span>
-												<Input
-													type="email"
-													name="email"
-													value={selectedEmail} class="bg-white h-8 rounded"
-													required/>
-												</Label>
-											<Button on:click={ModalClose} class="bg-primary-500 h-8 ml-2 rounded">Cancelar</Button>
-											<Button type="submit" class="bg-primary-500 h-8 ml-2 rounded">Confirmar</Button>																																		
-										</form>
-										</Modal>		
+										<a href={`/clientes/${cliente_id}/editar`} on:click={()=>{ //<!---------------------------------- edita cliente-------->
+												selectedClienteId.set(cliente_id);
+												selectedRazon_social.set(razon_social);
+                                                selectedCuit.set(cuit);
+                                                selectedLocalidad.set(localidad);
+                                                selectedDomicilio_calle.set(domicilio_calle);
+                                                selectedDomicilio_altura.set(domicilio_altura);
+                                                selectedCodigo_postal.set(codigo_postal);
+                                                selectedTelefono.set(telefono);
+                                                selectedEmail.set(email);		
+											    }} 
+											    class="font-medium text-primary-600 hover:underline dark:text-primary-500">Editar</a>				
+										
 									</TableBodyCell>
 									<TableBodyCell><!---------------------Elimina el cliente--------------------->
-										<a href="#eliminar" on:click={() => { //<!-----------------------------------------Modal para eliminar-------->
-												selectedCliente_id = cli.cliente_id;	
-											    }} on:click={() => (formModalDelete = true)}
+										<a href={`/clientes/${cliente_id}/eliminar`} on:click={() => { //<!----------------------------------eliminar-------->
+												selectedClienteId.set(cliente_id);
+												selectedRazon_social.set(razon_social);	
+											    }}
 											   class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a>
 
-										<form method="POST" action="?/deleteClient" on:submit={()=>{selectedCliente_id = cli.cliente_id;}}>
-											<Modal bind:open={formModalDelete} size="xs" autoclose={false} class="w-full">
-												<div>
-													<h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> Confirmar la eliminación  !!</h3>
-													<P value={cli.razon_social}>Cliente:{cli.razon_social}</P> 
-												<Input
-												type="hidden"
-												name="cliente_id"
-												bind:value={selectedCliente_id}
-												required/>
-												<Button on:click={ModalClose} class="bg-primary-500 h-8 ml-2 rounded">Cancelar</Button>
-												<Button type="submit" class="bg-primary-500 h-8 ml-2 rounded">Confirmar</Button>
-					  </div>													
-				    </Modal>
-				   </form>									
 				</TableBodyCell>
 			 </TableBodyRow>
 			{/each}

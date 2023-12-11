@@ -1,4 +1,4 @@
-<script context="module">
+<script >
 	import {Input,Button} from 'flowbite-svelte'
 	import {onMount} from 'svelte';
 	import {goto} from '$app/navigation';

@@ -52,6 +52,6 @@ export const actions = {
       console.log('Error: ', err);
       throw error(500, 'Algo salió mal al actualizar el producto');
     }
-	return { success: true, message:'Producto actualizado correctamente!!!'};
+  	return { success: true, message:'Producto actualizado correctamente!!!'};
   }
-}
+ }

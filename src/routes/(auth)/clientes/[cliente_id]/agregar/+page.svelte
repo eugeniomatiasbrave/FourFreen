@@ -61,8 +61,11 @@
 		  <span>Email</span>
 		  <Input type="email" name="email" placeholder="email" class="bg-white h-8 rounded" required />
 	  </Label>		
-	  <Button type="submit" size="xs" class="bg-primary-500 h-8 ml-2 mt-2 rounded">Confirmar</Button>	
-	  <Button on:click={() => goto('/clientes')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancelar</Button>						
+	  <footer class="text-center"> 
+		<Button type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Confirmar</Button>
+		<Button on:click={() => goto('/clientes')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancelar</Button>
+	  </footer>  
+	 					
   </form>	
 </div> 
 </main>
