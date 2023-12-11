@@ -20,7 +20,7 @@ export const actions = {
 				const datos = await res.json();
 				return { 
 				  success: true, 
-				  message:'Cliente actualizado correctamente!!!',
+				  message:'Cliente eliminado correctamente!!!',
 				  clienteEliminado: {
 					cliente_id: datos.cliente_id		
 				  }
@@ -30,7 +30,7 @@ export const actions = {
 			}
 		} catch (err) {
 			console.log('Error: ', err);
-			throw error(500, 'Algo salió mal al eliminar el producto');
+			throw error(500, 'Algo salió mal al eliminar el Cliente');
 		}
 		return { success: true, message: 'Cliente eliminado correctamente!!!' };
 	}
