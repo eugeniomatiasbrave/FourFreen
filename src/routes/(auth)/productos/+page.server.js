@@ -2,13 +2,10 @@ import { error } from '@sveltejs/kit';
 import { BASE_URL } from '$lib/utils.js';
 import { fetchApi } from '$lib/fetchApi.js';
 
-
 export const load = async ({ locals, url}) => {
   const search = url.searchParams.get('search');
   const sort = url.searchParams.get('sort');
 
-  
- 
   const getProductos = async () => {
     try {
       const productos = await fetchApi.get({ url: BASE_URL + '/productos', token: locals.token, resStatus: 200 });
@@ -39,7 +36,7 @@ export const load = async ({ locals, url}) => {
        }     
      }
   
-     const getSortNombre=async()=>{
+  const getSortNombre=async()=>{
       try {
         const sortNombre = await fetchApi.get({url:BASE_URL+`/productos?sort=${search}:${sort}`,token:locals.token,resStatus:200});
          return sortNombre;  
@@ -49,7 +46,7 @@ export const load = async ({ locals, url}) => {
        }     
      }
   
-     const getSortProducto_id=async()=>{
+  const getSortProducto_id=async()=>{
       try {
         const sortProducto_id = await fetchApi.get({url:BASE_URL+`/productos?sort=${search}:${sort}`,token:locals.token,resStatus:200});
          return sortProducto_id;  
@@ -59,32 +56,11 @@ export const load = async ({ locals, url}) => {
        }     
      }
   
-      return {
-        productos: await getProductos(),
-        productosSearch: await getProductosSearch(),
-        sortPrecio: await getSortPrecio(),
-        sortNombre: await getSortNombre(),
-        sortProducto_id: await getSortProducto_id()
-       
-    
+    return {
+      productos: await getProductos(),
+      productosSearch: await getProductosSearch(),
+      sortPrecio: await getSortPrecio(),
+      sortNombre: await getSortNombre(),
+      sortProducto_id: await getSortProducto_id()
       }
     }  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

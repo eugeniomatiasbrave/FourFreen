@@ -24,12 +24,3 @@
 		max-height: 82vh;
 	}
 </style>
-
-
-	
-	
-	
-
-
-
-

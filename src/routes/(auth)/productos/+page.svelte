@@ -136,7 +136,7 @@ const sortedNombre=(params)=> {
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
 				<Table hoverable={true} class="mx-auto mt-2 border text-xs" > 		
 				<TableHead class=" bg-primary-500 text-white" > <!------------------------cabecera celdas-->
-					<TableHeadCell class="text-xs " >
+					<TableHeadCell class="py-2">
 					  <div class="flex items-center ">
 						ID<button on:click={alternarSortId} class="bg-primary-500 hover:bg-primary-500 rounded">	
 							{#if sortOrder === 1}
@@ -151,7 +151,7 @@ const sortedNombre=(params)=> {
 						 </button>			      
 				      </div>
 				    </TableHeadCell>
-					<TableHeadCell >
+					<TableHeadCell class="py-2">
 					<div class="flex items-center">	
 					    NOMBRE
 						<button on:click={alternarSort} class="bg-primary-500 hover:bg-primary-500 rounded">	
@@ -168,7 +168,7 @@ const sortedNombre=(params)=> {
 						 </button>
 					  </div>
 				    </TableHeadCell> 
-				    <TableHeadCell >
+				    <TableHeadCell class="py-2" >
 						<div class="flex items-center justify-end ">	
 						PRECIO
 						<button on:click={alternarSortPre} class="bg-primary-500 hover:bg-primary-500 rounded">	
@@ -185,20 +185,20 @@ const sortedNombre=(params)=> {
 						 </button> 
 					</div>
 				</TableHeadCell>
-				  <TableHeadCell class="">Editar
+				  <TableHeadCell class="py-2">Editar
 					<span class="sr-only">Editar</span>
 				  </TableHeadCell>
-				  <TableHeadCell class="">Eliminar
+				  <TableHeadCell class="py-2">Eliminar
 					<span class="sr-only">Eliminar</span>
 				  </TableHeadCell>
 				</TableHead><!----------------------fin cabecera celdas-->	
-				<TableBody class="divide-y">
+				<TableBody class="divide-y ">
 					{#each Productos as {producto_id, precio, nombre }}
-					<TableBodyRow class="hover:bg-hover-gray-light">
-					<TableBodyCell >{producto_id}</TableBodyCell>
-					<TableBodyCell >{nombre}</TableBodyCell>
-					<TableBodyCell style="text-align: right;" >${precio.toFixed(2)}</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyRow class=" hover:bg-hover-gray-light ">
+					<TableBodyCell class="py-2" >{producto_id}</TableBodyCell>
+					<TableBodyCell class="py-2">{nombre}</TableBodyCell>
+					<TableBodyCell class="py-2" style="text-align: right;" >${precio.toFixed(2)}</TableBodyCell>
+					<TableBodyCell class="py-2">
 						<!------------------------------------------------------Editar producto--------------------->
 						<a href={`/productos/${producto_id}/editar`}  
 						on:click={()=>{
@@ -209,7 +209,7 @@ const sortedNombre=(params)=> {
 							 class="font-medium text-primary-600 hover:underline dark:text-primary-500"  	
 							>Editar</a>			
 					</TableBodyCell>
-					<TableBodyCell>		
+					<TableBodyCell class="py-2">		
 						<a href={`/productos/${producto_id}/eliminar`} 
 						on:click={() =>{
 							selectedProductoId.set(producto_id);
@@ -225,39 +225,3 @@ const sortedNombre=(params)=> {
 			</div>
 		  </div> <!----------------fin Div contenedor: tabla + add + Filtro--------->	
 	</main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
-		
-		
-			
