@@ -1,15 +1,15 @@
 <script>
 	import {Input,Button,P,Label,Modal,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
-	import {onMount} from 'svelte';
+	
 	import { goto } from '$app/navigation';
-	export let form;
+	
 	export let data;
 	export const { clientes,sortrazonsocial, searchclientes } = data;
 
 	let searchTerm = '';
 	let sortOrder= 1
 
-	let formModalAdd = false;
+	
 	let formModalEdit = false;
 	let formModalDelete = false;
 
@@ -28,16 +28,7 @@
     let SearchClientes= searchclientes;
 	//console.log(filteredClientes)
 
- onMount(() => {
-   if (form?.success) {
-    Swal.fire({
-      icon: 'success',
-      title: form.message,
-      backdrop: true,
-      confirmButtonText: 'Volver',
-      confirmButtonColor: 'rgb(69, 166, 175)'
-    })}
-    });
+ 
 
 const filterClientes=(params)=>{
 	let search=params;
@@ -52,7 +43,6 @@ const reset=()=>{
 }
 
 const ModalClose =()=>{
-	formModalAdd = false;
 	formModalEdit = false;
     formModalDelete = false;
 }
@@ -79,60 +69,23 @@ const SortedRazonSocial=(params)=>{
 <main class="bg-gray-50 dark:bg-gray-900 sm:p-3">
   <P size="2xl" align="center" class="mb-8">Tabla de Clientes</P>
 	<div class=" bg-white mx-auto p-1 pt-2  border rounded shadow-md w-3/4"> <!----------------Div contenedor: tabla + add + Filtro--------->
-	   <div class=" flex justify-between items-center mx-auto w-full"><!-----cabecera Add + Filtro--------->
-		  <div class=""> <!-----Modal Add--------->
-			  <div>
-			   <Button on:click={() => (formModalAdd = true)}  size="xs" class="bg-primary-500 rounded h-8 p-2">
+	   
+		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"> 
+			<div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
+			  <Button href={`/clientes/${0}/agregar`} size="xs" class="bg-primary-500 rounded m-0 px-2 w-full sm:w-auto">
 				<svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
 				fill="none" viewBox="0 0 20 20">
-			   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-				d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-			   </svg> Nuevo</Button>		
-			  </div>
-				<Modal bind:open={formModalAdd} size="xs" autoclose={false} class="w-full">
-				  <form method="POST" action="?/addClient">
-					<p>Porfavor Agregar nuevo cliente!!</p>
-					<Label class="space-y-2"><span>Nombre</span>
-					 <Input type="text" name="razon_social" placeholder="razon_social" class="bg-white h-8 rounded" required/>
-					</Label>
-					<Label class="space-y-2"><span>Cuit</span>
-					  <Input type="number" name="cuit" placeholder="cuit" class="bg-white h-8 rounded" maxlength="11" required/>			
-					</Label>
-					<Label class="space-y-2">
-						<span>Calle</span>
-					    <Input type="text" name="domicilio_calle" placeholder="escribe aqui calle" class="bg-white h-8 rounded" required/>
-					</Label>
-					<Label class="space-y-2">
-						<span>Altura</span>
-					    <Input type="text" name="domicilio_altura" placeholder="altura" class="bg-white h-8 rounded" required/>
-					</Label>
-					<Label class="space-y-2">
-						<span>Loc..</span>
-					    <Input type="text" name="localidad" placeholder="localidad" class="bg-white h-8 rounded" required/>
-					</Label>
-					<Label class="space-y-2">
-						<span>Cp.</span>
-					<Input type="text" name="codigo_postal" placeholder="codigo postal" class="bg-white h-8 rounded" required/>
-					</Label>
-					<Label class="space-y-2">
-						<span>Tel</span>
-						<Input type="text" name="telefono" placeholder="telefono" class="bg-white h-8 rounded" required/>
-					</Label>
-					<Label class="space-y-2">
-						<span>Email</span>
-						<Input type="email" name="email" placeholder="email" class="bg-white h-8 rounded" required />
-					</Label>		
-					<Button on:click={ModalClose} size="xs" class="bg-primary-500 h-8 ml-2 mt-2 rounded">Cancelar</Button>
-					<Button type="submit" size="xs" class="bg-primary-500 h-8 ml-2 mt-2 rounded">Confirmar</Button>												
-				</form>	
-			 </Modal>
+				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+				 d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+				</svg> Nuevo</Button>    
 			</div>
-            <div class="flex items-center"><!----- Filtro x nombre--------->
-			  <Input type="text" id="search" bind:value={searchTerm} name="search" class="bg-white h-8 rounded" placeholder="Buscar cliente" required/>
-			  <Button on:click={()=> filterClientes(searchTerm)} size="xs" class="bg-primary-500 h-8 ml-1 px-2 rounded">Buscar</Button>
-			  <Button on:click={reset} size="xs" class="bg-primary-500 h-8 ml-1 px-2 rounded">Actualizar</Button>		
-		    </div>			    
-		</div><!-----fin de cabecera Add + Filtro--------->
+			<div class="flex items-center"> 
+			  <Input type="text" bind:value={searchTerm} name="searchTerm" placeholder="Buscar Producto" required class=" bg-white h-8 w-full sm:w-auto rounded"  /> 
+			  <Button size="xs" on:click={()=> filterClientes(searchTerm)} class="bg-primary-500 h-8 ml-1 px-2  rounded">Buscar</Button> 
+			  <Button size="xs" on:click={reset} class="bg-primary-500 h-8 ml-1 px-2 rounded">Actualizar</Button>
+			</div> 
+		  </div>
+	
 				<div >
 					<Table hoverable={true} class=" mt-2 border">
 						<TableHead class="bg-primary-500 text-white">
