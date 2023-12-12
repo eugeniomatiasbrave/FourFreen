@@ -28,8 +28,18 @@ const selectedOption = event.target.options[selectedIndex];
 precio = selectedOption.getAttribute('data-precio');
 }
 
+const formatter = new Intl.DateTimeFormat('en', {
+	month: 'numeric',
+	day: 'numeric',
+	year: 'numeric',
+	hour12: true,
+	hour: 'numeric',
+	minute: '2-digit',
+	second: '2-digit'
+});
+
 let cliente_id;
-let fecha = new Date().toISOString();
+let fecha = formatter.format();	
 let unidades;
 let producto_id;
 let precio;	
@@ -55,7 +65,10 @@ const handleAdd=(event)=> {
 }
 
 const reset =()=>{
-	items=[]
+	items=[];
+	producto_id="Seleccionar Producto";
+	unidades="";
+	precio="";
 }
 
 const formClose=()=>{
@@ -128,17 +141,17 @@ const formClose=()=>{
 		<div><!-------Area items-------------->
 		  <div class="Area-pedido"> 
 			<Table hoverable={true} class="mx-auto border text-xs" ><!-------Table-------------->
-				<TableHead class="bg-primary-500 text-white"> 
+				<TableHead class="bg-primary-500 text-white" style="text-align: center;"> 
 					<TableHeadCell class="py-2">Producto_id</TableHeadCell>
-					<TableHeadCell class="py-2">Unidades</TableHeadCell>
-					<TableHeadCell class="py-2">Precio</TableHeadCell>	 	
+					<TableHeadCell class="py-2" >Unidades</TableHeadCell>
+					<TableHeadCell class="py-2" >Precio</TableHeadCell>	 	
 				</TableHead>
 				<TableBody class="divide-y">	
 					{#each items as item (item.producto_id)}
-					<TableBodyRow class="hover:bg-hover-gray-light">
+					<TableBodyRow class="hover:bg-hover-gray-light" style="text-align: center;">
 					<TableBodyCell class="py-2">{item.producto_id}</TableBodyCell>
 					<TableBodyCell class="py-2">{item.unidades}</TableBodyCell>
-					<TableBodyCell class="py-2">{item.precio}</TableBodyCell>
+					<TableBodyCell class="py-2" style="text-align: right;">${item.precio.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableBodyCell>
 					</TableBodyRow>
 					{/each}
 				</TableBody>

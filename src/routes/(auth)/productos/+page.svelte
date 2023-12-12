@@ -172,7 +172,7 @@ const sortedNombre=(params)=> {
 					<TableBodyRow class=" hover:bg-hover-gray-light ">
 					<TableBodyCell class="py-2" >{producto_id}</TableBodyCell>
 					<TableBodyCell class="py-2">{nombre}</TableBodyCell>
-					<TableBodyCell class="py-2" style="text-align: right;" >${precio.toFixed(2)}</TableBodyCell>
+					<TableBodyCell class="py-2" style="text-align: right;" >${precio.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableBodyCell>
 					<TableBodyCell class="py-2">
 						<!------------------------------------------------------Editar producto--------------------->
 						<a  href={`/productos/${producto_id}/editar`} 

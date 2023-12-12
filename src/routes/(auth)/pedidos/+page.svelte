@@ -47,6 +47,7 @@ const reset=()=> {
 	<title>{titulo}</title>
 	<meta name="description" content="Tabla de Pedidos"/>
 	</svelte:head>
+
 <main class="bg-gray-50 dark:bg-gray-900 sm:p-3">
 	<div class="my-4">
 	  <P size="2xl" align="center">{titulo}</P>
@@ -81,8 +82,8 @@ const reset=()=> {
 		<TableHeadCell class="py-2">us id</TableHeadCell>
 		<TableHeadCell class="py-2">Items</TableHeadCell>
 		<TableHeadCell class="py-2">Detalle</TableHeadCell>
-		<TableHeadCell class="py-2">Tot. Uds</TableHeadCell>
-		<TableHeadCell class="py-2">Total</TableHeadCell>	
+		<TableHeadCell class="py-2" style="text-align: right;">Tot. Uds</TableHeadCell>
+		<TableHeadCell class="py-2" style="text-align: right;">Total</TableHeadCell>	
 	</TableHead>
 	<TableBody class="divide-y">
 		{#each Pedido as pe}
@@ -102,8 +103,8 @@ const reset=()=> {
 			<TableBodyCell class="py-2">
 			    <a href={`/pedidos/${pe.pedido_cab_id}/detalle`} class="font-medium text-primary-600 hover:underline dark:text-primary-500">Detalle</a>
 			</TableBodyCell> <!--detalle pedido-->
-			<TableBodyCell class="py-2">{pe.total_unidades}</TableBodyCell>
-			<TableBodyCell class="py-2">{pe.total_importe}</TableBodyCell>		
+			<TableBodyCell class="py-2" style="text-align: right;">{pe.total_unidades}</TableBodyCell>
+			<TableBodyCell class="py-2" style="text-align: right;">${pe.total_importe.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableBodyCell>		
 			</TableBodyRow>
 		{/each}
 		</TableBody>

@@ -15,23 +15,23 @@ console.log(detalle)
  <div class=" bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-2/3">
 	<div class="overflow-x-auto"> 
 		<Table hoverable={true} class="mx-auto mt-1 border text-xs" > 		
-		<TableHead class=" bg-primary-500 text-white"> 
+		<TableHead class=" bg-primary-500 text-white" style="text-align: center;"> 
 			<TableHeadCell class="py-2">ID del pedido</TableHeadCell>
 			<TableHeadCell class="py-2">ID del producto</TableHeadCell> 
 		    <TableHeadCell class="py-2">Nombre del producto</TableHeadCell>
 		    <TableHeadCell class="py-2">Unidades</TableHeadCell>
-		    <TableHeadCell class="py-2">Precio</TableHeadCell>
-			<TableHeadCell class="py-2">Importe Total</TableHeadCell>
+		    <TableHeadCell class="py-2" style="text-align: right;">Precio</TableHeadCell>
+			<TableHeadCell class="py-2" style="text-align: right;">Importe Total</TableHeadCell>
 		</TableHead>
-		<TableBody class="divide-y ">
+		<TableBody class="divide-y">
 			{#each detalle as det} 
-			<TableBodyRow class=" hover:bg-hover-gray-light ">
+			<TableBodyRow class=" hover:bg-hover-gray-light" style="text-align: center;">
 			<TableBodyCell class="py-2">{det.pedido_cab_id}</TableBodyCell>
 			<TableBodyCell class="py-2">{det.producto_id}</TableBodyCell>
 			<TableBodyCell class="py-2">{det.producto_nombre}</TableBodyCell>
 			<TableBodyCell class="py-2">{det.unidades}</TableBodyCell>
-			<TableBodyCell class="py-2">{det.precio}</TableBodyCell>
-			<TableBodyCell class="py-2">{det.importe}</TableBodyCell>
+			<TableBodyCell class="py-2" style="text-align: right;">${det.precio.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})}</TableBodyCell>
+			<TableBodyCell class="py-2" style="text-align: right;">${det.importe.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})}</TableBodyCell>
 		</TableBodyRow>
 		{/each}	
 		</TableBody>
