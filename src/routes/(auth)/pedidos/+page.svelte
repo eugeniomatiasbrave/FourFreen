@@ -43,7 +43,7 @@ onMount(()=>{
 	  }});
   }});
 
-function handleProductoChange(event) {
+const handleProductoChange=(event)=> {
 const selectedIndex = event.target.selectedIndex;
 const selectedOption = event.target.options[selectedIndex];
 precio = selectedOption.getAttribute('data-precio');
@@ -55,9 +55,9 @@ let unidades;
 let producto_id;
 let precio;	
   
-function handleAdd(event) {
+const handleAdd=(event)=> {
     event.preventDefault();
-  const newItem = {
+    const newItem = {
        producto_id,
        unidades,
        precio,
@@ -65,12 +65,12 @@ function handleAdd(event) {
        items= [...items, newItem];
   }
 
-  function handleSubmit(event) {
-  event.preventDefault();
-  const pedido = {
-    selectedCliente_id,
-    fecha,
-    items
+  const handleSubmit=(event)=> {
+    event.preventDefault();
+    const pedido = {
+     selectedCliente_id,
+     fecha,
+     items
   };
   console.log(pedido);
 }
@@ -119,7 +119,7 @@ const ModalClose =()=>{
 	   <Modal bind:open={formModalAdd} size="xs" autoclose={false} class="w-full">			
             <div> <!--cabecera ( nombre cliente y fecha)--->
 				   <div>
-					  <Select id="select-sm" size="sm"  class="mt-6 mb-4"  name="selectedCliente_id"  bind:value={selectedCliente_id}  required>
+					  <Select id="select-sm" size="sm"  class="mt-6 mb-4" name="selectedCliente_id"  bind:value={selectedCliente_id}  required>
 						<option selected>cliente_id</option>
 						 {#each clientes as cli}
 						 <option  value={cli.cliente_id}>{cli.cliente_id} - {cli.razon_social}</option>
@@ -224,7 +224,7 @@ const ModalClose =()=>{
 			<TableBodyCell>{pe.usuario_id}</TableBodyCell>
 			<TableBodyCell>{pe.items}</TableBodyCell>
 			<TableBodyCell>
-			    <a href={`/pedidos/${pe.pedido_cab_id}`} class="font-medium text-primary-600 hover:underline dark:text-primary-500">Detalle</a>
+			    <a href={`/pedidos/${pe.pedido_cab_id}/detalle`} class="font-medium text-primary-600 hover:underline dark:text-primary-500">Detalle</a>
 			</TableBodyCell> <!--detalle pedido-->
 			<TableBodyCell>{pe.total_unidades}</TableBodyCell>
 			<TableBodyCell>{pe.total_importe}</TableBodyCell>		
