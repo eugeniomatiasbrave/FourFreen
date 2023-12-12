@@ -1,15 +1,13 @@
 <script >
-import { page } from '$app/stores';
+import {page} from '$app/stores';
 import {Input,Button,P,Label,Select,Modal,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
 import {onMount} from 'svelte';
-//import { goto } from '$app/navigation';
+import {goto} from '$app/navigation';
 export let data;
-export let form;
-	
+export let form;	
 export const { pedidos, productos, clientes} = data;
 
 const estado_id = $page.url.searchParams.get('estado_id') || "0"
- 
  let titulo = ""
  switch (estado_id) {
 	case "0":
@@ -28,32 +26,22 @@ const estado_id = $page.url.searchParams.get('estado_id') || "0"
 		break;
  }
 
-
 let items=[];
-//let isOpenAdd = false;
-
-
-
-
-
-
-
-// console.log(form)
-// console.log(pedidos.datos);
 let formModalAdd = false;
 	
-onMount(() => {
-  if (form?.success) {
-   Swal.fire({
-     icon: 'success',
-     title: form.message,
-     text: 'Cliente: ',
-     backdrop: true,
-     confirmButtonText: 'Volver',
-     confirmButtonColor: 'rgb(69, 166, 175)'
-   })}
-   });
-
+onMount(()=>{
+	if (form?.success){	
+	Swal.fire({
+	  icon:'success',
+	  title:form.message,
+	  backdrop:true,
+	  confirmButtonText:'Volver',
+	  confirmButtonColor:'rgb(69, 166, 175)',
+	}).then((result)=>{
+	  if (result.isConfirmed){
+		goto('/pedidos');
+	  }});
+  }});
 
 function handleProductoChange(event) {
 const selectedIndex = event.target.selectedIndex;
@@ -61,31 +49,31 @@ const selectedOption = event.target.options[selectedIndex];
 precio = selectedOption.getAttribute('data-precio');
 }
 
-// ------------------------variables cabecera-----
-let cliente_id;
+let selectedCliente_id;
 let fecha = new Date().toISOString();
-// ------------------------variables detalle items
 let unidades;
 let producto_id;
 let precio;	
   
 function handleAdd(event) {
     event.preventDefault();
-
   const newItem = {
        producto_id,
        unidades,
        precio,
      };
        items= [...items, newItem];
-	// console.log(items)
   }
 
-/*
-function ModalAdd() {
-  isOpenAdd=!isOpenAdd;
+  function handleSubmit(event) {
+  event.preventDefault();
+  const pedido = {
+    selectedCliente_id,
+    fecha,
+    items
+  };
+  console.log(pedido);
 }
-*/
 
 let Pedido = pedidos.datos;
 let selectedOption = '';
@@ -102,25 +90,22 @@ const reset=()=> {
 	searchTerm = '';
 	selectedOption = '';
 	Pedido = pedidos.datos;
+	goto(`/pedidos`);
 }
 
 const ModalClose =()=>{
 	formModalAdd = false;
+	goto(`/pedidos`);
 }
-
 </script>
-
 	<svelte:head>
 	<title>{titulo}</title>
 	<meta name="description" content="Tabla de Pedidos"/>
 	</svelte:head>
-
-<main class="bg-gray-50 dark:bg-gray-900 sm:p-3">
-	
-<P size="2xl" align="center" class="mb-8">{titulo}</P>
-  
+<main class="bg-gray-50 dark:bg-gray-900 sm:p-3">	
+<P size="2xl" align="center" class="mb-8">{titulo}</P> 
 <div class=" bg-white mx-auto p-1 pt-2 border border-gray-200 rounded shadow-md w-4/5"> <!----------------Div contenedor: tabla + add + Filtro--------->
-  <div class=" flex justify-between items-center mx-auto w-full mb-1"><!-----cabecera Add + Filtro--------->
+  <div class="flex justify-between items-center mx-auto w-full mb-1"><!-----cabecera Add + Filtro--------->
 	<div class=""> <!-------modal add-------------->
 	   <div>
 	     <Button on:click={() => (formModalAdd = true)} size="xs" class="bg-primary-500 rounded m-0 px-1">
@@ -130,11 +115,11 @@ const ModalClose =()=>{
 			 d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
 			</svg> Nuevo</Button>		
 	   </div>
-	   <form  method="POST" action="?/addPedido">       	 
+	   <form  method="POST" >       	 
 	   <Modal bind:open={formModalAdd} size="xs" autoclose={false} class="w-full">			
-                <div > <!---------------------cabecera ( nombre cliente y fecha)-------------->
+            <div> <!--cabecera ( nombre cliente y fecha)--->
 				   <div>
-					  <Select id="select-sm" size="sm"  class="mt-6 mb-4"  name="cliente_id"  bind:value={cliente_id}  required>
+					  <Select id="select-sm" size="sm"  class="mt-6 mb-4"  name="selectedCliente_id"  bind:value={selectedCliente_id}  required>
 						<option selected>cliente_id</option>
 						 {#each clientes as cli}
 						 <option  value={cli.cliente_id}>{cli.cliente_id} - {cli.razon_social}</option>
@@ -146,13 +131,12 @@ const ModalClose =()=>{
 						 <Input type="text" name="fecha" bind:value={fecha} class="bg-white h-8 rounded"/>
 						</Label>
 					</div>
-			    </div> <!---------------------fin cabecera-------------->
-			       
-						  <div >	<!----------- detalles items-------------->   
-							<Input type="hidden" name="items" value={JSON.stringify( items = items.map(item => ({
+			    </div><!---------------------fin cabecera-------------->    
+					<div><!----------- detalles items-------------->   
+						<Input type="hidden" name="items" value={JSON.stringify( items = items.map(item => ({
 							                                       	...item,
 								                                     precio: Number(item.precio)
-							                                            })) )}  />
+							                                            })) )} />
 							<Select bind:value={producto_id} on:change={handleProductoChange} required>
 							  <option selected>Productos</option>
 							  {#each productos.datos as prod}
@@ -168,11 +152,10 @@ const ModalClose =()=>{
 						  </div>					 
 						  <div>	  
 						     <Button  on:click={handleAdd} size="xs" class="bg-primary-500 h-8 ml-1 px-2 my-4 rounded">Agregar item</Button>	
-					      </div>	
-						
+					      </div>		
 					   <div>	
 						<div class="Area-pedido"> <!-------Area items-------------->
-						 <Table hoverable={true}  class="border" >  <!-------Table-------------->
+						 <Table hoverable={true} class="border" ><!-------Table-------------->
 							<TableHead class="bg-primary-500 text-white"> 
 								<TableHeadCell>Producto_id</TableHeadCell>
 								<TableHeadCell>Unidades</TableHeadCell>
@@ -193,7 +176,7 @@ const ModalClose =()=>{
 					   <div class="mt-2">
 						<Button on:click={ModalClose} size="xs" class="bg-primary-500 h-8 ml-2 rounded">Cancelar</Button>				  
 						<Button size="xs" class="bg-primary-500 h-8 ml-2 mt-2 rounded">Actualizar</Button>
-						<Button type="submit" size="xs" class="bg-primary-500 h-8 ml-2  rounded">Nuevo Pedido</Button>		
+						<Button type="submit" on:submit={handleSubmit} size="xs" class="bg-primary-500 h-8 ml-2  rounded">Nuevo Pedido</Button>		
 					  </div>
 					</Modal>
 				</form>	

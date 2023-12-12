@@ -3,7 +3,8 @@
 	import {Input,Button} from 'flowbite-svelte'
 	import {onMount} from 'svelte';
 	import {goto} from '$app/navigation';
-	import { selectedClienteId,selectedRazon_social} from '../../storeCli';
+	import { page } from '$app/stores';
+	//import { selectedClienteId,selectedRazon_social}
 	export let form;
 	console.log(form)
 
@@ -30,10 +31,10 @@
 	 <form class="flex flex-col space-y-6" method="POST" >
 		<h3 class="mt-4 text-xl text-center font-medium text-gray-900 dark:text-white">Confirmar la eliminación !!</h3> 
 		<h4 class=" text-l text-center font-medium text-gray-900 dark:text-white">
-			Cliente: {$selectedRazon_social} </h4> 
-		<Input type="hidden" name="cliente_id" value={$selectedClienteId} class="bg-white h-8 rounded"/>
+			Cliente: </h4> 
+		<Input type="hidden" name="cliente_id" bind:value={$page.params.cliente_id} class="bg-white h-8 rounded"/>
 		<footer class="text-center">  
-		<Button type="submit" on:submit={$selectedClienteId} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Confirmar</Button>
+		<Button type="submit" on:submit={$page.params.cliente_id} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Confirmar</Button>
 		<Button on:click={() => goto('/clientes')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Cancelar</Button>
 		</footer>
 	</form>

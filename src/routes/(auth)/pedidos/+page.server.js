@@ -34,13 +34,13 @@ export const load = async ({ locals, url }) => {
 };
 
 export const actions = {
-	addPedido: async ({ request, locals }) => {
+	default: async ({ request, locals }) => {
 		const formData = await request.formData();
-		const cliente_id = Number(formData.get('cliente_id'));
+		const cliente_id = Number(formData.get('selectedCliente_id'));
 		const fecha = String(formData.get('fecha'));
 		const items = JSON.parse(formData.get('items')); //funcion items en el cliente, se trajo el array desde el form en forma de JSON
 
-		//  console.log ( "datos:", "cliente_id:", cliente_id, "fecha:",fecha ,items, locals.token,BASE_URL)
+		 console.log ( "datos:", "cliente_id:", cliente_id, "fecha:",fecha ,items, locals.token,BASE_URL)
 
 		try {
 			const res = await fetchApi.post({
@@ -53,7 +53,7 @@ export const actions = {
 				},
 				resStatus: 200
 			});
-
+		
 			if (res.status === 200) {
 				const datos = await res.json();
 				console.log(datos);

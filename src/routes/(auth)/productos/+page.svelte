@@ -1,33 +1,8 @@
 <script>
-	import { goto} from '$app/navigation';
+	import {goto} from '$app/navigation';
 	import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';			
 	export let data;
-	import { selectedProductoId, selectedNombre, selectedPrecio } from './storeProd';
 	export const {productos,productosSearch,sortPrecio,searchSortPrecio,sortNombre,sortProducto_id}=data;
-    import { onDestroy } from 'svelte';
-
-
-
-let producto_id;
-let nombre;
-let precio;
-
-// unsubscrib y onDestroy  para podre usar store y no genere leak fuga de memoria ...comprobarlo.
-const unsubscribeProductoId = selectedProductoId.subscribe(value => {
- producto_id = value;
-});
-const unsubscribeNombre = selectedNombre.subscribe(value => {
-  nombre = value;
-});
-const unsubscribePrecio = selectedPrecio.subscribe(value => {
-  precio = value;
-});
-
-onDestroy(() => {
-  unsubscribeProductoId();
-  unsubscribeNombre();
-  unsubscribePrecio();
-});
 
 let searchTerm='';
 let sortOrder= 1
@@ -200,22 +175,13 @@ const sortedNombre=(params)=> {
 					<TableBodyCell class="py-2" style="text-align: right;" >${precio.toFixed(2)}</TableBodyCell>
 					<TableBodyCell class="py-2">
 						<!------------------------------------------------------Editar producto--------------------->
-						<a href={`/productos/${producto_id}/editar`}  
-						on:click={()=>{
-							          selectedProductoId.set(producto_id);
-							          selectedNombre.set(nombre);
-							          selectedPrecio.set(precio);					 
-							          }}  
+						<a  href={`/productos/${producto_id}/editar`} 
+						
 							 class="font-medium text-primary-600 hover:underline dark:text-primary-500"  	
 							>Editar</a>			
 					</TableBodyCell>
 					<TableBodyCell class="py-2">		
 						<a href={`/productos/${producto_id}/eliminar`} 
-						on:click={() =>{
-							selectedProductoId.set(producto_id);
-							selectedNombre.set(nombre);
-							selectedPrecio.set(precio);
-							}}  	
 						class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a> 
 				   </TableBodyCell>
 				</TableBodyRow>

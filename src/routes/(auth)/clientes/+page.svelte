@@ -1,26 +1,14 @@
 <script>
 import {goto} from '$app/navigation';
 import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
-import { selectedClienteId,selectedRazon_social,selectedCuit,
-	selectedLocalidad,selectedDomicilio_calle,selectedDomicilio_altura,
-	selectedCodigo_postal,selectedTelefono,selectedEmail} from './storeCli';
+//import {selectedClienteId,selectedRazon_social,selectedCuit,
+//	selectedLocalidad,selectedDomicilio_calle,selectedDomicilio_altura,
+//	selectedCodigo_postal,selectedTelefono,selectedEmail}
 export let data;
 export const {clientes,sortrazonsocial,searchclientes} = data;
 
 let searchTerm = '';
 let sortOrder= 1
-
-/*
-let cliente_id;
-let razon_social;
-let cuit;
-let localidad;
-let domicilio_calle;
-let domicilio_altura;
-let codigo_postal;
-let telefono;
-let email;
-*/
 
 let Clientes = clientes;
 let SortRazonSocial = sortrazonsocial;
@@ -80,14 +68,14 @@ const SortedRazonSocial=(params)=>{
 			  <Button size="xs" on:click={reset} class="bg-primary-500 h-7 ml-1 px-2 rounded">Actualizar</Button>
 			</div> 
 		  </div>
-				<div >
-					<Table hoverable={true} class="mx-auto mt-1 border text-xs">
-						<TableHead class="bg-primary-500 text-white">
-							<TableHeadCell class="py-2">id</TableHeadCell>
-							<TableHeadCell class="py-2">
-								<div class="flex items-center">	
-									NOMBRE
-									<button on:click={alternarSortRS} class="bg-primary-500 hover:bg-primary-500 rounded">	
+			<div>
+			 <Table hoverable={true} class="mx-auto mt-1 border text-xs">
+				<TableHead class="bg-primary-500 text-white">
+					<TableHeadCell class="py-2">id</TableHeadCell>
+					<TableHeadCell class="py-2">
+						<div class="flex items-center">	
+							NOMBRE
+							<button on:click={alternarSortRS} class="bg-primary-500 hover:bg-primary-500 rounded">	
 										{#if sortOrder === 1}
 										<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
 										<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
@@ -128,26 +116,12 @@ const SortedRazonSocial=(params)=>{
 									<TableBodyCell class="py-2">{telefono}</TableBodyCell>
 									<TableBodyCell class="py-2">{email}</TableBodyCell>
 									<TableBodyCell class="py-2">
-										<a href={`/clientes/${cliente_id}/editar`} on:click={()=>{ //<!---------------------------------- edita cliente-------->
-												selectedClienteId.set(cliente_id);
-												selectedRazon_social.set(razon_social);
-                                                selectedCuit.set(cuit);
-                                                selectedLocalidad.set(localidad);
-                                                selectedDomicilio_calle.set(domicilio_calle);
-                                                selectedDomicilio_altura.set(domicilio_altura);
-                                                selectedCodigo_postal.set(codigo_postal);
-                                                selectedTelefono.set(telefono);
-                                                selectedEmail.set(email);		
-											    }} 
+										<a href={`/clientes/${cliente_id}/editar`} 
 											    class="font-medium text-primary-600 hover:underline dark:text-primary-500">Editar</a>								
 									</TableBodyCell>
 									<TableBodyCell class="py-2"><!---------------------Elimina el cliente--------------------->
-										<a href={`/clientes/${cliente_id}/eliminar`} on:click={() => { //<!----------------------------------eliminar-------->
-												selectedClienteId.set(cliente_id);
-												selectedRazon_social.set(razon_social);	
-											    }}
-											   class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a>
-
+										<a href={`/clientes/${cliente_id}/eliminar`}			
+										   class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a>
 				</TableBodyCell>
 			 </TableBodyRow>
 			{/each}
