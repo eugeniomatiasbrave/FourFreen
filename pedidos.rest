@@ -23,12 +23,12 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "cliente_id": 2,
-  "fecha": "2023-11-09T13:38:56.000Z",
+  "cliente_id": 4,
+  "fecha": "2023-12-12T13:38:56.000Z",
   "items": [
     {
       "producto_id": 10,
-      "unidades": 1000,
+      "unidades": 1001,
       "precio": 500.54
     },
     {
@@ -36,6 +36,5 @@ Content-Type: application/json
       "unidades": 201,
       "precio": 2520.54
     }
-
   ]
 }
