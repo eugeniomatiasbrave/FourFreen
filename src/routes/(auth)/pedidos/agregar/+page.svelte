@@ -28,18 +28,11 @@ const selectedOption = event.target.options[selectedIndex];
 precio = selectedOption.getAttribute('data-precio');
 }
 
-const formatter = new Intl.DateTimeFormat('en', {
-	month: 'numeric',
-	day: 'numeric',
-	year: 'numeric',
-	hour12: true,
-	hour: 'numeric',
-	minute: '2-digit',
-	second: '2-digit'
-});
+
+
 
 let cliente_id;
-let fecha = formatter.format();	
+let fecha = new Date().toISOString();	
 let unidades;
 let producto_id;
 let precio;	
