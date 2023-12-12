@@ -70,25 +70,18 @@ GET {{baseUrl}}/clientes?search=ELO HTTP/1.1 ................euge
     
 
 **************************** TABLA DE PEDIDOS:************************************************
-       
-          * /pedidos :
-           * Responsive.....................................................................
-           * GET............................................................................
-           * ADD pedidos  ..................................................................
-           * EDIT pedidos  .................................................................
-           * DELETE pedidos  ...............................................................
-           * Ordenar por click en cabecera de columna:
-           * Filtrar pedidos x nombre ......................................................
-
             
-    * Tabla de Gestion de Pedidos: 
-            - Accones: 
-                 - Add pedidos:
-                      Nota:Una Cabecera (hasta cliente) y detalle (a partir de Producto). 
-                      * Mas de un item por pedido 
-                 - Edita (modifica pedido en detalle):.....a espera de Api  
-             - Detalle de pedido:
-             - Estado de Pedido:  
+    * Tabla de Gestion de Pedidos:
+           * Responsive..................................................................... 
+           * Detalle de pedido.............................................................ok
+           * Agregar pedidos...............................................................ok
+                Nota:Una Cabecera (hasta cliente) y detalle (a partir de Producto). 
+           * Mas de un item por pedido.....................................................ok 
+           * Editar (modifica pedido en detalle):.......................................... 
+           * Eliminar pedido (modifica pedido en detalle):.................................
+           * Estado de Pedido.............................................................. 
+           * Filtrar pedidos x nombre ..................................................... 
+           * Ordenar por click en cabecera de columna......................................?
 
 **** Api pedidos *****
 GET {{baseUrl}}/pedidos 
