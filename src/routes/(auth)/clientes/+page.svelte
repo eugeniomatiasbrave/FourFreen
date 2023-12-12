@@ -51,7 +51,9 @@ const SortedRazonSocial=(params)=>{
 </svelte:head>
 
 <main class="bg-gray-50 dark:bg-gray-900 sm:p-3">
-  <P size="2xl" align="center" class="mb-8">Tabla de Clientes</P>
+<div class="my-4">
+  <P size="2xl" align="center">Tabla de Clientes</P>
+</div>
 	<div class=" bg-white mx-auto p-1 pt-1 border rounded shadow-md w-3/4"> <!----------------Div contenedor: tabla + add + Filtro--------->  
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"> 
 			<div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
