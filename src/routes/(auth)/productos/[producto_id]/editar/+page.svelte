@@ -35,11 +35,11 @@ let showForm=true;
 		<Input type="hidden" name="producto_id" bind:value={$page.params.producto_id} class="bg-white h-8 rounded" required />
 	  <Label class="space-y-2">
 		<span>Nombre</span>
-		<Input type="text" name="nombre"  class="bg-white h-8 rounded" required/>
+		<Input type="text" name="nombre" class="bg-white h-8 rounded" required/>
 	  </Label> 
 	  <Label class="space-y-2">
 		<span>Precio</span> 
-		<Input type="text"  name="precio"  class="bg-white h-8 rounded" required/>
+		<Input type="text"  name="precio" class="bg-white h-8 rounded" required/>
     </Label>
     <footer class="text-center"> 
     <Button type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Confirmar</Button>
