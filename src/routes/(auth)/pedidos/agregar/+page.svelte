@@ -30,8 +30,8 @@ precio = selectedOption.getAttribute('data-precio');
 
  
 let cliente_id;
-let fecha = new Intl.DateTimeFormat('es',{day: 'numeric',month: 'numeric',year: 'numeric'}).format(new Date());
-//let fecha = new Date().toISOString();	
+//let fecha = new Intl.DateTimeFormat('es',{day: 'numeric',month: 'numeric',year: 'numeric'}).format(new Date());
+let fecha = new Date().toISOString();	
 let unidades;
 let producto_id;
 let precio;	
