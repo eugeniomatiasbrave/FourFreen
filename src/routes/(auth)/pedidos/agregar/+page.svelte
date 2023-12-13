@@ -28,11 +28,10 @@ const selectedOption = event.target.options[selectedIndex];
 precio = selectedOption.getAttribute('data-precio');
 }
 
-
-
-
+ 
 let cliente_id;
-let fecha = new Date().toISOString();	
+let fecha = new Intl.DateTimeFormat('es',{day: 'numeric',month: 'numeric',year: 'numeric'}).format(new Date());
+//let fecha = new Date().toISOString();	
 let unidades;
 let producto_id;
 let precio;	
@@ -91,7 +90,7 @@ const formClose=()=>{
 			</div>
 			<div>
 				<label for="small" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Fecha</label>
-				<input id="small" type="text" name="fecha" bind:value={fecha} class="block w-full h-8 mb-2 text-xs text-gray-900 border 
+				<input id="small" type="text" maxlength="8" name="fecha" bind:value={fecha} class="block w-full h-8 mb-2 text-xs text-gray-900 border 
 				 border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700
 				 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
 				 dark:focus:border-primary-500"/>			
@@ -163,7 +162,7 @@ const formClose=()=>{
 <style>
 	.Area-pedido{
 		background-color: rgb(253, 251, 251);
-		min-height: 300px;
+		min-height: 200px;
 		border: 1px solid #b8b6b6;
 		border-radius: 4px;
 		overflow: scroll;		

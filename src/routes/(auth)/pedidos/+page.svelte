@@ -28,6 +28,8 @@ let Pedido = pedidos.datos;
 let selectedOption = '';
 let searchTerm = '';
 
+
+
 const filteredPedidos=()=> {
 	Pedido = pedidos.datos.filter(pe => {
 		return (selectedOption === '' || pe.pedido_estado_nombre.toString() === selectedOption) &&
@@ -70,13 +72,13 @@ const reset=()=> {
   </div> <!-----fin cabecera Add + Filtro--------->
   <div class="border-gray-900">
     <Table hoverable={true} class="mx-auto mt-1 border text-xs">  <!-------Table-------------->
-	  <TableHead class="bg-primary-500 text-white">
+	  <TableHead class="bg-primary-500 text-white" style="text-align: right;">
 		<TableHeadCell class="py-2">Pedido Id</TableHeadCell>
 		<TableHeadCell class="py-2">Cliente Id</TableHeadCell>
-		<TableHeadCell class="py-2">Cliente</TableHeadCell>
-		<TableHeadCell class="py-2">Fecha</TableHeadCell>			
+		<TableHeadCell class="py-2" style="text-align: left;">Cliente</TableHeadCell>
+		<TableHeadCell class="py-2" style="text-align: center;">Fecha</TableHeadCell>			
 		<TableHeadCell class="py-2">Estado Id</TableHeadCell>
-		<TableHeadCell class="py-2">Estado Pedido</TableHeadCell>
+		<TableHeadCell class="py-2" style="text-align: center;">Estado Pedido</TableHeadCell>
 		<TableHeadCell class="py-2">Editar</TableHeadCell>
 		<TableHeadCell class="py-2">Eliminar</TableHeadCell>
 		<TableHeadCell class="py-2">us id</TableHeadCell>
@@ -87,11 +89,11 @@ const reset=()=> {
 	</TableHead>
 	<TableBody class="divide-y">
 		{#each Pedido as pe}
-		 <TableBodyRow class="hover:bg-hover-gray-light">
+		 <TableBodyRow class="hover:bg-hover-gray-light" style="text-align: center;">
             <TableBodyCell class="py-2">{pe.pedido_cab_id}</TableBodyCell>
 			<TableBodyCell class="py-2">{pe.cliente_id}</TableBodyCell>
-			<TableBodyCell class="py-2">{pe.razon_social}</TableBodyCell>
-			<TableBodyCell class="py-2">{pe.fecha}</TableBodyCell>	
+			<TableBodyCell class="py-2" style="text-align: left;">{pe.razon_social}</TableBodyCell>
+			<TableBodyCell class="py-2" style="text-align: right;">{pe.fecha=new Intl.DateTimeFormat('es', {day: 'numeric', month: 'numeric', year: 'numeric'}).format(new Date(pe.fecha))}</TableBodyCell>				
 			<TableBodyCell class="py-2"> 
 				<a href={`/estado_id/${pe.pedido_estado_id}`} class="font-medium text-primary-600 hover:underline dark:text-primary-500">Estado: {pe.pedido_estado_id}</a> 
 			</TableBodyCell>
