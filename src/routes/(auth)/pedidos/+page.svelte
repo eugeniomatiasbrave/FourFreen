@@ -50,11 +50,11 @@ const reset=()=> {
 	<meta name="description" content="Tabla de Pedidos"/>
 	</svelte:head>
 
-<main class="bg-gray-50 dark:bg-gray-900 sm:p-3">
+<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1">
 	<div class="my-4">
 	  <P size="2xl" align="center">{titulo}</P>
 	</div>	
- <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-4/5"> <!----------------Div contenedor: tabla + add + Filtro--------->
+ <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-full xl:w-4/5"> <!----------------Div contenedor: tabla + add + Filtro--------->
    <div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"><!-----cabecera Add + Filtro---------> 
 	<div class="mb-2 sm:mb-0 w-full sm:w-auto"><!-------Boton nuevo pedido-------------->
 	  <Button href='/pedidos/agregar' size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto">
@@ -72,16 +72,16 @@ const reset=()=> {
   </div> <!-----fin cabecera Add + Filtro--------->
   <div class="border-gray-900">
     <Table hoverable={true} class="mx-auto mt-1 border text-xs">  <!-------Table-------------->
-	  <TableHead class="bg-primary-500 text-white" style="text-align: right;">
-		<TableHeadCell class="py-2">Pedido Id</TableHeadCell>
-		<TableHeadCell class="py-2">Cliente Id</TableHeadCell>
+	  <TableHead class="bg-primary-500 text-white" theadClass='text-xs' style="text-align: right;">
+		<TableHeadCell class="py-2 px-0 ">Pedido Id</TableHeadCell>
+		<TableHeadCell class="py-2 px-5">Cliente Id</TableHeadCell>
 		<TableHeadCell class="py-2" style="text-align: left;">Cliente</TableHeadCell>
 		<TableHeadCell class="py-2" style="text-align: center;">Fecha</TableHeadCell>			
 		<TableHeadCell class="py-2">Estado Id</TableHeadCell>
 		<TableHeadCell class="py-2" style="text-align: center;">Estado Pedido</TableHeadCell>
 		<TableHeadCell class="py-2">Editar</TableHeadCell>
 		<TableHeadCell class="py-2">Eliminar</TableHeadCell>
-		<TableHeadCell class="py-2">us id</TableHeadCell>
+		<TableHeadCell class="py-2">Us id</TableHeadCell>
 		<TableHeadCell class="py-2">Items</TableHeadCell>
 		<TableHeadCell class="py-2">Detalle</TableHeadCell>
 		<TableHeadCell class="py-2" style="text-align: right;">Tot. Uds</TableHeadCell>

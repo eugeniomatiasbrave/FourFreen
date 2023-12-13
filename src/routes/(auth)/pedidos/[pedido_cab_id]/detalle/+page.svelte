@@ -12,10 +12,10 @@ console.log(detalle)
   <div class="my-4">
 	<P size="2xl" align="center">Detalle del Pedido</P>
   </div>	
- <div class=" bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-2/3">
+ <div class=" bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-1/2">
 	<div class="overflow-x-auto"> 
 		<Table hoverable={true} class="mx-auto mt-1 border text-xs" > 		
-		<TableHead class=" bg-primary-500 text-white" style="text-align: center;"> 
+		<TableHead class=" bg-primary-500 text-white" style="text-align: center;" theadClass='text-xs'> 
 			<TableHeadCell class="py-2">ID del pedido</TableHeadCell>
 			<TableHeadCell class="py-2">ID del producto</TableHeadCell> 
 		    <TableHeadCell class="py-2">Nombre del producto</TableHeadCell>

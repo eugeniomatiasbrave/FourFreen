@@ -87,12 +87,12 @@ const sortedNombre=(params)=> {
 	<meta name="description" content="Productos" />
 </svelte:head>
 		
-<main class="bg-gray-50 dark:bg-gray-900 sm:p-3">
+<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1">
   <div class="my-4">
 	<P size="2xl" align="center">Tabla de Productos</P>
   </div>
 	<!--------------------------Seccion tabla --> 	
-	  <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-2/3"><!----------------Div contenedor: tabla + add + Filtro--------->
+	  <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-full xl:w-3/5"><!----------------Div contenedor: tabla + add + Filtro--------->
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"> 
 		 <div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
 		  <Button href={`/productos/${0}/agregar`} size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto">
@@ -110,10 +110,10 @@ const sortedNombre=(params)=> {
 	  </div>
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
 				<Table hoverable={true} class="mx-auto mt-1 border text-xs" > 		
-				<TableHead class=" bg-primary-500 text-white" > <!------------------------cabecera celdas-->
+				<TableHead class=" bg-primary-500 text-white" theadClass='text-xs' > <!------------------------cabecera celdas-->
 					<TableHeadCell class="py-2">
-					  <div class="flex items-center ">
-						ID<button on:click={alternarSortId} class="bg-primary-500 hover:bg-primary-500 rounded">	
+					  <div class="flex items-center">
+						Id<button on:click={alternarSortId} class="bg-primary-500 hover:bg-primary-500 rounded">	
 							{#if sortOrder === 1}
 							<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
 							<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
@@ -128,7 +128,7 @@ const sortedNombre=(params)=> {
 				    </TableHeadCell>
 					<TableHeadCell class="py-2">
 					<div class="flex items-center">	
-					    NOMBRE
+					    Nombre
 						<button on:click={alternarSort} class="bg-primary-500 hover:bg-primary-500 rounded">	
 							{#if sortOrder === 1}
 						    <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
@@ -145,7 +145,7 @@ const sortedNombre=(params)=> {
 				    </TableHeadCell> 
 				    <TableHeadCell class="py-2" >
 						<div class="flex items-center justify-end ">	
-						PRECIO
+						Precio
 						<button on:click={alternarSortPre} class="bg-primary-500 hover:bg-primary-500 rounded">	
 							{#if sortOrder === 1}
 						    <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
@@ -170,7 +170,7 @@ const sortedNombre=(params)=> {
 				<TableBody class="divide-y ">
 					{#each Productos as {producto_id, precio, nombre }}
 					<TableBodyRow class=" hover:bg-hover-gray-light ">
-					<TableBodyCell class="py-2" >{producto_id}</TableBodyCell>
+					<TableBodyCell class="py-2" align="right">{producto_id}</TableBodyCell>
 					<TableBodyCell class="py-2">{nombre}</TableBodyCell>
 					<TableBodyCell class="py-2" style="text-align: right;" >${precio.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableBodyCell>
 					<TableBodyCell class="py-2">

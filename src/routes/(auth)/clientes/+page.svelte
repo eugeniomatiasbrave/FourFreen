@@ -50,11 +50,11 @@ const SortedRazonSocial=(params)=>{
 	<meta name="description" content="Clientes"/>
 </svelte:head>
 
-<main class="bg-gray-50 dark:bg-gray-900 sm:p-3">
+<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1">
 <div class="my-4">
   <P size="2xl" align="center">Tabla de Clientes</P>
 </div>
-	<div class=" bg-white mx-auto p-1 pt-1 border rounded shadow-md w-3/4"> <!----------------Div contenedor: tabla + add + Filtro--------->  
+	<div class=" bg-white mx-auto p-1 pt-1 border rounded shadow-md w-full xl:w-3/4"> <!----------------Div contenedor: tabla + add + Filtro--------->  
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"> 
 			<div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
 			  <Button href={`/clientes/${0}/agregar`} size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto">
@@ -72,11 +72,11 @@ const SortedRazonSocial=(params)=>{
 		  </div>
 			<div>
 			 <Table hoverable={true} class="mx-auto mt-1 border text-xs">
-				<TableHead class="bg-primary-500 text-white">
+				<TableHead class="bg-primary-500 text-white" align="center" theadClass='text-xs'>
 					<TableHeadCell class="py-2">id</TableHeadCell>
 					<TableHeadCell class="py-2">
 						<div class="flex items-center">	
-							NOMBRE
+							Nombre
 							<button on:click={alternarSortRS} class="bg-primary-500 hover:bg-primary-500 rounded">	
 										{#if sortOrder === 1}
 										<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
@@ -94,8 +94,8 @@ const SortedRazonSocial=(params)=>{
 							<TableHeadCell class="py-2">Cuit</TableHeadCell>
 							<TableHeadCell class="py-2">Calle</TableHeadCell>
 							<TableHeadCell class="py-2">Altura</TableHeadCell>
-							<TableHeadCell class="py-2">Loc.</TableHeadCell>
-							<TableHeadCell class="py-2">CP.</TableHeadCell>
+							<TableHeadCell class="py-2">Localidad</TableHeadCell>
+							<TableHeadCell class="py-2">Codigo postal</TableHeadCell>
 							<TableHeadCell class="py-2">Telefono</TableHeadCell>
 							<TableHeadCell class="py-2">Email</TableHeadCell>
 							<TableHeadCell class="py-2">Editar
@@ -108,20 +108,20 @@ const SortedRazonSocial=(params)=>{
 					    	<TableBody class="divide-y">
 								{#each Clientes as {cliente_id,razon_social,cuit,domicilio_calle,domicilio_altura,localidad,telefono,email, codigo_postal}}
 								<TableBodyRow class="hover:bg-hover-gray-light">
-									<TableBodyCell class="py-2">{cliente_id}</TableBodyCell>
+									<TableBodyCell class="py-2" align="center">{cliente_id}</TableBodyCell>
 									<TableBodyCell class="py-2">{razon_social}</TableBodyCell>
-									<TableBodyCell class="py-2">{cuit}</TableBodyCell>
+									<TableBodyCell class="py-2" align="right">{cuit}</TableBodyCell>
 									<TableBodyCell class="py-2">{domicilio_calle}</TableBodyCell>
-									<TableBodyCell class="py-2">{domicilio_altura}</TableBodyCell>
+									<TableBodyCell class="py-2" align="right">{domicilio_altura}</TableBodyCell>
 									<TableBodyCell class="py-2">{localidad}</TableBodyCell>
-									<TableBodyCell class="py-2">{codigo_postal}</TableBodyCell>
-									<TableBodyCell class="py-2">{telefono}</TableBodyCell>
+									<TableBodyCell class="py-2" align="right">{codigo_postal}</TableBodyCell>
+									<TableBodyCell class="py-2" align="right">{telefono}</TableBodyCell>
 									<TableBodyCell class="py-2">{email}</TableBodyCell>
-									<TableBodyCell class="py-2">
+									<TableBodyCell class="py-2" align="center">
 										<a href={`/clientes/${cliente_id}/editar`} 
 											    class="font-medium text-primary-600 hover:underline dark:text-primary-500">Editar</a>								
 									</TableBodyCell>
-									<TableBodyCell class="py-2"><!---------------------Elimina el cliente--------------------->
+									<TableBodyCell class="py-2" align="center"><!---------------------Elimina el cliente--------------------->
 										<a href={`/clientes/${cliente_id}/eliminar`}			
 										   class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a>
 				</TableBodyCell>

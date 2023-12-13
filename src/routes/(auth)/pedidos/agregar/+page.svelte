@@ -133,7 +133,7 @@ const formClose=()=>{
 		<div><!-------Area items-------------->
 		  <div class="Area-pedido"> 
 			<Table hoverable={true} class="mx-auto border text-xs" ><!-------Table-------------->
-				<TableHead class="bg-primary-500 text-white" style="text-align: center;"> 
+				<TableHead class="bg-primary-500 text-white" style="text-align: center;" theadClass='text-xs'> 
 					<TableHeadCell class="py-2">Producto_id</TableHeadCell>
 					<TableHeadCell class="py-2" >Unidades</TableHeadCell>
 					<TableHeadCell class="py-2" >Precio</TableHeadCell>	 	

@@ -28,7 +28,7 @@
 	
 {#if showForm}
  <main class="flex items-center justify-center min-h-screen pb-36">
-   <div class="bg-white mx-auto p-4 pt-2 my-2 rounded border border-gray-200 shadow-md w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5">
+   <div class="bg-white mx-auto p-4 pt-2 my-2 rounded border border-gray-200 shadow-md  sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5">
 	 <form class="flex flex-col space-y-6" method="POST">
 		<h3 class="mt-4 text-xl text-center font-medium text-gray-900 dark:text-white">Confirmar la eliminación!!</h3>
 		<Input type="hidden" name="producto_id" bind:value={$page.params.producto_id} class="bg-white h-8 rounded"/>

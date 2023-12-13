@@ -10,7 +10,7 @@
 </svelte:head>
 
 <main class="flex items-start justify-center min-h-screen pt-16">
-	<div class="bg-white mx-auto p-2 pt-2 rounded border border-gray-200 shadow-md w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/6"> 
+	<div class="bg-white mx-auto p-2 pt-2 rounded border border-gray-200 shadow-md  sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/6"> 
 		<div class="justify-between items-center mx-auto w-full"> 
 			<div class="text-center my-3">
 				<h1 class="text-2xl">Cierre de Sesión</h1>
