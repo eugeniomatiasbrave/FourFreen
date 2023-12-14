@@ -38,7 +38,7 @@ GET {{baseUrl}}/productos?limit=10 HTTP/1.1
 Authorization: Bearer {{token}}
 ###
 // recuperda los datos de un producto en particular con su :id en el path
-GET {{baseUrl}}/productos/10 HTTP/1.1 
+GET {{baseUrl}}/productos/110 HTTP/1.1 
 Authorization: Bearer {{token}}
 
 ###

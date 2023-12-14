@@ -46,8 +46,7 @@
 		</Label>
 		<Label class="space mt-2">
 		  <span>Calle</span>
-		<Input
-		type="text" name="domicilio_calle" class="bg-white h-8 rounded" required/>
+		<Input type="text" name="domicilio_calle" class="bg-white h-8 rounded" required/>
 		</Label>
 		<Label class="space mt-2">
 		<span>Altura</span>

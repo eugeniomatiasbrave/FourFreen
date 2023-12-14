@@ -1,5 +1,5 @@
 @baseUrl = https://fg-api-rest.fly.dev
-@baseUrl = http://localhost:3000
+#@baseUrl = http://localhost:3000
 @token = eyJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvX2lkIjoxLCJub21icmUiOiJhQGEuY29tIiwiaWF0IjoxNjk3NDY0MTAzfQ.Jx6HocdoKz8H7kxPqrVjmEqYBLmjODjw3CHoWdxjLGs
 
 // Recupera todos los estados de los pedidos   ....ok
@@ -17,7 +17,7 @@ GET {{baseUrl}}/pedidos/38/detalle HTTP/1.1
 Authorization: Bearer {{token}}
 
 ###
-// Recupera todos los estados de los pedidos.  ADD  ...ok
+// Recupera todos los estados de los pedidos. 
 POST {{baseUrl}}/pedidos HTTP/1.1 
 Authorization: Bearer {{token}}
 Content-Type: application/json

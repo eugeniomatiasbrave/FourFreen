@@ -1,19 +1,35 @@
 import { BASE_URL } from '$lib/utils.js';
 import { fetchApi } from '$lib/fetchApi.js';
-import { error } from '@sveltejs/kit';
+//import { error } from '@sveltejs/kit';
 
-export const load = async ({ locals, params, url }) => {
+export const load = async ({ locals, params}) => {
 	const { pedido_estado_id } = params;
 
-	const fetchEstadoPedidoId = async () => {
-		const estadoPedidoId = await fetchApi.get({
+	const PedidoEstadoId = async () => {
+		const pedidoEstadoId = await fetchApi.get({
 			url: BASE_URL + `/pedidos_estado/${pedido_estado_id}`,
 			token: locals.token,
 			resStatus: 200
 		});
-		return estadoPedidoId;
+		return pedidoEstadoId;
 	};
 
+const PedidosEstados = async () => {
+	const pedidosEstados = await fetchApi.get({
+		url: BASE_URL + '/pedidos_estado',
+		token: locals.token,
+		resStatus: 200
+	});
+	return pedidosEstados;
+};
+
+	return {
+		pedidoEstadoId: await PedidoEstadoId(),
+		pedidosEstados: await PedidosEstados()
+	};
+};
+////////////////////////////////////////////////////////////////////////////////////
+/*
 	const fetchEstados = async () => {
 		const estadoId = url.searchParams.get('estado_id');
 		let localUrl = '/pedidos';
@@ -27,15 +43,10 @@ export const load = async ({ locals, params, url }) => {
 		});
 		return estados;
 	};
-
-	return {
-		estadoPedidoId: await fetchEstadoPedidoId(),
-		estados: await fetchEstados()
-	};
-};
-
+*/
+/*
 export const actions = {
-	confeccionado: async ({ request, locals }) => {
+	default: async ({ request, locals }) => {
 		const formData = await request.formData();
 		const pedido_estado_id = formData.get('pedido_estado_id');
 		const nombre = formData.get('nombre');
@@ -70,3 +81,4 @@ export const actions = {
 		return { success: true, message: 'Pedido agregado correctamente!!!' };
 	}
 };
+*/
