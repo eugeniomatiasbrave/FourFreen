@@ -12,8 +12,7 @@ export const load = async ({ locals, url }) => {
 			localUrl += '?estado_id=' + estadoId;
 		}
 		console.log('url:', localUrl);
-		const pedidos = await fetchApi.get({ url: BASE_URL + localUrl, token: locals.token, resStatus: 200 });
-	    return pedidos;
+		return await fetchApi.get({ url: BASE_URL + localUrl, token: locals.token, resStatus: 200 });   
 	};
 	return {
 		pedidos: await getPedidos()

@@ -3,9 +3,10 @@ import {page} from '$app/stores';
 import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
 import {goto} from '$app/navigation';
 export let data;	
-export const { pedidos, productos, clientes} = data;
 
-const estado_id = $page.url.searchParams.get('estado_id') || "0"
+export const { pedidos, productos, clientes} = data;
+	const estado_id = $page.url.searchParams.get('estado_id') || "0"
+ 
  let titulo = ""
  switch (estado_id) {
 	case "0":
@@ -15,31 +16,24 @@ const estado_id = $page.url.searchParams.get('estado_id') || "0"
 		titulo = "Pedidos Ingresados"
 		break;
 		case "20":
-		titulo = "Pedidos Confeccionados"
+		titulo = "Pedidos confeccionados"
 		break;
 		case "30":
-		titulo = "Pedidos Entregados"
-		break;
+        titulo = "Pedidos entregados"
 	default:
 		break;
  }
 
+
 let Pedido = pedidos.datos;
-let selectedOption = '';
 let searchTerm = '';
 
-
-
 const filteredPedidos=()=> {
-	Pedido = pedidos.datos.filter(pe => {
-		return (selectedOption === '' || pe.pedido_estado_nombre.toString() === selectedOption) &&
-		       (searchTerm === '' || pe.pedido_cab_id.toString().includes(searchTerm.toString()));
-	});	 
+	Pedido = pedidos.datos.filter(pe => pe.pedido_cab_id.toString().includes(searchTerm.toString()));	 
 }
 
 const reset=()=> {
 	searchTerm = '';
-	selectedOption = '';
 	Pedido = pedidos.datos;
 	goto(`/pedidos`);
 }
@@ -47,7 +41,7 @@ const reset=()=> {
 </script>
 	<svelte:head>
 	<title>{titulo}</title>
-	<meta name="description" content="Tabla de Pedidos"/>
+	<meta name="description" content="Pedidos"/>
 	</svelte:head>
 
 <main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1">
@@ -95,7 +89,7 @@ const reset=()=> {
 			<TableBodyCell class="py-2" style="text-align: left;">{pe.razon_social}</TableBodyCell>
 			<TableBodyCell class="py-2" style="text-align: right;">{pe.fecha=new Intl.DateTimeFormat('es', {day: 'numeric', month: 'numeric', year: 'numeric'}).format(new Date(pe.fecha))}</TableBodyCell>				
 			<TableBodyCell class="py-2"> 
-				<a href={`/pedidos_estado/${pe.pedido_estado_id}`} class="font-medium text-primary-600 hover:underline dark:text-primary-500">Estado: {pe.pedido_estado_id}</a> 
+			     <a href={`/pedidos_estado/${pe.pedido_estado_id}`} class="font-medium text-primary-600 hover:underline dark:text-primary-500">Estado: {pe.pedido_estado_id}</a> 
 			</TableBodyCell>
 			<TableBodyCell class="py-2">{pe.pedido_estado_nombre}</TableBodyCell>
 			<TableBodyCell class="py-2">{pe.editar}</TableBodyCell>
