@@ -3,6 +3,19 @@ import { BASE_URL } from '$lib/utils.js';
 import { fetchApi } from '$lib/fetchApi.js';
 import { z } from 'zod';
 
+
+export const load = async ({ locals,params}) => {
+	const {producto_id} = params;
+	const getProductosId = async () => {
+	
+		const productosId = await fetchApi.get({ url: BASE_URL + `/productos/${producto_id}`, token: locals.token, resStatus: 200 });
+		return productosId;	
+	    }
+	return {
+		productosId: await getProductosId()
+     }
+}
+
 const productoSchema = z.object({
   producto_id: z.string(),
   nombre: z.string().min(1),
