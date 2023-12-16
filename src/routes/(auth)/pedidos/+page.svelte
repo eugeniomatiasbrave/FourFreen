@@ -44,11 +44,11 @@ const reset=()=> {
 	<meta name="description" content="Pedidos"/>
 	</svelte:head>
 
-<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1">
+<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full xl:w-4/5">
 	<div class="my-4">
 	  <P size="2xl" align="center">{titulo}</P>
 	</div>	
- <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-full xl:w-4/5"> <!----------------Div contenedor: tabla + add + Filtro--------->
+ <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-full "> <!----------------Div contenedor: tabla + add + Filtro--------->
    <div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"><!-----cabecera Add + Filtro---------> 
 	<div class="mb-2 sm:mb-0 w-full sm:w-auto"><!-------Boton nuevo pedido-------------->
 	  <Button href='/pedidos/agregar' size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto">
@@ -73,8 +73,6 @@ const reset=()=> {
 		<TableHeadCell class="py-2" style="text-align: center;">Fecha</TableHeadCell>			
 		<TableHeadCell class="py-2">Estado Id</TableHeadCell>
 		<TableHeadCell class="py-2" style="text-align: center;">Estado Pedido</TableHeadCell>
-		<TableHeadCell class="py-2">Editar</TableHeadCell>
-		<TableHeadCell class="py-2">Eliminar</TableHeadCell>
 		<TableHeadCell class="py-2">Us id</TableHeadCell>
 		<TableHeadCell class="py-2">Items</TableHeadCell>
 		<TableHeadCell class="py-2">Detalle</TableHeadCell>
@@ -92,8 +90,6 @@ const reset=()=> {
 			     <a href={`/pedidos_estado/${pe.pedido_estado_id}`} class="font-medium text-primary-600 hover:underline dark:text-primary-500">Estado: {pe.pedido_estado_id}</a> 
 			</TableBodyCell>
 			<TableBodyCell class="py-2">{pe.pedido_estado_nombre}</TableBodyCell>
-			<TableBodyCell class="py-2">{pe.editar}</TableBodyCell>
-			<TableBodyCell class="py-2">{pe.eliminar}</TableBodyCell>
 			<TableBodyCell class="py-2">{pe.usuario_id}</TableBodyCell>
 			<TableBodyCell class="py-2">{pe.items}</TableBodyCell>
 			<TableBodyCell class="py-2">

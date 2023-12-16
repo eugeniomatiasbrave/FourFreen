@@ -1,5 +1,5 @@
 <script>
-	import { P , Img} from 'flowbite-svelte';
+	import {Img} from 'flowbite-svelte';
 	import LogoFG0 from '$lib/img/LogoFG0.png';
 	import './style.css';
 
@@ -7,7 +7,7 @@
 
 <svelte:head>
 	<title>Inicio</title>
-	<meta name="description" content="Showcase" />
+	<meta name="description" content="Inicio" />
 </svelte:head>
 
 <main class="inicio">
