@@ -42,7 +42,7 @@ let showForm=true;
 	  </Label> 
 	  <Label class="space">
 		<span>Precio</span> 
-		<Input type="text" name="precio" value={producto.precio} class="bg-white h-7 w-full rounded" required/>
+		<Input type="number" name="precio" value={producto.precio} class="bg-white h-7 w-full rounded" required/>
     </Label>
     <footer class="text-center"> 
     <Button type="submit"  class="bg-primary-500 h-7 ml-1 px-2 rounded">Confirmar</Button>
