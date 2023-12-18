@@ -9,7 +9,7 @@
 	$: activeUrl = $page.url.pathname;
 </script>
 
-<Navbar class="p-0">
+<Navbar class="p-0 ">
 	<NavBrand href="/">
 		<img src="" class="mr-3 h-6 sm:h-9" alt="" />
 		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">FourGreens</span>
@@ -31,4 +31,5 @@
 	</NavUl>
 </Navbar>
 
- <slot/>
+
+<slot />

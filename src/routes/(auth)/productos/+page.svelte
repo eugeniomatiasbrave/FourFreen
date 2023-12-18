@@ -10,18 +10,37 @@ let Productos=productos.datos
 let filteredPrecio=sortPrecio.datos
 let filteredProductos=productosSearch.datos
 let filteredSortNombre=sortNombre.datos
-let filteredSortedId=sortProducto_id.datos
+
+let datos = sortProducto_id.datos;
+let filteredSortedId = datos.sort((e,f)=>e.producto_id - f.producto_id);
+
+const SortedProducto_id=(params)=>{
+	sortOrder= -sortOrder;
+	let sort=params;
+	let newOrder=[...filteredSortedId]
+	if (sort===1) {
+		filteredSortedId=newOrder.sort((e,f)=>e.producto_id - f.producto_id);
+		} else if (sort===-1) {
+		filteredSortedId=newOrder.sort((e,f)=>f.producto_id - e.producto_id);
+		}
+		
+		goto(`/productos?sort=producto_id:${sort}`);
+	}
+ 
+const alternarSortId =()=> {
+	SortedProducto_id(sortOrder === 1 ? -1 : 1);
+}
 
 const applyFilter=(params)=>{
 	let search=params;
 	filteredProductos=productosSearch.datos.filter(prod=>prod.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
-	Productos=filteredProductos; 
+	filteredSortedId=filteredProductos; 
 	goto(`/productos?search=${search}`);		
 	}
 
 const reset=()=>{
     searchTerm='';
-	Productos=productos.datos;
+	filteredSortedId = datos.sort((e,f)=>e.producto_id - f.producto_id);
 	goto(`/productos`);
 	}
 
@@ -33,30 +52,15 @@ const OrderedPrecio=(params)=>{
 	    } else if (sort===-1) {
 		filteredPrecio=sortPrecio.datos.sort((a,b)=>b.precio - a.precio);
 	    }
-		Productos=filteredPrecio;
+		filteredSortedId=filteredPrecio;
 		goto(`/productos?sort=precio:${sort}`);
 	}
+	
 	
 const alternarSortPre =()=> {
 	OrderedPrecio(sortOrder === 1 ? -1 : 1);
 }
 
-const SortedProducto_id=(params)=>{
-	sortOrder= -sortOrder;
-	let sort=params;
-	let newOrder=[...sortProducto_id.datos]
-	if (sort===1) {
-		filteredSortedId=newOrder.sort((e,f)=>e.producto_id - f.producto_id);
-		} else if (sort===-1) {
-		filteredSortedId=newOrder.sort((e,f)=>f.producto_id - e.producto_id);
-		}
-		Productos=filteredSortedId;
-		goto(`/productos?sort=producto_id:${sort}`);
-	}
-
-const alternarSortId =()=> {
-	SortedProducto_id(sortOrder === 1 ? -1 : 1);
-}
 
 const sortedNombre=(params)=> {
     sortOrder = -sortOrder;
@@ -72,7 +76,7 @@ const sortedNombre=(params)=> {
       }
       return 0;
     });
-	Productos=filteredSortNombre;
+	filteredSortedId=filteredSortNombre;
 	goto(`/productos?sort=nombre:${sort}`);
   }
 
@@ -87,13 +91,13 @@ const sortedNombre=(params)=> {
 	<meta name="description" content="Productos" />
 </svelte:head>
 		
-<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full xl:w-3/4">
+<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full ">
   <div class="my-4">
 	<P size="xl" align="center">Tabla de Productos</P>
   </div>
 	<!--------------------------Seccion tabla --> 	
-	  <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-full "><!----------------Div contenedor: tabla + add + Filtro--------->
-		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"> 
+	  <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-full xl:w-3/5"><!----------------Div contenedor: tabla + add + Filtro--------->
+		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto "> 
 		 <div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
 		  <Button href={`/productos/${0}/agregar`} size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto">
 			<svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
@@ -168,7 +172,7 @@ const sortedNombre=(params)=> {
 				  </TableHeadCell>
 				</TableHead><!----------------------fin cabecera celdas-->	
 				<TableBody class="divide-y ">
-					{#each Productos as {producto_id, precio, nombre }}
+					{#each filteredSortedId as {producto_id, precio, nombre }}
 					<TableBodyRow class=" hover:bg-hover-gray-light ">
 					<TableBodyCell class="py-2" align="right">{producto_id}</TableBodyCell>
 					<TableBodyCell class="py-2">{nombre}</TableBodyCell>

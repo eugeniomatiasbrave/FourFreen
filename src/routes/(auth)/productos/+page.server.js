@@ -3,7 +3,7 @@ import { BASE_URL } from '$lib/utils.js';
 import { fetchApi } from '$lib/fetchApi.js';
 
 export const load = async ({ locals, url}) => {
-  const search = url.searchParams.get('search');
+ 
   const sort = url.searchParams.get('sort');
 
   const getProductos = async () => {
@@ -28,7 +28,7 @@ export const load = async ({ locals, url}) => {
   
   const getSortPrecio=async()=>{
       try {
-        const sortPrecio = await fetchApi.get({url:BASE_URL+`/productos?sort=${search}:${sort}`,token:locals.token,resStatus:200});
+        const sortPrecio = await fetchApi.get({url:BASE_URL+`/productos?sort=precio:${sort}`,token:locals.token,resStatus:200});
         return sortPrecio;
       } catch (err) {
           console.error('Error: ', err);
@@ -38,7 +38,7 @@ export const load = async ({ locals, url}) => {
   
   const getSortNombre=async()=>{
       try {
-        const sortNombre = await fetchApi.get({url:BASE_URL+`/productos?sort=${search}:${sort}`,token:locals.token,resStatus:200});
+        const sortNombre = await fetchApi.get({url:BASE_URL+`/productos?sort=nombre:${sort}`,token:locals.token,resStatus:200});
          return sortNombre;  
       } catch (err) {
           console.error('Error: ', err);
@@ -48,7 +48,7 @@ export const load = async ({ locals, url}) => {
   
   const getSortProducto_id=async()=>{
       try {
-        const sortProducto_id = await fetchApi.get({url:BASE_URL+`/productos?sort=${search}:${sort}`,token:locals.token,resStatus:200});
+        const sortProducto_id = await fetchApi.get({url:BASE_URL+`/productos?sort=producto_id:${sort}`,token:locals.token,resStatus:200});
          return sortProducto_id;  
       } catch (err) {
           console.error('Error: ', err);

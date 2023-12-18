@@ -14,6 +14,8 @@ Authorization: Bearer {{token}}
 GET {{baseUrl}}/productos?sort=precio:-1 HTTP/1.1  
 Authorization: Bearer {{token}}
 
+
+
 ###
 // recupera todos los productos que contengan la palabra ELO en el nombre . Ordena por nombre
 GET {{baseUrl}}/productos?search=ELO HTTP/1.1 
