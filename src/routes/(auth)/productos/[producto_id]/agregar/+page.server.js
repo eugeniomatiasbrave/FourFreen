@@ -17,12 +17,11 @@ export const actions = {
     };
 
     const result = productoSchema.safeParse(data);
-
     if (!result.success) {
-      console.log(result.error);
-      throw error(400, 'Datos de formulario inválidos');
+      console.log(result.error); 
+      throw error(500, 'Algo salió mal al agregar el producto');
     }
-
+  
     try {
       const res = await fetchApi.post({
         url: BASE_URL + '/productos',

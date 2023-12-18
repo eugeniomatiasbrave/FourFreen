@@ -3,7 +3,7 @@
 	import {onMount} from 'svelte';
 	import {goto} from '$app/navigation';
 	export let form;
-	
+
 	let showForm = true;
 
 	onMount(() => {
@@ -21,8 +21,9 @@
 			goto('/productos');
 		  }
 		});
-	  }
+	}
 	});	
+
 	</script>
 
 {#if showForm}
@@ -36,7 +37,8 @@
           </Label>
           <Label class="space">
             <span>Precio</span>
-            <Input type="text" name="precio" placeholder="Agregar precio" class="bg-white h-7 w-full rounded" required/>
+            <Input type="number" name="precio" placeholder="Agregar precio" class="bg-white h-7 w-full rounded" required/>
+			
           </Label> 
           <footer class="text-center">
           <Button type="submit"  class="bg-primary-500 h-7 px-2 rounded">Confirmar</Button>
