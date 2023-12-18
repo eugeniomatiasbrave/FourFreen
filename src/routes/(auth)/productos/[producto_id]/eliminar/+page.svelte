@@ -33,8 +33,8 @@ onMount(()=>{
 	    <form class="flex flex-col space-y-6" method="POST">
 		<Input type="hidden" name="producto_id" value={producto.producto_id}/>
 		<footer class="text-center">  
-		<Button type="submit" size="xs" class="bg-primary-500 h-7 ml-1 px-2 rounded">Confirmar</Button>
-		<Button on:click={() => goto('/productos')} size="xs" class="bg-primary-500 h-7 ml-1 px-2 rounded">Cancelar</Button>
+		<Button type="submit"  class="bg-primary-500 h-7 ml-1 px-2 rounded">Confirmar</Button>
+		<Button on:click={() => goto('/productos')}  class="bg-primary-500 h-7 ml-1 px-2 rounded">Cancelar</Button>
 		</footer>
 	</form>
 </div>

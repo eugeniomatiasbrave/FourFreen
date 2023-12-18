@@ -29,18 +29,18 @@
  <main class="flex items-center justify-center min-h-screen pb-36 ">
    <div class="bg-white mx-auto p-4 pt-1 my-0 rounded border border-gray-200 shadow-md w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/6"> <!----------------------------modal add productos-->  
       <form class="flex flex-col space-y-4" method="POST" >	
-          <h3 class="mt-4 text-xl text-center font-medium text-gray-900 dark:text-white">Agregar un producto nuevo</h3>
+          <h3 class="mt-4 text-xl text-center font-medium text-gray-900 dark:text-white">Ingrese un producto nuevo</h3>
           <Label class="space">
             <span>Producto</span>
-            <Input type="text" name="nombre" placeholder="escribe aqui el producto" class="bg-white h-7 w-full rounded" required/>
+            <Input type="text" name="nombre" placeholder="Agregar producto" class="bg-white h-7 w-full rounded" required/>
           </Label>
           <Label class="space">
             <span>Precio</span>
-            <Input type="text" name="precio" placeholder="escribe aqui el precio" class="bg-white h-7 w-full rounded" required/>
+            <Input type="text" name="precio" placeholder="Agregar precio" class="bg-white h-7 w-full rounded" required/>
           </Label> 
           <footer class="text-center">
-          <Button type="submit" size="xs" class="bg-primary-500 h-7 px-2 rounded">Confirmar</Button>
-          <Button on:click={() => goto('/productos')} size="xs" class="bg-primary-500 h-7  px-2 rounded">Cancelar</Button>
+          <Button type="submit"  class="bg-primary-500 h-7 px-2 rounded">Confirmar</Button>
+          <Button on:click={() => goto('/productos')} class="bg-primary-500 h-7  px-2 rounded">Cancelar</Button>
          </footer>  
       </form>   
     </div> <!----------------------fin de modal add productos-->
