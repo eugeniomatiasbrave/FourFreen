@@ -96,7 +96,7 @@ const sortedNombre=(params)=> {
 	<P size="xl" align="center">Tabla de Productos</P>
   </div>
 	<!--------------------------Seccion tabla --> 	
-	  <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-full xl:w-3/5"><!----------------Div contenedor: tabla + add + Filtro--------->
+	  <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-full xl:w-1/2"><!----------------Div contenedor: tabla + add + Filtro--------->
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto "> 
 		 <div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
 		  <Button href={`/productos/${0}/agregar`} size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto">
@@ -108,15 +108,15 @@ const sortedNombre=(params)=> {
 		 </div>
 		<div class="flex items-center"> 
 		  <Input type="text" bind:value={searchTerm} name="searchTerm" placeholder="Buscar Producto" required class="bg-white h-7 w-full sm:w-auto rounded"  /> 
-		  <Button size="xs" on:click={()=> applyFilter(searchTerm)} class="bg-primary-500 h-7 ml-1 px-2  rounded">Buscar</Button> 
-		  <Button size="xs" on:click={reset} class="bg-primary-500 h-7 ml-1 px-2 rounded">Actualizar</Button>
+		  <Button size="xs" on:click={()=> applyFilter(searchTerm)} class="bg-primary-500 h-7 ml-1 px-2 rounded">Buscar</Button> 
+		  <Button size="xs" on:click={reset} class="bg-primary-500 h-7 ml-1 px-2 w-32 sm:w-32     rounded">Borrar Filtro</Button>
 		</div> 
 	  </div>
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
 				<Table hoverable={true} class="mx-auto mt-1 border text-xs" > 		
 				<TableHead class=" bg-primary-500 text-white" theadClass='text-xs' > <!------------------------cabecera celdas-->
-					<TableHeadCell class="py-2">
-					  <div class="flex items-center">
+					<TableHeadCell class="py-2" >
+					  <div class="flex items-center justify-end">
 						Id<button on:click={alternarSortId} class="bg-primary-500 hover:bg-primary-500 rounded">	
 							{#if sortOrder === 1}
 							<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
@@ -180,7 +180,6 @@ const sortedNombre=(params)=> {
 					<TableBodyCell class="py-2">
 						<!------------------------------------------------------Editar producto--------------------->
 						<a  href={`/productos/${producto_id}/editar`} 
-						
 							 class="font-medium text-primary-600 hover:underline dark:text-primary-500"  	
 							>Editar</a>			
 					</TableBodyCell>
