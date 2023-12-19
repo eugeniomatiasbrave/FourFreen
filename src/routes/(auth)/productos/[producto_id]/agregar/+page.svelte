@@ -1,6 +1,5 @@
 <script>
 	import {Input,Button,Label} from 'flowbite-svelte'
-  
 	import {onMount} from 'svelte';
 	import {goto} from '$app/navigation';
 	export let form;
@@ -8,15 +7,13 @@
 	export const {productos}=data;
 
 let showForm = true;
-
-	onMount(() => {
+onMount(() => {
   if (form?.success) {
-	  showForm = false;
-	 
+    showForm = false;
     Swal.fire({
       icon: 'success',
       title: form.message,
-	  text: "Producto:" + form.nombre,
+      text: "Producto:" + form.nombre,
       backdrop: true,
       confirmButtonText: 'Volver',
       confirmButtonColor: 'rgb(69, 166, 175)'
@@ -25,9 +22,23 @@ let showForm = true;
         goto('/productos');
       }
     });
+  } else if (form?.error) {
+    showForm = false;
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: form.error,
+      backdrop: true,
+      confirmButtonText: 'Volver',
+      confirmButtonColor: 'rgb(69, 166, 175)'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        goto('/productos/0/agregar');
+        showForm = true;
+      }
+    });
   }
 });
-
 	</script>
 
 {#if showForm}

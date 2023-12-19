@@ -1,27 +1,46 @@
 <script>
-	import { Input, Button, Label } from 'flowbite-svelte'
-	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
+	import {Input,Button,Label} from 'flowbite-svelte'
+	import {onMount} from 'svelte';
+	import {goto} from '$app/navigation';
 	export let data;
-	export const {productosId}=data;
 	export let form;
+	export const {productosId,productos}=data;
 	
 	let ProductosId=productosId.datos
+  //let Productos=productos.datos
 	let showForm=true;
-	onMount(() => {
+
+  //console.log(productos.datos)
+	
+
+onMount(() => {
   if (form?.success) {
-	  showForm = false;
-	 
+    showForm = false;
     Swal.fire({
       icon: 'success',
       title: form.message,
-	  text: "Producto:" + form.nombre,
+      text: "Producto:" + form.nombre,
       backdrop: true,
       confirmButtonText: 'Volver',
       confirmButtonColor: 'rgb(69, 166, 175)'
     }).then((result) => {
       if (result.isConfirmed) {
         goto('/productos');
+      }
+    });
+  } else if (form?.error) {
+    showForm = false;
+    Swal.fire({
+      icon: 'error',
+       title: 'Error',
+       text: form.error,
+      backdrop: true,
+      confirmButtonText: 'Volver',
+      confirmButtonColor: 'rgb(69, 166, 175)'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        goto(`/productos/${form.producto_id}/editar`);
+        showForm = true;
       }
     });
   }
@@ -38,7 +57,24 @@
 		<Input type="hidden" name="producto_id" value={producto.producto_id} required />
 	  <Label class="space">
 		<span>Nombre</span>
-		<Input type="text" name="nombre" value={producto.nombre} maxlength="30" class="bg-white h-7 w-full rounded" required/>
+		<Input type="text" name="nombre" value={producto.nombre} maxlength="30" on:change={(e)=> {
+      let nombre=e.target.value
+      let existe = productos.datos.some(producto => producto.nombre === nombre);
+      console.log(existe)
+      if (existe) {
+        window.Swal.fire( 
+          {
+            icon: 'error',
+            title: 'Producto existente',
+            text: `Nombre: ${nombre}.`,
+            backdrop: true,
+            confirmButtonText: 'Volver',
+            confirmButtonColor: 'rgb(69, 166, 175)'
+            });
+            e.target.value = '';
+             }
+            }}      
+          placeholder="Agregar producto" class="bg-white h-7 w-full rounded" required/>
 	  </Label> 
 	  <Label class="space">
 		<span>Precio</span> 

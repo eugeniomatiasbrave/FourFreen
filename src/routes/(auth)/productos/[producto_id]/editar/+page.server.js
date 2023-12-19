@@ -3,24 +3,29 @@ import { BASE_URL } from '$lib/utils.js';
 import { fetchApi } from '$lib/fetchApi.js';
 import { z } from 'zod';
 
-
-export const load = async ({ locals,params}) => {
-	const {producto_id} = params;
-	const getProductosId = async () => {
-	
-		const productosId = await fetchApi.get({ url: BASE_URL + `/productos/${producto_id}`, token: locals.token, resStatus: 200 });
-		return productosId;	
-	    }
-	return {
-		productosId: await getProductosId()
-     }
-}
-
 const productoSchema = z.object({
   producto_id: z.string(),
   nombre: z.string().min(1),
   precio: z.number(),
 });
+
+export const load = async ({ locals,params}) => {
+ const {producto_id} = params;
+
+ const getProductosId = async () => {
+		const productosId = await fetchApi.get({ url: BASE_URL + `/productos/${producto_id}`, token: locals.token, resStatus: 200 });
+		 return productosId;	
+    }
+
+ const getProductos = async () => {
+    return await fetchApi.get({ url: BASE_URL + '/productos', token: locals.token, resStatus: 200 });
+  }
+        
+	return {
+		productosId: await getProductosId(),
+    productos: getProductos()
+     }
+}
 
 export const actions = {
 	default: async ({ request, locals }) => {
@@ -63,8 +68,8 @@ export const actions = {
       }
     } catch (err) {
       console.log('Error: ', err);
-      throw error(500, 'Algo salió mal al editar el producto');
+      return { error: 'Algo salió mal al editar el producto', success: false, nombre: data.nombre,precio: data.precio, producto_id:data.producto_id};
     }
-  	return { success: true, message:'Producto editado correctamente!!!' , nombre: data.nombre};
+  	return { success: true, message:'Producto editado correctamente!!!' , nombre: data.nombre,precio: data.precio, producto_id:data.producto_id };
   }
  }
