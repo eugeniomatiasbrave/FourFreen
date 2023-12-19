@@ -6,7 +6,7 @@
 
 let searchTerm='';
 let sortOrder= 1
-let Productos=productos.datos
+//let Productos=productos.datos
 let filteredPrecio=sortPrecio.datos
 let filteredProductos=productosSearch.datos
 let filteredSortNombre=sortNombre.datos
@@ -107,7 +107,7 @@ const sortedNombre=(params)=> {
 			</svg> Nuevo</Button>    
 		 </div>
 		<div class="flex items-center"> 
-		  <Input type="text" bind:value={searchTerm} name="searchTerm" placeholder="Buscar Producto" required class="bg-white h-7 w-full sm:w-auto rounded"  /> 
+		  <Input type="text" bind:value={searchTerm} maxlength="30" name="searchTerm" placeholder="Buscar Producto" required class="bg-white h-7 w-full sm:w-auto rounded"  /> 
 		  <Button size="xs" on:click={()=> applyFilter(searchTerm)} class="bg-primary-500 h-7 ml-1 px-2 rounded">Buscar</Button> 
 		  <Button size="xs" on:click={reset} class="bg-primary-500 h-7 ml-1 px-2 w-32 sm:w-32 rounded">Borrar Filtro</Button>
 		</div> 

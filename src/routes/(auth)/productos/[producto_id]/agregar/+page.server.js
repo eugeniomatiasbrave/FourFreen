@@ -3,6 +3,16 @@ import { BASE_URL } from '$lib/utils.js';
 import { fetchApi } from '$lib/fetchApi.js';
 import { z } from 'zod';
 
+export const load = async ({ locals}) => {
+ 
+  const getProductos = async () => {
+     return await fetchApi.get({ url: BASE_URL + '/productos', token: locals.token, resStatus: 200 }); 
+     }
+     return {
+      productos: getProductos()
+     };
+}
+
 const productoSchema = z.object({
   nombre: z.string().min(1),
   precio: z.number(),
@@ -36,7 +46,7 @@ export const actions = {
         const datos = await res.json();
         return {
           success: true,
-          message: 'Producto agregado correctamente!!!',
+          message: 'ProductoM agregado correctamente!!!',
           productoAgregado: {
             nombre: datos.nombre,
             precio: datos.precio
@@ -49,6 +59,6 @@ export const actions = {
       console.error('Error: ', err);
       throw error(500, 'Algo salió mal al agregar el producto');
     }
-    return { success: true, message: 'Producto agregado correctamente!!!' };
+    return { success: true, message: 'Producto agregado correctamente!!!', nombre: data.nombre };
   }
 }

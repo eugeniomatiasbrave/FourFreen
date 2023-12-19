@@ -52,7 +52,7 @@ export const actions = {
         const datos = await res.json();
         return { 
           success: true, 
-          message:'Producto actualizado correctamente!!!',
+          message:'Producto editado correctamente!!!',
           productoActualizado: {
             nombre: datos.nombre,
             precio: datos.precio
@@ -63,8 +63,8 @@ export const actions = {
       }
     } catch (err) {
       console.log('Error: ', err);
-      throw error(500, 'Algo salió mal al actualizar el producto');
+      throw error(500, 'Algo salió mal al editar el producto');
     }
-  	return { success: true, message:'Producto actualizado correctamente!!!'};
+  	return { success: true, message:'Producto editado correctamente!!!' , nombre: data.nombre};
   }
  }

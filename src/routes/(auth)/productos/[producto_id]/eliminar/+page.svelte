@@ -15,6 +15,7 @@ onMount(()=>{
 		Swal.fire({
 		  icon:'success',
 		  title:form.message,
+		  text: "ID:" + form.producto_id,
 		  backdrop:true,
 		  confirmButtonText:'Volver',
 		  confirmButtonColor:'rgb(69, 166, 175)',

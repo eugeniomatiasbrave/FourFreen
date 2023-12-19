@@ -1,28 +1,50 @@
 <script>
-	import {Input,Button,Label} from 'flowbite-svelte'
+	import {Input,Button,Label, P} from 'flowbite-svelte'
 	import {onMount} from 'svelte';
 	import {goto} from '$app/navigation';
 	export let form;
+  export let data;
+	export const {productos}=data;
 
-	let showForm = true;
 
+//let Productos=productos.datos;
+
+
+let showForm = true;
+
+/*
+const productoExiste = () => {
+ let productoExiste= Productos.some(producto => producto.nombre === nombreProducto);
+  if (productoExiste) {
+   alert('Este producto ya existe.'); 
+ }
+};
+	*/
 	onMount(() => {
-	  if (form?.success) {
-		showForm = false;
+  if (form?.success) {
+	  showForm = false;
+	 
+    Swal.fire({
+      icon: 'success',
+      title: form.message,
+	  text: "Producto:" + form.nombre,
+      backdrop: true,
+      confirmButtonText: 'Volver',
+      confirmButtonColor: 'rgb(69, 166, 175)'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        goto('/productos');
+      }
+    });
+  }
+});
 
-		Swal.fire({
-		  icon: 'success',
-		  title: form.message,
-		  backdrop: true,
-		  confirmButtonText: 'Volver',
-		  confirmButtonColor: 'rgb(69, 166, 175)'
-		}).then((result) => {
-		  if (result.isConfirmed) {
-			goto('/productos');
-		  }
-		});
-	}
-	});	
+
+
+
+
+
+
 
 	</script>
 
@@ -30,14 +52,14 @@
  <main class="flex items-center justify-center min-h-screen pb-36 ">
    <div class="bg-white mx-auto p-4 pt-1 my-0 rounded border border-gray-200 shadow-md w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/6"> <!----------------------------modal add productos-->  
       <form class="flex flex-col space-y-4" method="POST" >	
-          <h3 class="mt-4 text-xl text-center font-medium text-gray-900 dark:text-white">Ingrese un producto nuevo</h3>
+          <h3 class="mt-4 text-xl text-center font-medium text-gray-900 dark:text-white">Ingrese un producto nuevo </h3>
           <Label class="space">
             <span>Producto</span>
-            <Input type="text" name="nombre" placeholder="Agregar producto" class="bg-white h-7 w-full rounded" required/>
+            <Input type="text" name="nombre" maxlength="30" placeholder="Agregar producto" class="bg-white h-7 w-full rounded" required/>
           </Label>
           <Label class="space">
             <span>Precio</span>
-            <Input type="number" name="precio" placeholder="Agregar precio" class="bg-white h-7 w-full rounded" required/>
+            <Input type="number" name="precio" min="0" max="1000000" step="0.01" placeholder="Agregar precio" class="bg-white h-7 w-full rounded" required/>
 			
           </Label> 
           <footer class="text-center">

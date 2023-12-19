@@ -36,7 +36,7 @@ export const actions = {
 			console.log('Error: ', err);
 			throw error(500, 'Algo salió mal al eliminar el producto');
 		}
-		return { success: true, message: 'Producto eliminado correctamente!!!' };
+		return { success: true, message: `Producto eliminado correctamente!!!`, producto_id: producto_id };
 	}
 };
 

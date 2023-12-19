@@ -3,30 +3,30 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	export let data;
-	//import { page } from '$app/stores';
 	export const {productosId}=data;
 	export let form;
 	
-let ProductosId=productosId.datos
-let showForm=true;
-
+	let ProductosId=productosId.datos
+	let showForm=true;
 	onMount(() => {
-	  if (form?.success) {
-		showForm = false
+  if (form?.success) {
+	  showForm = false;
+	 
+    Swal.fire({
+      icon: 'success',
+      title: form.message,
+	  text: "Producto:" + form.nombre,
+      backdrop: true,
+      confirmButtonText: 'Volver',
+      confirmButtonColor: 'rgb(69, 166, 175)'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        goto('/productos');
+      }
+    });
+  }
+});
 
-		Swal.fire({
-		  icon: 'success',
-		  title: form.message,
-		  backdrop: true,
-		  confirmButtonText: 'Volver',
-		  confirmButtonColor: 'rgb(69, 166, 175)'
-		}).then((result) => {
-		  if (result.isConfirmed) {
-			goto('/productos');
-		  }
-		});
-	  }
-	});
 	</script>
 
 {#if showForm}
@@ -38,11 +38,11 @@ let showForm=true;
 		<Input type="hidden" name="producto_id" value={producto.producto_id} required />
 	  <Label class="space">
 		<span>Nombre</span>
-		<Input type="text" name="nombre" value={producto.nombre} class="bg-white h-7 w-full rounded" required/>
+		<Input type="text" name="nombre" value={producto.nombre} maxlength="30" class="bg-white h-7 w-full rounded" required/>
 	  </Label> 
 	  <Label class="space">
 		<span>Precio</span> 
-		<Input type="number" name="precio" value={producto.precio} class="bg-white h-7 w-full rounded" required/>
+		<Input type="number" name="precio" value={producto.precio} min="0" max="1000000" step="0.01" class="bg-white h-7 w-full rounded" required/>
     </Label>
     <footer class="text-center"> 
     <Button type="submit"  class="bg-primary-500 h-7 ml-1 px-2 rounded">Confirmar</Button>
