@@ -40,12 +40,6 @@ const productoExiste = () => {
 });
 
 
-
-
-
-
-
-
 	</script>
 
 {#if showForm}
@@ -55,7 +49,16 @@ const productoExiste = () => {
           <h3 class="mt-4 text-xl text-center font-medium text-gray-900 dark:text-white">Ingrese un producto nuevo </h3>
           <Label class="space">
             <span>Producto</span>
-            <Input type="text" name="nombre" maxlength="30" placeholder="Agregar producto" class="bg-white h-7 w-full rounded" required/>
+            <Input type="text" name="nombre"  maxlength="30" on:change={(e)=> {
+                let nombre = e.target.value;
+                let existe = productos.datos.some(producto => producto.nombre === nombre);
+               if (!existe) {
+                console.log ( `El producto ${nombre} no existe.`)
+                } else{
+                alert(`El producto ${nombre} existe.`);
+                e.target.value = '';
+              }} }        
+              placeholder="Agregar producto" class="bg-white h-7 w-full rounded" required/>
           </Label>
           <Label class="space">
             <span>Precio</span>
