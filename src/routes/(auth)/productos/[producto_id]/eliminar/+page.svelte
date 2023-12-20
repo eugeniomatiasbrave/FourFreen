@@ -9,21 +9,38 @@
 let ProductosId=productosId.datos
 let showForm = true;
 
-onMount(()=>{
-	if (form?.success){
-		showForm = false	
-		Swal.fire({
-		  icon:'success',
-		  title:form.message,
-		  text: "ID:" + form.producto_id,
-		  backdrop:true,
-		  confirmButtonText:'Volver',
-		  confirmButtonColor:'rgb(69, 166, 175)',
-		}).then((result)=>{
-		  if (result.isConfirmed){
-			goto('/productos');
-		  }});
-	  }});
+onMount(() => {
+  if (form?.success) {
+    showForm = false;
+    Swal.fire({
+      icon: 'success',
+      title: form.message,
+      text: "Id:" + form.producto_id,
+      backdrop: true,
+      confirmButtonText: 'Volver',
+      confirmButtonColor: 'rgb(69, 166, 175)'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        goto('/productos');
+      }
+    });
+  } else if (form?.error) {
+    showForm = false;
+    Swal.fire({
+      icon: 'error',
+       title: 'Error',
+       text: form.error,
+      backdrop: true,
+      confirmButtonText: 'Volver',
+      confirmButtonColor: 'rgb(69, 166, 175)'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        goto(`/productos/${form.producto_id}/eliminar`);
+        showForm = true;
+      }
+    });
+  }
+});
 </script>
 
 {#if showForm}

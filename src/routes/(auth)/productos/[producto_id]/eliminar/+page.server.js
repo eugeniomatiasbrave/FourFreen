@@ -1,7 +1,5 @@
-import { error } from '@sveltejs/kit';
 import { BASE_URL } from '$lib/utils.js';
 import { fetchApi } from '$lib/fetchApi.js';
-
 
 export const load = async ({ locals,params}) => {
 	const {producto_id} = params;
@@ -34,7 +32,7 @@ export const actions = {
 				}                       
 		} catch (err) {
 			console.log('Error: ', err);
-			throw error(500, 'Algo salió mal al eliminar el producto');
+			return { error: 'Error: 500. Algo salió mal al eliminar el producto', success: false,  producto_id:producto_id};
 		}
 		return { success: true, message: `Producto eliminado correctamente!!!`, producto_id: producto_id };
 	}

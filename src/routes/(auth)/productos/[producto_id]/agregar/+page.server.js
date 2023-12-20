@@ -56,7 +56,7 @@ export const actions = {
       }
     } catch (err) {
       console.error('Error: ',err);
-       return { error: 'Algo salió mal al agregar el producto', success: false };
+       return { error: 'Algo salió mal al agregar el producto',success: false  };
     }
     return { success: true, message: 'Producto agregado correctamente!!!', nombre: data.nombre };
   }}

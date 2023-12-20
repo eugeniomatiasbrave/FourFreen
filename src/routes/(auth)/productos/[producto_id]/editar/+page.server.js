@@ -68,7 +68,7 @@ export const actions = {
       }
     } catch (err) {
       console.log('Error: ', err);
-      return { error: 'Algo salió mal al editar el producto', success: false, nombre: data.nombre,precio: data.precio, producto_id:data.producto_id};
+      return { error: 'Error: 500. Algo salió mal al editar el producto', success: false, nombre: data.nombre,precio: data.precio, producto_id:data.producto_id};
     }
   	return { success: true, message:'Producto editado correctamente!!!' , nombre: data.nombre,precio: data.precio, producto_id:data.producto_id };
   }
