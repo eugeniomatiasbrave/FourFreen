@@ -7,11 +7,7 @@ export const load = async ({ locals, url }) => {
 
 	const getClientes = async () => {
 		try {
-			const clientes = await fetchApi.get({
-				url: BASE_URL + '/clientes',
-				token: locals.token,
-				resStatus: 200
-			});
+			const clientes = await fetchApi.get({url: BASE_URL + '/clientes',token: locals.token,resStatus: 200});
 			return clientes;
 		} catch (err) {
 			console.error('Error: ', err);
@@ -21,11 +17,7 @@ export const load = async ({ locals, url }) => {
 
 	const getClientesSearch = async () => {
 		try {
-			const searchclientes = await fetchApi.get({
-				url: BASE_URL + '/clientes?search=',
-				token: locals.token,
-				resStatus: 200
-			});
+			const searchclientes = await fetchApi.get({url: BASE_URL + '/clientes?search=',token: locals.token,resStatus: 200});
 			return searchclientes;
 		} catch (err) {
 			console.error('Error: ', err);
@@ -35,11 +27,7 @@ export const load = async ({ locals, url }) => {
 
 	const getSortRS = async () => {
 		try {
-			const sortrazonsocial = await fetchApi.get({
-				url: BASE_URL + `/clientes?sort=razon_social:${sort}`,
-				token: locals.token,
-				resStatus: 200
-			});
+			const sortrazonsocial = await fetchApi.get({url: BASE_URL + `/clientes?sort=razon_social:${sort}`,token: locals.token,resStatus: 200});
 			return sortrazonsocial;
 		} catch (err) {
 			console.error('Error: ', err);
@@ -47,10 +35,21 @@ export const load = async ({ locals, url }) => {
 		}
 	};
 
+	const getSortCliente_id=async()=>{
+		try {
+		  const sortCliente_id = await fetchApi.get({url:BASE_URL+`/clientes?sort=cliente_id:${sort}`,token:locals.token,resStatus:200});
+		   return sortCliente_id;  
+		} catch (err) {
+			console.error('Error: ', err);
+		  throw error(500, 'Algo salio mal al ordenar los productos', err);
+		 }     
+	   }
+
 	return {
 		clientes: getClientes(),
 		sortrazonsocial: getSortRS(),
-		searchclientes: getClientesSearch()
+		searchclientes: getClientesSearch(),
+		sortCliente_id: getSortCliente_id()
 	};
 };
 

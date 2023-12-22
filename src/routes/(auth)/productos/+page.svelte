@@ -11,8 +11,8 @@ let filteredPrecio=sortPrecio.datos
 let filteredProductos=productosSearch.datos
 let filteredSortNombre=sortNombre.datos
 
-let datos = sortProducto_id.datos;
-let filteredSortedId = datos.sort((e,f)=>e.producto_id - f.producto_id);
+let info = sortProducto_id.datos;
+let filteredSortedId = info.sort((e,f)=>e.producto_id - f.producto_id);
 
 const SortedProducto_id=(params)=>{
 	sortOrder= -sortOrder;
@@ -40,7 +40,7 @@ const applyFilter=(params)=>{
 
 const reset=()=>{
     searchTerm='';
-	filteredSortedId = datos.sort((e,f)=>e.producto_id - f.producto_id);
+	filteredSortedId = info.sort((e,f)=>e.producto_id - f.producto_id);
 	goto(`/productos`);
 	}
 

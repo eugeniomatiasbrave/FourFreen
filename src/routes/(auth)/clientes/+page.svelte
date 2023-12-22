@@ -2,25 +2,44 @@
 import {goto} from '$app/navigation';
 import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
 export let data;
-export const {clientes,sortrazonsocial,searchclientes} = data;
+export const {clientes,sortrazonsocial,searchclientes,sortCliente_id} = data;
 
 let searchTerm = '';
 let sortOrder= 1
 
-let Clientes = clientes;
+//let Clientes = clientes;
 let SortRazonSocial = sortrazonsocial;
 let SearchClientes= searchclientes;
+let SortCliente_id = sortCliente_id;
+
+let filteredSortCliente_id = SortCliente_id.sort((e,f)=>e.cliente_id - f.cliente_id);
+
+const SortedCliente_id=(params)=>{
+	sortOrder= -sortOrder;
+	let sort=params;
+	let newOrder=[...filteredSortCliente_id]
+	if (sort===1) {
+		filteredSortCliente_id=newOrder.sort((e,f)=>e.cliente_id - f.cliente_id);
+		} else if (sort===-1) {
+		filteredSortCliente_id=newOrder.sort((e,f)=>f.cliente_id - e.cliente_id);
+		}
+		goto(`/clientes?sort=cliente_id:${sort}`);
+	}
+ 
+const alternarSortId =()=> {
+	SortedCliente_id(sortOrder === 1 ? -1 : 1);
+}
 
 const filterClientes=(params)=>{
 	let search=params;
-	SearchClientes=searchclientes.filter(prod=>prod.razon_social.toLowerCase().includes(searchTerm.toLowerCase()));
-	Clientes=SearchClientes; 
+	SearchClientes=searchclientes.filter(cliente=>cliente.razon_social.toLowerCase().includes(searchTerm.toLowerCase()));
+	filteredSortCliente_id=SearchClientes; 
 	goto(`/clientes?search=${search}`);		
 }
 
 const reset=()=>{
 	searchTerm = '';
-	Clientes = clientes;
+	filteredSortCliente_id = SortCliente_id.sort((e,f)=>e.cliente_id - f.cliente_id);
 	goto('/clientes')
 }
 
@@ -32,7 +51,7 @@ const SortedRazonSocial=(params)=>{
     } else if (sort===-1) {
 	SortRazonSocial=sortrazonsocial.sort((c,d)=>d.razon_social.localeCompare(c.razon_social));
     }
-	Clientes=SortRazonSocial;
+	filteredSortCliente_id=SortRazonSocial;
 	goto(`/clientes?sort=razon_social:${sort}`);
   }
 
@@ -70,7 +89,21 @@ const SortedRazonSocial=(params)=>{
 			<div>
 			 <Table hoverable={true} class="mx-auto mt-1 border text-xs">
 				<TableHead class="bg-primary-500 text-white" align="center" theadClass='text-xs'>
-					<TableHeadCell class="py-2">id</TableHeadCell>
+					<TableHeadCell class="py-2" >
+						<div class="flex items-center justify-end">
+						  Id<button on:click={alternarSortId} class="bg-primary-500 hover:bg-primary-500 rounded">	
+							  {#if sortOrder === 1}
+							  <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+							  <path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
+							  </svg>
+							  {:else}
+							  <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+							  <path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
+							  </svg>		
+							  {/if}
+						   </button>			      
+						</div>
+					  </TableHeadCell>
 					<TableHeadCell class="py-2">
 						<div class="flex items-center">	
 							Nombre
@@ -103,7 +136,7 @@ const SortedRazonSocial=(params)=>{
 							</TableHeadCell>
 						    </TableHead>
 					    	<TableBody class="divide-y">
-								{#each Clientes as {cliente_id,razon_social,cuit,domicilio_calle,domicilio_altura,localidad,telefono,email, codigo_postal}}
+								{#each filteredSortCliente_id as {cliente_id,razon_social,cuit,domicilio_calle,domicilio_altura,localidad,telefono,email, codigo_postal}}
 								<TableBodyRow class="hover:bg-hover-gray-light">
 									<TableBodyCell class="py-2" align="center">{cliente_id}</TableBodyCell>
 									<TableBodyCell class="py-2">{razon_social}</TableBodyCell>
