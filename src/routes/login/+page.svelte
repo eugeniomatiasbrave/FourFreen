@@ -20,7 +20,7 @@
 				<Input type="text" name="username" placeholder="Usuario" required class=" bg-white h-8 rounded w-full"/>
 				<Input type="password" name="password" placeholder="Contraseña" class="bg-white h-8 rounded w-full" required/>
 				<footer class="text-center ">
-				 <Button type="submit" size="xs" class="bg-primary-500 h-8   rounded">Inciar sesión</Button>				
+				 <Button type="submit" size="xs" class="bg-primary-500 h-8 rounded">Inciar sesión</Button>				
 				 <Button on:click={() => goto('/')} size="xs" class="bg-primary-500 h-8  rounded">Cancelar</Button>
 					</footer>
 				{#if form?.success}

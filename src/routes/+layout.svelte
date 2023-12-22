@@ -1,11 +1,10 @@
 <script>
 	import {Navbar,NavBrand,NavLi,NavUl,NavHamburger} from 'flowbite-svelte';
 	import {page} from '$app/stores';
-	//import logo1 from '$lib/img/LogoFourGreens2021.png';
 	import './style.css';
 	import '../app.postcss';
 	export let data;
-	//console.log(data.usuario)	
+	
 	$: activeUrl = $page.url.pathname;
 </script>
 
@@ -30,6 +29,5 @@
 	  {/if}
 	</NavUl>
 </Navbar>
-
 
 <slot />

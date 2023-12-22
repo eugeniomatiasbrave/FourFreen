@@ -24,16 +24,19 @@ App en Versel  https://four-green-p9ha6v7dw-eugeniomatiasbrave.vercel.app/
 ***** TABLA DE PRODUCTOS:  (cerrar todo productos) ********************************************
        * /productos : 
             - Responsive.....................................................................Ok
-            - GET............................................................................OK
-            * ADD productos desde otra pagina /productos/add_productos ......................ok
-            * EDIT productos desde otra pagina /productos/add_productos .....................ok
-            * DELETE productos desde otra pagina /productos/add_productos ...................ok
+            * GET captura para tabala........................................................OK
+            * PATCH y DELETE desde /productos/[producto_id] .................................ok
+            * POST productos desde otra pagina /productos/[0]/agregar .......................ok
             * Filtrar x nombre   ............................................................ok
             * Ordenar por click en cabecera de columna:
                    * precio..................................................................ok
                    * Nombre..................................................................ok
-                   * id .....................................................................ok
-            * Paginacion ?...................................................................       
+                   * id (inicia ordenado por Id).............................................ok
+                     
+            * Alert si la respuesta es 200...................................................ok      
+            * Alert en input en caso de excistir el producto Nombre desde Api rest...........ok
+            * Alert si la peticion no es 200.................................................ok
+
  
 GET {{baseUrl}}/productos 
 GET {{baseUrl}}/productos?sort=precio:-1    

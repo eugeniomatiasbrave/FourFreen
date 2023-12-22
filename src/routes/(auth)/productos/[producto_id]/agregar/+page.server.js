@@ -58,5 +58,5 @@ export const actions = {
       console.error('Error: ',err);
        return { error: 'Algo salió mal al agregar el producto',success: false  };
     }
-    return { success: true, message: 'Producto agregado correctamente!!!', nombre: data.nombre };
+    return { success: true, message: `Producto ${data.nombre} agregado correctamente!!!`};
   }}

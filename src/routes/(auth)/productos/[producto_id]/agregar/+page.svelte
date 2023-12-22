@@ -13,7 +13,6 @@ onMount(() => {
     Swal.fire({
       icon: 'success',
       title: form.message,
-      text: "Producto:" + form.nombre,
       backdrop: true,
       confirmButtonText: 'Volver',
       confirmButtonColor: 'rgb(69, 166, 175)'
@@ -76,6 +75,6 @@ onMount(() => {
           <Button on:click={() => goto('/productos')} class="bg-primary-500 h-7  px-2 rounded">Cancelar</Button>
          </footer>  
       </form>   
-    </div> <!----------------------fin de modal add productos-->
+    </div> 
   </main>
 {/if}
