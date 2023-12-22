@@ -18,11 +18,12 @@ App en Versel  https://four-green-p9ha6v7dw-eugeniomatiasbrave.vercel.app/
     * Libreria CSS: Flowbite svelte
 
   
-************** CRUD: *****************
+******************************** CRUD: ********************************************************
 
      
-***** TABLA DE PRODUCTOS:  (cerrar todo productos) ********************************************
-       * /productos : 
+*********************** TABLA DE PRODUCTOS:(cerrar todo productos)****************************
+
+       * /productos: 
             * Responsive.....................................................................Ok
             * GET captura para tabala........................................................OK
             * PATCH y DELETE desde /productos/[producto_id] .................................ok
@@ -49,13 +50,13 @@ PATCH {{baseUrl}}/productos/110
 DELETE {{baseUrl}}/productos/104 
 
       
-**************************** TABLA DE CLIENTES:************************************************
+************************ TABLA DE CLIENTES:***************************************************
        
-          * /clientes : (cerrar clientes todo)
+        * /clientes: (cerrar clientes todo)
            * Responsive.....................................................................
            * GET captura para tabala........................................................OK
            * PATCH y DELETE desde /clientes/[cliente_id] ...................................
-           * POST cliente desde otra pagina /cliente/[0]/agregar ...........................
+           * POST cliente desde otra pagina /clientes/[0]/agregar ...........................
            * Filtrar x nombre + borrar filtro  .............................................OK
            * Ordenar por click en cabecera de columna:
                 * Nombre....................................................................OK

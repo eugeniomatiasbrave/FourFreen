@@ -71,19 +71,19 @@ const SortedRazonSocial=(params)=>{
   <P size="2xl" align="center">Tabla de Clientes</P>
 </div>
 	<div class=" bg-white mx-auto p-1 pt-1 border rounded shadow-md w-full  xl:w-2/3 "> <!----------------Div contenedor: tabla + add + Filtro--------->  
-		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"> 
+		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto "> 
 			<div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
-			  <Button href={`/clientes/${0}/agregar`} size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto">
-				<svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
-				fill="none" viewBox="0 0 20 20">
-				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-				 d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-				</svg> Nuevo</Button>    
-			</div>
+				<Button href={`/clientes/${0}/agregar`}  size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto ">
+				  <svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
+				  fill="none" viewBox="0 0 20 20">
+				  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+				   d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+				  </svg> Nuevo</Button>    
+			   </div>
 			<div class="flex items-center"> 
 			  <Input type="text" bind:value={searchTerm} name="searchTerm" placeholder="Buscar Cliente" required class=" bg-white h-7 w-full sm:w-auto rounded"  /> 
 			  <Button size="xs" on:click={()=> filterClientes(searchTerm)} class="bg-primary-500 h-7 ml-1 px-2  rounded">Buscar</Button> 
-			  <Button size="xs" on:click={reset} class="bg-primary-500 h-7 ml-1 px-2 rounded">Actualizar</Button>
+			  <Button size="xs" on:click={reset} class="bg-primary-500 h-7 ml-1 px-2 w-32 sm:w-32 rounded">Borrar Filtro</Button>
 			</div> 
 		  </div>
 			<div>
@@ -113,7 +113,6 @@ const SortedRazonSocial=(params)=>{
 										<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
 										</svg>
 										{:else}
-										<!-- SVG para la flecha ascendente -->	
 										<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
 										<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
 										</svg>	
@@ -148,11 +147,11 @@ const SortedRazonSocial=(params)=>{
 									<TableBodyCell class="py-2" align="right">{telefono}</TableBodyCell>
 									<TableBodyCell class="py-2">{email}</TableBodyCell>
 									<TableBodyCell class="py-2" align="center">
-										<a href={`/clientes/${cliente_id}/editar`} 
+										<a href={`/clientes/${cliente_id}?action=editar`} 
 											    class="font-medium text-primary-600 hover:underline dark:text-primary-500">Editar</a>								
 									</TableBodyCell>
 									<TableBodyCell class="py-2" align="center"><!---------------------Elimina el cliente--------------------->
-										<a href={`/clientes/${cliente_id}/eliminar`}			
+										<a href={`/clientes/${cliente_id}?action=eliminar`}			
 										   class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a>
 				</TableBodyCell>
 			 </TableBodyRow>

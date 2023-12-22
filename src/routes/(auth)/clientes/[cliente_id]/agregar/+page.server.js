@@ -14,6 +14,16 @@ const ClienteSchema = z.object({
 	email: z.string().email(),
 });
 
+
+export const load = async ({ locals}) => {
+	const getClientes = async () => {
+	   return await fetchApi.get({ url: BASE_URL + '/clientes', token: locals.token, resStatus: 200 }); 
+	   }
+	   return {
+		clientes: getClientes()
+	   };
+  }
+
 export const actions = {
 	default: async ({ request, locals }) => {
 		const formData = await request.formData();
@@ -46,9 +56,9 @@ export const actions = {
 			}
 		} catch (err) {
 			console.log('Error: ', err);
-			throw error(500, 'Algo salió mal al agregar el cliente');
-			//throw redirect(303, '/clientes')
+			return { error: 'Algo salió mal al agregar el cliente',success: false  };
+			
 		}
-		return { success: true, message: 'Cliente agregado correctamente!!!' };
+		return { success: true, message: `Cliente ${data.razon_social} agregado correctamente!!!`};
 	}
 }

@@ -8,16 +8,13 @@
   export const {productosId,productos}=data;
 	//console.log(form)
   
-  let action = '';
-
-  onMount(() => {
-    action = $page.url.searchParams.get('action') || 'view';
-  });
- 
-
 let ProductosId=productosId.datos
+let action = '';
 
-
+onMount(() => {
+    action = $page.url.searchParams.get('action') || 'view';
+});
+ 
 onMount(() => {
   if (form?.success) {
     Swal.fire({

@@ -15,8 +15,32 @@ const ClienteSchema = z.object({
 	email: z.string().email(),
 });
 
+
+export const load = async ({ locals, params}) => {
+
+	const {cliente_id} = params;
+    const getClienteId = async () => {
+	    return await fetchApi.get({ url: BASE_URL + `/clientes/${cliente_id}`, token: locals.token, resStatus: 200 });	
+    }
+
+	const getClientes = async () => {
+		try {
+			const clientes = await fetchApi.get({url: BASE_URL + '/clientes',token: locals.token,resStatus: 200});
+			return clientes;
+		} catch (err) {
+			console.error('Error: ', err);
+			throw error(500, 'Algo salio mal con la peticion de los clientes', err);
+		}
+	};
+
+	return {
+		clientes: getClientes(),
+		clienteId: getClienteId()
+	};
+}
+
 export const actions = {
-	default: async ({ request, locals }) => {
+	editar: async ({ request, locals }) => {
 		const formData = await request.formData();
 		const data = {
 			cliente_id : formData.get('cliente_id'),
@@ -74,8 +98,40 @@ export const actions = {
 			  }
 			} catch (err) {
 			  console.log('Error: ', err);
-			  throw error(500, 'Algo salió mal al actualizar el cliente');
+			  return { error: 'Error: 500. Algo salió mal al editar el cliente', success: false, cliente_id:data.cliente_id, razon_social: data.razon_social };
+			}		
+		   return { success: true, message:`Cliente ${data.razon_social} editado correctamente!!!`};
+		  },
+
+		  eliminar: async ({ request, locals }) => {
+			const formData = await request.formData();
+			const cliente_id = formData.get('cliente_id');
+			console.log('Cliente:',cliente_id, locals.token, BASE_URL);
+			try {
+				const res = await fetchApi.delete({
+					url: BASE_URL + `/clientes/${cliente_id}`,
+					token: locals.token,
+					body: {
+						cliente_id: cliente_id
+					},
+					resStatus: 200
+				});
+				if (res.status === 200) {
+					const datos = await res.json();
+					return { 
+					  success: true, 
+					  message:'Cliente eliminado correctamente!!!',
+					  clienteEliminado: {
+						cliente_id: datos.cliente_id		
+					  }
+					};	
+				} else {
+					//return { success: false };
+				}
+			} catch (err) {
+				console.log('Error: ', err);
+				return { error: 'Error: 500. Algo salió mal al eliminar el cliente', success: false,  cliente_id:cliente_id};
 			}
-			  return { success: true, message:'Cliente actualizado correctamente!!!'};
-		  }
+			return { success: true, message: `Cliente Id: ${cliente_id} eliminado correctamente!!!` };
 		}
+}

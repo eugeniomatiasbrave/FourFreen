@@ -27,28 +27,6 @@ export const load = async ({ locals,params}) => {
 };
 
 export const actions = {
-	eliminar: async ({ request, locals }) => {
-		const formData = await request.formData();
-		const producto_id = formData.get('producto_id');
-		console.log('Producto:',producto_id, locals.token, BASE_URL);
-		try {
-			const res = await fetchApi.delete({
-				url: BASE_URL + `/productos/${producto_id}`,
-				token: locals.token,
-				body: {
-					producto_id: producto_id
-				},
-				resStatus: 200
-			});
-			if (res.status === 200) {
-				const res = await res.json();
-				}                       
-		} catch (err) {
-			console.log('Error: ', err);
-			return { error: 'Error: 500. Algo salió mal al eliminar el producto', success: false,  producto_id:producto_id};
-		}
-		return { success: true, message: `Producto Id: ${producto_id}, eliminado correctamente!!!` };
-	},
 
 	editar: async ({ request, locals }) => {
 		const formData = await request.formData();
@@ -63,15 +41,9 @@ export const actions = {
 		  throw error(400, 'Datos de formulario inválidos');
 		}
 		try {
-		  const res = await fetchApi.patch({
-			url: BASE_URL + `/productos/${data.producto_id}`,
-			token: locals.token,
-			body: {
-			  nombre: data.nombre,
-			  precio: data.precio
-			},
-			resStatus: 200
-		  });
+		  const res = await fetchApi.patch({url: BASE_URL + `/productos/${data.producto_id}`,token: locals.token,
+		    body: { nombre: data.nombre,precio: data.precio},resStatus: 200});
+
 		  if (res.status === 200) {
 			const datos = await res.json();
 			return { 
@@ -87,9 +59,27 @@ export const actions = {
 		  }
 		} catch (err) {
 		  console.log('Error: ', err);
-		  return { error: 'Error: 500. Algo salió mal al editar el producto', success: false, nombre: data.nombre,precio: data.precio, producto_id:data.producto_id};
+		  return { error: 'Error: 500. Algo salió mal al editar el producto', success: false, nombre: data.nombre,precio: data.precio, producto_id:data.producto_id}
 		}
 		  return { success: true, message:`Producto ${data.nombre} editado correctamente!!!` };
-	  }
+	  },
 
+	eliminar: async ({ request, locals }) => {
+		const formData = await request.formData();
+		const producto_id = formData.get('producto_id');
+		console.log('Producto:',producto_id, locals.token, BASE_URL);
+		try {
+			const res = await fetchApi.delete({url: BASE_URL + `/productos/${producto_id}`,token: locals.token,
+				              body: {producto_id: producto_id},resStatus: 200});
+
+			if (res.status === 200) {
+				const res = await res.json();
+			}  
+
+		} catch (err) {
+			console.log('Error: ', err);
+		return { error: 'Error: 500. Algo salió mal al eliminar el producto', success: false,  producto_id:producto_id};
+		}
+		return { success: true, message: `Producto Id: ${producto_id}, eliminado correctamente!!!` };
+	}
 };
