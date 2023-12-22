@@ -60,6 +60,11 @@ Authorization: Bearer {{token}}
 GET {{baseUrl}}/clientes?sort=razon_social:-1 HTTP/1.1  
 Authorization: Bearer {{token}}
 
+###
+//  creado x mi....consultar a Adrian
+GET {{baseUrl}}/clientes?sort=cliente_id:-1 HTTP/1.1  
+Authorization: Bearer {{token}}
+
 
 ### creado por mi...Adrian??
 // recupera todos los productos que contengan la palabra ELO en el nombre . Ordena por nombre

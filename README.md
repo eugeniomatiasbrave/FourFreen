@@ -23,7 +23,7 @@ App en Versel  https://four-green-p9ha6v7dw-eugeniomatiasbrave.vercel.app/
      
 ***** TABLA DE PRODUCTOS:  (cerrar todo productos) ********************************************
        * /productos : 
-            - Responsive.....................................................................Ok
+            * Responsive.....................................................................Ok
             * GET captura para tabala........................................................OK
             * PATCH y DELETE desde /productos/[producto_id] .................................ok
             * POST productos desde otra pagina /productos/[0]/agregar .......................ok
@@ -51,15 +51,18 @@ DELETE {{baseUrl}}/productos/104
       
 **************************** TABLA DE CLIENTES:************************************************
        
-          * /clientes :
-           * Responsive.....................................................................ok
-           * GET............................................................................ok
-           * ADD clientes ..................................................................ok
-           * EDIT clientes .................................................................ok
-           * DELETE clientes ...............................................................ok
+          * /clientes : (cerrar clientes todo)
+           * Responsive.....................................................................
+           * GET captura para tabala........................................................
+           * PATCH y DELETE desde /clientes/[cliente_id] ...................................
+           * POST cliente desde otra pagina /cliente/[0]/agregar ...........................
+           * Filtrar x nombre   ............................................................
            * Ordenar por click en cabecera de columna:
-                  * Nombre..................................................................ok ?? Adrian. Cree un endpoint se puede?
-           * Filtrar clientes x nombre......................................................ok
+                * Nombre....................................................................
+                * id (inicia ordenado por Id)...............................................
+           * Alert si la respuesta es 200...................................................
+           * Alert en input en caso de excistir el cliente Nombre desde Api rest............
+           * Alert si la peticion no es 200.................................................
 
   
 GET {{baseUrl}}/clientes  // Recupera todos los productos
@@ -69,6 +72,7 @@ POST {{baseUrl}}/clientes  // para dar de alta un producto, en el boy va el json
 PATCH {{baseUrl}}/clientes/2  // para actualizar nombre y/o precio del producto, va el :id en el path y los campos en el body
 DELETE {{baseUrl}}/clientes/3 //para eliminar un producto, va el :id en el path
 GET {{baseUrl}}/clientes?sort=razon_social:-1 HTTP/1.1.......euge
+GET {{baseUrl}}/clientes?sort=cliente_id:-1 HTTP/1.1 ........euge
 GET {{baseUrl}}/clientes?search=ELO HTTP/1.1 ................euge
     
 
@@ -76,10 +80,10 @@ GET {{baseUrl}}/clientes?search=ELO HTTP/1.1 ................euge
             
     * Tabla de Gestion de Pedidos:
            * Responsive..................................................................... 
-           * Detalle de pedido.............................................................ok
-           * Agregar pedidos...............................................................ok
+           * Detalle de pedido.............................................................
+           * Agregar pedidos...............................................................
                 Nota:Una Cabecera (hasta cliente) y detalle (a partir de Producto). 
-           * Mas de un item por pedido.....................................................ok 
+           * Mas de un item por pedido.....................................................
            * Editar (modifica pedido en detalle):.......................................... 
            * Eliminar pedido (modifica pedido en detalle):.................................
            * Estado de Pedido.............................................................. 
