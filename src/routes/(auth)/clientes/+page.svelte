@@ -124,7 +124,7 @@ const SortedRazonSocial=(params)=>{
 							<TableHeadCell class="py-2">Calle</TableHeadCell>
 							<TableHeadCell class="py-2">Altura</TableHeadCell>
 							<TableHeadCell class="py-2">Localidad</TableHeadCell>
-							<TableHeadCell class="py-2">Codigo postal</TableHeadCell>
+							<TableHeadCell class="py-2">C. P.</TableHeadCell>
 							<TableHeadCell class="py-2">Telefono</TableHeadCell>
 							<TableHeadCell class="py-2">Email</TableHeadCell>
 							<TableHeadCell class="py-2">Editar

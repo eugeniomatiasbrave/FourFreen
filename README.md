@@ -107,13 +107,8 @@ GET {{baseUrl}}/pedidos_estado/20  // recuperda los datos de un estado de pedido
 
  *******************************************************************************************************  
   
-
-
-
 **** LOGO: ****
     *Colores de marca:
-
-
 
 ****16/11/23*********
 1) Ver diseño que sea responsive
