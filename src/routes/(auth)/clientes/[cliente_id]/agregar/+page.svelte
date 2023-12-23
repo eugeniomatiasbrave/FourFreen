@@ -68,7 +68,7 @@ onMount(() => {
 				placeholder="Agregar cliente" class="bg-white h-7 w-full rounded" required/>
 	  </Label>
 	  <Label class="space mt-2"><span>Cuit</span>
-		<Input type="number" name="cuit" placeholder="cuit" class="bg-white h-8 rounded" maxlength="11" required/>			
+		<Input type="number" name="cuit" placeholder="cuit" min="20000000000" max="30000000000" class="bg-white h-8 rounded" maxlength="11" required/>			
 	  </Label>
 	  <Label class="space mt-2">
 		  <span>Calle</span>
@@ -88,7 +88,7 @@ onMount(() => {
 	  </Label>
 	  <Label class="space mt-2">
 		  <span>Telefono</span>
-		  <Input type="text" name="telefono" placeholder="telefono" class="bg-white h-8 rounded" required/>
+		  <Input type="text" name="telefono" placeholder="telefono" maxlength="10" class="bg-white h-8 rounded" required/>
 	  </Label>
 	  <Label class="space mt-2">
 		  <span>Email</span>
