@@ -26,19 +26,18 @@ App en Versel  https://four-green-p9ha6v7dw-eugeniomatiasbrave.vercel.app/
        * /productos: 
             * Responsive.....................................................................Ok
             * GET captura para tabala........................................................OK
-            * PATCH y DELETE desde /productos/[producto_id] .................................ok
-            * POST productos desde otra pagina /productos/[0]/agregar .......................ok
-            * Filtrar x nombre   ............................................................ok
+            * PATCH y DELETE desde /productos/[producto_id] .................................OK
+            * POST productos desde otra pagina /productos/[0]/agregar .......................OK
+            * Filtrar x nombre   ............................................................OK
             * Ordenar por click en cabecera de columna:
-                   * precio..................................................................ok
-                   * Nombre..................................................................ok
-                   * id (inicia ordenado por Id).............................................ok
+                   * precio..................................................................OK
+                   * Nombre..................................................................OK
+                   * id (inicia ordenado por Id).............................................OK
                      
-            * Alert si la respuesta es 200...................................................ok      
-            * Alert en input en caso de excistir el producto Nombre desde Api rest...........ok
-            * Alert si la peticion no es 200.................................................ok
+            * Alert si la respuesta es 200...................................................OK      
+            * Alert en input en caso de excistir el producto Nombre desde Api rest...........OK
+            * Alert si la peticion no es 200.................................................OK
 
- 
 GET {{baseUrl}}/productos 
 GET {{baseUrl}}/productos?sort=precio:-1    
 GET {{baseUrl}}/productos?search=ELO  
@@ -53,19 +52,20 @@ DELETE {{baseUrl}}/productos/104
 ************************ TABLA DE CLIENTES:***************************************************
        
         * /clientes: (cerrar clientes todo)
-           * Responsive.....................................................................
+           * Responsive.....................................................................OK
            * GET captura para tabala........................................................OK
-           * PATCH y DELETE desde /clientes/[cliente_id] ...................................
-           * POST cliente desde otra pagina /clientes/[0]/agregar ...........................
+           * PATCH y DELETE /clientes/[cliente_id] juntos en +page..........................OK
+           * POST /clientes/[0]/agregar en otro +page.......................................OK
            * Filtrar x nombre + borrar filtro  .............................................OK
            * Ordenar por click en cabecera de columna:
                 * Nombre....................................................................OK
                 * id (inicia ordenado por Id)...............................................OK
-           * Alert si la respuesta es 200...................................................
-           * Alert en input en caso de excistir el cliente Nombre desde Api rest............
-           * Alert si la peticion no es 200.................................................
+           * Alert si la respuesta es 200...................................................OK
+           * Alert en input en caso de excistir el cliente Nombre desde Api rest............OK
+           * Alert si la peticion no es 200.................................................OK
+           * Alert cuit ....................................................................OK
+           * Revisar los demas input y su esuqema...........................................
 
-  
 GET {{baseUrl}}/clientes  // Recupera todos los productos
 GET {{baseUrl}}/clientes?limit=5&offset=2  recupera todos los productos con la opción limit y offset
 GET {{baseUrl}}/clientes/1  // recuperda los datos de un producto en particular con su :id en el path

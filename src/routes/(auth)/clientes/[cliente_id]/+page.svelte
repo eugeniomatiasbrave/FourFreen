@@ -44,13 +44,6 @@ onMount(() => {
   }
 });
 
-function validateCuit(event) {
-    const cuit = event.target.value;
-    if (cuit < 20000000000 || cuit > 30000000000) {
-      alert('El CUIT debe estar entre 20000000000 y 30000000000.');
-    }
-  }
-
 </script>
 
  {#if action === 'editar'}
