@@ -27,8 +27,8 @@ export const actions = {
 
     const result = productoSchema.safeParse(data);
     if (!result.success) {
-      console.log(result.error); 
-      throw error(500, 'Algo salió mal al agregar el producto');
+     // console.log(result.error); 
+     throw error ( 400, {message: 'Error 400: Producto no agregado', hint: 'Prueba nuevamente'} )
     }
   
     try {
@@ -43,6 +43,7 @@ export const actions = {
       });
       if (res.status === 200) {
         const datos = await res.json();
+        
         return {
           success: true,
           message: 'ProductoM agregado correctamente!!!',
@@ -56,7 +57,7 @@ export const actions = {
       }
     } catch (err) {
       console.error('Error: ',err);
-       return { error: 'Algo salió mal al agregar el producto',success: false  };
+      throw error ( 404, {message: 'Erroe 404 Producto no agregado', hint: 'Prueba nuevamente'} )
     }
     return { success: true, message: `Producto ${data.nombre} agregado correctamente!!!`};
   }}
