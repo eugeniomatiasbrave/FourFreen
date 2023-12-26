@@ -36,7 +36,8 @@ App en Versel  https://four-green-p9ha6v7dw-eugeniomatiasbrave.vercel.app/
                      
             * Alert si la respuesta es 200...................................................OK      
             * Alert en input en caso de excistir el producto Nombre desde Api rest...........OK
-            * Alert si la peticion no es 200.................................................OK
+            * +error.svelte si la peticion no es 200 y si el esquema es incorrecto...........OK
+
 
 GET {{baseUrl}}/productos 
 GET {{baseUrl}}/productos?sort=precio:-1    
@@ -60,11 +61,12 @@ DELETE {{baseUrl}}/productos/104
            * Ordenar por click en cabecera de columna:
                 * Nombre....................................................................OK
                 * id (inicia ordenado por Id)...............................................OK
+                
            * Alert si la respuesta es 200...................................................OK
            * Alert en input en caso de excistir el cliente Nombre desde Api rest............OK
-           * Alert si la peticion no es 200.................................................OK
+           * +error.svelte si la peticion no es 200 y si esquema es incorrecto..............OK
            * Alert cuit ....................................................................OK
-           * Revisar los demas input y su esuqema...........................................
+           * Revisar los demas input y su esquemas...........................................
 
 GET {{baseUrl}}/clientes  // Recupera todos los productos
 GET {{baseUrl}}/clientes?limit=5&offset=2  recupera todos los productos con la opción limit y offset

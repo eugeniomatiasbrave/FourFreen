@@ -40,7 +40,7 @@ export const actions = {
 
 		const result = ClienteSchema.safeParse(data);
 		if (!result.success) {
-			throw error(400, 'Los datos del formulario son inválidos');
+			throw error ( 400, {message: 'Error 400: Datos del formulario incorrectos', hint: 'Prueba nuevamente'} )
 		}
 
 		try {
@@ -56,7 +56,7 @@ export const actions = {
 			}
 		} catch (err) {
 			console.log('Error: ', err);
-			return { error: 'Algo salió mal al agregar el cliente',success: false  };
+			throw error ( 404, {message: 'Error 404: Cliente no agregado', hint: 'Prueba nuevamente'} )
 			
 		}
 		return { success: true, message: `Cliente ${data.razon_social} agregado correctamente!!!`};

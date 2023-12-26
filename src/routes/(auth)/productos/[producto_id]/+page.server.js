@@ -38,7 +38,7 @@ export const actions = {
 		const result = productoSchema.safeParse(data);
 		if (!result.success) {
 		  console.log(result.error);
-		  throw error ( 400, {message: 'Error 400: Producto no editado', hint: 'Prueba nuevamente'} )
+		  throw error ( 400, {message: 'Error 400: datos del formulario son inválidos', hint: 'Prueba nuevamente'} )
 		}
 		try {
 		  const res = await fetchApi.patch({url: BASE_URL + `/productos/${data.producto_id}`,token: locals.token,
@@ -59,7 +59,7 @@ export const actions = {
 		  }
 		} catch (err) {
 		  console.log('Error: ', err);
-		  throw error ( 404, {message: 'Error 404 Producto no editado', hint: 'Prueba nuevamente'} )
+		  throw error ( 404, {message: 'Error 404: Producto no editado', hint: 'Prueba nuevamente'} )
 		}
 		  return { success: true, message:`Producto ${data.nombre} editado correctamente!!!` };
 	  },
@@ -78,7 +78,7 @@ export const actions = {
 
 		} catch (err) {
 			console.log('Error: ', err);
-			throw error ( 404, {message: 'Error 404 Producto no eliminado', hint: 'Prueba nuevamente'} )
+			throw error ( 404, {message: 'Error 404: Producto no eliminado', hint: 'Prueba nuevamente'} )
 		}
 		return { success: true, message: `Producto Id: ${producto_id}, eliminado correctamente!!!` };
 	}

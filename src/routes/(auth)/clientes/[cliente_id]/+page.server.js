@@ -57,7 +57,7 @@ export const actions = {
 		const result = ClienteSchema.safeParse(data);
 
 		if (!result.success) {
-			throw error(400, 'Los datos del formulario son inválidos');
+			throw error ( 400, {message: 'Erroe 400: datos del formulario son inválidos', hint: 'Prueba nuevamente'} )
 		}
 
 		try {
@@ -98,7 +98,7 @@ export const actions = {
 			  }
 			} catch (err) {
 			  console.log('Error: ', err);
-			  return { error: 'Error: 500. Algo salió mal al editar el cliente', success: false, cliente_id:data.cliente_id, razon_social: data.razon_social };
+			  throw error ( 404, {message: 'Error 404: Cliente no editado', hint: 'Prueba nuevamente'} )
 			}		
 		   return { success: true, message:`Cliente ${data.razon_social} editado correctamente!!!`};
 		  },
@@ -130,7 +130,7 @@ export const actions = {
 				}
 			} catch (err) {
 				console.log('Error: ', err);
-				return { error: 'Error: 500. Algo salió mal al eliminar el cliente', success: false,  cliente_id:cliente_id};
+				throw error ( 404, {message: 'Error 404: Cliente no eliminado', hint: 'Prueba nuevamente'} )
 			}
 			return { success: true, message: `Cliente Id: ${cliente_id} eliminado correctamente!!!` };
 		}

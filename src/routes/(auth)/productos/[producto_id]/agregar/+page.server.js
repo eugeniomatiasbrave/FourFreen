@@ -28,7 +28,7 @@ export const actions = {
     const result = productoSchema.safeParse(data);
     if (!result.success) {
      // console.log(result.error); 
-     throw error ( 400, {message: 'Error 400: Producto no agregado', hint: 'Prueba nuevamente'} )
+     throw error ( 400, {message: 'Error 400: Datos del formulario incorrectos', hint: 'Prueba nuevamente'} )
     }
   
     try {

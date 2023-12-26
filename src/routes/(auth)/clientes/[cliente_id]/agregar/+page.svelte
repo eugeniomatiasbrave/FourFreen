@@ -23,21 +23,6 @@ onMount(() => {
         goto('/clientes');
       }
     });
-  } else if (form?.error) {
-    showForm = false;
-    Swal.fire({
-      icon: 'error',
-      title: 'Error',
-      text: form.error,
-      backdrop: true,
-      confirmButtonText: 'Volver',
-      confirmButtonColor: 'rgb(69, 166, 175)'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        goto('/clientes/0/agregar');
-        showForm = true;
-      }
-    });
   }
 });
 	</script>
