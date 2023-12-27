@@ -1,5 +1,6 @@
 <script>
 	import {goto} from '$app/navigation';
+	//import { page } from '$app/stores';
 	import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';			
 	export let data;
 	export const {productos,productosSearch,sortPrecio,searchSortPrecio,sortNombre,sortProducto_id}=data;
@@ -23,7 +24,6 @@ const SortedProducto_id=(params)=>{
 		} else if (sort===-1) {
 		filteredSortedId=newOrder.sort((e,f)=>f.producto_id - e.producto_id);
 		}
-		
 		goto(`/productos?sort=producto_id:${sort}`);
 	}
  
@@ -84,6 +84,8 @@ const sortedNombre=(params)=> {
     sortedNombre(sortOrder === 1 ? -1 : 1);
   }
 
+  
+
 </script>
 			
 <svelte:head>
@@ -99,7 +101,7 @@ const sortedNombre=(params)=> {
 	  <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-full xl:w-1/2"><!----------------Div contenedor: tabla + add + Filtro--------->
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto "> 
 		 <div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
-		  <Button href={`/productos/${0}/agregar`}  size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto ">
+		  <Button href={`/productos/-1`}  size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto ">
 			<svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
 			fill="none" viewBox="0 0 20 20">
 			<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 

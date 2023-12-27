@@ -20,7 +20,7 @@ export const load = async ({ locals}) => {
 	   return await fetchApi.get({ url: BASE_URL + '/clientes', token: locals.token, resStatus: 200 }); 
 	   }
 	   return {
-		clientes: getClientes()
+		clientes: await getClientes()
 	   };
   }
 

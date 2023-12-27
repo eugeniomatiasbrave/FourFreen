@@ -34,8 +34,8 @@ export const load = async ({ locals, params}) => {
 	};
 
 	return {
-		clientes: getClientes(),
-		clienteId: getClienteId()
+		clientes: await getClientes(),
+		clienteId: await getClienteId()
 	};
 }
 

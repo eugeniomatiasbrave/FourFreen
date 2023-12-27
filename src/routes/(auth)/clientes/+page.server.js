@@ -46,10 +46,10 @@ export const load = async ({ locals, url }) => {
 	   }
 
 	return {
-		clientes: getClientes(),
-		sortrazonsocial: getSortRS(),
-		searchclientes: getClientesSearch(),
-		sortCliente_id: getSortCliente_id()
+		clientes: await getClientes(),
+		sortrazonsocial: await getSortRS(),
+		searchclientes: await getClientesSearch(),
+		sortCliente_id: await getSortCliente_id()
 	};
 };
 

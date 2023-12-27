@@ -8,7 +8,7 @@ Authorization: Bearer {{token}}
 
 ###
 // recupera todos los estados de los pedidos con la opción limit y offset para realizar paginado (en principio por la cantidad de items no hace falta)
-GET {{baseUrl}}/pedidos?limit=2 HTTP/1.1 
+GET {{baseUrl}}/pedidos?limit=200 HTTP/1.1 
 Authorization: Bearer {{token}}
 
 ###
@@ -38,6 +38,16 @@ Content-Type: application/json
     }
   ]
 }
+
+###
+GET {{baseUrl}}/pedidos?sort=pedido_cab_id:1 HTTP/1.1  
+Authorization: Bearer {{token}}
+
+
+###
+// recupera todos los productos que contengan la palabra ELO en el nombre . Ordena por nombre
+GET {{baseUrl}}/pedidos?search=ELO HTTP/1.1 
+Authorization: Bearer {{token}}
 
 
 

@@ -26,8 +26,7 @@ App en Versel  https://four-green-p9ha6v7dw-eugeniomatiasbrave.vercel.app/
        * /productos: 
             * Responsive.....................................................................Ok
             * GET captura para tabala........................................................OK
-            * PATCH y DELETE desde /productos/[producto_id] .................................OK
-            * POST productos desde otra pagina /productos/[0]/agregar .......................OK
+            * PATCH, DELETE y POST desde /productos/[producto_id] ...........................OK
             * Filtrar x nombre   ............................................................OK
             * Ordenar por click en cabecera de columna:
                    * precio..................................................................OK
@@ -55,8 +54,7 @@ DELETE {{baseUrl}}/productos/104
         * /clientes: (cerrar clientes todo)
            * Responsive.....................................................................OK
            * GET captura para tabala........................................................OK
-           * PATCH y DELETE /clientes/[cliente_id] juntos en +page..........................OK
-           * POST /clientes/[0]/agregar en otro +page.......................................OK
+           * PATCH POST y DELETE /clientes/[cliente_id] juntos en +page.....................
            * Filtrar x nombre + borrar filtro  .............................................OK
            * Ordenar por click en cabecera de columna:
                 * Nombre....................................................................OK
