@@ -73,7 +73,7 @@ const SortedRazonSocial=(params)=>{
 	<div class=" bg-white mx-auto p-1 pt-1 border rounded shadow-md w-full  xl:w-2/3 "> <!----------------Div contenedor: tabla + add + Filtro--------->  
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto "> 
 			<div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
-				<Button href={`/clientes/${0}/agregar`}  size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto ">
+				<Button href={`/clientes/-1`}  size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto ">
 				  <svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
 				  fill="none" viewBox="0 0 20 20">
 				  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 

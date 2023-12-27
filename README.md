@@ -54,7 +54,7 @@ DELETE {{baseUrl}}/productos/104
         * /clientes: (cerrar clientes todo)
            * Responsive.....................................................................OK
            * GET captura para tabala........................................................OK
-           * PATCH POST y DELETE /clientes/[cliente_id] juntos en +page.....................
+           * PATCH POST y DELETE /clientes/[cliente_id] juntos en +page.....................OK
            * Filtrar x nombre + borrar filtro  .............................................OK
            * Ordenar por click en cabecera de columna:
                 * Nombre....................................................................OK
@@ -64,7 +64,7 @@ DELETE {{baseUrl}}/productos/104
            * Alert en input en caso de excistir el cliente Nombre desde Api rest............OK
            * +error.svelte si la peticion no es 200 y si esquema es incorrecto..............OK
            * Alert cuit ....................................................................OK
-           * Revisar los demas input y su esquemas...........................................
+           * Revisar los demas input y su esquemas..........................................OK
 
 GET {{baseUrl}}/clientes  // Recupera todos los productos
 GET {{baseUrl}}/clientes?limit=5&offset=2  recupera todos los productos con la opción limit y offset
