@@ -1,13 +1,12 @@
 <script>
+	//import { invalidate } from '$app/navigation';
 	import {goto} from '$app/navigation';
-	//import { page } from '$app/stores';
 	import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';			
 	export let data;
 	export const {productos,productosSearch,sortPrecio,searchSortPrecio,sortNombre,sortProducto_id}=data;
 
 let searchTerm='';
 let sortOrder= 1
-//let Productos=productos.datos
 let filteredPrecio=sortPrecio.datos
 let filteredProductos=productosSearch.datos
 let filteredSortNombre=sortNombre.datos
@@ -24,25 +23,26 @@ const SortedProducto_id=(params)=>{
 		} else if (sort===-1) {
 		filteredSortedId=newOrder.sort((e,f)=>f.producto_id - e.producto_id);
 		}
-		goto(`/productos?sort=producto_id:${sort}`);
-	}
+	//	invalidate(`/productos?sort=producto_id:${sort}`);  // analizar si es mas conveniente utilizar Invalidate ()
+		goto(`/productos?sort=producto_id:${sort}`); 
+	};
  
 const alternarSortId =()=> {
 	SortedProducto_id(sortOrder === 1 ? -1 : 1);
-}
+};
 
 const applyFilter=(params)=>{
 	let search=params;
 	filteredProductos=productosSearch.datos.filter(prod=>prod.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
 	filteredSortedId=filteredProductos; 
-	goto(`/productos?search=${search}`);		
-	}
+	goto(`/productos?search=${search}`);	// analizar si es mas conveniente utilizar Invalidate ()...y si hay difrencias
+	};
 
 const reset=()=>{
     searchTerm='';
 	filteredSortedId = info.sort((e,f)=>e.producto_id - f.producto_id);
 	goto(`/productos`);
-	}
+	};
 
 const OrderedPrecio=(params)=>{
 	sortOrder= -sortOrder;
@@ -53,14 +53,12 @@ const OrderedPrecio=(params)=>{
 		filteredPrecio=sortPrecio.datos.sort((a,b)=>b.precio - a.precio);
 	    }
 		filteredSortedId=filteredPrecio;
-		goto(`/productos?sort=precio:${sort}`);
-	}
-	
+		goto(`/productos?sort=precio:${sort}`); // analizar si es mas conveniente utilizar Invalidate ()...y si hay difrencias
+	};
 	
 const alternarSortPre =()=> {
 	OrderedPrecio(sortOrder === 1 ? -1 : 1);
-}
-
+};
 
 const sortedNombre=(params)=> {
     sortOrder = -sortOrder;
@@ -77,14 +75,12 @@ const sortedNombre=(params)=> {
       return 0;
     });
 	filteredSortedId=filteredSortNombre;
-	goto(`/productos?sort=nombre:${sort}`);
-  }
+	goto(`/productos?sort=nombre:${sort}`); // analizar si es mas conveniente utilizar Invalidate ()...y si hay difrencias
+  };
 
   const alternarSort =()=> {
     sortedNombre(sortOrder === 1 ? -1 : 1);
-  }
-
-  
+  };
 
 </script>
 			
