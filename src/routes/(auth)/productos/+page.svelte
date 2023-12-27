@@ -97,7 +97,7 @@ const sortedNombre=(params)=> {
 	  <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-full xl:w-1/2"><!----------------Div contenedor: tabla + add + Filtro--------->
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto "> 
 		 <div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
-		  <Button href={`/productos/-1`}  size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto ">
+		  <Button href={`/productos/-1`} data-sveltekit-preload-code="hover" size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto ">
 			<svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
 			fill="none" viewBox="0 0 20 20">
 			<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
@@ -176,12 +176,12 @@ const sortedNombre=(params)=> {
 					<TableBodyCell class="py-2">{nombre}</TableBodyCell>
 					<TableBodyCell class="py-2" style="text-align: right;" >${precio.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableBodyCell>
 					<TableBodyCell class="py-2">
-						<a  href={`/productos/${producto_id}?action=editar`} 
+						<a  href={`/productos/${producto_id}?action=editar`} data-sveltekit-preload-code="hover"
 							 class="font-medium text-primary-600 hover:underline dark:text-primary-500"  	
 							>Editar</a>			
 					</TableBodyCell>
 					<TableBodyCell class="py-2">		
-						<a href={`/productos/${producto_id}?action=eliminar`} 
+						<a href={`/productos/${producto_id}?action=eliminar`} data-sveltekit-preload-code="hover"
 						class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a> 
 				    </TableBodyCell>
 				</TableBodyRow>

@@ -16,15 +16,15 @@
 	<NavHamburger class="" />
 	<NavUl {activeUrl}>
 	  {#if data.usuario === undefined}
-		<NavLi href="/login">Inciar sesión</NavLi>
+		<NavLi href="/login" data-sveltekit-preload-code="eager">Inciar sesión</NavLi>
 	  {:else}
 		<NavUl>
 			{#each data.menu as {item, icono, tooltip, ruta} }
 			<NavLi>
-				<a href={ruta} data-tooltip="Tooltip 1" data-placement="left">{item}</a>
+				<a href={ruta} data-sveltekit-preload-code="eager" data-tooltip="Tooltip 1" data-placement="left">{item}</a>
 			</NavLi>
 			{/each}		
-			<NavLi href="/logout">Cerrar sesión</NavLi>	
+			<NavLi href="/logout" data-sveltekit-preload-code="eager">Cerrar sesión</NavLi>	
 		</NavUl>
 	  {/if}
 	</NavUl>

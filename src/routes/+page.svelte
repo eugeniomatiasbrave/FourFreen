@@ -11,10 +11,9 @@
 </svelte:head>
 
 <main class="inicio">
-<div class="flex items-center justify-center h-screen">
+ <div class="flex items-center justify-center h-screen">
     <Img src={LogoFG0}  alt="sample 1"/>
 </div>
-
 </main>
 
 <style>
