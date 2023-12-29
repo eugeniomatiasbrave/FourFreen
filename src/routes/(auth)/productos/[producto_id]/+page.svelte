@@ -11,10 +11,15 @@ let ProductosId=productosId.datos
 
 let action = '';
 let producto_id = $page.params.producto_id;
-  onMount(() => {
-      action = producto_id === "-1" ? 'agregar' : $page.url.searchParams.get('action') || 'view';   
-  });  
-
+  
+onMount(() => {
+    if (producto_id === "-1") {
+        action = 'agregar';
+    } else {
+        action = $page.url.searchParams.get('action') || 'otraAccion';
+    }
+});
+  
 onMount(() => {
   if (form?.success) {
     Swal.fire({

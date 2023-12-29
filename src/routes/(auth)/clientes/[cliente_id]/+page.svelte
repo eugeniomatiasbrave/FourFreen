@@ -12,10 +12,15 @@ let Clientes=clientes;
 
 let action = '';
 let cliente_id = $page.params.cliente_id;
-  onMount(() => {
-      action = cliente_id === "-1" ? 'agregar' : $page.url.searchParams.get('action') || 'view';   
-  });  
- 
+  
+onMount(() => {
+    if (cliente_id === "-1") {
+        action = 'agregar';
+    } else {
+        action = $page.url.searchParams.get('action') || 'otraAccion';
+    }
+});
+  
 onMount(() => {
   if (form?.success) {
     Swal.fire({
@@ -28,9 +33,7 @@ onMount(() => {
       if (result.isConfirmed) {
         goto('/clientes');
       }
-    });
-  }
-});
+    });}});
 
 </script>
 
