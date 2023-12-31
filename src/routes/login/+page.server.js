@@ -1,4 +1,4 @@
-import { error, redirect } from '@sveltejs/kit';
+import { error, redirect} from '@sveltejs/kit';
 import { BASE_URL } from '$lib/utils.js';
 //import { date } from 'zod';
 
@@ -41,7 +41,7 @@ export const actions = {
 			}
 		} catch (err) {
 			console.log('Error: ', err);
-			throw error(500, 'Something went wrong logging in');	
+			throw error(500, 'Something went wrong logging in');
 		}
 		throw redirect(303, '/');       
 	}

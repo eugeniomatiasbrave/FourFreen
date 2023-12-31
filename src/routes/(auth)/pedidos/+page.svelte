@@ -86,7 +86,7 @@ const reset=()=> {
 			<TableBodyCell class="py-2">{pe.cliente_id}</TableBodyCell>
 			<TableBodyCell class="py-2" style="text-align: left;">{pe.razon_social}</TableBodyCell>
 			<TableBodyCell class="py-2" style="text-align: right;">{pe.fecha=new Intl.DateTimeFormat('es', {day: 'numeric', month: 'numeric', year: 'numeric'}).format(new Date(pe.fecha))}</TableBodyCell>				
-			<TableBodyCell class="py-2"> 
+			<TableBodyCell class="py-2">  
 			     <a href={`/pedidos_estado/${pe.pedido_estado_id}`} class="font-medium text-primary-600 hover:underline dark:text-primary-500">Estado: {pe.pedido_estado_id}</a> 
 			</TableBodyCell>
 			<TableBodyCell class="py-2">{pe.pedido_estado_nombre}</TableBodyCell>

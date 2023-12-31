@@ -1,5 +1,6 @@
 <script>
 	import { Button } from 'flowbite-svelte';
+	import { enhance } from '$app/forms';
 	import {goto} from '$app/navigation';
 	export let form;
 </script>
@@ -16,7 +17,7 @@
 				<h1 class="text-2xl">Cierre de Sesión</h1>
 				<h2 class="text-lg">¿Está seguro que quiere salir?</h2>
 			</div>
-			<form method="POST" class="grid gap-4">
+			<form method="POST" class="grid gap-4" use:enhance>
 				<footer class="text-center ">
 				<Button type="submit" size="xs" class="bg-primary-500 h-8 ml-1 px-2 rounded">Confirmar</Button>				
                 <Button on:click={() => goto('/')} size="xs" class="bg-primary-500 h-8 ml-1 px-2 rounded">Cancelar</Button>
