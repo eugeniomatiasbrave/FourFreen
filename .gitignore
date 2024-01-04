@@ -8,3 +8,8 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+productos.rest
+pedidos.rest
+clientes.rest
+usuarios.rest
+pedidos_estado.rest

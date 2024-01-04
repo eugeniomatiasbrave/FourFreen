@@ -35,6 +35,8 @@ onMount(() => {
       }
     });}});
 
+
+
 </script>
 
  {#if action === 'editar'}
@@ -67,7 +69,7 @@ onMount(() => {
 		 </Label> 
 		<Label class="space mt-2">
 		 <span>Cuit</span>	
-		<Input type="number" name="cuit" value={cliente.cuit} on:blur={(e)=> {
+		<Input type="number" name="cuit" bind:value={cliente.cuit} on:blur={(e)=> {
          let cuit = e.target.value;
           if (cuit < 20000000000 || cuit > 30000000000) {
 		    window.Swal.fire({
