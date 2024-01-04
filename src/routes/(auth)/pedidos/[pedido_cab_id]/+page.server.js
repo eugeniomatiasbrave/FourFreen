@@ -55,11 +55,3 @@ export const actions = {
 		return { success: true, message: 'Pedido agregado correctamente!!!' };
 	}
 };
-
-
-
-
-
-
-
-

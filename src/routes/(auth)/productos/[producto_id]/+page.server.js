@@ -47,6 +47,7 @@ export const actions = {
 	
   agregar: async ({ request, locals }) => {
     const data = await validateData(request, productoSchema.omit({ producto_id: true }));
+
     try {
       const res = await fetchApi.post({
         url: BASE_URL + '/productos',

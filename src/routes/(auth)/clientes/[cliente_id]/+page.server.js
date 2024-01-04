@@ -81,7 +81,6 @@ export const actions = {
 
 	
 	editar: async ({ request, locals }) => {
-
 		const ClienteSchemaEditar = z.object({
 			cliente_id: z.string(),
 			razon_social: z.string(),
@@ -112,7 +111,6 @@ export const actions = {
 		if (!result.success) {
 			throw error ( 400, {message: 'Erroe 400: datos del formulario son inválidos', hint: 'Prueba nuevamente'} )
 		}
-
 		try {
 			const res = await fetchApi.patch({
 				url: BASE_URL + `/clientes/${data.cliente_id}`,

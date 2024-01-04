@@ -35,7 +35,9 @@ export const actions = {
 					secure: true,
 					sameSite: 'strict',
 					maxAge: 60 * 60 * 24 // 1 day
-				})							
+				});
+
+							
 			} else {
 				return {success: false}						
 			}
@@ -43,6 +45,8 @@ export const actions = {
 			console.log('Error: ', err);
 			throw error(500, 'Something went wrong logging in');
 		}
-		throw redirect(303, '/');       
+		throw redirect(303, '/');   
+
 	}
+	
 };

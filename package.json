@@ -1,5 +1,5 @@
 {
-	"name": "fourgreen3hooks",
+	"name": "fourgreens",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -34,6 +34,7 @@
 		"bootstrap-icons": "^1.11.1",
 		"postcss-nested": "^6.0.1",
 		"svelte-alert": "^1.0.13",
+		"svelte-french-toast": "^1.2.0",
 		"sweetalert2": "^11.10.1"
 	}
 }
