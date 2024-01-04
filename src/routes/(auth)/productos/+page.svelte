@@ -94,7 +94,7 @@ const sortedNombre=(params)=> {
 	<P size="xl" align="center">Tabla de Productos</P>
   </div>
 	<!--------------------------Seccion tabla --> 	
-	  <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-full xl:w-1/2"><!----------------Div contenedor: tabla + add + Filtro--------->
+	  <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-300 shadow-md w-full xl:w-1/2"><!----------------Div contenedor: tabla + add + Filtro--------->
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto "> 
 		 <div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
 		  <Button href={`/productos/-1`} data-sveltekit-preload-code="hover" size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto ">

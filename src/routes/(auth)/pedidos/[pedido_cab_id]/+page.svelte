@@ -73,9 +73,9 @@
 	 <P size="2xl" align="center" class="mb-4">Nuevo Pedido</P> 
 	</div> 
 	<main class="flex items-start justify-center min-h-screen pb-36">
-		<div class="bg-white mx-auto p-4 pt-2 my-2 rounded border border-gray-200 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/4">
+		<div class="bg-white mx-auto p-1 pt-1 my-0 rounded border border-gray-300 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/4">
 		  <form method="POST" >       	 		
-			  <div class="  rounded border border-gray-300 p-3 my-1"><!----------- detalles items--------------> 
+			  <div class=" rounded border border-gray-300 p-3 my-0"><!----------- detalles items--------------> 
 				<div> <!--cabecera ( nombre cliente y fecha)--->
 					<div class="mt-0">
 					  <label for="small" class="block mb-1 text-sm  text-gray-900 dark:text-white">Cliente</label>
@@ -149,7 +149,7 @@
 				</Table>
 			  </div>
 			</div> <!-------fin Area items-------------->					
-			<div class="mt-2">
+			<div class="mt-1 mb-2">
 				<Button on:click={formClose} size="xs" class="bg-primary-500 h-7 ml-1 rounded">Cancelar</Button>				  
 				<Button size="xs" on:click={reset} class="bg-primary-500 h-7 ml-1 mt-2 rounded">Actualizar</Button>
 				<Button type="submit" on:submit={handleSubmit} size="xs" class="bg-primary-500 h-7 ml-1  rounded">Nuevo Pedido</Button>		
