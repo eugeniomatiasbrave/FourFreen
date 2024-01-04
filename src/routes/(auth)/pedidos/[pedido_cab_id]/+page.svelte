@@ -75,31 +75,31 @@
 	<main class="flex items-start justify-center min-h-screen pb-36">
 		<div class="bg-white mx-auto p-4 pt-2 my-2 rounded border border-gray-200 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/4">
 		  <form method="POST" >       	 		
-			<div> <!--cabecera ( nombre cliente y fecha)--->
-				<div class="mt-2">
-				  <label for="small" class="block mb-1 text-sm  text-gray-900 dark:text-white">Cliente</label>
-				   <select id="small" name="cliente_id" bind:value={cliente_id} required class="block w-full h-7 mb-1 text-xs py-0 text-gray-900 border
-								 border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700
-								 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
-								 dark:focus:border-primary-500">
-					<option selected>Seleccionar cliente</option>
-					{#each clientes as cli}
-					<option value={cli.cliente_id}>{cli.razon_social}</option>
-					{/each}
-				   </select>
-				</div>
-				<div>
-					<label for="small" class="block mb-1 text-sm text-gray-900 dark:text-white">Fecha</label>
-					<input id="small" type="text" maxlength="8" name="fecha" bind:value={fecha} class="block w-full h-7 mb-1 text-xs py-0 text-gray-900 border 
-					 border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700
-					 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
-					 dark:focus:border-primary-500"/>			
-				</div>
-			</div><!---------------------fin cabecera-------------->    
-			<div><!----------- detalles items-------------->   
+			  <div class="  rounded border border-gray-300 p-3 my-1"><!----------- detalles items--------------> 
+				<div> <!--cabecera ( nombre cliente y fecha)--->
+					<div class="mt-0">
+					  <label for="small" class="block mb-1 text-sm  text-gray-900 dark:text-white">Cliente</label>
+					   <select id="small" name="cliente_id" bind:value={cliente_id} required class="block w-full h-7 mb-1 text-xs py-0 text-gray-900 border
+									 border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700
+									 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
+									 dark:focus:border-primary-500">
+						<option selected>Seleccionar cliente</option>
+						{#each clientes as cli}
+						<option value={cli.cliente_id}>{cli.razon_social}</option>
+						{/each}
+					   </select>
+					</div>
+					<div>
+						<label for="small" class="block mb-1 text-sm text-gray-900 dark:text-white">Fecha</label>
+						<input id="small" type="text" maxlength="8" name="fecha" bind:value={fecha} class="block w-full h-7 mb-1 text-xs py-0 text-gray-900 border 
+						 border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700
+						 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
+						 dark:focus:border-primary-500"/>			
+					</div>
+			  </div><!---------------------fin cabecera-------------->    
 				<input type="hidden" name="items" 
 				   value={JSON.stringify( items = items.map(item =>({...item,precio: Number(item.precio)})) )}/>
-				   <div class="mt-2">
+				   <div class="mt-1">
 					<label for="small" class="block mb-1 text-sm  text-gray-900 dark:text-white">Productos</label>
 					 <select id="small" name="Productos" bind:value={producto_id} on:change={handleProductoChange} required 
 								   class="block w-full h-7 mb-1 text-xs py-0 text-gray-900 border
@@ -122,12 +122,14 @@
 				<input type="text"  placeholder="Precio" bind:value={precio} class="block w-full h-7 mb-1 text-xs text-gray-900 border
 				border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700
 				dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
-				dark:focus:border-primary-500" readonly required/>			
+				dark:focus:border-primary-500" readonly required/>
+				
+				<div>	  
+					<Button on:click={handleAdd} size="xs" class="bg-primary-500 h-7 ml-1 px-2 mt-2 rounded">Agregar Item</Button>	
+				</div>		
 			</div><!-----------fin detalles items-------------->				 
-			<div>	  
-				<Button on:click={handleAdd} size="xs" class="bg-primary-500 h-7 ml-1 px-2 my-2 rounded">Agregar Item</Button>	
-			</div>		
-			<div><!-------Area items-------------->
+			
+			<div class="mt-3"><!-------Area items-------------->
 			  <div class="Area-pedido"> 
 				<Table hoverable={true} class="mx-auto border text-xs" ><!-------Table-------------->
 					<TableHead class="bg-primary-500 text-white" style="text-align: center;" theadClass='text-xs'> 
