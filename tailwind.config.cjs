@@ -7,6 +7,9 @@ const config = {
   
 	theme: {
 	  extend: {
+		width: {
+			'custom': '30%', // Valor personalizado entre w-1/4 y w-1/3
+		},
 		borderColor: ['active'],
 		colors: {
 			'hover-gray-light': '#F5F5F5',

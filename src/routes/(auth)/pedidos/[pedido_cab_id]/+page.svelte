@@ -22,11 +22,17 @@
 		  }});
 	  }});
 	
-	const handleProductoChange=(event)=> {
+const handleProductoChange=(event)=> {
 	const selectedIndex = event.target.selectedIndex;
 	const selectedOption = event.target.options[selectedIndex];
 	precio = selectedOption.getAttribute('data-precio');
 	}
+
+const handleClienteChange = (event) => {
+  const selectedIndex = event.target.selectedIndex;
+  const selectedOption = event.target.options[selectedIndex];
+  razon_social = selectedOption.getAttribute('data-razon_social');
+}
 	
 	 
 	let cliente_id;
@@ -34,7 +40,8 @@
 	let fecha = new Date().toISOString();	
 	let unidades;
 	let producto_id;
-	let precio;	
+	let precio;
+	let razon_social;
 	  
 	const handleAdd=(event)=> {
 		event.preventDefault();
@@ -73,19 +80,19 @@
 	 <P size="2xl" align="center" class="mb-4">Nuevo Pedido</P> 
 	</div> 
 	<main class="flex items-start justify-center min-h-screen pb-36">
-		<div class="bg-white mx-auto p-1 pt-1 my-0 rounded border border-gray-300 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/4">
+		<div class="bg-white mx-auto p-1 pt-1 my-0 rounded border border-gray-300 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-custom 2xl:w-custom">
 		  <form method="POST" >       	 		
 			  <div class=" rounded border border-gray-300 p-3 my-0"><!----------- detalles items--------------> 
 				<div> <!--cabecera ( nombre cliente y fecha)--->
 					<div class="mt-0">
 					  <label for="small" class="block mb-1 text-sm  text-gray-900 dark:text-white">Cliente</label>
-					   <select id="small" name="cliente_id" bind:value={cliente_id} required class="block w-full h-7 mb-1 text-xs py-0 text-gray-900 border
+					   <select id="small" name="cliente_id" bind:value={cliente_id} on:change={handleClienteChange} required class="block w-full h-7 mb-1 text-xs py-0 text-gray-900 border
 									 border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700
 									 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
 									 dark:focus:border-primary-500">
 						<option selected>Seleccionar cliente</option>
 						{#each clientes as cli}
-						<option value={cli.cliente_id}>{cli.razon_social}</option>
+						<option value={cli.cliente_id} data-razon_social={cli.razon_social} >{cli.razon_social}</option> 
 						{/each}
 					   </select>
 					</div>
@@ -125,7 +132,7 @@
 				dark:focus:border-primary-500" readonly required/>
 				
 				<div>	  
-					<Button on:click={handleAdd} size="xs" class="bg-primary-500 h-7 ml-1 px-2 mt-2 rounded">Agregar Item</Button>	
+					<Button on:click={handleAdd} data-sveltekit-preload-code="hover" size="xs" class="bg-primary-500 h-7 ml-1 px-2 mt-2 rounded">Agregar Item</Button>	
 				</div>		
 			</div><!-----------fin detalles items-------------->				 
 			
@@ -134,6 +141,7 @@
 				<Table hoverable={true} class="mx-auto border text-xs" ><!-------Table-------------->
 					<TableHead class="bg-primary-500 text-white" style="text-align: center;" theadClass='text-xs'> 
 						<TableHeadCell class="py-1">Producto_id</TableHeadCell>
+						<TableHeadCell class="py-1">Cliente</TableHeadCell>
 						<TableHeadCell class="py-1" >Unidades</TableHeadCell>
 						<TableHeadCell class="py-1" >Precio</TableHeadCell>	 	
 					</TableHead>
@@ -141,6 +149,7 @@
 						{#each items as item (item.producto_id)}
 						<TableBodyRow class="hover:bg-hover-gray-light" style="text-align: center;">
 						<TableBodyCell class="py-0" style="font-weight: normal;">{item.producto_id}</TableBodyCell>
+						<TableBodyCell class="py-0" style="font-weight: normal;">{razon_social}</TableBodyCell>
 						<TableBodyCell class="py-0" style="font-weight: normal;">{item.unidades}</TableBodyCell>
 						<TableBodyCell class="py-0" style="text-align: right; font-weight: normal;">${item.precio.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableBodyCell>
 						</TableBodyRow>
@@ -150,9 +159,9 @@
 			  </div>
 			</div> <!-------fin Area items-------------->					
 			<div class="mt-1 mb-2">
-				<Button on:click={formClose} size="xs" class="bg-primary-500 h-7 ml-1 rounded">Cancelar</Button>				  
-				<Button size="xs" on:click={reset} class="bg-primary-500 h-7 ml-1 mt-2 rounded">Actualizar</Button>
-				<Button type="submit" on:submit={handleSubmit} size="xs" class="bg-primary-500 h-7 ml-1  rounded">Nuevo Pedido</Button>		
+				<Button on:click={formClose} data-sveltekit-preload-code="hover" size="xs" class="bg-primary-500 h-7 ml-1 rounded">Cancelar</Button>				  
+				<Button size="xs" on:click={reset} data-sveltekit-preload-code="hover" class="bg-primary-500 h-7 ml-1 mt-2 rounded">Actualizar</Button>
+				<Button type="submit" on:submit={handleSubmit} data-sveltekit-preload-code="hover" size="xs" class="bg-primary-500 h-7 ml-1  rounded">Nuevo Pedido</Button>		
 			</div>				  
 		</form>	
 	  </div>
