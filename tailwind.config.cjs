@@ -25,7 +25,19 @@ const config = {
 				700: '#296e73',
 				800: '#25858e', // bg hover:
 				900: '#0d3737',         
-		   }
+		   },
+		   secundary: {	
+			50: '#a6c94e',
+            100: '#a6c94e',
+            200: '#a6c94e',
+            300: '#a6c94e', //border hover blanco
+            400: '#a6c94e',
+			500: '#a6c94e', //bg botton	secundario 
+			600: '#a6c94e',
+            700: '#a6c94e',
+            800: '#abc95e', // bg hover:
+            900: '#a6c94e',             
+	   }
 		 }
 		}
 	  }

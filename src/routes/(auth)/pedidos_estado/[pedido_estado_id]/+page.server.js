@@ -28,22 +28,8 @@ const PedidosEstados = async () => {
 		pedidosEstados: await PedidosEstados()
 	};
 };
-////////////////////////////////////////////////////////////////////////////////////
-/*
-	const fetchEstados = async () => {
-		const estadoId = url.searchParams.get('estado_id');
-		let localUrl = '/pedidos';
-		if (estadoId !== null) {
-			localUrl += '?estado_id=' + estadoId;
-		}
-		const estados = await fetchApi.get({
-			url: BASE_URL + localUrl,
-			token: locals.token,
-			resStatus: 200
-		});
-		return estados;
-	};
-*/
+
+
 /*
 export const actions = {
 	default: async ({ request, locals }) => {

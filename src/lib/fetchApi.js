@@ -1,5 +1,4 @@
 import { error } from '@sveltejs/kit';
-
 export const fetchApi = {
   get,
   post,

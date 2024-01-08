@@ -92,7 +92,7 @@ const handleClienteChange = (event) => {
 									 dark:focus:border-primary-500">
 						<option selected>Seleccionar cliente</option>
 						{#each clientes as cli}
-						<option value={cli.cliente_id} data-razon_social={cli.razon_social} >{cli.razon_social}</option> 
+						<option value={cli.cliente_id} data-razon_social={cli.razon_social} class="focus:ring-primary-500 focus:border-primary-500 ">{cli.razon_social}</option> 
 						{/each}
 					   </select>
 					</div>
@@ -126,7 +126,7 @@ const handleClienteChange = (event) => {
 				dark:focus:border-primary-500" required/>
 				
 				<label for="small" class="block mb-1 text-sm  text-gray-900 dark:text-white">Precio	</label>	
-				<input type="text"  placeholder="Precio" bind:value={precio} class="block w-full h-7 mb-1 text-xs text-gray-900 border
+				<input type="text" placeholder="Precio del producto" bind:value={precio} class="block w-full h-7 mb-1 text-xs text-gray-900 border
 				border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700
 				dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
 				dark:focus:border-primary-500" readonly required/>

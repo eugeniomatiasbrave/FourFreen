@@ -4,29 +4,11 @@ import {Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadC
 export let data;
 export let form;
 export const {pedidoEstadoId,pedidosEstados} = data;
+console.log(form)
 
 const PedidoEstadoId= data.pedidoEstadoId
-const PedidosEstados  = data.pedidosEstados  
-
-console.log(PedidosEstados)
-console.log(form)
-/*
-const estado_id = $page.url.searchParams.get('estado_id') || "10"
- let titulo = "";
- switch (estado_id) {
-		case "10":
-		titulo = estadoPedidoId[0].nombre
-		break;
-		case "20":
-		titulo = "Pedidos Confeccionados"
-		break;
-		case "30":
-		titulo = "Pedidos Entregados"
-		break;
-	default:
-		break;
- }
- */
+//const PedidosEstados  = data.pedidosEstados  
+//console.log(PedidosEstados)
 /*
 [
   {
