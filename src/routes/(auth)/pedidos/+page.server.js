@@ -6,12 +6,12 @@ export const load = async ({ locals, url }) => {
 	const getPedidos=  async () => {
 		console.log('Estado pedidos server:', url.searchParams);
 		let localUrl = '/pedidos';
-		let urlLocalNueva = localUrl;
+	
 		if (estadoId !== null) {
-			urlLocalNueva += '?estado_id=' + estadoId;
+			localUrl += '?estado_id=' + estadoId;
 		}
-		console.log('url:', urlLocalNueva);
-		const pedidos = await fetchApi.get({ url: BASE_URL + urlLocalNueva, token: locals.token, resStatus: 200 });	 
+		console.log('url:', localUrl );
+		const pedidos = await fetchApi.get({ url: BASE_URL + localUrl, token: locals.token, resStatus: 200 });	 
 	    return pedidos;
 	}
 	   return {

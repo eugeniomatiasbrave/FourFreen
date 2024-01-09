@@ -1,11 +1,11 @@
 <script>
 	import {Navbar,NavBrand,NavLi,NavUl,NavHamburger} from 'flowbite-svelte';
+	import {goto} from '$app/navigation';
 	//import {page} from '$app/stores';
 	import './style.css';
 	import '../app.postcss';
 	export let data;
 	
-	$: menu = data.menu;
 	
 	
 </script>
@@ -21,15 +21,16 @@
 		<NavLi href="/login" data-sveltekit-preload-code="eager">Inciar sesión</NavLi>
 	  {:else}
 		<NavUl>
-			{#each menu as men }
+			{#each data.menu as men }
 			<NavLi>
-				<a href={men.ruta} data-sveltekit-preload-code="eager" data-tooltip="Tooltip 1" data-placement="left">{men.item}</a>
-			</NavLi>
+			<a href={men.ruta} data-sveltekit-preload-code="eager" data-placement="left">{men.item}</a>	
+			<!--<a href={men.ruta} on:click={() => window.location.href = men.ruta} data-sveltekit-preload-code="eager" data-placement="left">{men.item}</a>-->			</NavLi>
 			{/each}		
 			<NavLi href="/logout" data-sveltekit-preload-code="eager">Cerrar sesión</NavLi>	
 		</NavUl>
 	  {/if}
 	</NavUl>
 </Navbar>
+
 
 <slot />
