@@ -56,9 +56,9 @@
 		  <div class="flex items-center w-full sm:w-auto">
 			<div>
 			 <select bind:value={selected} id="small" required class="block w-full h-7 text-xs py-0 text-gray-900 border
-			border-gray-300 rounded bg-gray-50 focus:ring-secundary-800 focus:border-secundary-800 dark:bg-gray-700
-			dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secundary-800
-			dark:focus:border-secundary-800">
+			border-gray-300 rounded bg-gray-50 focus:ring-gray-50 focus:border-primary-500 dark:bg-gray-700
+			dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
+			dark:focus:border-primary-500">
 			  <option value="0">Todos los Pedidos</option>
 			  <option value="10">Pedidos Ingresados</option>
 			  <option value="20">Pedidos Preparados</option>
@@ -66,11 +66,14 @@
 			</select>
 		  </div>
 		  <div>
-			<Button on:click={ruta} size="xs" class=" mx-1 px-1
-			bg-secundary-500 rounded h-7 w-full hover:bg-secundary-800
-			border-gray-300  focus:ring-secundary-500 focus:border-secundary-500 dark:bg-gray-700
-			dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secundary-500
-			dark:focus:border-secundary-500">Buscar</Button>
+			
+			<Button type="button" on:click={ruta} size="xs" class=" mx-1 px-1
+			bg-white rounded h-7 w-full hover:bg-primary-500 text-primary-500
+			border border-primary-500  focus:ring-gray-50 focus:border-primary-500 dark:bg-gray-700
+			dark:border-gray-600 dark:placeholder-gray-400 hover:text-white dark:focus:ring-gray-200
+			"><svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+			</svg></Button>
 		  </div>	
 	   </div> 
 			<div class="flex items-center w-full sm:w-auto"><!----- Filtro--------->
@@ -85,7 +88,7 @@
 		<Table hoverable={true} class="mx-auto mt-1 border text-xs">  <!-------Table-------------->
 		  <TableHead class="bg-primary-500 text-white" theadClass='text-xs' style="text-align: right;">
 			<TableHeadCell class="py-2 px-0 ">Pedido Id</TableHeadCell>
-			<TableHeadCell class="py-2 px-5">Cliente Id</TableHeadCell>
+			
 			<TableHeadCell class="py-2" style="text-align: left;">Cliente</TableHeadCell>
 			<TableHeadCell class="py-2" style="text-align: center;">Fecha</TableHeadCell>			
 			<TableHeadCell class="py-2">Estado Id</TableHeadCell>
@@ -100,7 +103,7 @@
 			{#each pedidos.datos as pe}
 			 <TableBodyRow class="hover:bg-hover-gray-light" style="text-align: center;">
 				<TableBodyCell class="py-2">{pe.pedido_cab_id}</TableBodyCell>
-				<TableBodyCell class="py-2">{pe.cliente_id}</TableBodyCell>
+				
 				<TableBodyCell class="py-2" style="text-align: left;">{pe.razon_social}</TableBodyCell>
 				<TableBodyCell class="py-2" style="text-align: right;">{pe.fecha}</TableBodyCell>				
 				<TableBodyCell class="py-2">  
