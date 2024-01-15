@@ -37,7 +37,7 @@ onMount(() => {
 
  {#if action === 'editar'}
  {#each ProductosId as producto }
- <main class="flex items-center justify-center min-h-screen pb-25 ">
+ <main class="flex items-center justify-center min-h-screen pb-16 ">
   <div class="bg-white mx-auto p-4 pt-2 my-0 rounded border border-gray-200 shadow-md w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/6 2xl:w-1/6">
     <form class="flex flex-col space-y-4" method="POST" action="?/editar" >   
         <h3 class="mt-4 text-xl text-center font-medium text-gray-900 dark:text-white">Editar el producto!!</h3>	

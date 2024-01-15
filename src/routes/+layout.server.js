@@ -1,8 +1,6 @@
 import { fetchApi } from '$lib/fetchApi';
 import { BASE_URL } from '$lib/utils.js';
-
-export const load = async ({ locals }) => {
-  
+export const load = async ({ locals }) => { 
   const getMenu = async () => {
     const datos = await fetchApi.get({
       url: BASE_URL + "/usuarios/menu",
