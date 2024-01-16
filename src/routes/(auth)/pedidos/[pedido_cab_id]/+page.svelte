@@ -76,14 +76,15 @@ const handleClienteChange = (event) => {
 	
 	</script>
 	
-	<div class="my-4"> 
-	 <P size="2xl" align="center" class="mb-4">Nuevo Pedido</P> 
-	</div> 
-	<main class="flex items-start justify-center min-h-screen pb-36">
+	<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full ">
+		<div class="my-4">
+			<h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
+		  from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Nuevo Pedido</h3>
+		  </div>
 		<div class="bg-white mx-auto p-1 pt-1 my-0 rounded border border-gray-300 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-custom 2xl:w-custom">
 		  <form method="POST" >       	 		
-			  <div class=" rounded border border-gray-300 p-3 my-0"><!----------- detalles items--------------> 
-				<div> <!--cabecera ( nombre cliente y fecha)--->
+			  <div class="rounded border border-gray-300 p-3 my-0"><!----------- detalles items--------------> 
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-3"> <!--cabecera ( nombre cliente y fecha)--->
 					<div class="mt-0">
 					  <label for="small" class="block mb-1 text-sm  text-gray-900 dark:text-white">Cliente</label>
 					   <select id="small" name="cliente_id" bind:value={cliente_id} on:change={handleClienteChange} required class="block w-full h-7 mb-1 text-xs py-0 text-gray-900 border
@@ -103,7 +104,9 @@ const handleClienteChange = (event) => {
 						 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
 						 dark:focus:border-primary-500"/>			
 					</div>
-			  </div><!---------------------fin cabecera-------------->    
+			  </div><!---------------------fin cabecera-------------->   
+			  <div class="grid grid-cols-1 md:grid-cols-3 gap-3"><!---------------------detalle items-------------->
+				<div class="mt-0">
 				<input type="hidden" name="items" 
 				   value={JSON.stringify( items = items.map(item =>({...item,precio: Number(item.precio)})) )}/>
 				   <div class="mt-1">
@@ -113,26 +116,30 @@ const handleClienteChange = (event) => {
 								   border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700
 								   dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
 								   dark:focus:border-primary-500">
-					  <option selected>Seleccionar Producto</option>
+					  <option selected>Seleccionar</option>
 					  {#each productos.datos as prod}
 					  <option value={prod.producto_id} data-precio={prod.precio}>{prod.producto_id} - {prod.nombre}</option>
 					  {/each} 
 					 </select>
 				  </div>
-				<label for="small" class="block mb-1 text-sm  text-gray-900 dark:text-white">Unidades</label>
+				</div>
+				<div>
+				<label for="small" class="block my-1 text-sm  text-gray-900 dark:text-white">Unidades</label>
 				<input type="number" placeholder="Agregar Unidades" bind:value={unidades} class="block w-full h-7 mb-2 text-xs text-gray-900 border
 				border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700
 				dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
 				dark:focus:border-primary-500" required/>
-				
-				<label for="small" class="block mb-1 text-sm  text-gray-900 dark:text-white">Precio	</label>	
+			   </div>
+			   <div>
+				<label for="small" class="block my-1 text-sm  text-gray-900 dark:text-white">Precio	</label>	
 				<input type="text" placeholder="Precio del producto" bind:value={precio} class="block w-full h-7 mb-1 text-xs text-gray-900 border
 				border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700
 				dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
 				dark:focus:border-primary-500" readonly required/>
-				
+			</div>
+			</div> 
 				<div>	  
-					<Button on:click={handleAdd} data-sveltekit-preload-code="hover" size="xs" class="bg-primary-500 h-7 ml-1 px-2 mt-2 rounded">Agregar Item</Button>	
+					<Button on:click={handleAdd} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Agregar Item</Button>	
 				</div>		
 			</div><!-----------fin detalles items-------------->				 
 			
@@ -159,9 +166,9 @@ const handleClienteChange = (event) => {
 			  </div>
 			</div> <!-------fin Area items-------------->					
 			<div class="mt-1 mb-2">
-				<Button on:click={formClose} data-sveltekit-preload-code="hover" size="xs" class="bg-primary-500 h-7 ml-1 rounded">Cancelar</Button>				  
-				<Button size="xs" on:click={reset} data-sveltekit-preload-code="hover" class="bg-primary-500 h-7 ml-1 mt-2 rounded">Actualizar</Button>
-				<Button type="submit" on:submit={handleSubmit} data-sveltekit-preload-code="hover" size="xs" class="bg-primary-500 h-7 ml-1  rounded">Nuevo Pedido</Button>		
+				<Button on:click={formClose} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Cancelar</Button>				  
+				<Button  on:click={reset} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Actualizar</Button>
+				<Button type="submit" on:submit={handleSubmit} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Nuevo Pedido</Button>		
 			</div>				  
 		</form>	
 	  </div>

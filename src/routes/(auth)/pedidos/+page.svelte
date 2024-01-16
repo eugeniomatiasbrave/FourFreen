@@ -92,10 +92,10 @@
 			<Table hoverable={true} class="mx-auto mt-1 border text-xs">  <!-------Table-------------->
 			  <TableHead class="bg-primary-500 text-white" theadClass='text-xs' style="text-align: right;">
 				<TableHeadCell class="py-2 px-0 ">Pedido Id</TableHeadCell>
-				<TableHeadCell class="py-2 px-0 ">Cliente Id</TableHeadCell>
 				<TableHeadCell class="py-2" style="text-align: left;">Cliente</TableHeadCell>
 				<TableHeadCell class="py-2" style="text-align: center;">Fecha</TableHeadCell>			
 				<TableHeadCell class="py-2">Estado Id</TableHeadCell>
+				<TableHeadCell class="py-2">Detalle</TableHeadCell>
 				<TableHeadCell class="py-2" style="text-align: center;">Estado Pedido</TableHeadCell>
 				<TableHeadCell class="py-2">Us id</TableHeadCell>
 				<TableHeadCell class="py-2">Items</TableHeadCell>
@@ -107,15 +107,15 @@
 			<TableBody class="divide-y">
 				{#each Pedidos  as pe }  
 				 <TableBodyRow class="hover:bg-hover-gray-light" style="text-align: center;">
-					<TableBodyCell class="py-2"> {pe.pedido_cab_id}
-						<a href={`/pedidos/${pe.pedido_cab_id}/detalle`}  
-						class="font-medium text-primary-600 hover:underline dark:text-primary-500"> Detalle</a>
-					</TableBodyCell> <!--detalle pedido-->
-					<TableBodyCell class="py-2">{pe.cliente_id}</TableBodyCell>
+					<TableBodyCell class="py-2"> {pe.pedido_cab_id}</TableBodyCell>
 					<TableBodyCell class="py-2" style="text-align: left;">{pe.razon_social}</TableBodyCell>
 					<TableBodyCell class="py-2" style="text-align: right;">{pe.fecha}</TableBodyCell>				
 					<TableBodyCell class="py-2"> {pe.pedido_estado_id} </TableBodyCell>
 					<TableBodyCell class="py-2">{pe.pedido_estado_nombre}</TableBodyCell>
+					<TableBodyCell class="py-2"> 
+						<a href={`/pedidos/${pe.pedido_cab_id}/detalle`}  
+						class="font-medium text-primary-600 hover:underline dark:text-primary-500"> Detalle</a>
+					</TableBodyCell> <!--detalle pedido-->
 					<TableBodyCell class="py-2">{pe.usuario_id}</TableBodyCell>
 					<TableBodyCell class="py-2">{pe.items}</TableBodyCell>
 					<TableBodyCell class="py-2">{pe.editar}</TableBodyCell>
