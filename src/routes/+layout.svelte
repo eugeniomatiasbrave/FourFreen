@@ -16,11 +16,13 @@
 		<NavLi href="/login" data-sveltekit-preload-code="eager">Inciar sesión</NavLi>
 	  {:else}
 		<NavUl>
-			{#each data.menu as men }
+			{#each data.menu as men (men.ruta)}
 			<NavLi>
-			<!--<a href={men.ruta} data-sveltekit-preload-code="eager" data-placement="left">{men.item}</a>	-->
-            <a href={men.ruta} on:click={() => window.location.href = men.ruta} data-sveltekit-preload-code="eager" data-placement="left">{men.item}</a></NavLi>
-			{/each}		
+			<a href={men.ruta} data-sveltekit-preload-code="eager" data-placement="left">{men.item}</a>
+        <!--<a href={men.ruta} on:click={() => window.location.href = men.ruta}
+			 data-sveltekit-preload-code="eager" data-placement="left">{men.item}</a>-->
+			</NavLi>
+			{/each}	
 			<NavLi href="/logout" data-sveltekit-preload-code="eager">Cerrar sesión</NavLi>	
 		</NavUl>
 	  {/if}

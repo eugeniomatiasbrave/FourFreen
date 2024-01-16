@@ -87,11 +87,11 @@ const sortedNombre=(params)=> {
 <svelte:head>
 	<title>Productos</title>
 	<meta name="description" content="Productos" />
-</svelte:head>
-		
+</svelte:head>		
 <main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full ">
   <div class="my-4">
-	<P size="xl" align="center">Tabla de Productos</P>
+	<h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
+	from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Tabla de Productos</h3>
   </div>
 	<!--------------------------Seccion tabla --> 	
 	  <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-300 shadow-md w-full xl:w-1/2"><!----------------Div contenedor: tabla + add + Filtro--------->

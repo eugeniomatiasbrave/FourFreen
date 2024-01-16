@@ -32,7 +32,7 @@ const config = {
             200: '#a6c94e',
             300: '#a6c94e', //border hover blanco
             400: '#a6c94e',
-			500: '#a6c94e', //bg botton	secundario 
+			500: '#a6ce39', //bg botton	secundario 
 			600: '#a6c94e',
             700: '#a6c94e',
             800: '#abc95e', // bg hover:

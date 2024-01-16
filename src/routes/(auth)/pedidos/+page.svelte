@@ -6,37 +6,33 @@
 	
 	let Pedidos =pedidos.datos;
 
-	console.log(pedidos)
-
-	
-
   const estado_id = $page.url.searchParams.get('estado_id') || "0";
-		 
+
 		 let titulo = "";
+		
 		 switch (estado_id) {
 			case "0":
-				titulo = "Tabla de Pedidos";	
+				titulo = "Tabla de Pedidos";		
 				break;
 				case "10":
-				titulo = "Pedidos Ingresados";
+				titulo = "Pedidos Ingresados";			
 				break;
 				case "20":
-				titulo = "Pedidos Preparados";
+				titulo = "Pedidos Confeccionados";	
 				break;
 				case "30":
-				titulo = "Pedidos entregados"; 
+				titulo = "Pedidos Entregados";	
 				break;
 				case "40":
-				titulo = "Pedidos facturado"; 
+				titulo = "Pedidos Facturados"; 		
 				break;
 				case "50":
-				titulo = "Pedidos cobrado"; 
+				titulo = "Pedidos Cobrados"; 
 				break;
 			default: 
 				break;
 		 }
-
-		
+	
 		let selected="0" ;
 	
 		const ruta = () => {
@@ -47,7 +43,8 @@
 	
 		<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full ">
 			<div class="my-4">
-			  <P size="2xl" align="center">{titulo} </P>
+			  <h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
+                 from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">{titulo}</h3>
 			</div>
 		 <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-full xl:w-4/5 "> <!--Div contenedor: tabla + add + Filtro--------->
 			<div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"><!-----cabecera Add + Filtro---------> 
@@ -57,7 +54,9 @@
 					fill="none" viewBox="0 0 20 20">
 					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
 					d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-					</svg> Nuevo</Button>		
+					</svg> Nuevo</Button>
+					
+					
 				</div><!-----------fin botton add-------------->
 			  <div class="flex items-center w-full sm:w-auto">
 				<div>
@@ -106,9 +105,9 @@
 				<TableHeadCell class="py-2" style="text-align: right;">Total</TableHeadCell>	
 			</TableHead>
 			<TableBody class="divide-y">
-				{#each Pedidos  as pe}  
+				{#each Pedidos  as pe }  
 				 <TableBodyRow class="hover:bg-hover-gray-light" style="text-align: center;">
-					<TableBodyCell class="py-2">
+					<TableBodyCell class="py-2"> {pe.pedido_cab_id}
 						<a href={`/pedidos/${pe.pedido_cab_id}/detalle`}  
 						class="font-medium text-primary-600 hover:underline dark:text-primary-500"> Detalle</a>
 					</TableBodyCell> <!--detalle pedido-->
@@ -132,4 +131,7 @@
 		  </div><!------------ -Div contenedor: tabla + add + Filtro-->
 		</main> 
 
-		<slot />
+		
+
+		
+
