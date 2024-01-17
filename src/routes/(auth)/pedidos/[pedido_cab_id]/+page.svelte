@@ -81,9 +81,9 @@ const handleClienteChange = (event) => {
 			<h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
 		  from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Nuevo Pedido</h3>
 		  </div>
-		<div class="bg-white mx-auto p-1 pt-1 my-0 rounded border border-gray-300 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-custom 2xl:w-custom">
+		<div class="bg-white mx-auto p-1 pt-1 my-0 rounded-3xl border border-gray-300 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-custom 2xl:w-custom">
 		  <form method="POST" >       	 		
-			  <div class="rounded border border-gray-300 p-3 my-0"><!----------- detalles items--------------> 
+			  <div class="rounded-b-3xl border border-gray-300 p-3 my-0"><!----------- detalles items--------------> 
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-3"> <!--cabecera ( nombre cliente y fecha)--->
 					<div class="mt-0">
 					  <label for="small" class="block mb-1 text-sm  text-gray-900 dark:text-white">Cliente</label>
@@ -125,8 +125,8 @@ const handleClienteChange = (event) => {
 				</div>
 				<div>
 				<label for="small" class="block my-1 text-sm  text-gray-900 dark:text-white">Unidades</label>
-				<input type="number" placeholder="Agregar Unidades" bind:value={unidades} class="block w-full h-7 mb-2 text-xs text-gray-900 border
-				border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700
+				<input type="number" placeholder="Agregar Unidades" bind:value={unidades} class="block w-full rounded h-7 mb-2 text-xs text-gray-900 border
+				border-gray-300  bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700
 				dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
 				dark:focus:border-primary-500" required/>
 			   </div>
@@ -147,18 +147,18 @@ const handleClienteChange = (event) => {
 			  <div class="Area-pedido"> 
 				<Table hoverable={true} class="mx-auto border text-xs" ><!-------Table-------------->
 					<TableHead class="bg-primary-500 text-white" style="text-align: center;" theadClass='text-xs'> 
-						<TableHeadCell class="py-1">Producto_id</TableHeadCell>
-						<TableHeadCell class="py-1">Cliente</TableHeadCell>
-						<TableHeadCell class="py-1" >Unidades</TableHeadCell>
-						<TableHeadCell class="py-1" >Precio</TableHeadCell>	 	
+						<TableHeadCell class="py-2">Producto_id</TableHeadCell>
+						<TableHeadCell class="py-2">Cliente</TableHeadCell>
+						<TableHeadCell class="py-2" >Unidades</TableHeadCell>
+						<TableHeadCell class="py-2" >Precio</TableHeadCell>	 	
 					</TableHead>
 					<TableBody class="divide-y">	
 						{#each items as item (item.producto_id)}
 						<TableBodyRow class="hover:bg-hover-gray-light" style="text-align: center;">
-						<TableBodyCell class="py-0" style="font-weight: normal;">{item.producto_id}</TableBodyCell>
-						<TableBodyCell class="py-0" style="font-weight: normal;">{razon_social}</TableBodyCell>
-						<TableBodyCell class="py-0" style="font-weight: normal;">{item.unidades}</TableBodyCell>
-						<TableBodyCell class="py-0" style="text-align: right; font-weight: normal;">${item.precio.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableBodyCell>
+						<TableBodyCell class="py-1" style="font-weight: normal;">{item.producto_id}</TableBodyCell>
+						<TableBodyCell class="py-1" style="font-weight: normal;">{razon_social}</TableBodyCell>
+						<TableBodyCell class="py-1" style="font-weight: normal;">{item.unidades}</TableBodyCell>
+						<TableBodyCell class="py-1" style="text-align: right; font-weight: normal;">${item.precio.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableBodyCell>
 						</TableBodyRow>
 						{/each}
 					</TableBody>
@@ -181,5 +181,8 @@ const handleClienteChange = (event) => {
 			border: 1px solid #b8b6b6;
 			border-radius: 4px;
 			overflow: scroll;		
-		}		
+		}
+		.rounded-b-3xl {
+             border-radius: 1.5rem 1.5rem 0.5rem 0.5rem; /* Esquinas superiores con 3rem de radio, esquinas inferiores con 1rem de radio */
+}		
 	</style>

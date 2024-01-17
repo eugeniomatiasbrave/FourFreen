@@ -94,10 +94,10 @@
 				<TableHeadCell class="py-2 px-0 ">Pedido Id</TableHeadCell>
 				<TableHeadCell class="py-2" style="text-align: left;">Cliente</TableHeadCell>
 				<TableHeadCell class="py-2" style="text-align: center;">Fecha</TableHeadCell>			
-				<TableHeadCell class="py-2">Estado Id</TableHeadCell>
+				<TableHeadCell class="py-2 px-0">Estado Id</TableHeadCell>
 				<TableHeadCell class="py-2">Detalle</TableHeadCell>
-				<TableHeadCell class="py-2" style="text-align: center;">Estado Pedido</TableHeadCell>
-				<TableHeadCell class="py-2">Us id</TableHeadCell>
+				<TableHeadCell class="py-2" >Estado Pedido</TableHeadCell>
+				<TableHeadCell class="py-2 px-0" style="text-align: center;">Us id</TableHeadCell>
 				<TableHeadCell class="py-2">Items</TableHeadCell>
 				<TableHeadCell class="py-2">Editar</TableHeadCell>
 				<TableHeadCell class="py-2">Eliminar</TableHeadCell>
@@ -109,7 +109,7 @@
 				 <TableBodyRow class="hover:bg-hover-gray-light" style="text-align: center;">
 					<TableBodyCell class="py-2"> {pe.pedido_cab_id}</TableBodyCell>
 					<TableBodyCell class="py-2" style="text-align: left;">{pe.razon_social}</TableBodyCell>
-					<TableBodyCell class="py-2" style="text-align: right;">{pe.fecha}</TableBodyCell>				
+					<TableBodyCell class="py-2" style="text-align: right;">{pe.fecha=new Intl.DateTimeFormat('es', {day: 'numeric', month: 'numeric', year: 'numeric'}).format(new Date(pe.fecha))}</TableBodyCell>				
 					<TableBodyCell class="py-2"> {pe.pedido_estado_id} </TableBodyCell>
 					<TableBodyCell class="py-2">{pe.pedido_estado_nombre}</TableBodyCell>
 					<TableBodyCell class="py-2"> 
