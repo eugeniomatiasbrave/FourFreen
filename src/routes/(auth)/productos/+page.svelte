@@ -94,10 +94,10 @@ const sortedNombre=(params)=> {
 	from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Tabla de Productos</h3>
   </div>
 	<!--------------------------Seccion tabla --> 	
-	  <div class="bg-white mx-auto p-1 pt-1 rounded border border-gray-300 shadow-md w-full xl:w-1/2"><!----------------Div contenedor: tabla + add + Filtro--------->
+	  <div class="bg-white mx-auto p-1 pt-1 rounded-2xl border border-gray-300 shadow-md w-full xl:w-1/2"><!----------------Div contenedor: tabla + add + Filtro--------->
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto "> 
 		 <div class="mb-2 sm:mb-0 w-full sm:w-auto"> 
-		  <Button href={`/productos/-1`} data-sveltekit-preload-code="hover" size="xs" class="bg-primary-500 rounded m-0 h-7 px-2 w-full sm:w-auto ">
+		  <Button href={`/productos/-1`} data-sveltekit-preload-code="hover" size="xs" class="bg-primary-500 rounded-2xl m-0 h-7 px-3 w-full sm:w-auto ">
 			<svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
 			fill="none" viewBox="0 0 20 20">
 			<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
@@ -105,9 +105,9 @@ const sortedNombre=(params)=> {
 			</svg> Nuevo</Button>    
 		 </div>
 		<div class="flex items-center"> 
-		  <Input type="text" bind:value={searchTerm} maxlength="30" name="searchTerm" placeholder="Buscar Producto" required class="bg-white h-7 w-full sm:w-auto rounded"  /> 
-		  <Button size="xs" on:click={()=> applyFilter(searchTerm)} class="bg-primary-500 h-7 ml-1 px-2 rounded">Buscar</Button> 
-		  <Button size="xs" on:click={reset} class="bg-primary-500 h-7 ml-1 px-2 w-32 sm:w-32 rounded">Borrar Filtro</Button>
+		  <Input type="text" bind:value={searchTerm} maxlength="30" name="searchTerm" placeholder="Buscar Producto" required class="bg-white h-7 w-full sm:w-auto rounded-2xl"  /> 
+		  <Button size="xs" on:click={()=> applyFilter(searchTerm)} class="bg-primary-500 h-7 ml-1 px-3 rounded-2xl">Buscar</Button> 
+		  <Button size="xs" on:click={reset} class="bg-primary-500 h-7 ml-1 px-0 w-32 sm:w-32 rounded-2xl">Borrar Filtro</Button>
 		</div> 
 	  </div>
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
