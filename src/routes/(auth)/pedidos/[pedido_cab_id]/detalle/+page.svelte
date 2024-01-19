@@ -13,7 +13,7 @@ console.log(detalle)
 		<h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
 	  from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Tabla de Clientes</h3>
 	  </div>
- <div class=" bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-1/2">
+ <div class=" bg-white mx-auto p-1 pt-1 rounded-2xl border border-gray-200 shadow-xl w-1/2">
 	<div class="overflow-x-auto"> 
 		<Table hoverable={true} class="mx-auto mt-1 rounded border text-xs" > 		
 		<TableHead class=" bg-primary-500 text-white" style="text-align: center;" theadClass='text-xs'> 
