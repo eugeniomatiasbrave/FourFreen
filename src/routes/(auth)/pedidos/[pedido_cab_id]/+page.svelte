@@ -139,7 +139,7 @@ const handleClienteChange = (event) => {
 			</div>
 			</div> 
 				<div>	  
-					<Button on:click={handleAdd} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Agregar Item</Button>	
+					<Button on:click={handleAdd} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-7 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Agregar Item</Button>	
 				</div>		
 			</div><!-----------fin detalles items-------------->				 
 			
@@ -166,9 +166,9 @@ const handleClienteChange = (event) => {
 			  </div>
 			</div> <!-------fin Area items-------------->					
 			<div class="mt-1 mb-2">
-				<Button on:click={formClose} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Cancelar</Button>				  
-				<Button  on:click={reset} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Actualizar</Button>
-				<Button type="submit" on:submit={handleSubmit} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Nuevo Pedido</Button>		
+				<Button on:click={formClose} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-7 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Cancelar</Button>				  
+				<Button  on:click={reset} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-7 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Actualizar</Button>
+				<Button type="submit" on:submit={handleSubmit} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-7 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Nuevo Pedido</Button>		
 			</div>				  
 		</form>	
 	  </div>

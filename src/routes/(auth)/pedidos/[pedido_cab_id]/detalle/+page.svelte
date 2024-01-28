@@ -37,7 +37,7 @@ console.log(detalle)
 		{/each}	
 		</TableBody>
 	  </Table>
-	  <Button on:click={() => goto('/pedidos')}  class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded-3xl my-3 shadow-2xl hover:shadow-3xl">Volver</Button>
+	  <Button on:click={() => goto('/pedidos')}  class="bg-primary-500 h-7 mb-2 md:mb-0 md:ml-2 rounded-3xl my-3 shadow-2xl hover:shadow-3xl">Volver</Button>
 	</div>
  </div>
 </main>	

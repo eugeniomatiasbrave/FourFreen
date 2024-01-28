@@ -4,6 +4,8 @@
 	import { Input, Button, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
 	export let data;
 	export const { pedidos } = data;
+
+	
 	
 let Pedidos = pedidos.datos		
 const estadoId = $page.url.searchParams.get("estado_id") || "0";
@@ -46,6 +48,7 @@ const ruta = () => {
 
 
 </script>
+
 	<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full ">
 		<div class="my-4">
 		  <h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
