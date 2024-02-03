@@ -1,12 +1,16 @@
 <script >
-import {Input,Button,Label} from 'flowbite-svelte'
+import {Input,Label} from 'flowbite-svelte'
 import {onMount} from 'svelte';
 import {page} from '$app/stores';
 import {goto} from '$app/navigation';
-	import EliminarCli from './EliminarCli.svelte';
+import EliminarCli from './EliminarCli.svelte';
+import FooterForm from '$lib/Componentes/FooterForm.svelte';
+import InputField from '$lib/Componentes/InputField.svelte';
 export let data;
 export let form;
 export const {clienteId,clientes}=data;
+
+let ruta= "clientes";
   
 let ClienteId=clienteId;
 let Clientes=clientes;
@@ -80,62 +84,18 @@ const validarCuit =(e)=> {
         Editar Cliente !!
       </h1>
       <form method="POST" action="?/editar">
-        <Input type="hidden" name="cliente_id" value={cliente.cliente_id}/>
-        <div class="grid grid-cols-2 gap-4">
-          <Label class="space">
-            <span>Nombre</span>
-            <Input type="text" name="razon_social" value={cliente.razon_social} maxlength="30" on:change={validarRazonSocial} 
-                   required placeholder="Razon social"
-                   class="bg-white h-8 w-full rounded border border-gray-300 focus:outline-none focus:ring-2
-                    focus:ring-primary-500 focus:border-transparent"/>
-          </Label>
-          <Label class="space">
-            <span>Cuit</span>
-            <Input type="number" name="cuit" bind:value={cliente.cuit} on:blur={validarCuit} required
-			        class="bg-white h-8 w-full rounded border border-gray-300 focus:outline-none focus:ring-2
-                     focus:ring-primary-500 focus:border-transparent"/>
-          </Label>
-          <Label class="space">
-            <span>Calle</span>
-            <Input type="text" name="domicilio_calle" value={cliente.domicilio_calle} required
-              class="bg-white h-8 w-full rounded border border-gray-300 focus:outline-none focus:ring-2
-              focus:ring-primary-500 focus:border-transparent"/>
-          </Label>
-          <Label class="space">
-            <span>Altura</span>
-            <Input type="text" name="domicilio_altura" value={cliente.domicilio_altura} required
-              class="bg-white h-8 w-full rounded border border-gray-300 focus:outline-none focus:ring-2
-                    focus:ring-primary-500 focus:border-transparent"/>
-          </Label>
-          <Label class="space">
-            <span>Localidad</span>
-            <Input type="text" name="localidad" value={cliente.localidad} required
-              class="bg-white h-8 w-full rounded border border-gray-300 focus:outline-none focus:ring-2
-             focus:ring-primary-500 focus:border-transparent"/>
-          </Label>
-          <Label class="space">
-            <span>Codigo.Postal</span>
-            <Input type="text" name="codigo_postal" value={cliente.codigo_postal} required
-              class="bg-white h-8 w-full rounded border border-gray-300 focus:outline-none focus:ring-2
-              focus:ring-primary-500 focus:border-transparent"/>
-          </Label>
-          <Label class="space">
-            <span>Telefono</span>
-            <Input type="text" name="telefono" value={cliente.telefono} required
-                 class="bg-white h-8 w-full rounded border border-gray-300 focus:outline-none focus:ring-2
-			         focus:ring-primary-500 focus:border-transparent"/>
-          </Label>
-          <Label class="space">
-            <span>Email</span>
-            <Input type="email" name="email" value={cliente.email} required
-              class="bg-white h-8 w-full rounded border border-gray-300 focus:outline-none focus:ring-2
-                     focus:ring-primary-500 focus:border-transparent"/>
-          </Label>
-        </div>
-        <footer class="text-center mt-4">
-          <Button type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded-3xl shadow-2xl hover:shadow-3xl">Confirmar</Button>
-          <Button on:click={()=>goto("/clientes")} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded-3xl shadow-2xl hover:shadow-3xl">Cancelar</Button>
-        </footer>
+        <InputField type="hidden" name="cliente_id" value={cliente.cliente_id}/>
+          <div class="grid grid-cols-2 gap-4">
+           <InputField name="razon_social" value={cliente.razon_social} maxlength="30" placeholder="Razon social" required onValidate={validarRazonSocial}/>
+           <InputField type="number" name="cuit" value={cliente.cuit} placeholder="Cuit" required onValidate={validarCuit}/>
+           <InputField type="text" name="domicilio_calle" value={cliente.domicilio_calle} placeholder="Calle" required/>
+           <InputField type="text" name="domicilio_altura" value={cliente.domicilio_altura} placeholder="Altura" required/>
+           <InputField type="text" name="localidad" value={cliente.localidad} placeholder="Localidad" required/>
+           <InputField type="text" name="codigo_postal" value={cliente.codigo_postal} placeholder="Codigo.Postal" required/>
+           <InputField type="text" name="telefono" value={cliente.telefono} placeholder="Telefono" required/>
+           <InputField type="text" name="email" value={cliente.email} placeholder="E-mail" required/>
+          </div>
+        <FooterForm {ruta}/>
       </form>
     </div>
   </div>
@@ -149,59 +109,20 @@ const validarCuit =(e)=> {
 	  <form method="POST" action="?/agregar">
       <h3 class="text-3xl font-bold text-center py-4 bg-gradient-to-r from-secundary-400 from-10% via-primary-500 via-40%
             to-primary-500 to-70% text-transparent bg-clip-text">Por favor agregar nuevo cliente!!</h3>
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-		  <Label class="space">
-			<span>Razon Social</span>
-			<Input type="text" name="razon_social" maxlength="50" on:change={validarRazonSocial} placeholder="Agregar cliente" required
-			  class="bg-white h-8 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"/>
-		  </Label>
-		  <Label class="space">
-			<span>Cuit</span>
-			<Input type="number" name="cuit" on:blur={validarCuit} placeholder="Agregar Cuit" required
-	           class="bg-white h-8 rounded border border-gray-300 focus:outline-none focus:ring-2
-                 focus:ring-primary-500 focus:border-transparent"/>
-		  </Label>
-		  <Label class="space">
-			<span>Calle</span>
-			<Input type="text" name="domicilio_calle" placeholder="Agregar calle" required
-             class="bg-white h-8 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"/>
-		  </Label>
-		  <Label class="space">
-			<span>Altura</span>
-			<Input type="text" name="domicilio_altura" placeholder="Agregar altura" required
-             class="bg-white h-8 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"/>
-		  </Label>
-		  <Label class="space">
-			<span>Localidad</span>
-			<Input type="text" name="localidad" placeholder="Agregar localidad" required
-        class="bg-white h-8 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"/>
-		  </Label>
-		  <Label class="space">
-			<span>Codigo Postal</span>
-			<Input type="text" name="codigo_postal" placeholder="Agregar Codigo Postal" required 
-             class="bg-white h-8 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"/>
-		  </Label>
-		  <Label class="space">
-			<span>Telefono</span>
-			<Input type="text" name="telefono" placeholder=" Agregar telefono" maxlength="10" required
-       class="bg-white h-8 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"/>
-		  </Label>
-		  <Label class="space">
-			<span>Email</span>
-			<Input type="email" name="email" placeholder="Agregar email" required
-	           class="bg-white h-8 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"/>
-		  </Label>
-		</div>
-		<footer class="text-center mt-4">
-		  <Button	type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded-2xl shadow-md hover:shadow-lg">Confirmar</Button>
-		  <Button	on:click={() => goto("/clientes")} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded-2xl shadow-md hover:shadow-lg">Cancelar</Button>
-		</footer>
+		 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <InputField name="razon_social" maxlength="50" placeholder="Razon social" required onValidate={validarRazonSocial}/>
+      <InputField type="number" name="cuit" placeholder="Cuit" required onValidate={validarCuit}/>
+      <InputField type="text" name="domicilio_calle" placeholder="Calle" required/>
+      <InputField type="text" name="domicilio_altura" placeholder="Altura" required/>
+      <InputField type="text" name="localidad" placeholder="Localidad" required/>
+      <InputField type="text" name="codigo_postal" placeholder="Codigo.Postal" required/>
+      <InputField type="text" name="telefono" placeholder="Telefono" required/>
+      <InputField type="text" name="email" placeholder="E-mail" required/>
+		 </div>
+     <FooterForm {ruta}/>
 	  </form>
-	</div>
-  </main>  
-  
-  {:else if action === 'eliminar'}
-  
-  <EliminarCli {data} {form} {action} {cliente_id} {ClienteId} {Clientes}/>
-  
-  {/if}
+	 </div>
+  </main>   
+{:else if action === 'eliminar'}
+   <EliminarCli {data} {form} {action} {cliente_id} {ClienteId} {Clientes}/>
+{/if}
