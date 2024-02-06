@@ -18,19 +18,18 @@
 <Sidebar class="bg-primary-500 text-white w-full">
 	{#if data.usuario === undefined}
 	<SidebarGroup class="bg-primary-500">
-	  <SidebarItem class="bg-primary-500 hover:bg-primary-500 px-3 text-white" >
+	  <SidebarItem class="bg-primary-500 hover:bg-primary-500 px-3 text-white">
 		<svelte:fragment slot="icon">
-			
-			<a href="/login" class="bg-primary-500 hover:bg-primary-500  px-3  text-white flex group" 
-			data-sveltekit-preload-code="eager" data-placement="left"><ArrowRightToBracketSolid class="w-6 h-6 me-2 text-white transition duration-75 dark:text-white group-hover:text-white dark:group-hover:text-white" />Inciar sesión</a>
-			
+			<a href="/login" class="bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold flex group" style="margin-left: auto;" 
+			data-sveltekit-preload-code="eager" data-placement="left"><ArrowRightToBracketSolid class="w-5 h-5 me-2 text-white
+			transition duration-75 dark:text-white group-hover:text-white dark:group-hover:text-white"/>Inciar sesión</a>
 		</svelte:fragment>
 	 </SidebarItem>
    </SidebarGroup>
 {:else}
 	<div class="p-0 ms-3">	
 		<Button on:click={() => (hidden2 = false)} class="text-white bg-primary-500 hover:bg-primary-800 border
-			border-white focus:ring-1 focus:outline-none focus:ring-primary-500 font-medium rounded-lg 
+			border-primary-500 focus:ring-1 focus:outline-none focus:ring-primary-500 font-medium rounded-lg 
 			text-sm text-center inline-flex items-center dark:focus:ring-white dark:bg-gray-800 dark:border-white
 			dark:text-white dark:hover:bg-gray-700 m-1 p-2 ">
 			<svg class="w-5 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -38,28 +37,28 @@
 			</svg>
 		</Button>
 	</div>
-	<Drawer transitionType="fly" {transitionParams} bind:hidden={hidden2} id="sidebar2">
+<Drawer transitionType="fly" {transitionParams} bind:hidden={hidden2} id="sidebar2">
+	<h5 id="drawer-navigation-label-3" class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">Menu</h5>
 		<div class="flex items-center">
-			<CloseButton on:click={()=> (hidden2 = true)} class="mb-0 dark:text-white" />
+			<CloseButton on:click={()=> (hidden2 = true)} class="mb-0 dark:text-black" />
 		</div>
   <Sidebar>
-	  <SidebarWrapper divClass="overflow-y-auto py-4 px-3 rounded dark:bg-gray-800">	  
+	  <SidebarWrapper divClass="overflow-y-auto py-4 px-1 rounded dark:bg-gray-800">	  
 		  <SidebarGroup>
 			  {#each data.menu as men }
 			  <SidebarItem {spanClass}>
 				<svelte:fragment slot="icon">
-					<a href={men.ruta} on:click={()=> (hidden2 = true)} data-sveltekit-preload-code="eager" data-placement="left">{men.item}</a>	
+					<a href={men.ruta} on:click={()=> (hidden2 = true)} class="text-primary-800 px-3 text-white-sm font-semibold"
+						 data-sveltekit-preload-code="eager" data-placement="left">{men.item}</a>	
 				</svelte:fragment>
             </SidebarItem>
 			{/each}	
-			
-			
 			<SidebarItem>
 				<svelte:fragment slot="icon">
-					<a href="/logout" on:click={()=> (hidden2 = true)} data-sveltekit-preload-code="eager" data-placement="left">Cerrar sesión</a>
+					<a href="/logout" on:click={()=> (hidden2 = true)} class="text-primary-800 px-3 text-white-sm font-semibold" 
+						data-sveltekit-preload-code="eager" data-placement="left">Cerrar sesión</a>
 				</svelte:fragment>
 			</SidebarItem>
-			
 		</SidebarGroup>
     </SidebarWrapper>
 </Sidebar>
@@ -67,9 +66,5 @@
 {/if}
 
 </Sidebar>
-
-
-
  <slot />
 
- 
