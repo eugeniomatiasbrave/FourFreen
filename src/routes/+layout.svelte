@@ -1,18 +1,23 @@
 <script>
+	
 	import './style.css';
 	import '../app.postcss';
 	export let data;
 
-  import { Drawer, Button, CloseButton, Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
+  import { Drawer, Button, CloseButton, Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Img, A } from 'flowbite-svelte';
   import { ArrowRightToBracketSolid } from 'flowbite-svelte-icons';
   import { sineIn } from 'svelte/easing';
+  import LogoFG from '$lib/img/LogoFG2.jpg';
   let hidden2 = true;
-  let spanClass = 'flex-1 ms-3 whitespace-nowrap';
+  let spanClass = 'flex-1 ms-3 py-4 whitespace-nowrap';
   let transitionParams = {
     x: -320,
     duration: 200,
     easing: sineIn
   };
+
+  
+
 </script>
 
 <Sidebar class="bg-primary-500 text-white w-full">
@@ -37,23 +42,20 @@
 			</svg>
 		</Button>
 	</div>
-<Drawer transitionType="fly" {transitionParams} bind:hidden={hidden2} id="sidebar2">
-	<h5 id="drawer-navigation-label-3" class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">Menu</h5>
-		<div class="flex items-center">
-			<CloseButton on:click={()=> (hidden2 = true)} class="mb-0 dark:text-black" />
-		</div>
+<Drawer transitionType="fly" {transitionParams} bind:hidden={hidden2} id="sidebar2" class="w-1/5.5 border-r-4 border-secundary-500">
+<Img src={LogoFG} class="w-64 mb-4 pb-2 border-b-2 border-gray-400" alt="FourGreen Logo" />
   <Sidebar>
-	  <SidebarWrapper divClass="overflow-y-auto py-4 px-1 rounded dark:bg-gray-800">	  
+	  <SidebarWrapper divClass="overflow-y-auto px-0 dark:bg-gray-800">	 
 		  <SidebarGroup>
 			  {#each data.menu as men }
 			  <SidebarItem {spanClass}>
 				<svelte:fragment slot="icon">
-					<a href={men.ruta} on:click={()=> (hidden2 = true)} class="text-primary-800 px-3 text-white-sm font-semibold"
+					<a href={men.ruta} on:click={()=> (hidden2 = true)} class="text-gray-800 px-2 text-white-sm font-semibold"
 						 data-sveltekit-preload-code="eager" data-placement="left">{men.item}</a>	
 				</svelte:fragment>
             </SidebarItem>
 			{/each}	
-			<SidebarItem>
+			<SidebarItem >
 				<svelte:fragment slot="icon">
 					<a href="/logout" on:click={()=> (hidden2 = true)} class="text-primary-800 px-3 text-white-sm font-semibold" 
 						data-sveltekit-preload-code="eager" data-placement="left">Cerrar sesión</a>
