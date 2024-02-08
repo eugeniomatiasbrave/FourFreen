@@ -22,8 +22,8 @@
 
 <Sidebar class="bg-primary-500 text-white w-full">
 	{#if data.usuario === undefined}
-	<SidebarGroup class="bg-primary-500">
-	  <SidebarItem class="bg-primary-500 hover:bg-primary-500 px-3 text-white">
+	<SidebarGroup class="bg-primary-500 justify-between-end">
+	  <SidebarItem class="bg-primary-500 hover:bg-primary-500 px-3 text-white ">
 		<svelte:fragment slot="icon">
 			<a href="/login" class="bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold flex group" style="margin-left: auto;" 
 			data-sveltekit-preload-code="eager" data-placement="left"><ArrowRightToBracketSolid class="w-5 h-5 me-2 text-white
@@ -32,7 +32,7 @@
 	 </SidebarItem>
    </SidebarGroup>
 {:else}
-	<div class="p-0 ms-3">	
+	<div class="p-0 ms-3 flex group justify-between">	
 		<Button on:click={() => (hidden2 = false)} class="text-white bg-primary-500 hover:bg-primary-800 border
 			border-primary-500 focus:ring-1 focus:outline-none focus:ring-primary-500 font-medium rounded-lg 
 			text-sm text-center inline-flex items-center dark:focus:ring-white dark:bg-gray-800 dark:border-white
@@ -41,6 +41,15 @@
 				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
 			</svg>
 		</Button>
+		<SidebarGroup class="bg-primary-500">
+			<SidebarItem class="bg-primary-500 hover:bg-primary-500 px-3 text-white flex justify-between">
+					<svelte:fragment slot="icon">
+						<a href="/logout" class="bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold flex group" style="margin-left: auto;" 
+						data-sveltekit-preload-code="eager" data-placement="left"><ArrowRightToBracketSolid class="w-5 h-5 me-2  text-white
+						 dark:text-white group-hover:text-white dark:group-hover:text-white"/>Cerrar sesión</a>
+					</svelte:fragment>
+				</SidebarItem>
+			</SidebarGroup>
 	</div>
 <Drawer transitionType="fly" {transitionParams} bind:hidden={hidden2} id="sidebar2" class="w-1/5.5 border-r-4 border-secundary-500">
 <Img src={LogoFG} class="w-64 mb-4 pb-2 border-b-2 border-gray-400" alt="FourGreen Logo" />
@@ -55,12 +64,12 @@
 				</svelte:fragment>
             </SidebarItem>
 			{/each}	
-			<SidebarItem >
-				<svelte:fragment slot="icon">
-					<a href="/logout" on:click={()=> (hidden2 = true)} class="text-primary-800 px-3 text-white-sm font-semibold" 
-						data-sveltekit-preload-code="eager" data-placement="left">Cerrar sesión</a>
-				</svelte:fragment>
-			</SidebarItem>
+			
+			
+			
+			
+			
+			
 		</SidebarGroup>
     </SidebarWrapper>
 </Sidebar>

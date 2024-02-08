@@ -37,8 +37,8 @@ onMount(() => {
 
  {#if action === 'editar'}
  {#each ProductosId as producto }
- <main class="flex items-center justify-center min-h-screen pb-36 ">
-  <div class="bg-white mx-auto p-2 py-4 my-0 rounded-3xl border border-gray-200 shadow-md w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/5 2xl:w-1/5">
+ <main class="flex items-center justify-center pt-36 ">
+  <div class="bg-white mx-auto p-2 py-4 my-0 rounded-3xl border border-gray-200 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/5 2xl:w-1/5">
     <form class="flex flex-col space-y-4 px-4" method="POST" action="?/editar" >   
         <h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
         from-secundary-400 from-10% via-primary-500 via-40% to-primary-500 to-70% text-transparent bg-clip-text">Editar el producto!!</h3>	
@@ -77,8 +77,8 @@ onMount(() => {
 {/each}
 {:else if action === 'eliminar'}
 {#each ProductosId as producto }
-<main class="flex items-center justify-center min-h-screen pb-36 ">
-  <div class="bg-white mx-auto p-1 py-4 my-0 rounded-3xl border border-gray-200 shadow-md w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/5 2xl:w-1/5 ">
+<main class="flex items-center justify-center pt-36 ">
+  <div class="bg-white mx-auto p-1 py-4 my-0 rounded-3xl border border-gray-200 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/5 2xl:w-1/5 ">
     <h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
         from-secundary-400 from-10% via-primary-500 via-40% to-primary-500 to-70% text-transparent bg-clip-text">Confirmar la eliminación!!</h3>		
      <h5 class="text-lg font-bold text-center mb-4">Producto: {producto.nombre}</h5>
@@ -94,8 +94,8 @@ onMount(() => {
 {/each}
 
 {:else if action === 'agregar'}
-<main class="flex items-center justify-center min-h-screen pb-36 ">
-  <div class="bg-white mx-auto p-2 py-4 my-0 rounded-3xl border border-gray-200 shadow-md w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5"> 
+<main class="flex items-center justify-center pt-36 ">
+  <div class="bg-white mx-auto p-2 py-4 my-0 rounded-3xl border border-gray-200 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5"> 
      <form class="flex flex-col space-y-4 px-4" method="POST" action="?/agregar" >	
          <h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
          from-secundary-400 from-10% via-primary-500 via-40% to-primary-500 to-70% text-transparent bg-clip-text">Agregar producto</h3>	

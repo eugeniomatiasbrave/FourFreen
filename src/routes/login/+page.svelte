@@ -19,8 +19,6 @@ let ruta="";
 let textoboton1="Inciar sesión"; 
 let textoboton2="Cancelar";
 
-
-
 </script>
 
 <svelte:head>
@@ -28,8 +26,8 @@ let textoboton2="Cancelar";
 	<meta name="description" content="Login" />
 </svelte:head>
 
-<main class="flex items-start justify-center mt-32">
-	<div class="bg-white mx-auto p-4 rounded-3xl border border-gray-300 shadow-xl w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/6">	
+<main class="flex items-start justify-center pt-32">
+	<div class="bg-white mx-auto p-4 rounded-3xl border border-gray-300 shadow-xl sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/6">	
 		<form method="POST" class="grid" use:enhance>
 			<div class="text-center ">
 				<P class="text-2xl font-bold text-center bg-gradient-to-r

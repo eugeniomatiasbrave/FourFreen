@@ -77,7 +77,7 @@ const validarCuit =(e)=> {
 </script>
  {#if action === 'editar'}
   {#each ClienteId as cliente }
-  <main class="flex items-start justify-center min-h-screen pb-36">
+  <main class="flex items-start justify-center pt-16">
   <div class="bg-white mx-auto p-1 pt-1 my-2 rounded-3xl border border-gray-300 shadow-2xl sm:w-3/4 md:w-1/2 
               lg:w-1/3 xl:w-1/4 2xl:w-1/4 transform transition duration-500 hover:scale-105">
     <div class="container mx-auto p-4">
@@ -105,7 +105,7 @@ const validarCuit =(e)=> {
  {/each}
 
  {:else if action === 'agregar'}
- <main class="flex items-start justify-center min-h-screen pb-16">
+ <main class="flex items-start justify-center pt-16">
 	<div class="bg-white mx-auto p-4 pt-2 my-2 rounded-3xl border border-gray-300 shadow-xl sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/4 
               transform transition duration-500 hover:scale-105">
 	  <form method="POST" action="?/agregar">
