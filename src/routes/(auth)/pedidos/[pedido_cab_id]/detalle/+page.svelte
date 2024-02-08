@@ -11,9 +11,9 @@ console.log(detalle)
 <main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full">
 	<div class="my-4">
 		<h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
-	  from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Tabla de Clientes</h3>
+	  from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Detalle de pedido</h3>
 	  </div>
- <div class=" bg-white mx-auto p-1 pt-1 rounded-2xl border border-gray-200 shadow-xl w-1/2">
+ <div class=" bg-white mx-auto p-1 pt-1 rounded-2xl border border-gray-200 shadow-xl  sm:w-3/4 md:w-3/4 lg:w-3/4 xl:w-1/1.5 2xl:w-1/2">
 	<div class="overflow-x-auto"> 
 		<Table hoverable={true} class="mx-auto mt-1 rounded border text-xs" > 		
 		<TableHead class=" bg-primary-500 text-white" style="text-align: center;" theadClass='text-xs'> 

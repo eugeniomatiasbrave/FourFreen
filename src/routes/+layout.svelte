@@ -22,11 +22,11 @@
 
 <Sidebar class="bg-primary-500 text-white w-full">
 	{#if data.usuario === undefined}
-	<SidebarGroup class="bg-primary-500 justify-between-end">
+	<SidebarGroup class="bg-primary-500 justify-between-end ">
 	  <SidebarItem class="bg-primary-500 hover:bg-primary-500 px-3 text-white ">
 		<svelte:fragment slot="icon">
-			<a href="/login" class="bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold flex group" style="margin-left: auto;" 
-			data-sveltekit-preload-code="eager" data-placement="left"><ArrowRightToBracketSolid class="w-5 h-5 me-2 text-white
+			<a href="/login" class="bg-primary-500 hover:bg-primary-500 px-3  text-white-sm font-semibold flex group" style="margin-left: auto;" 
+			data-sveltekit-preload-code="eager" data-placement="left"><ArrowRightToBracketSolid class="w-5 h-5 me-2 py-0 text-white
 			 dark:text-white group-hover:text-white dark:group-hover:text-white"/>Inciar sesión</a>
 		</svelte:fragment>
 	 </SidebarItem>

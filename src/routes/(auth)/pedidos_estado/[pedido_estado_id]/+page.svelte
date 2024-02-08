@@ -1,4 +1,5 @@
 <script>
+import FooterForm from '$lib/Componentes/FooterForm.svelte';
 import {goto} from '$app/navigation';
 import {Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
 export let data;
@@ -7,6 +8,10 @@ export const {pedidoEstadoId,pedidosEstados} = data;
 console.log(form)
 
 const PedidoEstadoId= data.pedidoEstadoId
+
+let ruta="pedidos";
+let textoboton1="Confirmar"; 
+let textoboton2="Cancelar";
 //const PedidosEstados  = data.pedidosEstados  
 //console.log(PedidosEstados)
 /*
@@ -72,10 +77,11 @@ const PedidoEstadoId= data.pedidoEstadoId
 </svelte:head>
 
   <main class="bg-gray-50 dark:bg-gray-900 sm:p-3">
-      <div class="my-4">
-      <P size="2xl" align="center">Estado del pedido</P>
-      </div>	
-     <div class=" bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-1/4">
+    <div class="my-4">
+      <h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
+      from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Estado de pedido</h3>
+      </div>
+     <div class=" bg-white mx-auto p-1 pt-1 rounded border border-gray-200 shadow-md w-1/3">
       <div class="overflow-x-auto"> 
       <Table hoverable={true} class="mx-auto mt-1 border text-xs" > 		
         <TableHead class=" bg-primary-500 text-white" style="text-align: center;" theadClass='text-xs'> 
@@ -95,10 +101,9 @@ const PedidoEstadoId= data.pedidoEstadoId
           {/each}	
         </TableBody>
       </Table>
-        <form method="POST"> 
-         <P>Cambiar estado a ...</P>
-         <Button on:click={() => goto('/pedidos')} class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded my-3">Volver</Button>
-         <Button type="submit" class="bg-primary-500 h-8 mb-2 md:mb-0 md:ml-2 rounded">Confirmar</Button>
+        <form method="POST" class="py-2"> 
+         <P >Cambiar estado a ...</P>
+         <FooterForm {ruta} {textoboton1} {textoboton2}/>
        </form>
       </div>
      </div>
