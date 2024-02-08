@@ -39,7 +39,7 @@ export const actions = {
 
 							
 			} else {
-				return {success: false}						
+				return {success: false, message: 'Datos de acceso incorrectos'}						
 			}
 		} catch (err) {
 			console.log('Error: ', err);

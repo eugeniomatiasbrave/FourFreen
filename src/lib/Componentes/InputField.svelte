@@ -4,7 +4,6 @@
     export let name;
     export let value = "";
     export let placeholder = "";
-    export let required = false;
     export let maxlength = undefined;
     export let onValidate = () => {};
   </script>
@@ -16,7 +15,7 @@
       name={name} 
       value={value} 
       maxlength={maxlength} 
-      required={required} 
+      required
       placeholder={placeholder} 
       class="bg-white h-8 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
       on:change={onValidate}

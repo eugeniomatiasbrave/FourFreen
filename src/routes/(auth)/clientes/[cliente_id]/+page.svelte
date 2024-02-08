@@ -11,6 +11,8 @@ export let form;
 export const {clienteId,clientes}=data;
 
 let ruta= "clientes";
+let textoboton1="Confirmar";
+let textoboton2="Cancelar";
   
 let ClienteId=clienteId;
 let Clientes=clientes;
@@ -86,16 +88,16 @@ const validarCuit =(e)=> {
       <form method="POST" action="?/editar">
         <InputField type="hidden" name="cliente_id" value={cliente.cliente_id}/>
           <div class="grid grid-cols-2 gap-4">
-           <InputField name="razon_social" value={cliente.razon_social} maxlength="30" placeholder="Razon social" required onValidate={validarRazonSocial}/>
-           <InputField type="number" name="cuit" value={cliente.cuit} placeholder="Cuit" required onValidate={validarCuit}/>
-           <InputField type="text" name="domicilio_calle" value={cliente.domicilio_calle} placeholder="Calle" required/>
-           <InputField type="text" name="domicilio_altura" value={cliente.domicilio_altura} placeholder="Altura" required/>
-           <InputField type="text" name="localidad" value={cliente.localidad} placeholder="Localidad" required/>
-           <InputField type="text" name="codigo_postal" value={cliente.codigo_postal} placeholder="Codigo.Postal" required/>
-           <InputField type="text" name="telefono" value={cliente.telefono} placeholder="Telefono" required/>
-           <InputField type="text" name="email" value={cliente.email} placeholder="E-mail" required/>
+           <InputField name="razon_social" value={cliente.razon_social} maxlength="30" placeholder="Razon social" onValidate={validarRazonSocial}/>
+           <InputField type="number" name="cuit" value={cliente.cuit} placeholder="Cuit" onValidate={validarCuit}/>
+           <InputField type="text" name="domicilio_calle" value={cliente.domicilio_calle} placeholder="Calle"/>
+           <InputField type="text" name="domicilio_altura" value={cliente.domicilio_altura} placeholder="Altura"/>
+           <InputField type="text" name="localidad" value={cliente.localidad} placeholder="Localidad"/>
+           <InputField type="text" name="codigo_postal" value={cliente.codigo_postal} placeholder="Codigo.Postal"/>
+           <InputField type="text" name="telefono" value={cliente.telefono} placeholder="Telefono"/>
+           <InputField type="text" name="email" value={cliente.email} placeholder="E-mail"/>
           </div>
-        <FooterForm {ruta}/>
+        <FooterForm {ruta} {textoboton1} {textoboton2} />
       </form>
     </div>
   </div>
@@ -110,16 +112,16 @@ const validarCuit =(e)=> {
       <h3 class="text-3xl font-bold text-center py-4 bg-gradient-to-r from-secundary-400 from-10% via-primary-500 via-40%
             to-primary-500 to-70% text-transparent bg-clip-text">Por favor agregar nuevo cliente!!</h3>
 		 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <InputField name="razon_social" maxlength="50" placeholder="Razon social" required onValidate={validarRazonSocial}/>
-      <InputField type="number" name="cuit" placeholder="Cuit" required onValidate={validarCuit}/>
-      <InputField type="text" name="domicilio_calle" placeholder="Calle" required/>
-      <InputField type="text" name="domicilio_altura" placeholder="Altura" required/>
-      <InputField type="text" name="localidad" placeholder="Localidad" required/>
-      <InputField type="text" name="codigo_postal" placeholder="Codigo.Postal" required/>
-      <InputField type="text" name="telefono" placeholder="Telefono" required/>
-      <InputField type="text" name="email" placeholder="E-mail" required/>
+      <InputField name="razon_social" maxlength="50" placeholder="Razon social" onValidate={validarRazonSocial}/>
+      <InputField type="number" name="cuit" placeholder="Cuit" onValidate={validarCuit}/>
+      <InputField type="text" name="domicilio_calle" placeholder="Calle"/>
+      <InputField type="text" name="domicilio_altura" placeholder="Altura"/>
+      <InputField type="text" name="localidad" placeholder="Localidad"/>
+      <InputField type="text" name="codigo_postal" placeholder="Codigo.Postal"/>
+      <InputField type="text" name="telefono" placeholder="Telefono"/>
+      <InputField type="text" name="email" placeholder="E-mail"/>
 		 </div>
-     <FooterForm {ruta}/>
+     <FooterForm {ruta} {textoboton1} {textoboton2}/>
 	  </form>
 	 </div>
   </main>   
