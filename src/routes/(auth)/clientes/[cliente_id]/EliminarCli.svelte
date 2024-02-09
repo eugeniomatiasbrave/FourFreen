@@ -1,6 +1,6 @@
 <script >
-	import {Input,Button} from 'flowbite-svelte'
-	import {goto} from '$app/navigation';
+	import {Input} from 'flowbite-svelte'
+	import {enhance} from '$app/forms';
 	import FooterForm from '$lib/Componentes/FooterForm.svelte';
 	export let data;
 	export let form;
@@ -19,7 +19,7 @@
 <main class="flex items-center justify-center pt-36">
 	<div class="bg-white mx-auto p-2 pt-2 my-2 rounded-3xl shadow-2xl border border-gray-300 sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/4">
 	 <div class="container mx-auto p-3">
-	  <form class="flex flex-col space-y-2" method="POST" action="?/eliminar" >
+	  <form class="flex flex-col space-y-2" method="POST" action="?/eliminar" use:enhance >
 		 <h3 class="text-3xl font-bold text-center bg-gradient-to-r from-secundary-400 from-10% via-primary-500 via-40%
               to-primary-500 to-70% text-transparent bg-clip-text">
 			Confirmar la eliminación!!
