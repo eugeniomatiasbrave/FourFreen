@@ -13,7 +13,7 @@ const closeAlert = () => {
 
 </script>
 
-<div class="absolute inset-0 flex items-center justify-center mt-10 bg-gray-900 bg-opacity-60 ">
+<div class="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-60" style="margin-top:42px;">
 	<Alert 
 	  class="border border-gray-300 " 
 	  dismissable transition={fly} 
