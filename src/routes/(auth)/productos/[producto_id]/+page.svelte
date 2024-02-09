@@ -1,11 +1,10 @@
 <script>
-	import {Input,Button,Label, Alert} from 'flowbite-svelte'
-  import { fly } from 'svelte/transition';
-  import { sineIn } from 'svelte/easing';
+	import {Input,Button,Label} from 'flowbite-svelte'
   import {page} from '$app/stores';
 	import {goto} from '$app/navigation';
   import {enhance} from '$app/forms';
   import Swal from 'sweetalert2';
+	import AlertOk from '$lib/Componentes/AlertOk.svelte';
 
 	export let data;
 	export let form;
@@ -15,8 +14,9 @@ let ProductosId=productosId.datos
 
 let action = '';
 let producto_id = $page.params.producto_id;
-  
- 
+
+let ruta= "productos";
+
     if (producto_id === "-1") {
         action = 'agregar';
     } else {
@@ -127,11 +127,5 @@ let producto_id = $page.params.producto_id;
 {/if}
 
 {#if form?.success }
-<div class="absolute inset-0 flex items-center justify-center mt-10  bg-gray-50">
- <Alert class="border border-gray-200 " dismissable transition={fly} params={{ x: -200, duration: 200, easing: sineIn}}>
-  <p class="py-2">{form.message}</p>
-  <Button slot="close-button" size="xs" let:close on:click={close} on:click={() => goto('/productos')} 
-    class="bg-primary-500 h-8 ml-1 px-4 rounded-2xl ms-auto">Volver</Button>
-</Alert>
-</div>
+ <AlertOk message={form?.message} {ruta}/>
 {/if} 

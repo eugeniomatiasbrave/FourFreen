@@ -1,9 +1,6 @@
 <script >
-import {Button, Alert} from 'flowbite-svelte'
-import { fly } from 'svelte/transition';
-import { sineIn } from 'svelte/easing';
+import AlertOk from '$lib/Componentes/AlertOk.svelte';
 import {page} from '$app/stores';
-import {goto} from '$app/navigation';
 import {enhance} from '$app/forms';
 import Swal from 'sweetalert2';
 import EliminarCli from './EliminarCli.svelte';
@@ -120,11 +117,5 @@ const validarCuit =(e)=> {
 {/if}
 
 {#if form?.success }
-<div class="absolute inset-0 flex items-center justify-center mt-10 bg-gray-50">
- <Alert class="border border-gray-200 " dismissable transition={fly} params={{ x: 600, duration: 300,  easing: sineIn}}>
-  <p class="py-2">{form.message}</p>
-  <Button slot="close-button" size="xs" let:close on:click={close} on:click={() => goto('/clientes')} 
-    class="bg-primary-500 h-8 ml-1 px-4 rounded-2xl ms-auto">Volver</Button>
-</Alert>
-</div>
+ <AlertOk message={form?.message} {ruta}/>
 {/if} 

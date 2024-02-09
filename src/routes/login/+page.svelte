@@ -41,7 +41,7 @@ let textoboton2="Cancelar";
 		</main>
 			{#if form?.success === false}
              <div class="relative inset-0 flex items-center justify-center mt-2">
-              <Alert class="border border-gray-200" dismissable transition={fly} params={{ x: -200, duration: 200, easing: sineIn}}>
+              <Alert class="border border-gray-200" dismissable transition={fly} params={{ x: -200, duration: 300, easing: sineIn}}>
                <ExclamationCircleSolid slot="icon" class="w-5 h-5" />
                <p>{form?.message}</p>
                </Alert>
