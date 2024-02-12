@@ -1,5 +1,5 @@
 <script>
-
+import AlertError from '$lib/Componentes/AlertError.svelte';
 import {enhance} from '$app/forms';
 import { P,Alert} from 'flowbite-svelte';
 import { fly } from 'svelte/transition';
@@ -39,14 +39,12 @@ let textoboton2="Cancelar";
 		     </form>
 			</div>
 		</main>
-			{#if form?.success === false}
-             <div class="relative inset-0 flex items-center justify-center mt-2">
-              <Alert class="border border-gray-200" dismissable transition={fly} params={{ x: -200, duration: 300, easing: sineIn}}>
-               <ExclamationCircleSolid slot="icon" class="w-5 h-5" />
-               <p>{form?.message}</p>
-               </Alert>
-             </div>
-            {/if} 
+			
+	{#if form?.success === false}
+	<AlertError errorMessage={form?.message} class="bg-white shadow-xl"/>
+    {/if} 
+
+
 		
 		
 		

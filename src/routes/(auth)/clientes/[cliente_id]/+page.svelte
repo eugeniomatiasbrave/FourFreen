@@ -1,8 +1,8 @@
-<script >
-import AlertOk from '$lib/Componentes/AlertOk.svelte';
+<script >	
 import {page} from '$app/stores';
 import {enhance} from '$app/forms';
-import Swal from 'sweetalert2';
+import AlertOk from '$lib/Componentes/AlertOk.svelte';
+import AlertError from '$lib/Componentes/AlertError.svelte';
 import EliminarCli from './EliminarCli.svelte';
 import FooterForm from '$lib/Componentes/FooterForm.svelte';
 import InputField from '$lib/Componentes/InputField.svelte';
@@ -10,10 +10,13 @@ export let data;
 export let form;
 export const {clienteId,clientes}=data;
 
+
 let ruta= "clientes";
 let textoboton1="Confirmar";
 let textoboton2="Cancelar";
-  
+let errorMessage="";
+let showError = false;
+
 let ClienteId=clienteId;
 let Clientes=clientes;
 
@@ -27,36 +30,18 @@ let cliente_id = $page.params.cliente_id;
         action = $page.url.searchParams.get('action') || 'otraAccion';
     }
 
+    
 
-
-const validarRazonSocial =(e)=> {
+const validarExiste = (e)=> {
   let razon_social = e.target.value;
   let existe = Clientes.some(cli => cli.razon_social === razon_social);
-  console.log(existe);
+  
   if (existe) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Cliente existente',
-      text: `Nombre: ${razon_social}.`,
-      backdrop: true,
-      confirmButtonText: 'Volver',
-      confirmButtonColor: 'rgb(69, 166, 175)'
-    });
-    e.target.value = '';
-  }
-}
-
-const validarCuit =(e)=> {
-  let cuit = e.target.value;
-  if (cuit < 20000000000 || cuit > 30000000000) {
-    Swal.fire({
-      icon: 'error',
-      title: 'El cantidad de caracteres incorrectos.',
-      backdrop: true,
-      confirmButtonText: 'Volver',
-      confirmButtonColor: 'rgb(69, 166, 175)'
-    });
-    e.target.value = '';
+      showError = true;
+      errorMessage="Nombre de cliente existente!!" 
+      
+    } else {
+    showError = false;
   }
 }
 
@@ -75,8 +60,8 @@ const validarCuit =(e)=> {
       <form method="POST" action="?/editar" use:enhance>
         <InputField type="hidden" name="cliente_id" value={cliente.cliente_id}/>
           <div class="grid grid-cols-2 gap-4">
-           <InputField name="razon_social" value={cliente.razon_social} maxlength="30" placeholder="Razon social" onValidate={validarRazonSocial}/>
-           <InputField type="number" name="cuit" value={cliente.cuit} placeholder="Cuit" onValidate={validarCuit}/>
+           <InputField name="razon_social" value={cliente.razon_social} maxlength="30" placeholder="Razon social" onValidate={validarExiste} />
+           <InputField type="number" name="cuit" value={cliente.cuit} placeholder="Cuit" />
            <InputField type="text" name="domicilio_calle" value={cliente.domicilio_calle} placeholder="Calle"/>
            <InputField type="text" name="domicilio_altura" value={cliente.domicilio_altura} placeholder="Altura"/>
            <InputField type="text" name="localidad" value={cliente.localidad} placeholder="Localidad"/>
@@ -87,8 +72,13 @@ const validarCuit =(e)=> {
         <FooterForm {ruta} {textoboton1} {textoboton2} />
       </form>
     </div>
-  </div>
+  </div> 
 </main>
+  
+  {#if showError} 
+    <AlertError {errorMessage} class="bg-white shadow-xl"/>
+  {/if}
+ 
  {/each}
 
  {:else if action === 'agregar'}
@@ -99,8 +89,8 @@ const validarCuit =(e)=> {
       <h3 class="text-3xl font-bold text-center py-4 bg-gradient-to-r from-secundary-400 from-10% via-primary-500 via-40%
             to-primary-500 to-70% text-transparent bg-clip-text">Por favor agregar nuevo cliente!!</h3>
 		 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <InputField name="razon_social" maxlength="50" placeholder="Razon social" onValidate={validarRazonSocial}/>
-      <InputField type="number" name="cuit" placeholder="Cuit" onValidate={validarCuit}/>
+      <InputField name="razon_social" maxlength="50" placeholder="Razon social" onValidate={validarExiste}/>
+      <InputField type="number" name="cuit" placeholder="Cuit"/>
       <InputField type="text" name="domicilio_calle" placeholder="Calle"/>
       <InputField type="text" name="domicilio_altura" placeholder="Altura"/>
       <InputField type="text" name="localidad" placeholder="Localidad"/>
@@ -111,7 +101,10 @@ const validarCuit =(e)=> {
      <FooterForm {ruta} {textoboton1} {textoboton2}/>
 	  </form>
 	 </div>
-  </main>   
+  </main>  
+   {#if showError} 
+   <AlertError {errorMessage} />
+   {/if} 
 {:else if action === 'eliminar'}
    <EliminarCli {data} {form} {action} {cliente_id} {ClienteId} {Clientes}/>
 {/if}
@@ -119,3 +112,13 @@ const validarCuit =(e)=> {
 {#if form?.success }
  <AlertOk message={form?.message} {ruta}/>
 {/if} 
+
+
+
+
+
+
+
+
+
+
