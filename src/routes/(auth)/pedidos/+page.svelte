@@ -1,13 +1,11 @@
 <script >
-	//import {goto} from '$app/navigation';
+	
 	import { page } from '$app/stores';
 	import { Input, Button, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
 	export let data;
 	export const { pedidos } = data;
-
 	
-	
-let Pedidos = pedidos.datos		
+		
 const estadoId = $page.url.searchParams.get("estado_id") || "0";
 
 let titulo = "";
@@ -24,22 +22,15 @@ let titulo = "";
 		case "30":
 		titulo = "Pedidos Entregados";	
 		break;
+		case "40":
+        titulo = "Pedidos Facturados";	
+        break;
+		case "50":
+        titulo = "Pedidos Cobrados";	
 		default: 
 		break;
 	}
 					
-/*				
-function filterEstadoId10() {
-    if (estadoId !== 0) {            
-        searchParams.set('estado_id', '10')	 
-	  } else {
-	        searchParams.set('estado_id', '0')
-	    }
-        goto(`?${searchParams.toString()}`);
-}
-	*/	
-	
-//const searchParams = new URLSearchParams($page.url.searchParams);
 let selected="0" ;
 
 const ruta = () => {
@@ -48,6 +39,10 @@ const ruta = () => {
 
 
 </script>
+<svelte:head>
+		<title>{titulo}</title>
+		<meta name="description" content="Pedidos"/>
+		</svelte:head>
 
 	<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full ">
 		<div class="my-1">
@@ -102,8 +97,8 @@ const ruta = () => {
 			<TableHeadCell class="py-2" style="text-align: left;">Cliente</TableHeadCell>
 			<TableHeadCell class="py-2" style="text-align: center;">Fecha</TableHeadCell>			
 			<TableHeadCell class="py-2 px-0">Estado Id</TableHeadCell>
-			<TableHeadCell class="py-2">Detalle</TableHeadCell>
-			<TableHeadCell class="py-2" >Estado Pedido</TableHeadCell>
+			<TableHeadCell class="py-2">Estado Pedido</TableHeadCell>
+			<TableHeadCell class="py-2" >Detalle</TableHeadCell>
 			<TableHeadCell class="py-2 px-0" style="text-align: center;">Us id</TableHeadCell>
 			<TableHeadCell class="py-2">Items</TableHeadCell>
 			<TableHeadCell class="py-2">Editar</TableHeadCell>
@@ -112,13 +107,14 @@ const ruta = () => {
 			<TableHeadCell class="py-2" style="text-align: right;">Total</TableHeadCell>	
 		</TableHead>
 		<TableBody class="divide-y">
-			{#each Pedidos  as pe }  
+			{#each pedidos.datos  as pe }  
 			 <TableBodyRow class="hover:bg-hover-gray-light" style="text-align: center;">
 				<TableBodyCell class="py-2"> {pe.pedido_cab_id}</TableBodyCell>
 				<TableBodyCell class="py-2" style="text-align: left;">{pe.razon_social}</TableBodyCell>
-				<TableBodyCell class="py-2" style="text-align: right;">{pe.fecha=new Intl.DateTimeFormat('es', {day: 'numeric', month: 'numeric', year: 'numeric'}).format(new Date(pe.fecha))}</TableBodyCell>				
-				<TableBodyCell class="py-2"><a href={`/pedidos_estado/${pe.pedido_estado_id}`}  
-					class="font-medium text-primary-600 hover:underline dark:text-primary-500">{pe.pedido_estado_id}</a></TableBodyCell>
+				<TableBodyCell class="py-2" style="text-align: right;">{pe.fecha}</TableBodyCell>			
+				<TableBodyCell class="py-2">  
+					<a href={`/pedidos_estado/${pe.pedido_estado_id}`} class="font-medium text-primary-600 hover:underline dark:text-primary-500">{pe.pedido_estado_id}</a>
+				   </TableBodyCell>
 				<TableBodyCell class="py-2">{pe.pedido_estado_nombre}</TableBodyCell>
 				<TableBodyCell class="py-2"> 
 					<a href={`/pedidos/${pe.pedido_cab_id}/detalle`}  

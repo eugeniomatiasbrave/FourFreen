@@ -17,7 +17,6 @@
   };
 
   
-
 </script>
 
 <Sidebar class="bg-primary-500 text-white w-full">
@@ -64,18 +63,10 @@
 				</svelte:fragment>
             </SidebarItem>
 			{/each}	
-			
-			
-			
-			
-			
-			
 		</SidebarGroup>
     </SidebarWrapper>
-</Sidebar>
-</Drawer>
+  </Sidebar>
+ </Drawer>
 {/if}
-
 </Sidebar>
  <slot />
-
