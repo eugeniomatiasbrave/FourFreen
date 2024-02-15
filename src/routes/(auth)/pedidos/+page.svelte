@@ -9,27 +9,30 @@
 const estadoId = $page.url.searchParams.get("estado_id") || "0";
 
 let titulo = "";
+
+
 	switch (estadoId) {
 		case "0":
-		titulo = "Tabla de Pedidos";	
-		break;
-		case "10":
-		titulo = "Pedidos Ingresados";	
-		break;
-		case "20":
-		titulo = "Pedidos Confeccionados";	
-		break;
-		case "30":
-		titulo = "Pedidos Entregados";	
-		break;
-		case "40":
-        titulo = "Pedidos Facturados";	
-        break;
-		case "50":
-        titulo = "Pedidos Cobrados";	
-		default: 
-		break;
-	}
+			titulo = "Tabla de Pedidos";	
+			break;
+			case "10":
+				titulo = "Pedidos Ingresados";	
+				break;
+				case "20":
+					titulo = "Pedidos Confeccionados";	
+					break;
+					case "30":
+						titulo = "Pedidos Entregados";	
+						break;
+						case "40":
+							titulo = "Pedidos Facturados";	
+							break;
+							case "50":
+								titulo = "Pedidos Cobrados";	
+								default: 
+								break;
+							}
+						
 					
 let selected="0" ;
 

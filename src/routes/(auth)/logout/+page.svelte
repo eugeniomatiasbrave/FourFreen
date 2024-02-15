@@ -6,8 +6,8 @@ export let form;
 console.log(form)
 
 let ruta="";
-let textoboton1="Confirmar"; 
-let textoboton2="Cancelar";
+let textoboton1="Si. Cerrar"; 
+let textoboton2="No. Volver";
 
 </script>
 
@@ -21,7 +21,7 @@ let textoboton2="Cancelar";
 		<div class="justify-between items-center mx-auto w-full"> 
 			<div class="text-center ">
 				<h1 class="text-2xl font-bold text-center py-2 bg-gradient-to-r
-				from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Cierre de Sesión</h1>
+				from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Cerrar de Sesión</h1>
 				<h2 class="text-lg pb-1">¿Está seguro que quiere salir?</h2>
 			</div>
 			<form method="POST" class="grid gap-3" use:enhance>

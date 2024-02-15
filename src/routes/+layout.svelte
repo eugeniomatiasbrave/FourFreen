@@ -1,15 +1,23 @@
 <script>
-	
 	import './style.css';
 	import '../app.postcss';
-	export let data;
+	import { Drawer, Button, Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Img, A } from 'flowbite-svelte';
+	import { ArrowRightToBracketSolid } from 'flowbite-svelte-icons';
+	import { sineIn } from 'svelte/easing';
+	import LogoFG from '$lib/img/LogoFG2.jpg';
+	
+	import { page } from '$app/stores';
+	
+export let data;
 
-  import { Drawer, Button, CloseButton, Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Img, A } from 'flowbite-svelte';
-  import { ArrowRightToBracketSolid } from 'flowbite-svelte-icons';
-  import { sineIn } from 'svelte/easing';
-  import LogoFG from '$lib/img/LogoFG2.jpg';
+export const { menu } = data;
+	
+
+
+$: activeUrl = $page.url.pathname;
+
   let hidden2 = true;
-  let spanClass = 'flex-1 ms-3 py-4 whitespace-nowrap';
+  let spanClass = 'flex-1 px-0 py-4 whitespace-nowrap w-56';
   let transitionParams = {
     x: -320,
     duration: 200,
@@ -31,7 +39,7 @@
 	 </SidebarItem>
    </SidebarGroup>
 {:else}
-	<div class="p-0 ms-3 flex group justify-between">	
+	<div class="p-0 ms-3 flex group justify-between" >	
 		<Button on:click={() => (hidden2 = false)} class="text-white bg-primary-500 hover:bg-primary-800 border
 			border-primary-500 focus:ring-1 focus:outline-none focus:ring-primary-500 font-medium rounded-lg 
 			text-sm text-center inline-flex items-center dark:focus:ring-white dark:bg-gray-800 dark:border-white
@@ -45,22 +53,30 @@
 					<svelte:fragment slot="icon">
 						<a href="/logout" class="bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold flex group" style="margin-left: auto;" 
 						data-sveltekit-preload-code="eager" data-placement="left"><ArrowRightToBracketSolid class="w-5 h-5 me-2  text-white
-						 dark:text-white group-hover:text-white dark:group-hover:text-white"/>Cerrar sesión</a>
+						 dark:text-white group-hover:text-white dark:group-hover:text-white"/>Cerrar</a>
 					</svelte:fragment>
 				</SidebarItem>
 			</SidebarGroup>
 	</div>
-<Drawer transitionType="fly" {transitionParams} bind:hidden={hidden2} id="sidebar2" class="w-1/5.5 border-r-4 border-secundary-500">
-<Img src={LogoFG} class="w-64 mb-4 pb-2 border-b-2 border-gray-400" alt="FourGreen Logo" />
-  <Sidebar>
-	  <SidebarWrapper divClass="overflow-y-auto px-0 dark:bg-gray-800">	 
-		  <SidebarGroup>
-			  {#each data.menu as men }
-			  <SidebarItem {spanClass}>
+<Drawer transitionType="fly" {transitionParams} bind:hidden={hidden2} id="sidebar2" 
+class=" w-52 border-r-4 border-secundary-500">
+<Img src={LogoFG} class="w-52 mb-4 pb-2 border-b-2 border-gray-400" alt="FourGreen Logo" />
+  <SidebarItem  {spanClass} class="w-52">
+     <svelte:fragment slot="icon">
+			<a href="/" class=" w-52 text-gray-800 px-0 text-white-sm font-semibold "  
+					data-sveltekit-preload-code="eager" data-placement="left">Inicio</a>
+			</svelte:fragment>
+  </SidebarItem>
+  <Sidebar class="w-52">
+	  <SidebarWrapper divClass="overflow-y-auto px-0 dark:bg-gray-800 w-52">	 
+		  <SidebarGroup class="w-52 px-0" >
+			  {#each menu as men }
+			  <SidebarItem {spanClass} class="w-52 px-0" >
 				<svelte:fragment slot="icon">
-					<a href={men.ruta} on:click={()=> (hidden2 = true)} class="text-gray-800 px-2 text-white-sm font-semibold"
-						 data-sveltekit-preload-code="eager" data-placement="left">{men.item}</a>	
+				<a href={men.ruta} class:active={activeUrl === men.ruta} on:click={()=> (hidden2 = true)} class="text-gray-800 px-2 text-white-sm font-semibold"
+						 data-sveltekit-preload-code="eager" data-placement="left">{men.item}</a>			
 				</svelte:fragment>
+				
             </SidebarItem>
 			{/each}	
 		</SidebarGroup>
