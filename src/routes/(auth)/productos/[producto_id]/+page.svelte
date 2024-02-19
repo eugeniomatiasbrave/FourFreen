@@ -1,8 +1,7 @@
 <script>
-	import {Input,Label} from 'flowbite-svelte'
+	import {Input} from 'flowbite-svelte'
   import {page} from '$app/stores';
   import {enhance} from '$app/forms';
-  import Swal from 'sweetalert2';
 	import AlertOk from '$lib/Componentes/AlertOk.svelte';
   import AlertError from '$lib/Componentes/AlertError.svelte';
   import FooterForm from '$lib/Componentes/FooterForm.svelte';
@@ -87,12 +86,14 @@ if (producto_id === "-1") {
 {:else if action === 'agregar'}
   <main class="flex items-center justify-center pt-36 ">
     <div class="bg-white mx-auto p-4 my-0 rounded-3xl border border-gray-200 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5"> 
-     <form class="flex flex-col space-y-3 px-2" method="POST" action="?/agregar" >	
+     <form class="flex flex-col space-y-3 px-2" method="POST" action="?/agregar" use:enhance>	
+
          <h3 class="text-3xl font-bold text-center bg-gradient-to-r
          from-secundary-400 from-10% via-primary-500 via-40% to-primary-500 to-70% text-transparent bg-clip-text">Agregar producto</h3>	 
       <InputField type="text" name="nombre" maxlength="30" placeholder="Agregar producto" onValidate={validarExiste}/>
       <InputField type="number" name="precio"  min="0" max="1000000" step="0.01" placeholder="Agregar precio"/>
       <FooterForm {ruta} {textoboton1} {textoboton2} />
+    
       </form>   
      </div> 
     </main>
@@ -100,10 +101,9 @@ if (producto_id === "-1") {
     {#if showError} 
      <AlertError {errorMessage} />
     {/if} 
-
-{/if} <!--fin de agregar-->
+{/if} 
 
 <!--Mensaje de ok-->
 {#if form?.success }
- <AlertOk message={form?.message} {ruta}/>
-{/if} 
+<AlertOk message={form?.message} {ruta}/>
+{/if}

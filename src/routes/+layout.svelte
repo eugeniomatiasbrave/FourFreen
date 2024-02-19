@@ -10,10 +10,8 @@
 	
 export let data;
 
-export const { menu } = data;
+
 	
-
-
 $: activeUrl = $page.url.pathname;
 
   let hidden2 = true;
@@ -29,15 +27,14 @@ $: activeUrl = $page.url.pathname;
 
 <Sidebar class="bg-primary-500 text-white w-full">
 	{#if data.usuario === undefined}
-	<SidebarGroup class="bg-primary-500 justify-between-end ">
-	  <SidebarItem class="bg-primary-500 hover:bg-primary-500 px-3 text-white ">
+	<SidebarGroup class="bg-primary-500 justify-between-end" >
+	 <SidebarItem href="/login" label="Iniciar sesión" class="bg-primary-500 hover:bg-primary-500 px-3  text-white-sm font-semibold flex group" >
 		<svelte:fragment slot="icon">
-			<a href="/login" class="bg-primary-500 hover:bg-primary-500 px-3  text-white-sm font-semibold flex group" style="margin-left: auto;" 
-			data-sveltekit-preload-code="eager" data-placement="left"><ArrowRightToBracketSolid class="w-5 h-5 me-2 py-0 text-white
-			 dark:text-white group-hover:text-white dark:group-hover:text-white"/>Inciar sesión</a>
+		  <ArrowRightToBracketSolid class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-white
+		   dark:group-hover:text-white" />
 		</svelte:fragment>
-	 </SidebarItem>
-   </SidebarGroup>
+	  </SidebarItem>
+    </SidebarGroup>
 {:else}
 	<div class="p-0 ms-3 flex group justify-between" >	
 		<Button on:click={() => (hidden2 = false)} class="text-white bg-primary-500 hover:bg-primary-800 border
@@ -49,13 +46,12 @@ $: activeUrl = $page.url.pathname;
 			</svg>
 		</Button>
 		<SidebarGroup class="bg-primary-500">
-			<SidebarItem class="bg-primary-500 hover:bg-primary-500 px-3 text-white flex justify-between">
-					<svelte:fragment slot="icon">
-						<a href="/logout" class="bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold flex group" style="margin-left: auto;" 
-						data-sveltekit-preload-code="eager" data-placement="left"><ArrowRightToBracketSolid class="w-5 h-5 me-2  text-white
-						 dark:text-white group-hover:text-white dark:group-hover:text-white"/>Cerrar</a>
-					</svelte:fragment>
-				</SidebarItem>
+				<SidebarItem href="/logout" label="Cerrar sesión" class="bg-primary-500 hover:bg-primary-500 px-3  text-white-sm font-semibold flex group" >
+				   <svelte:fragment slot="icon">
+					 <ArrowRightToBracketSolid class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-white
+					  dark:group-hover:text-white" />
+				   </svelte:fragment>
+				 </SidebarItem>
 			</SidebarGroup>
 	</div>
 <Drawer transitionType="fly" {transitionParams} bind:hidden={hidden2} id="sidebar2" 
@@ -70,7 +66,7 @@ class=" w-52 border-r-4 border-secundary-500">
   <Sidebar class="w-52">
 	  <SidebarWrapper divClass="overflow-y-auto px-0 dark:bg-gray-800 w-52">	 
 		  <SidebarGroup class="w-52 px-0" >
-			  {#each menu as men }
+			  {#each data.menu as men }
 			  <SidebarItem {spanClass} class="w-52 px-0" >
 				<svelte:fragment slot="icon">
 				<a href={men.ruta} class:active={activeUrl === men.ruta} on:click={()=> (hidden2 = true)} class="text-gray-800 px-2 text-white-sm font-semibold"
@@ -78,7 +74,9 @@ class=" w-52 border-r-4 border-secundary-500">
 				</svelte:fragment>
 				
             </SidebarItem>
+			
 			{/each}	
+			
 		</SidebarGroup>
     </SidebarWrapper>
   </Sidebar>

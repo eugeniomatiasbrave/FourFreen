@@ -10,7 +10,6 @@ const estadoId = $page.url.searchParams.get("estado_id") || "0";
 
 let titulo = "";
 
-
 	switch (estadoId) {
 		case "0":
 			titulo = "Tabla de Pedidos";	
