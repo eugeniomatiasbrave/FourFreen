@@ -27,13 +27,13 @@ $: activeUrl = $page.url.pathname;
 
 <Sidebar class="bg-primary-500 text-white w-full">
 	{#if data.usuario === undefined}
-	<SidebarGroup class="bg-primary-500 justify-between-end" >
-	 <SidebarItem href="/login" label="Iniciar sesión" class="bg-primary-500 hover:bg-primary-500 px-3  text-white-sm font-semibold flex group" >
-		<svelte:fragment slot="icon">
-		  <ArrowRightToBracketSolid class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-white
-		   dark:group-hover:text-white" />
-		</svelte:fragment>
-	  </SidebarItem>
+	<SidebarGroup class="bg-primary-500 flex justify-end " >
+			<SidebarItem href="/login" active={activeUrl === '/login'} label="Iniciar sesión" data-placement="left" class="bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold" >
+			  <svelte:fragment slot="icon">
+				<ArrowRightToBracketSolid class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-white
+				 dark:group-hover:text-white" />
+			  </svelte:fragment>
+			</SidebarItem>  
     </SidebarGroup>
 {:else}
 	<div class="p-0 ms-3 flex group justify-between" >	
@@ -46,7 +46,7 @@ $: activeUrl = $page.url.pathname;
 			</svg>
 		</Button>
 		<SidebarGroup class="bg-primary-500">
-				<SidebarItem href="/logout" label="Cerrar sesión" class="bg-primary-500 hover:bg-primary-500 px-3  text-white-sm font-semibold flex group" >
+				<SidebarItem href="/logout" active={activeUrl === "/logout"} label="Cerrar sesión" class="bg-primary-500 hover:bg-primary-500 px-3  text-white-sm font-semibold flex group" >
 				   <svelte:fragment slot="icon">
 					 <ArrowRightToBracketSolid class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-white
 					  dark:group-hover:text-white" />
@@ -59,7 +59,7 @@ class=" w-52 border-r-4 border-secundary-500">
 <Img src={LogoFG} class="w-52 mb-4 pb-2 border-b-2 border-gray-400" alt="FourGreen Logo" />
   <SidebarItem  {spanClass} class="w-52">
      <svelte:fragment slot="icon">
-			<a href="/" class=" w-52 text-gray-800 px-0 text-white-sm font-semibold "  
+			<a href="/"  active={activeUrl === "/"} class=" w-52 text-gray-800 px-0 text-white-sm font-semibold "  
 					data-sveltekit-preload-code="eager" data-placement="left">Inicio</a>
 			</svelte:fragment>
   </SidebarItem>
@@ -69,14 +69,11 @@ class=" w-52 border-r-4 border-secundary-500">
 			  {#each data.menu as men }
 			  <SidebarItem {spanClass} class="w-52 px-0" >
 				<svelte:fragment slot="icon">
-				<a href={men.ruta} class:active={activeUrl === men.ruta} on:click={()=> (hidden2 = true)} class="text-gray-800 px-2 text-white-sm font-semibold"
+				<a href={men.ruta} active={activeUrl === men.ruta} on:click={()=> (hidden2 = true)} class="text-gray-800 px-2 text-white-sm font-semibold"
 						 data-sveltekit-preload-code="eager" data-placement="left">{men.item}</a>			
-				</svelte:fragment>
-				
-            </SidebarItem>
-			
-			{/each}	
-			
+				</svelte:fragment>	
+              </SidebarItem>
+		   {/each}		
 		</SidebarGroup>
     </SidebarWrapper>
   </Sidebar>
