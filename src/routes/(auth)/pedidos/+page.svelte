@@ -132,6 +132,22 @@ const ruta = () => {
 				</TableBodyRow>
 			{/each}
 			</TableBody>
+			<tfoot>
+				<tr class=" bg-white font-semibold text-gray-900 dark:text-white divide-y hover:bg-hover-gray-light ">
+				  <th scope="row" class="py-2 text-center ps-3"></th>
+				  <td class="py-2"> </td>
+				  <td class="py-2"></td>
+				  <td class="py-2"></td>
+				  <td class="py-2"></td>
+				  <td class="py-2"></td>
+				  <td class="py-2 ps-6">{pedidos.datos.length}</td>
+				  <td class="py-2"></td>
+				  <td class="py-2"></td>
+				  <td class="py-2"></td>
+				  <td class="py-2 pe-6" style="text-align: right;">{ pedidos.datos.reduce((total, item) => total + item.total_unidades, 0)}</td>
+				  <td class="py-2 text-right pe-6">$ { pedidos.datos.reduce((total, item) => total + item.total_importe, 0).toFixed(2)}</td> 
+				</tr>
+			  </tfoot>
 			</Table>
 		</div>
 	  </div><!------------ -Div contenedor: tabla + add + Filtro-->

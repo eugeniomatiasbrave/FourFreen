@@ -1,7 +1,6 @@
 <script>
-	//import { invalidate } from '$app/navigation';
 	import {goto} from '$app/navigation';
-	import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';			
+	import {Input,Button,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';			
 	export let data;
 	export const {productos,productosSearch,sortPrecio,searchSortPrecio,sortNombre,sortProducto_id}=data;
 
@@ -23,7 +22,6 @@ const SortedProducto_id=(params)=>{
 		} else if (sort===-1) {
 		filteredSortedId=newOrder.sort((e,f)=>f.producto_id - e.producto_id);
 		}
-	//	invalidate(`/productos?sort=producto_id:${sort}`);  // analizar si es mas conveniente utilizar Invalidate ()
 		goto(`/productos?sort=producto_id:${sort}`); 
 	};
  
@@ -36,7 +34,7 @@ const applyFilter=(params)=>{
 	filteredProductos=productosSearch.datos.filter(prod=>prod.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
 	filteredSortedId=filteredProductos; 
 	goto(`/productos?search=${search}`);	// analizar si es mas conveniente utilizar Invalidate ()...y si hay difrencias
-	};
+};
 
 const reset=()=>{
     searchTerm='';
@@ -82,6 +80,7 @@ const sortedNombre=(params)=> {
     sortedNombre(sortOrder === 1 ? -1 : 1);
   };
 
+
 </script>
 			
 <svelte:head>
@@ -112,7 +111,7 @@ const sortedNombre=(params)=> {
 	  </div>
 			 <div class="overflow-x-auto"> <!-------------------------------Nueva tabla Flowbite-------> 
 				<Table hoverable={true} class="mx-auto mt-1 border text-xs" > 		
-				<TableHead class=" bg-primary-500 text-white" theadClass='text-xs' > <!------------------------cabecera celdas-->
+				  <TableHead class=" bg-primary-500 text-white" theadClass='text-xs' > <!------------------------cabecera celdas-->
 					<TableHeadCell class="py-2" >
 					  <div class="flex items-center justify-end">
 						Id<button on:click={alternarSortId} class="bg-primary-500 hover:bg-primary-500 rounded">	
@@ -187,6 +186,15 @@ const sortedNombre=(params)=> {
 				</TableBodyRow>
 				{/each}	
 				</TableBody>
+				<tfoot>
+					<tr class=" bg-white font-semibold text-gray-900 dark:text-white divide-y hover:bg-hover-gray-light ">
+					  <th scope="row" class="py-2 text-center ps-3">Total= {filteredSortedId.length}</th>
+					  <td class="py-2 ps-6"> </td>
+					  <td class="py-2"></td> 
+					  <td class="py-2"></td>
+					  <td class="py-2"></td>
+					</tr>
+				  </tfoot>
 			  </Table>
 			</div>
 		  </div> <!----------------fin Div contenedor: tabla + add + Filtro--------->	

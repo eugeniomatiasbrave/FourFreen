@@ -46,7 +46,7 @@ $: activeUrl = $page.url.pathname;
 			</svg>
 		</Button>
 		<SidebarGroup class="bg-primary-500">
-				<SidebarItem href="/logout" active={activeUrl === "/logout"} label="Cerrar sesión" class="bg-primary-500 hover:bg-primary-500 px-3  text-white-sm font-semibold flex group" >
+				<SidebarItem href="/logout" active={activeUrl === "/logout"} label="Cerrar sesión" class="bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold flex group" >
 				   <svelte:fragment slot="icon">
 					 <ArrowRightToBracketSolid class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-white
 					  dark:group-hover:text-white" />
@@ -55,9 +55,9 @@ $: activeUrl = $page.url.pathname;
 			</SidebarGroup>
 	</div>
 <Drawer transitionType="fly" {transitionParams} bind:hidden={hidden2} id="sidebar2" 
-class=" w-52 border-r-4 border-secundary-500">
-<Img src={LogoFG} class="w-52 mb-4 pb-2 border-b-2 border-gray-400" alt="FourGreen Logo" />
-  <SidebarItem  {spanClass} class="w-52">
+class="w-64 border-r-4 border-secundary-500">
+<Img src={LogoFG} class=" mb-4 pb-2 border-b-2 border-gray-400" alt="FourGreen Logo" />
+  <SidebarItem {spanClass} class="">
      <svelte:fragment slot="icon">
 			<a href="/"  active={activeUrl === "/"} class=" w-52 text-gray-800 px-0 text-white-sm font-semibold "  
 					data-sveltekit-preload-code="eager" data-placement="left">Inicio</a>
