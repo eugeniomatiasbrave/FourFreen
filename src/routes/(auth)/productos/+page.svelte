@@ -84,7 +84,7 @@ const sortedNombre=(params)=> {
 </script>
 			
 <svelte:head>
-	<title>Productos</title>
+	<title>FourGreens-Productos</title>
 	<meta name="description" content="Productos" />
 </svelte:head>		
 <main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full ">
@@ -186,15 +186,6 @@ const sortedNombre=(params)=> {
 				</TableBodyRow>
 				{/each}	
 				</TableBody>
-				<tfoot>
-					<tr class=" bg-white font-semibold text-gray-900 dark:text-white divide-y hover:bg-hover-gray-light ">
-					  <th scope="row" class="py-2 text-center ps-3">Total= {filteredSortedId.length}</th>
-					  <td class="py-2 ps-6"> </td>
-					  <td class="py-2"></td> 
-					  <td class="py-2"></td>
-					  <td class="py-2"></td>
-					</tr>
-				  </tfoot>
 			  </Table>
 			</div>
 		  </div> <!----------------fin Div contenedor: tabla + add + Filtro--------->	

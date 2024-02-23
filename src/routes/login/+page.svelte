@@ -22,7 +22,7 @@ let textoboton2="Cancelar";
 </script>
 
 <svelte:head>
-	<title>Inciar sesión</title>
+	<title>FourGreens-Inciar sesión</title>
 	<meta name="description" content="Login" />
 </svelte:head>
 

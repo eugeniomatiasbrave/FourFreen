@@ -1,50 +1,50 @@
 <script >
-	
-	import { page } from '$app/stores';
-	import { Input, Button, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
+	import { page } from '$app/stores';	
+	import { goto } from '$app/navigation';
+	import { Input, Button, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, ButtonGroup } from 'flowbite-svelte';
 	export let data;
 	export const { pedidos } = data;
 	
-		
-const estadoId = $page.url.searchParams.get("estado_id") || "0";
+	let Pedidos = pedidos.datos;
+	
+	const searchParams = new URLSearchParams(window.location.search);
+	let estadoId = parseInt(searchParams.get("estado_id") || '0');
+	
+	let mutatedData = Pedidos;
+	
+	$: estadoId = parseInt($page.url.searchParams.get("estado_id")?.toString() || '0');
+	$: mutatedData = estadoId ? Pedidos.filter(p => p.pedido_estado_id === estadoId) : Pedidos;
 
-let titulo = "";
-
-	switch (estadoId) {
-		case "0":
-			titulo = "Tabla de Pedidos";	
-			break;
-			case "10":
-				titulo = "Pedidos Ingresados";	
-				break;
-				case "20":
-					titulo = "Pedidos Confeccionados";	
-					break;
-					case "30":
-						titulo = "Pedidos Entregados";	
-						break;
-						case "40":
-							titulo = "Pedidos Facturados";	
-							break;
-							case "50":
-								titulo = "Pedidos Cobrados";	
-								default: 
-								break;
-							}
-						
-					
-let selected="0" ;
-
-const ruta = () => {
-		window.location.href = ( `/pedidos?estado_id=${selected}`);
+	let titulo = "Todos los Pedidos"; // Título por defecto
+	$: {
+	    switch(estadoId) {
+	        case 10:
+	            titulo = "Pedidos Ingresados";
+	            break;
+	        case 20:
+	            titulo = "Pedido Preparados";
+	            break;
+			case 30:
+	            titulo = "Pedidos Entregado";
+	            break;
+	        default:
+	            titulo = "Todos los Pedidos ";
+	    }
 	}
 
-
+	function filterByEstadoId(newEstadoId) {
+	    estadoId = newEstadoId; // Actualiza el estadoId actual
+	    searchParams.set('estado_id', newEstadoId.toString());
+	    goto(`?${searchParams.toString()}`);
+	}
+	 
 </script>
 <svelte:head>
-		<title>{titulo}</title>
-		<meta name="description" content="Pedidos"/>
-		</svelte:head>
+	<title>{titulo}</title>
+	<meta name="description" content="Pedidos"/>
+</svelte:head>
+
+		
 
 	<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full ">
 		<div class="my-1">
@@ -59,33 +59,18 @@ const ruta = () => {
 				fill="none" viewBox="0 0 20 20">
 				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
 				d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-				</svg> Nuevo</Button>
-						
+				</svg> Nuevo</Button>			
 			</div><!-----------fin botton add-------------->
-		  <div class="flex items-center w-full sm:w-auto">
-			<div>
-			 <select bind:value={selected} id="small" required class="block w-full h-7 text-xs py-0 text-gray-900 border
-			border-gray-300 rounded-b-2xl cursor-pointer bg-gray-50 focus:ring-gray-50 focus:border-primary-500 dark:bg-gray-700
-			dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
-			dark:focus:border-primary-500">
-			  <option value="0">Todos los Pedidos</option>
-			  <option value="10">Pedidos Ingresados</option>
-			  <option value="20">Pedidos Confeccionado</option>
-			  <option value="30">Pedidos Entregados</option>
-			  <option value="40">Pedidos Facturado</option>
-			  <option value="50">Pedidos Cobrado</option>
-			</select>
-		  </div>
-		  <div>
-			<Button type="button"  on:click={ruta} size="xs" class=" rounded-lg mx-1 px-1 
-			bg-white  h-7 w-full hover:bg-primary-500 text-primary-500
-			border border-primary-500  focus:ring-gray-50 focus:border-primary-500 dark:bg-gray-700
-			dark:border-gray-600 dark:placeholder-gray-400 hover:text-white dark:focus:ring-gray-200
-			"><svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-			</svg></Button>
-		  </div>	
-	   </div> 
+			<div class="mx-auto flex justify-between-center">
+				<ButtonGroup>
+					<Button on:click={() => filterByEstadoId(0)} color="light" class="rounded-none h-7">Todos</Button>
+					<Button on:click={() => filterByEstadoId(10)} color="light" class="rounded-none h-7">Ingresados</Button>
+					<Button on:click={() => filterByEstadoId(20)} color="light" class="rounded-none h-7">Preparados</Button>
+					<Button on:click={() => filterByEstadoId(30)} color="light" class="rounded-none h-7">Entregados</Button>
+					<Button on:click={() => filterByEstadoId(40)} color="light" class="rounded-none h-7">Facturado</Button>
+					<Button on:click={() => filterByEstadoId(50)} color="light" class="rounded-none h-7">Cobrado</Button>	
+				</ButtonGroup>
+		    </div>
 			<div class="flex items-center w-full sm:w-auto"><!----- Filtro--------->
 				<Input type="text" id="search" name="search" placeholder="Buscar Pedido" class="bg-white h-7 w-full sm:w-auto rounded-2xl" required/>
 				<Button  size="xs" class="bg-primary-500 h-7 ml-1 px-3 rounded-2xl">Buscar</Button>
@@ -109,7 +94,7 @@ const ruta = () => {
 			<TableHeadCell class="py-2" style="text-align: right;">Total</TableHeadCell>	
 		</TableHead>
 		<TableBody class="divide-y">
-			{#each pedidos.datos  as pe }  
+			{#each mutatedData as pe }  
 			 <TableBodyRow class="hover:bg-hover-gray-light" style="text-align: center;">
 				<TableBodyCell class="py-2"> {pe.pedido_cab_id}</TableBodyCell>
 				<TableBodyCell class="py-2" style="text-align: left;">{pe.razon_social}</TableBodyCell>
@@ -132,8 +117,8 @@ const ruta = () => {
 				</TableBodyRow>
 			{/each}
 			</TableBody>
-			<tfoot>
-				<tr class=" bg-white font-semibold text-gray-900 dark:text-white divide-y hover:bg-hover-gray-light ">
+			<tfoot >
+				<tr class="bg-gray-300 font-semibold text-gray-900 dark:text-white divide-y hover:bg-hover-gray-light ">
 				  <th scope="row" class="py-2 text-center ps-3"></th>
 				  <td class="py-2"> </td>
 				  <td class="py-2"></td>
@@ -153,14 +138,6 @@ const ruta = () => {
 	  </div><!------------ -Div contenedor: tabla + add + Filtro-->
 	</main> 
 
-<style>
-	.rounded-b-2xl {
-        border-radius: 1.5rem 0.5rem 0.5rem 1.5rem;
-    }
-	
 
-
-
-</style>
 
 				

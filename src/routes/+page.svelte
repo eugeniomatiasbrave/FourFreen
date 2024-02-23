@@ -1,18 +1,18 @@
 <script>
 	import {Img} from 'flowbite-svelte';
-	import LogoFG0 from '$lib/img/LogoFG0.png';
+	import FG03 from '$lib/img/FG03.png';
 	import './style.css';
 
 </script>
 
 <svelte:head>
-	<title>Inicio</title>
+	<title>FourGreens-Inicio</title>
 	<meta name="description" content="Inicio" />
 </svelte:head>
 
 <main class="inicio">
  <div class="flex items-center justify-center h-screen">
-    <Img src={LogoFG0}  alt="sample 1"/>
+    <Img src={FG03} class="w-36" alt="sample 1"/>
 </div>
 </main>
 

@@ -36,6 +36,7 @@
 		"postcss-nested": "^6.0.1",
 		"svelte-alert": "^1.0.13",
 		"svelte-french-toast": "^1.2.0",
+		"svelte-spa-router": "^4.0.1",
 		"sweetalert2": "^11.10.1"
 	}
 }

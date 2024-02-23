@@ -27,8 +27,8 @@ $: activeUrl = $page.url.pathname;
 
 <Sidebar class="bg-primary-500 text-white w-full">
 	{#if data.usuario === undefined}
-	<SidebarGroup class="bg-primary-500 flex justify-end " >
-			<SidebarItem href="/login" active={activeUrl === '/login'} label="Iniciar sesión" data-placement="left" class="bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold" >
+	<SidebarGroup class="bg-primary-500 flex justify-end" >
+			<SidebarItem href="/login" active={activeUrl === '/login'} label="Iniciar sesión" data-placement="left" class=" border border-white border-2 px-0 h-8 m-1 me-3 bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold" >
 			  <svelte:fragment slot="icon">
 				<ArrowRightToBracketSolid class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-white
 				 dark:group-hover:text-white" />
@@ -46,7 +46,7 @@ $: activeUrl = $page.url.pathname;
 			</svg>
 		</Button>
 		<SidebarGroup class="bg-primary-500">
-				<SidebarItem href="/logout" active={activeUrl === "/logout"} label="Cerrar sesión" class="bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold flex group" >
+				<SidebarItem href="/logout" active={activeUrl === "/logout"} label="Cerrar sesión" class="border border-white border-2 h-8 my-1 me-2 bg-primary-500 hover:bg-primary-500 text-white-sm font-semibold flex group" >
 				   <svelte:fragment slot="icon">
 					 <ArrowRightToBracketSolid class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-white
 					  dark:group-hover:text-white" />
