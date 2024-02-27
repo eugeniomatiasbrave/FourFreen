@@ -1,7 +1,8 @@
 <script >
 	import { page } from '$app/stores';	
 	import { goto } from '$app/navigation';
-	import { Input, Button, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, ButtonGroup } from 'flowbite-svelte';
+	import {Dropdown, DropdownItem, DropdownDivider, Input, Button, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, ButtonGroup } from 'flowbite-svelte';
+    import { ChevronDownSolid } from 'flowbite-svelte-icons';
 	export let data;
 	export const { pedidos } = data;
 	
@@ -27,6 +28,12 @@
 			case 30:
 	            titulo = "Pedidos Entregado";
 	            break;
+			case 40:
+                titulo = "Pedidos Facturado";
+                break;
+			case 50:
+                titulo = "Pedidos Cobrado";
+                break;
 	        default:
 	            titulo = "Todos los Pedidos ";
 	    }
@@ -44,7 +51,21 @@
 	<meta name="description" content="Pedidos"/>
 </svelte:head>
 
+	<main>
+		<div class="mx-auto flex justify-between-center item-center w-full border-b-2">
 		
+		
+        
+        
+        
+        
+        
+		
+        
+		
+        
+		</div>
+	</main>	
 
 	<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full ">
 		<div class="my-1">
@@ -62,14 +83,17 @@
 				</svg> Nuevo</Button>			
 			</div><!-----------fin botton add-------------->
 			<div class="mx-auto flex justify-between-center">
-				<ButtonGroup>
-					<Button on:click={() => filterByEstadoId(0)} color="light" class="rounded-none h-7">Todos</Button>
-					<Button on:click={() => filterByEstadoId(10)} color="light" class="rounded-none h-7">Ingresados</Button>
-					<Button on:click={() => filterByEstadoId(20)} color="light" class="rounded-none h-7">Preparados</Button>
-					<Button on:click={() => filterByEstadoId(30)} color="light" class="rounded-none h-7">Entregados</Button>
-					<Button on:click={() => filterByEstadoId(40)} color="light" class="rounded-none h-7">Facturado</Button>
-					<Button on:click={() => filterByEstadoId(50)} color="light" class="rounded-none h-7">Cobrado</Button>	
-				</ButtonGroup>
+				<Button color="light" class="rounded-2xl h-7" >Estado de pedidos<ChevronDownSolid 
+					class="w-3 h-3 ms-2 text-gray-500 dark:text-gray-100" /></Button>
+			   <Dropdown>
+				<DropdownItem on:click={() => filterByEstadoId(0)}>Todos los Pedidos</DropdownItem>
+				<DropdownDivider />
+				<DropdownItem on:click={() => filterByEstadoId(10)}>Pedidos Ingresados</DropdownItem>
+				<DropdownItem on:click={() => filterByEstadoId(20)}>Pedidos Preparados</DropdownItem>
+				<DropdownItem on:click={() => filterByEstadoId(30)}>Pedidos Entregados</DropdownItem>
+				<DropdownItem on:click={() => filterByEstadoId(40)}>Pedidos Facturados</DropdownItem>
+				<DropdownItem on:click={() => filterByEstadoId(50)}>Pedidos Cobrados</DropdownItem>
+			  </Dropdown>
 		    </div>
 			<div class="flex items-center w-full sm:w-auto"><!----- Filtro--------->
 				<Input type="text" id="search" name="search" placeholder="Buscar Pedido" class="bg-white h-7 w-full sm:w-auto rounded-2xl" required/>

@@ -10,8 +10,6 @@
 	
 export let data;
 
-
-	
 $: activeUrl = $page.url.pathname;
 
   let hidden2 = true;
@@ -22,21 +20,16 @@ $: activeUrl = $page.url.pathname;
     easing: sineIn
   };
 
-  
 </script>
 
 <Sidebar class="bg-primary-500 text-white w-full">
 	{#if data.usuario === undefined}
 	<SidebarGroup class="bg-primary-500 flex justify-end" >
-			<SidebarItem href="/login" active={activeUrl === '/login'} label="Iniciar sesión" data-placement="left" class=" border border-white border-2 px-0 h-8 m-1 me-3 bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold" >
-			  <svelte:fragment slot="icon">
-				<ArrowRightToBracketSolid class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-white
-				 dark:group-hover:text-white" />
-			  </svelte:fragment>
+			<SidebarItem href="/login" active={activeUrl === '/login'} label="Iniciar sesión" data-placement="left" class=" rounded-2xl border-white border-2 h-8 m-1 me-5 ps-0 bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold" >
 			</SidebarItem>  
     </SidebarGroup>
 {:else}
-	<div class="p-0 ms-3 flex group justify-between" >	
+	<div class="p-0 ms-5 flex group justify-between" >	
 		<Button on:click={() => (hidden2 = false)} class="text-white bg-primary-500 hover:bg-primary-800 border
 			border-primary-500 focus:ring-1 focus:outline-none focus:ring-primary-500 font-medium rounded-lg 
 			text-sm text-center inline-flex items-center dark:focus:ring-white dark:bg-gray-800 dark:border-white
@@ -46,11 +39,7 @@ $: activeUrl = $page.url.pathname;
 			</svg>
 		</Button>
 		<SidebarGroup class="bg-primary-500">
-				<SidebarItem href="/logout" active={activeUrl === "/logout"} label="Cerrar sesión" class="border border-white border-2 h-8 my-1 me-2 bg-primary-500 hover:bg-primary-500 text-white-sm font-semibold flex group" >
-				   <svelte:fragment slot="icon">
-					 <ArrowRightToBracketSolid class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-white
-					  dark:group-hover:text-white" />
-				   </svelte:fragment>
+				<SidebarItem href="/logout" active={activeUrl === "/logout"} label="Cerrar sesión" class="rounded-2xl border-white border-2 h-8 my-1 me-5 ps-0 bg-primary-500 hover:bg-primary-500 text-white-sm font-semibold flex group" >
 				 </SidebarItem>
 			</SidebarGroup>
 	</div>
