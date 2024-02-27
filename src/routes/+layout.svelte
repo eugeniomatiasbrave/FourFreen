@@ -25,7 +25,10 @@ $: activeUrl = $page.url.pathname;
 <Sidebar class="bg-primary-500 text-white w-full">
 	{#if data.usuario === undefined}
 	<SidebarGroup class="bg-primary-500 flex justify-end" >
-			<SidebarItem href="/login" active={activeUrl === '/login'} label="Iniciar sesión" data-placement="left" class=" rounded-2xl border-white border-2 h-8 m-1 me-5 ps-0 bg-primary-500 hover:bg-primary-500 px-3 text-white-sm font-semibold" >
+			<SidebarItem href="/login" active={activeUrl === '/login'} label="Iniciar sesión" data-placement="left" 
+			class="rounded-2xl border-white border-2 h-8 m-1 me-5 ps-0 bg-gradient-to-br from-secundary-500 from-5% to-primary-500 to-50% hover:bg-gradient-to-bl focus:ring-4
+			focus:outline-none focus:ring-secundary-300 dark:focus:ring-cyan-800 
+			px-3 text-white text-sm font-semibold" >
 			</SidebarItem>  
     </SidebarGroup>
 {:else}
@@ -39,7 +42,11 @@ $: activeUrl = $page.url.pathname;
 			</svg>
 		</Button>
 		<SidebarGroup class="bg-primary-500">
-				<SidebarItem href="/logout" active={activeUrl === "/logout"} label="Cerrar sesión" class="rounded-2xl border-white border-2 h-8 my-1 me-5 ps-0 bg-primary-500 hover:bg-primary-500 text-white-sm font-semibold flex group" >
+				<SidebarItem href="/logout" active={activeUrl === "/logout"} label="Cerrar sesión" 
+				class="rounded-2xl border-white border-2 h-8 m-1 me-5 ps-0
+				bg-gradient-to-br from-secundary-500 from-5%
+				to-primary-500 to-50% hover:bg-gradient-to-bl focus:ring-4
+			   focus:outline-none focus:ring-secundary-300 dark:focus:ring-cyan-800 text-white text-sm font-semibold flex group" >
 				 </SidebarItem>
 			</SidebarGroup>
 	</div>
