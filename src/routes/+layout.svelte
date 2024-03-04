@@ -1,8 +1,7 @@
 <script>
 	import './style.css';
 	import '../app.postcss';
-	import { Drawer, Button, Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Img, A } from 'flowbite-svelte';
-	import { ArrowRightToBracketSolid } from 'flowbite-svelte-icons';
+	import { Drawer, Button, Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Img } from 'flowbite-svelte';
 	import { sineIn } from 'svelte/easing';
 	import LogoFG from '$lib/img/LogoFG2.jpg';
 	
@@ -41,6 +40,7 @@ $: activeUrl = $page.url.pathname;
 				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
 			</svg>
 		</Button>
+		<p class="text-white pt-2 m-0  font-semibold">Bienvenido {data.usuario.nombre} a FourGreens!!!</p>
 		<SidebarGroup class="bg-primary-500">
 				<SidebarItem href="/logout" active={activeUrl === "/logout"} label="Cerrar sesión" 
 				class="rounded-2xl border-white border-2 h-8 m-1 me-5 ps-0
@@ -76,4 +76,9 @@ class="w-64 border-r-4 border-secundary-500">
  </Drawer>
 {/if}
 </Sidebar>
+
+
+ 
+
+
  <slot />
