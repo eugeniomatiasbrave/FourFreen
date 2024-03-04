@@ -24,6 +24,21 @@ export const handle = async ({event, resolve}) => {
   console.log("ok hook:", event.locals)
   }
 
-  return resolve(event)
+// para ver el tiempo de carga
+  const route = event.url.pathname;
+  let start = performance.now();
+  let end = performance.now(); 
+  let responseTime = end - start;
+  
+  if (responseTime > 2000) {
+    console.log(`SLOW 🐢: ${route} took ${responseTime}ms`)
+  }
+  
+  if (responseTime < 2000) {
+    console.log(`FAST 🚀 ruta: ${route} tiempo: ${responseTime}ms`)
+  }
+  
+const response = await resolve(event);
+return response
   
 }
