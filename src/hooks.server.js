@@ -38,7 +38,7 @@ export const handle = async ({event, resolve}) => {
     console.log(`FAST 🚀 ruta: ${route} tiempo: ${responseTime}ms`)
   }
   
-const response = await resolve(event);
-return response
+ const response = await resolve(event);
+ return response
   
 }
