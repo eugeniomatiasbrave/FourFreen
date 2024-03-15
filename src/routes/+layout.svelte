@@ -56,7 +56,7 @@ $: activeUrl = $page.url.pathname;
 	<Img src={LogoFG} class=" mb-4 pb-2 border-b-2 border-gray-400" alt="FourGreen Logo" />
 	<SidebarItem {spanClass} class="">
 		<svelte:fragment slot="icon">
-			<a href="/"  active={activeUrl === "/"} class=" w-52 text-gray-800 px-0 text-white-sm font-semibold "  
+			<a href="/"  active={activeUrl === "/"} on:click={()=> (hidden2 = true)} class=" w-52 text-gray-800 px-0 text-white-sm font-semibold "  
 			data-sveltekit-preload-code="eager" data-placement="left">Inicio</a>
 		</svelte:fragment>
 	</SidebarItem>
