@@ -66,7 +66,7 @@ const SortedRazonSocial=(params)=>{
 	<meta name="description" content="Clientes"/>
 </svelte:head>
 
-<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full  ">
+<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-0 w-full  ">
 <div class="my-1">
   <h3  class="text-3xl font-bold text-center py-2 bg-gradient-to-r
 from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Tabla de Clientes</h3>

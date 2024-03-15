@@ -1,5 +1,5 @@
 <script>
-	import { Img,P } from 'flowbite-svelte';
+	import { Img } from 'flowbite-svelte';
 	import FG03 from '$lib/img/FG03.png';
 	import './style.css';
 </script>

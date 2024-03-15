@@ -1,4 +1,6 @@
 <script >
+	import { browser } from '$app/environment';
+	import {formatDate} from '$lib/DateUtils';
 	import { page } from '$app/stores';	
 	import { goto } from '$app/navigation';
 	import {Dropdown, DropdownItem, DropdownDivider, Input, Button, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, ButtonGroup } from 'flowbite-svelte';
@@ -8,9 +10,16 @@
 	
 	let Pedidos = pedidos.datos;
 	
-	const searchParams = new URLSearchParams(window.location.search);
-	let estadoId = parseInt(searchParams.get("estado_id") || '0');
-	
+
+	const searchParams = new URLSearchParams(browser ? window.location.search : '?estado_id=0');
+	//solucionar problema de redireccionamiento
+
+	if (!searchParams.has('estado_id')) { // Si no hay estado_id, establece el estado_id en 0
+		searchParams.set('estado_id', '0');// Establece el estado_id en 0
+		goto(`?${searchParams.toString()}`); // Redirige a la página con el estado_id en 0
+	}
+
+	 
 	let mutatedData = Pedidos;
 	
 	$: estadoId = parseInt($page.url.searchParams.get("estado_id")?.toString() || '0');
@@ -44,6 +53,7 @@
 	    searchParams.set('estado_id', newEstadoId.toString());
 	    goto(`?${searchParams.toString()}`);
 	}
+
 	 
 </script>
 <svelte:head>
@@ -54,20 +64,11 @@
 	<main>
 		<div class="mx-auto flex justify-between-center item-center w-full border-b-2">
 		
-		
-        
-        
-        
-        
-        
-		
-        
-		
         
 		</div>
 	</main>	
 
-	<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full ">
+	<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-0 w-full ">
 		<div class="my-1">
 		  <h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
 			 from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">{titulo}</h3>
@@ -122,7 +123,7 @@
 			 <TableBodyRow class="hover:bg-hover-gray-light" style="text-align: center;">
 				<TableBodyCell class="py-2"> {pe.pedido_cab_id}</TableBodyCell>
 				<TableBodyCell class="py-2" style="text-align: left;">{pe.razon_social}</TableBodyCell>
-				<TableBodyCell class="py-2" style="text-align: right;">{pe.fecha}</TableBodyCell>			
+				<TableBodyCell class="py-2" style="text-align: right;">{ formatDate(pe.fecha)}</TableBodyCell>			
 				<TableBodyCell class="py-2">  
 					<a href={`/pedidos_estado/${pe.pedido_estado_id}`} class="font-medium text-primary-600 hover:underline dark:text-primary-500">{pe.pedido_estado_id}</a>
 				   </TableBodyCell>

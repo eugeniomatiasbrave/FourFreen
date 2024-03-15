@@ -30,12 +30,14 @@ import { fetchApi } from '$lib/fetchApi';
 import { BASE_URL } from '$lib/utils.js';
 
 export const load = async ({ locals }) => {
+
+
   const getPedidos = async () => {
     const pedidos = await fetchApi.get({url: BASE_URL + "/pedidos",token: locals.token,resStatus: 200});
     return pedidos;
   };
     return {
-		pedidos: await getPedidos()
+		pedidos: await getPedidos(),
 	};
   }
 
