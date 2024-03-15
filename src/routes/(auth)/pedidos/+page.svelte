@@ -1,4 +1,5 @@
 <script >
+	import { fade } from 'svelte/transition'
 	import { browser } from '$app/environment';
 	import {formatDate} from '$lib/DateUtils';
 	import { page } from '$app/stores';	
@@ -10,16 +11,13 @@
 	
 	let Pedidos = pedidos.datos;
 	
-
 	const searchParams = new URLSearchParams(browser ? window.location.search : '?estado_id=0');
 	//solucionar problema de redireccionamiento
-
 	if (!searchParams.has('estado_id')) { // Si no hay estado_id, establece el estado_id en 0
 		searchParams.set('estado_id', '0');// Establece el estado_id en 0
 		goto(`?${searchParams.toString()}`); // Redirige a la página con el estado_id en 0
 	}
 
-	 
 	let mutatedData = Pedidos;
 	
 	$: estadoId = parseInt($page.url.searchParams.get("estado_id")?.toString() || '0');
@@ -56,19 +54,14 @@
 
 	 
 </script>
+
 <svelte:head>
 	<title>{titulo}</title>
 	<meta name="description" content="Pedidos"/>
 </svelte:head>
 
-	<main>
-		<div class="mx-auto flex justify-between-center item-center w-full border-b-2">
-		
-        
-		</div>
-	</main>	
-
-	<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-0 w-full ">
+{#key estadoId} <!--cada vez que cambia el estado_id se genera el efecto de fade (transition)-->
+	<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-0 w-full " in:fade>
 		<div class="my-1">
 		  <h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
 			 from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">{titulo}</h3>
@@ -162,6 +155,10 @@
 		</div>
 	  </div><!------------ -Div contenedor: tabla + add + Filtro-->
 	</main> 
+
+	{/key}
+
+
 
 
 

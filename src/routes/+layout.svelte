@@ -4,7 +4,7 @@
 	import { Drawer, Button, Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Img } from 'flowbite-svelte';
 	import { sineIn } from 'svelte/easing';
 	import LogoFG from '$lib/img/LogoFG2.jpg';
-	
+	import PageTransition from '$lib/Componentes/transition.svelte'
 	import { page } from '$app/stores';
 	
 export let data;
@@ -79,8 +79,8 @@ $: activeUrl = $page.url.pathname;
 </Sidebar>
 
 
-
-
+<PageTransition url={data.url}>
 	<slot />
+</PageTransition>
 
 
