@@ -1,11 +1,13 @@
 <script>
 	import {goto} from '$app/navigation';
-	import {Input,Button,P,Table,Label,Select,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
+	import {Button,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
 	import {onMount} from 'svelte';
+	import Titulo from '$lib/componentes/titulo.svelte';
 	export let data;
 	export let form;	
 	export const { productos, clientes} = data;
 	
+	let titulo = 'Nuevo Pedido';
 	let items=[];
 	
 	onMount(()=>{
@@ -77,13 +79,10 @@ const handleClienteChange = (event) => {
 	</script>
 	
 	<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-1 w-full ">
-		<div class="my-4">
-			<h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
-		  from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Nuevo Pedido</h3>
-		  </div>
-		<div class="bg-white mx-auto p-1 pt-1 my-0 rounded-3xl border border-gray-300 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-custom 2xl:w-custom">
+		<Titulo {titulo}/>
+		<div class="bg-white mx-auto p-1 pt-1 my-0 rounded-2xl border border-gray-300 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-custom 2xl:w-custom">
 		  <form method="POST" >       	 		
-			  <div class="rounded-b-3xl border border-gray-300 p-3 my-0"><!----------- detalles items--------------> 
+			  <div class="rounded-2xl border border-gray-300 p-3 my-0"><!----------- detalles items--------------> 
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-3"> <!--cabecera ( nombre cliente y fecha)--->
 					<div class="mt-0">
 					  <label for="small" class="block mb-1 text-sm  text-gray-900 dark:text-white">Cliente</label>
@@ -139,7 +138,7 @@ const handleClienteChange = (event) => {
 			</div>
 			</div> 
 				<div>	  
-					<Button on:click={handleAdd} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-7 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Agregar Item</Button>	
+					<Button on:click={handleAdd} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-7 mb-2 md:mb-0 rounded-lg my-1 shadow-2xl hover:shadow-3xl">Agregar Item</Button>	
 				</div>		
 			</div><!-----------fin detalles items-------------->				 
 			
@@ -166,9 +165,9 @@ const handleClienteChange = (event) => {
 			  </div>
 			</div> <!-------fin Area items-------------->					
 			<div class="mt-1 mb-2">
-				<Button on:click={formClose} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-7 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Cancelar</Button>				  
-				<Button  on:click={reset} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-7 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Actualizar</Button>
-				<Button type="submit" on:submit={handleSubmit} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-7 mb-2 md:mb-0 md:ml-2 rounded-3xl my-1 shadow-2xl hover:shadow-3xl">Nuevo Pedido</Button>		
+				<Button on:click={formClose} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-7 mb-2 md:mb-0 md:ml-2 rounded-lg my-1 shadow-2xl hover:shadow-3xl">Cancelar</Button>				  
+				<Button  on:click={reset} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-7 mb-2 md:mb-0 md:ml-1 rounded-lg my-1 shadow-2xl hover:shadow-3xl">Actualizar</Button>
+				<Button type="submit" on:submit={handleSubmit} data-sveltekit-preload-code="hover" size="sm" class="bg-primary-500 h-7 mb-2 md:mb-0 md:ml-1 rounded-lg my-1 shadow-2xl hover:shadow-3xl">Nuevo Pedido</Button>		
 			</div>				  
 		</form>	
 	  </div>
@@ -182,7 +181,7 @@ const handleClienteChange = (event) => {
 			border-radius: 4px;
 			overflow: scroll;		
 		}
-		.rounded-b-3xl {
-             border-radius: 1.5rem 1.5rem 0.5rem 0.5rem; /* Esquinas superiores con 3rem de radio, esquinas inferiores con 1rem de radio */
-}		
+
+
+
 	</style>

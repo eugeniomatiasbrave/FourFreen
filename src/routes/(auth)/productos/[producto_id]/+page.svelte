@@ -50,7 +50,7 @@ if (producto_id === "-1") {
  {#each ProductosId as producto }
  <main class="flex items-center justify-center pt-36 ">
   <div class="bg-white mx-auto p-4 my-0 rounded-3xl border border-gray-200 shadow-md sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/5 2xl:w-1/5">
-    <form class="flex flex-col space-y-3 px-2" method="POST" action="?/editar" use:enhance >   
+    <form class="flex flex-col space-y-3 px-3" method="POST" action="?/editar" use:enhance >   
         <h3 class="text-3xl font-bold text-center bg-gradient-to-r
         from-secundary-400 from-10% via-primary-500 via-40% to-primary-500 to-70% text-transparent bg-clip-text">Editar el producto!!</h3>	
 		<InputField type="hidden" name="producto_id" value={producto.producto_id}/>
@@ -75,9 +75,9 @@ if (producto_id === "-1") {
     <h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
         from-secundary-400 from-10% via-primary-500 via-40% to-primary-500 to-70% text-transparent bg-clip-text">Confirmar la eliminación!!</h3>		
      <h5 class="text-lg font-bold text-center mb-4">Producto: {producto.nombre}</h5>
-    <form class="flex flex-col space-y-4" method="POST" action="?/eliminar" use:enhance>
+    <form class="flex flex-col space-y-1 px-5" method="POST" action="?/eliminar" use:enhance>
       <Input type="hidden" name="producto_id" value={producto.producto_id}/>
-      <FooterForm {ruta} {textoboton1} {textoboton2} />
+      <FooterForm {ruta} {textoboton1} {textoboton2}  />
     </form>
   </div>
 </main>

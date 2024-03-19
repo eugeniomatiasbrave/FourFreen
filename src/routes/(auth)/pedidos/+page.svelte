@@ -31,7 +31,7 @@
 	            titulo = "Pedidos Ingresados";
 	            break;
 	        case 20:
-	            titulo = "Pedido Preparados";
+	            titulo = "Pedidos Preparados";
 	            break;
 			case 30:
 	            titulo = "Pedidos Entregado";
@@ -64,10 +64,10 @@
 {#key estadoId} <!--cada vez que cambia el estado_id se genera el efecto de fade (transition)-->
 	<main class="bg-gray-50 dark:bg-gray-900 m-0 w-full " in:fade>
 		<Titulo {titulo}/>
-	 <div class="bg-white mx-auto p-1 pt-1 rounded-2xl border border-gray-300 shadow-md w-full xl:w-4/5 "> <!--Div contenedor: tabla + add + Filtro--------->
+	 <div class="bg-white mx-auto p-1 pt-1 rounded-lg border border-gray-300 shadow-md w-full xl:w-4/5 "> <!--Div contenedor: tabla + add + Filtro--------->
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"><!-----cabecera Add + Filtro---------> 
 			<div class="mb-2 sm:mb-0 w-full sm:w-auto"><!-------Boton nuevo pedido-------------->
-				<Button href='/pedidos/0' data-sveltekit-preload-code="hover" size="xs" class="bg-primary-500 rounded-2xl m-0 h-7 px-3 w-full sm:w-auto">
+				<Button href='/pedidos/0' data-sveltekit-preload-code="hover" size="xs" class="bg-primary-500 rounded-lg m-0 h-7 px-3 w-full sm:w-auto">
 				<svg class="w-4 h-4 me-1 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
 				fill="none" viewBox="0 0 20 20">
 				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
@@ -75,7 +75,7 @@
 				</svg> Nuevo</Button>			
 			</div><!-----------fin botton add-------------->
 			<div class="mx-auto flex justify-between-center">
-				<Button color="light" class="rounded-2xl h-7" >Estado de pedidos<ChevronDownSolid 
+				<Button color="light" class="rounded-lg h-7" >Estado de pedidos<ChevronDownSolid 
 					class="w-3 h-3 ms-2 text-gray-500 dark:text-gray-100" /></Button>
 			   <Dropdown>
 				<DropdownItem on:click={() => filterByEstadoId(0)}>Todos los Pedidos</DropdownItem>
@@ -88,9 +88,9 @@
 			  </Dropdown>
 		    </div>
 			<div class="flex items-center w-full sm:w-auto"><!----- Filtro--------->
-				<Input type="text" id="search" name="search" placeholder="Buscar Pedido" class="bg-white h-7 w-full sm:w-auto rounded-2xl" required/>
-				<Button  size="xs" class="bg-primary-500 h-7 ml-1 px-3 rounded-2xl">Buscar</Button>
-				<Button size="xs" class="bg-primary-500 h-7 ml-1 px-3 rounded-2xl">Actualizar</Button>		
+				<Input type="text" id="search" name="search" placeholder="Buscar Pedido" class="bg-white h-7 w-full sm:w-auto rounded-lg" required/>
+				<Button  size="xs" class="bg-primary-500 h-7 ml-1 px-3 rounded-lg">Buscar</Button>
+				<Button size="xs" class="bg-primary-500 h-7 ml-1 px-3 rounded-lg">Actualizar</Button>		
 			</div>			    
 		 </div> <!-----fin cabecera Add + Filtro--------->
 	  <div class="border-gray-900">
