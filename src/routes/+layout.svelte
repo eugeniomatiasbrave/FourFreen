@@ -7,9 +7,7 @@
 	import PageTransition from '$lib/Componentes/transition.svelte'
 	import Brand from '$lib/Componentes/brand.svelte';
 	import { page } from '$app/stores';
-	
-	
-export let data;
+	export let data;
 
 $: activeUrl = $page.url.pathname;
 
@@ -24,32 +22,31 @@ $: activeUrl = $page.url.pathname;
 
 <Sidebar class="bg-primary-500 text-white w-full ">
 	{#if data.usuario === undefined}	
-	<div class="bg-primary-500 flex justify-between w-full p-2" >
-		<div>
-			<a href="/" class="text-white text-xl font-semibold ms-7">FourGreens</a>
+	<div class="bg-primary-500 flex flex-col sm:flex-row justify-between w-full p-2 md:p-2 lg:justify-between ">
+		<div class="sx:my-1">
+		  <a href="/" active={activeUrl === "/"} class="text-white text-xl font-semibold ms-7 lg:text-2xl">FourGreens</a>
 		</div>
-		<ul class="flex flex-row p-0 m-0"> 
-		 <Brand />
-		 <li class="border-l border-b h-8 hover:bg-primary-800 px-4 rounded-lg">
-			<a href="/login" active={activeUrl==='/login'} class="text-white text-sm font-semibold">Iniciar sesión</a>
-		 </li>
-	    </ul>
-    </div>
-		
+		<ul class="flex flex-col sm:flex-row ">
+		  <Brand />
+		  <li class="border-l border-b h-8 hover:bg-primary-800 px-4 rounded-lg">
+			<a href="/login" active={activeUrl === "/login"} class="text-white text-sm font-semibold ">Iniciar sesión</a>
+		  </li>
+		</ul>
+	  </div>
+	  	
 	{:else}
-	<div class="bg-primary-500 p-0 m-0 flex justify-between w-full" >	
+	<div class="bg-primary-500 flex flex-col sm:flex-row justify-between w-full py-2 lg:justify-between " >	
 		<Button on:click={() => (hidden2 = false)} class="text-white bg-primary-500 hover:bg-primary-800 border
 			border-primary-500 focus:ring-1 focus:outline-none focus:ring-primary-500 font-medium rounded-lg 
 			text-sm text-center inline-flex items-center dark:focus:ring-white dark:bg-gray-800 dark:border-white
-			dark:text-white dark:hover:bg-gray-700 m-1 p-2 ms-7">
+			dark:text-white dark:hover:bg-gray-700 py-1 ms-7 sx:justify-start">
 			<svg class="w-5 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
 				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M1 1h15M1 7h15M1 13h15"/>
 			</svg>
 		</Button>
-		<p class="text-white pt-3 m-0  font-semibold">Bienvenido {data.usuario.nombre} a FourGreens!!!</p>
-		<ul class="flex flex-row p-2 m-0">
+		<ul class="flex flex-col sm:flex-row pe-2">
 			<Brand />
-			<li class="border-l border-b h-8 hover:bg-primary-800 px-4 rounded-lg">
+			<li class="border-l border-b  h-8 hover:bg-primary-800 px-4  rounded-lg">
 				<a href="/logout" active={activeUrl === "/logout"} class="text-white text-sm font-semibold  " >Cerrar sesión
 			</a>
 		</li>
@@ -88,10 +85,17 @@ $: activeUrl = $page.url.pathname;
 </PageTransition>
 
 <style>
-	li {
-		margin: 0 10px 0 10px ;
-		padding-top: 2px;
+
+li {
+	margin: 0 7px 0 7px ;
+	padding-top: 2px;
 	}
+
+	@media (max-width: 640px) {
+		li {
+			margin: 3px 0px 3px 0px ;
+		}
+}
 </style>
 
 
