@@ -3,7 +3,9 @@
 	import {Input,Button,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';			
 	export let data;
 	export const {productos,productosSearch,sortPrecio,searchSortPrecio,sortNombre,sortProducto_id}=data;
+	import Titulo from '$lib/componentes/titulo.svelte';
 
+let titulo= 'Tabla de Productos';
 let searchTerm='';
 let sortOrder= 1
 let filteredPrecio=sortPrecio.datos
@@ -80,18 +82,15 @@ const sortedNombre=(params)=> {
     sortedNombre(sortOrder === 1 ? -1 : 1);
   };
 
-
 </script>
 			
 <svelte:head>
 	<title>FourGreens-Productos</title>
 	<meta name="description" content="Productos" />
 </svelte:head>		
-<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-0 w-full ">
-  <div class="my-1">
-	<h3 class="text-3xl font-bold text-center py-2 bg-gradient-to-r
-	        from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Tabla de Productos</h3>
-  </div>
+<main class="bg-gray-50 dark:bg-gray-900 m-0 w-full ">
+<Titulo {titulo}/>
+
 	<!--------------------------Seccion tabla --> 	
 	  <div class="bg-white mx-auto p-1 pt-1 rounded-2xl border border-gray-300 shadow-md w-full xl:w-1/2"><!----------------Div contenedor: tabla + add + Filtro--------->
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto "> 

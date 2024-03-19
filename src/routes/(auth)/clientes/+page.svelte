@@ -1,9 +1,11 @@
 <script>
 import {goto} from '$app/navigation';
-import {Input,Button,P,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
+import {Input,Button,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
+import Titulo from '$lib/componentes/titulo.svelte';
 export let data;
 export const {clientes,sortrazonsocial,searchclientes,sortCliente_id} = data;
 
+let titulo = 'Tabla de Clientes';
 let searchTerm = '';
 let sortOrder= 1
 
@@ -66,11 +68,8 @@ const SortedRazonSocial=(params)=>{
 	<meta name="description" content="Clientes"/>
 </svelte:head>
 
-<main class="bg-gray-50 dark:bg-gray-900 sm:p-3 mx-0 w-full  ">
-<div class="my-1">
-  <h3  class="text-3xl font-bold text-center py-2 bg-gradient-to-r
-from-secundary-400 from-30% via-primary-500 via-50% to-primary-500 to-50% text-transparent bg-clip-text">Tabla de Clientes</h3>
-</div>
+<main class="bg-gray-50 dark:bg-gray-900 m-0 w-full  ">
+	<Titulo {titulo}/>
 	<div class=" bg-white mx-auto p-1 pt-1 rounded-2xl border border-gray-300 shadow-md w-full  xl:w-4/5 "> <!----------------Div contenedor: tabla + add + Filtro--------->  
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto "> 
 			<div class="mb-2 sm:mb-0 w-full sm:w-auto"> 

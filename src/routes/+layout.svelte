@@ -7,6 +7,7 @@
 	import PageTransition from '$lib/Componentes/transition.svelte'
 	import { page } from '$app/stores';
 	
+	
 export let data;
 
 $: activeUrl = $page.url.pathname;
@@ -18,38 +19,44 @@ $: activeUrl = $page.url.pathname;
     duration: 200,
     easing: sineIn
   };
-
 </script>
 
-	<Sidebar class="bg-primary-500 text-white w-full ">
-		{#if data.usuario === undefined}
-		<SidebarGroup class="bg-primary-500 flex justify-end" >
-		  <SidebarItem href="/login" active={activeUrl === '/login'} label="Iniciar sesión" data-placement="left" 
-			class="rounded-2xl border-white border-2 h-8 m-1 me-5 ps-0 bg-gradient-to-br from-secundary-500 from-5%
-			 to-primary-500 to-50% hover:bg-gradient-to-bl focus:ring-4
-			focus:outline-none focus:ring-secundary-300 dark:focus:ring-cyan-800 
-			px-3 text-white text-sm font-semibold" >
-		  </SidebarItem>  
-        </SidebarGroup>
+<Sidebar class="bg-primary-500 text-white w-full ">
+	{#if data.usuario === undefined}	
+	<div class="bg-primary-500 flex justify-end w-full p-2" >
+		<ul class="flex flex-row p-0 m-0">
+		   <li  class="border-l border-b h-8 hover:bg-primary-800 px-3 rounded-lg">
+			 <a href="/sustentabilidad" active={activeUrl==='/sustentabilidad'} class="text-white text-sm font-semibold">Sustentabilidad</a>
+		   </li>
+			<li class="border-l border-b h-8 hover:bg-primary-800 px-3 rounded-lg">
+			 <a href="/somos" active={activeUrl==='/somos'} class="text-white text-sm font-semibold">Quienes somos</a>
+			</li>
+			<li  class="border-l border-b h-8 hover:bg-primary-800 px-3 rounded-lg">
+			  <a href="/contacto" active={activeUrl==='/contacto'} class="text-white text-sm font-semibold">Contacto</a>
+			</li>
+			<li class="border-l border-b h-8 hover:bg-primary-800 px-4 rounded-lg">
+			  <a href="/login" active={activeUrl==='/login'} class="text-white text-sm font-semibold">Iniciar sesión</a>
+		    </li>
+	    </ul>
+    </div>
+		
 	{:else}
-	<div class="p-0 m-0 flex group justify-between" >	
+	<div class="bg-primary-500 p-0 m-0 flex justify-between w-full" >	
 		<Button on:click={() => (hidden2 = false)} class="text-white bg-primary-500 hover:bg-primary-800 border
 			border-primary-500 focus:ring-1 focus:outline-none focus:ring-primary-500 font-medium rounded-lg 
 			text-sm text-center inline-flex items-center dark:focus:ring-white dark:bg-gray-800 dark:border-white
-			dark:text-white dark:hover:bg-gray-700 m-1 p-2 ms-5">
-			<svg class="w-5 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+			dark:text-white dark:hover:bg-gray-700 m-1 p-2 ms-7">
+			<svg class="w-5 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M1 1h15M1 7h15M1 13h15"/>
 			</svg>
 		</Button>
-		<p class="text-white pt-2 m-0  font-semibold">Bienvenido {data.usuario.nombre} a FourGreens!!!</p>
-		<SidebarGroup class="bg-primary-500">
-			<SidebarItem href="/logout" active={activeUrl === "/logout"} label="Cerrar sesión" 
-				class="rounded-2xl border-white border-2 h-8 m-1 me-5 ps-0
-				bg-gradient-to-br from-secundary-500 from-5%
-				to-primary-500 to-50% hover:bg-gradient-to-bl focus:ring-4
-				focus:outline-none focus:ring-secundary-300 dark:focus:ring-cyan-800 text-white text-sm font-semibold flex group" >
-			</SidebarItem>
-		</SidebarGroup>
+		<p class="text-white pt-3 m-0  font-semibold">Bienvenido {data.usuario.nombre} a FourGreens!!!</p>
+		<ul class="flex flex-row p-2 m-0">
+			<li class="border-l border-b h-8 hover:bg-primary-800 px-4 rounded-lg">
+				<a href="/logout" active={activeUrl === "/logout"} class="text-white text-sm font-semibold  " >Cerrar sesión
+			</a>
+		</li>
+		</ul>
 	</div>
 	<Drawer transitionType="fly" {transitionParams} bind:hidden={hidden2} id="sidebar2" 
 	class="w-64 border-r-4 border-secundary-500">
@@ -79,8 +86,15 @@ $: activeUrl = $page.url.pathname;
 </Sidebar>
 
 
-<PageTransition url={data.url}>
+<PageTransition url={data.url} >
 	<slot />
 </PageTransition>
+
+<style>
+	li {
+		margin: 0 10px 0 10px ;
+		padding-top: 2px;
+	}
+</style>
 
 
