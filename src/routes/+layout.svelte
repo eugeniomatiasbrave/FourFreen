@@ -1,10 +1,11 @@
 <script>
 	import './style.css';
 	import '../app.postcss';
-	import { Drawer, Button, Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, Img } from 'flowbite-svelte';
+	import { Drawer, Button, Sidebar, SidebarGroup, SidebarItem, SidebarWrapper,Img} from 'flowbite-svelte';
 	import { sineIn } from 'svelte/easing';
 	import LogoFG from '$lib/img/LogoFG2.jpg';
 	import PageTransition from '$lib/Componentes/transition.svelte'
+	import Brand from '$lib/Componentes/brand.svelte';
 	import { page } from '$app/stores';
 	
 	
@@ -23,20 +24,15 @@ $: activeUrl = $page.url.pathname;
 
 <Sidebar class="bg-primary-500 text-white w-full ">
 	{#if data.usuario === undefined}	
-	<div class="bg-primary-500 flex justify-end w-full p-2" >
-		<ul class="flex flex-row p-0 m-0">
-		   <li  class="border-l border-b h-8 hover:bg-primary-800 px-3 rounded-lg">
-			 <a href="/sustentabilidad" active={activeUrl==='/sustentabilidad'} class="text-white text-sm font-semibold">Sustentabilidad</a>
-		   </li>
-			<li class="border-l border-b h-8 hover:bg-primary-800 px-3 rounded-lg">
-			 <a href="/somos" active={activeUrl==='/somos'} class="text-white text-sm font-semibold">Quienes somos</a>
-			</li>
-			<li  class="border-l border-b h-8 hover:bg-primary-800 px-3 rounded-lg">
-			  <a href="/contacto" active={activeUrl==='/contacto'} class="text-white text-sm font-semibold">Contacto</a>
-			</li>
-			<li class="border-l border-b h-8 hover:bg-primary-800 px-4 rounded-lg">
-			  <a href="/login" active={activeUrl==='/login'} class="text-white text-sm font-semibold">Iniciar sesión</a>
-		    </li>
+	<div class="bg-primary-500 flex justify-between w-full p-2" >
+		<div>
+			<a href="/" class="text-white text-xl font-semibold ms-7">FourGreens</a>
+		</div>
+		<ul class="flex flex-row p-0 m-0"> 
+		 <Brand />
+		 <li class="border-l border-b h-8 hover:bg-primary-800 px-4 rounded-lg">
+			<a href="/login" active={activeUrl==='/login'} class="text-white text-sm font-semibold">Iniciar sesión</a>
+		 </li>
 	    </ul>
     </div>
 		
@@ -52,6 +48,7 @@ $: activeUrl = $page.url.pathname;
 		</Button>
 		<p class="text-white pt-3 m-0  font-semibold">Bienvenido {data.usuario.nombre} a FourGreens!!!</p>
 		<ul class="flex flex-row p-2 m-0">
+			<Brand />
 			<li class="border-l border-b h-8 hover:bg-primary-800 px-4 rounded-lg">
 				<a href="/logout" active={activeUrl === "/logout"} class="text-white text-sm font-semibold  " >Cerrar sesión
 			</a>
