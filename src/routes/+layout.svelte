@@ -28,8 +28,8 @@ $: activeUrl = $page.url.pathname;
 		</div>
 		<ul class="flex flex-col sm:flex-row ">
 		  <Brand />
-		  <li class="border-l border-b h-8 hover:bg-primary-800 px-4 rounded-lg">
-			<a href="/login" active={activeUrl === "/login"} class="text-white text-sm font-semibold ">Iniciar sesión</a>
+		  <li class="border-l border-b h-8 bg-white hover:border-primary-800 px-4 rounded-lg">
+			<a href="/login" active={activeUrl === "/login"} class="text-primary-600 text-sm font-semibold ">Iniciar sesión</a>
 		  </li>
 		</ul>
 	  </div>
@@ -46,8 +46,8 @@ $: activeUrl = $page.url.pathname;
 		</Button>
 		<ul class="flex flex-col sm:flex-row pe-2">
 			<Brand />
-			<li class="border-l border-b  h-8 hover:bg-primary-800 px-4  rounded-lg">
-				<a href="/logout" active={activeUrl === "/logout"} class="text-white text-sm font-semibold  " >Cerrar sesión
+			<li class="border-l border-b h-8 bg-white hover:border-primary-800 px-4 rounded-lg">
+				<a href="/logout" active={activeUrl === "/logout"} class="text-primary-600 text-sm font-semibold  " >Cerrar sesión
 			</a>
 		</li>
 		</ul>

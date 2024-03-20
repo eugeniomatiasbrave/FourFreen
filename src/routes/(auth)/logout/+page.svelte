@@ -17,7 +17,7 @@ let textoboton2="No. Volver";
 </svelte:head>
 
 <main class="flex items-start justify-center pt-32">
-	<div class="bg-white mx-auto p-2 pt-2 rounded-3xl border border-gray-300 shadow-2xl  sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/6"> 
+	<div class="bg-white mx-auto p-5 pt-2 rounded-3xl border border-gray-300 shadow-2xl  sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/6"> 
 		<div class="justify-between items-center mx-auto w-full"> 
 			<div class="text-center ">
 				<h1 class="text-2xl font-bold text-center py-2 bg-gradient-to-r

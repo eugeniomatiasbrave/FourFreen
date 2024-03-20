@@ -8,8 +8,8 @@
     export let onValidate = () => {};
   </script>
   
-  <Label class="space">
-    <span>{placeholder}</span>
+  <Label class="space my-1 text-gray-700">
+    <span >{placeholder}</span>
     <Input 
       type={type} 
       name={name} 
@@ -17,7 +17,14 @@
       maxlength={maxlength} 
       required
       placeholder={placeholder} 
-      class="bg-white h-8 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+      class="  px-4 py-2 w-full h-8 rounded-lg border mt-1 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
       on:change={onValidate}
     />
   </Label>
+
+
+  <style>
+    
+
+    
+  </style>
