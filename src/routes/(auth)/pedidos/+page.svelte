@@ -118,7 +118,11 @@
 				<TableBodyCell class="py-2">  
 					<a href={`/pedidos_estado/${pe.pedido_estado_id}`} class="font-medium text-primary-600 hover:underline dark:text-primary-500">{pe.pedido_estado_id}</a>
 				   </TableBodyCell>
-				<TableBodyCell class="py-2">{pe.pedido_estado_nombre}</TableBodyCell>
+				<TableBodyCell class="py-2" >
+					<div class="pedido-estado pedido-estado-{pe.pedido_estado_nombre.toLowerCase().replace(/\s/g, '-')}">
+						{pe.pedido_estado_nombre}
+					</div>
+				</TableBodyCell>
 				<TableBodyCell class="py-2"> 
 					<a href={`/pedidos/${pe.pedido_cab_id}/detalle`}  
 					class="font-medium text-primary-600 hover:underline dark:text-primary-500"> Detalle</a>
@@ -155,6 +159,42 @@
 	</main> 
 
 	{/key}
+
+
+	<style>
+		.pedido-estado {
+		  padding: 6px 3px 6px 3px; 
+		  margin: 0;
+		  border: 1px solid #e3e2e2;
+		  border-radius: 15px;
+		  font-weight: bold;
+		}
+	  
+		.pedido-estado-pedido-ingresado {
+		  background-color: #f5fb9e; 
+		}
+	  
+		.pedido-estado-pedido-confeccionado {
+		  background-color: #fcd747; 
+	    }
+
+		.pedido-estado-pedido-entregado {
+		  background-color: #cde986; 
+		}
+		
+		.pedido-estado-pedido-facturado {
+		  background-color: #9adee4;   
+		}
+		
+		.pedido-estado-pedido-cobrado {
+		  background-color: #69b6bd; 
+		}
+	  
+		.pedido-estado-pedido-anulado {
+		  background-color: #d3d3d3; 
+		}
+		
+	  </style>
 
 
 

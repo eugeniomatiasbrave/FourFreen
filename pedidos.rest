@@ -13,7 +13,7 @@ Authorization: Bearer {{token}}
 
 ###
 // Recupera el detalle del pedidos id..............ok
-GET {{baseUrl}}/pedidos/38/detalle HTTP/1.1 
+GET {{baseUrl}}/pedidos/43/detalle HTTP/1.1 
 Authorization: Bearer {{token}}
 
 ###
@@ -49,6 +49,9 @@ Authorization: Bearer {{token}}
 GET {{baseUrl}}/pedidos?search=ELO HTTP/1.1 
 Authorization: Bearer {{token}}
 
-
+###
+// Recupera el detalle del pedidos id..............ok
+GET {{baseUrl}}/pedidos?estado_id=10 HTTP/1.1 
+Authorization: Bearer {{token}}
 
 

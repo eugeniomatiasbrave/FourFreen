@@ -57,13 +57,13 @@ Content-Type: application/json
 
 ###
 // para actualizar nombre y/o precio del producto, va el :id en el path y los campos en el body
-PATCH {{baseUrl}}/productos/110 HTTP/1.1
+PATCH {{baseUrl}}/productos/205 HTTP/1.1
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
   "nombre": "Lechuga Mantecosa",
-  "precio": 430.00
+  "precio": 130.00
 }
 
 ###
