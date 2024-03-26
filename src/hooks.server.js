@@ -12,9 +12,9 @@ export const handle = async ({event, resolve}) => {
     // es una ruta protegida
     if (!token || !usuario) {
       console.log("Faltan datos:", token, usuario)
-      event.cookies.delete('AuthorizationToken');
-      event.cookies.delete("Usuario")
-      throw redirect(303, "/login")
+      /* @migration task: add path argument */ event.cookies.delete('AuthorizationToken');
+      /* @migration task: add path argument */ event.cookies.delete("Usuario")
+      redirect(303, "/login");
     } 
   }
   // tiene las cookies, está autorizado, cargo los datos en locals

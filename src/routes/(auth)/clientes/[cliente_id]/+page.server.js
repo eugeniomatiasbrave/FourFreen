@@ -18,7 +18,7 @@ export const load = async ({ locals, params}) => {
 			return clientes;
 		} catch (err) {
 			console.error('Error: ', err);
-			throw error(500, 'Algo salio mal con la peticion de los clientes', err);
+			error(500, 'Algo salio mal con la peticion de los clientes', err);
 		}
 	};
 
@@ -57,7 +57,7 @@ export const actions = {
 
 		const result = ClienteSchemaAgregar.safeParse(data);
 		if (!result.success) {
-			throw error ( 400, {message: 'Error 400: Datos del formulario incorrectos', hint: 'Prueba nuevamente'} )
+			error ( 400, {message: 'Error 400: Datos del formulario incorrectos', hint: 'Prueba nuevamente'} );
 		}
 
 		try {
@@ -73,7 +73,7 @@ export const actions = {
 			}
 		} catch (err) {
 			console.log('Error: ', err);
-			throw error ( 404, {message: 'Error 404: Cliente no agregado', hint: 'Prueba nuevamente'} )
+			error ( 404, {message: 'Error 404: Cliente no agregado', hint: 'Prueba nuevamente'} );
 			
 		}
 		return { success: true, message: `Cliente ${data.razon_social} agregado correctamente!!!`};
@@ -109,7 +109,7 @@ export const actions = {
 		const result = ClienteSchemaEditar.safeParse(data);
 
 		if (!result.success) {
-			throw error ( 400, {message: 'Erroe 400: datos del formulario son inválidos', hint: 'Prueba nuevamente'} )
+			error ( 400, {message: 'Erroe 400: datos del formulario son inválidos', hint: 'Prueba nuevamente'} );
 		}
 		try {
 			const res = await fetchApi.patch({
@@ -149,7 +149,7 @@ export const actions = {
 			  }
 			} catch (err) {
 			  console.log('Error: ', err);
-			  throw error ( 404, {message: 'Error 404: Cliente no editado', hint: 'Prueba nuevamente'} )
+			  error ( 404, {message: 'Error 404: Cliente no editado', hint: 'Prueba nuevamente'} );
 			}		
 		   return { success: true, message:`Cliente ${data.razon_social} editado correctamente!!!`};
 		  },
@@ -181,7 +181,7 @@ export const actions = {
 				}
 			} catch (err) {
 				console.log('Error: ', err);
-				throw error ( 404, {message: 'Error 404: Cliente no eliminado', hint: 'Prueba nuevamente'} )
+				error ( 404, {message: 'Error 404: Cliente no eliminado', hint: 'Prueba nuevamente'} );
 			}
 			return { success: true, message: `Cliente Id: ${cliente_id} eliminado correctamente!!!` };
 		}

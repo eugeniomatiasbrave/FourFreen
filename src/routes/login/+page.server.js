@@ -43,9 +43,9 @@ export const actions = {
 			}
 		} catch (err) {
 			console.log('Error: ', err);
-			throw error(500, 'Something went wrong logging in');
+			error(500, 'Something went wrong logging in');
 		}
-		throw redirect(303, '/');   
+		redirect(303, '/');   
 
 	}
 	

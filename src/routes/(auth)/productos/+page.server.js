@@ -11,7 +11,7 @@ export const load = async ({ locals, url }) => {
       return productos;
     } catch (err) {
       console.error('Error original: ', err);
-      throw error(500, 'Algo salio mal con la peticion de los productos', err);
+      error(500, 'Algo salio mal con la peticion de los productos', err);
     }
   };
 

@@ -11,7 +11,7 @@ export const load = async ({ locals, url }) => {
 			return clientes;
 		} catch (err) {
 			console.error('Error: ', err);
-			throw error(500, 'Algo salio mal con la peticion de los clientes', err);
+			error(500, 'Algo salio mal con la peticion de los clientes', err);
 		}
 	};
 
@@ -21,7 +21,7 @@ export const load = async ({ locals, url }) => {
 			return searchclientes;
 		} catch (err) {
 			console.error('Error: ', err);
-			throw error(500, 'Algo salio mal al filtrar por nombre de cliente', err);
+			error(500, 'Algo salio mal al filtrar por nombre de cliente', err);
 		}
 	};
 
@@ -31,7 +31,7 @@ export const load = async ({ locals, url }) => {
 			return sortrazonsocial;
 		} catch (err) {
 			console.error('Error: ', err);
-			throw error(500, 'Algo salio mal al ordenar los clientes', err);
+			error(500, 'Algo salio mal al ordenar los clientes', err);
 		}
 	};
 
@@ -41,7 +41,7 @@ export const load = async ({ locals, url }) => {
 		   return sortCliente_id;  
 		} catch (err) {
 			console.error('Error: ', err);
-		  throw error(500, 'Algo salio mal al ordenar los productos', err);
+		  error(500, 'Algo salio mal al ordenar los productos', err);
 		 }     
 	   }
 
@@ -90,7 +90,7 @@ export const actions = {
 			}
 		} catch (err) {
 			console.log('Error: ', err);
-			throw error(500, 'Algo salió mal al eliminar el cliente');
+			error(500, 'Algo salió mal al eliminar el cliente');
 		}
 		return { success: true, message: 'Cliente eliminado correctamente!!!' };
 	}

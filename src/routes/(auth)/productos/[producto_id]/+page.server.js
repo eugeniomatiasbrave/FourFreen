@@ -19,14 +19,14 @@ const validateData = async (request, schema) => {
   const result = schema.safeParse(data);
   if (!result.success) {
     console.log(result.error);
-    throw error(400, { message: 'Error 400: Datos del formulario incorrectos', hint: 'Prueba nuevamente' });
+    error(400, { message: 'Error 400: Datos del formulario incorrectos', hint: 'Prueba nuevamente' });
   }
   return result.data;
 };
 
 const handleApiError = (err, message) => {
   console.error('Error: ', err);
-  throw error(404, { message, hint: 'Prueba nuevamente' });
+  error(404, { message, hint: 'Prueba nuevamente' });
 };
 
 export const load = async ({ locals, params }) => {

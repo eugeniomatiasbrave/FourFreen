@@ -50,7 +50,7 @@ export const actions = {
 			}
 		} catch (err) {
 			// console.log('Error: ', err);
-			throw error(500, 'Algo salió mal al agregar el pedido');
+			error(500, 'Algo salió mal al agregar el pedido');
 		}
 		return { success: true, message: 'Pedido agregado correctamente!!!' };
 	}

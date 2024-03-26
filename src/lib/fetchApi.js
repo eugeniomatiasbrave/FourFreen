@@ -74,15 +74,15 @@ function handleResponse(response, resStatus) {
       const data = text && JSON.parse(text);
       
       if (!response.ok) {
-        throw error(response.status, {
-          message: JSON.stringify(data.error)
-        });
+        error(response.status, {
+                    message: JSON.stringify(data.error)
+                  });
       }
       
       if (resStatus !== 0 && resStatus !== response.status) {
-        throw error(response.status, {
-          message: `${JSON.stringify(data)} - Esperado: ${resStatus}`
-        });
+        error(response.status, {
+                    message: `${JSON.stringify(data)} - Esperado: ${resStatus}`
+                  });
       }
       return data;
   });
