@@ -29,29 +29,9 @@
 					<InputField type="text" name="username" placeholder="Usuario"/>
 					<InputField type="password" name="password" placeholder="Contraseña"/>
 					<InputField type="password" name="confirm_password" placeholder="Repetir Contraseña"/>
-					<Button on:click={() => goto('/')} class="bg-primary-500 h-8 mt-3 ">Crear Usuario</Button>
+					<Button  class="bg-primary-500 h-8 mt-3 ">Crear Usuario</Button>
 				 </form>
 				 <Button on:click={() => goto('/')} class="bg-white hover:border-primary-800 border border-primary-500 hover:bg-white h-5 text-xs text-primary-600 mt-3 px-2">Volver</Button>
 				</div>
 			</main>
 				
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-
-			
-			
-			
-			
-			
-			
-			

@@ -2,7 +2,7 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import adapter from '@sveltejs/adapter-auto';
 
 /** @type {import('@sveltejs/kit').Config} */
-const config = {
+const  config = {
 	kit: {
 		adapter: adapter()
 	},
@@ -10,4 +10,6 @@ const config = {
 	preprocess: [vitePreprocess({})]
 };
 
+ 
 export default config;
+

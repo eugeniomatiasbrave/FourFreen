@@ -36,8 +36,8 @@ export const actions = {
 					sameSite: 'strict',
 					maxAge: 60 * 60 * 24 // 1 day
 				});
-
-							
+			
+				
 			} else {
 				return {success: false, message: 'Datos de acceso incorrectos'}						
 			}
@@ -45,8 +45,8 @@ export const actions = {
 			console.log('Error: ', err);
 			error(500, 'Something went wrong logging in');
 		}
-		redirect(303, '/');   
-
+		
+		throw redirect(303, '/');   
 	}
 	
 };

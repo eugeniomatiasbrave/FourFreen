@@ -2,18 +2,13 @@
 import AlertError from '$lib/Componentes/AlertError.svelte';
 import {enhance} from '$app/forms';
 import { P, Button} from 'flowbite-svelte';
-import FooterForm from '$lib/Componentes/FooterForm.svelte';
 import InputField from '$lib/Componentes/InputField.svelte';
 import {goto} from '$app/navigation';
 import '../style.css';
-
 export let form;
 export let data;
-
 console.log(form)
 console.log(data)
-
-
 </script>
 
 <svelte:head>
@@ -54,7 +49,6 @@ console.log(data)
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
-
 .divider hr {
 	flex: 1;
 }

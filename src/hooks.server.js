@@ -11,18 +11,21 @@ export const handle = async ({event, resolve}) => {
   if (event.route.id && event.route.id.includes("auth")) {
     // es una ruta protegida
     if (!token || !usuario) {
-      console.log("Faltan datos:", token, usuario)
-      /* @migration task: add path argument */ event.cookies.delete('AuthorizationToken');
-      /* @migration task: add path argument */ event.cookies.delete("Usuario")
-      redirect(303, "/login");
+      // Correctamente se añade el argumento 'path' al eliminar las cookies
+      event.cookies.delete('AuthorizationToken', { path: '/' });
+      event.cookies.delete("Usuario", { path: '/' });
+      // Redirecciona al usuario a la página de inicio de sesión
+     throw redirect(303, "/");
     } 
+    
   }
-  // tiene las cookies, está autorizado, cargo los datos en locals
-  if (token && usuario) {
-  event.locals.token = token
-  event.locals.usuario = JSON.parse(usuario)
-  console.log("ok hook:", event.locals)
-  }
+    // tiene las cookies, está autorizado, cargo los datos en locals
+    if (token && usuario) {
+      event.locals.token = token
+      event.locals.usuario = JSON.parse(usuario)
+      console.log("ok hook:", event.locals)
+   
+    }
 
 // para ver el tiempo de carga
   const route = event.url.pathname;

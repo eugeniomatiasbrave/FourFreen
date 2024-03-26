@@ -15,7 +15,8 @@ export const load = async ({ locals, url }) => {
     return {
       usuario: locals.usuario,
       menu: menu,
-      url: url.pathname
+      url: url.parthname
+      
     };
   } else {
     return {};
