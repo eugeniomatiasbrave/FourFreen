@@ -62,7 +62,7 @@
 </svelte:head>
 
 {#key estadoId} <!--cada vez que cambia el estado_id se genera el efecto de fade (transition)-->
-	<main class="bg-gray-50 dark:bg-gray-900 m-0 w-full " in:fade>
+	<main class="bg-gray-50 dark:bg-gray-900 m-0 w-full " in:fade|global>
 		<Titulo {titulo}/>
 	 <div class="bg-white mx-auto p-1 pt-1 rounded-lg border border-gray-300 shadow-md w-full xl:w-4/5 "> <!--Div contenedor: tabla + add + Filtro--------->
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"><!-----cabecera Add + Filtro---------> 
