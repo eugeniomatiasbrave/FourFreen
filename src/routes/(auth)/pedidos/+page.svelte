@@ -4,13 +4,25 @@
 	import {formatDate} from '$lib/DateUtils';
 	import { page } from '$app/stores';	
 	import { goto } from '$app/navigation';
-	import {Dropdown, DropdownItem, DropdownDivider, Input, Button, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, ButtonGroup } from 'flowbite-svelte';
+	import {Dropdown, DropdownItem, DropdownDivider, Input, Button, Table, TableBody, TableBodyCell, Span,TableBodyRow, TableHead, TableHeadCell, Badge } from 'flowbite-svelte';
     import { ChevronDownSolid } from 'flowbite-svelte-icons';
 	import Titulo from '$lib/componentes/titulo.svelte';
+	import { derived } from 'svelte/store';
 	export let data;
 	export const { pedidos } = data;
 	
-	let Pedidos = pedidos.datos;
+	let Pedidos = pedidos.datos
+
+	
+	let cantAll = Pedidos.length;
+	let cantIngresados= Pedidos.filter(p => p.pedido_estado_id === 10).length;
+	let cantPreparados= Pedidos.filter(p => p.pedido_estado_id === 20).length;
+	let cantEntregados= Pedidos.filter(p => p.pedido_estado_id === 30).length;
+	let cantFacturados= Pedidos.filter(p => p.pedido_estado_id === 40).length;
+	let cantCobrados= Pedidos.filter(p => p.pedido_estado_id === 50).length;
+	
+	
+	let estadoId = parseInt($page.url.searchParams.get("estado_id")?.toString() || '0');
 	
 	const searchParams = new URLSearchParams(browser ? window.location.search : '?estado_id=0');
 	//solucionar problema de redireccionamiento
@@ -78,13 +90,19 @@
 				<Button color="light" class="rounded-lg h-7" >Estado de pedidos<ChevronDownSolid 
 					class="w-3 h-3 ms-2 text-gray-500 dark:text-gray-100" /></Button>
 			   <Dropdown>
-				<DropdownItem on:click={() => filterByEstadoId(0)}>Todos los Pedidos</DropdownItem>
+				<DropdownItem on:click={() => filterByEstadoId(0)}>Todos los Pedidos 
+					<Badge rounded class="w-4 h-4 ms-4 p-0 font-semibold text-primary-900 bg-gray-200 dark:text-primary-800 dark:bg-white">{cantAll}</Badge></DropdownItem>
 				<DropdownDivider />
-				<DropdownItem on:click={() => filterByEstadoId(10)}>Pedidos Ingresados</DropdownItem>
-				<DropdownItem on:click={() => filterByEstadoId(20)}>Pedidos Preparados</DropdownItem>
-				<DropdownItem on:click={() => filterByEstadoId(30)}>Pedidos Entregados</DropdownItem>
-				<DropdownItem on:click={() => filterByEstadoId(40)}>Pedidos Facturados</DropdownItem>
-				<DropdownItem on:click={() => filterByEstadoId(50)}>Pedidos Cobrados</DropdownItem>
+				<DropdownItem on:click={() => filterByEstadoId(10)}>Pedidos Ingresados 
+					<Badge rounded class="w-4 h-4 ms-2 p-0 font-semibold text-primary-900 bg-gray-200 dark:text-primary-800 dark:bg-white">{cantIngresados}</Badge></DropdownItem>
+				<DropdownItem on:click={() => filterByEstadoId(20)}>Pedidos Preparados 
+					<Badge rounded class="w-4 h-4 ms-2 p-0 font-semibold text-primary-900 bg-gray-200 dark:text-primary-800 dark:bg-white">{cantPreparados}</Badge></DropdownItem>
+				<DropdownItem on:click={() => filterByEstadoId(30)}>Pedidos Entregados
+					<Badge rounded class="w-4 h-4 ms-2 p-0 font-semibold text-primary-900 bg-gray-200 dark:text-primary-800 dark:bg-white">{cantEntregados}</Badge></DropdownItem>
+				<DropdownItem on:click={() => filterByEstadoId(40)}>Pedidos Facturados
+					<Badge rounded class="w-4 h-4 ms-2 p-0 font-semibold text-primary-900 bg-gray-200 dark:text-primary-800 dark:bg-white">{cantFacturados}</Badge></DropdownItem>
+				<DropdownItem on:click={() => filterByEstadoId(50)}>Pedidos Cobrados  
+					<Badge rounded class="w-4 h-4 ms-4 p-0 font-semibold text-primary-900 bg-gray-200 dark:text-primary-800 dark:bg-white">{cantCobrados}</Badge></DropdownItem>
 			  </Dropdown>
 		    </div>
 			<div class="flex items-center w-full sm:w-auto"><!----- Filtro--------->
@@ -145,12 +163,12 @@
 				  <td class="py-2"></td>
 				  <td class="py-2"></td>
 				  <td class="py-2"></td>
-				  <td class="py-2 ps-6">{pedidos.datos.length}</td>
+				  <td class="py-2 ps-6">{mutatedData.length}</td>
 				  <td class="py-2"></td>
 				  <td class="py-2"></td>
 				  <td class="py-2"></td>
-				  <td class="py-2 pe-6" style="text-align: right;">{ pedidos.datos.reduce((total, item) => total + item.total_unidades, 0)}</td>
-				  <td class="py-2 text-right pe-6">$ { pedidos.datos.reduce((total, item) => total + item.total_importe, 0).toFixed(2)}</td> 
+				  <td class="py-2 pe-6" style="text-align: right;">{ mutatedData.reduce((total, item) => total + item.total_unidades, 0)}</td>
+				  <td class="py-2 text-right pe-6">$ { mutatedData.reduce((total, item) => total + item.total_importe, 0).toFixed(2)}</td> 
 				</tr>
 			  </tfoot>
 			</Table>
