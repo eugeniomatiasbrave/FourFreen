@@ -1,4 +1,5 @@
 <script >
+	
 	import { fade } from 'svelte/transition'
 	import { browser } from '$app/environment';
 	import {formatDate} from '$lib/DateUtils';
@@ -7,20 +8,21 @@
 	import {Dropdown, DropdownItem, DropdownDivider, Input, Button, Table, TableBody, TableBodyCell, Span,TableBodyRow, TableHead, TableHeadCell, Badge } from 'flowbite-svelte';
     import { ChevronDownSolid } from 'flowbite-svelte-icons';
 	import Titulo from '$lib/componentes/titulo.svelte';
-	import { derived } from 'svelte/store';
+	
+
 	export let data;
 	export const { pedidos } = data;
+
+	
 	
 	let Pedidos = pedidos.datos
 
-	
 	let cantAll = Pedidos.length;
 	let cantIngresados= Pedidos.filter(p => p.pedido_estado_id === 10).length;
 	let cantPreparados= Pedidos.filter(p => p.pedido_estado_id === 20).length;
 	let cantEntregados= Pedidos.filter(p => p.pedido_estado_id === 30).length;
 	let cantFacturados= Pedidos.filter(p => p.pedido_estado_id === 40).length;
 	let cantCobrados= Pedidos.filter(p => p.pedido_estado_id === 50).length;
-	
 	
 	let estadoId = parseInt($page.url.searchParams.get("estado_id")?.toString() || '0');
 	
@@ -72,8 +74,8 @@
 	<title>{titulo}</title>
 	<meta name="description" content="Pedidos"/>
 </svelte:head>
-
 {#key estadoId} <!--cada vez que cambia el estado_id se genera el efecto de fade (transition)-->
+
 	<main class="bg-gray-50 dark:bg-gray-900 m-0 w-full " in:fade|global>
 		<Titulo {titulo}/>
 	 <div class="bg-white mx-auto p-1 pt-1 rounded-lg border border-gray-300 shadow-md w-full xl:w-4/5 "> <!--Div contenedor: tabla + add + Filtro--------->
@@ -91,7 +93,7 @@
 					class="w-3 h-3 ms-2 text-gray-500 dark:text-gray-100" /></Button>
 			   <Dropdown>
 				<DropdownItem on:click={() => filterByEstadoId(0)}>Todos los Pedidos 
-					<Badge rounded class="w-4 h-4 ms-4 p-0 font-semibold text-primary-900 bg-gray-200 dark:text-primary-800 dark:bg-white">{cantAll}</Badge></DropdownItem>
+					<Badge rounded class="w-4 h-4 ms-2 p-0 font-semibold text-primary-900 bg-gray-200 dark:text-primary-800 dark:bg-white">{cantAll}</Badge></DropdownItem>
 				<DropdownDivider />
 				<DropdownItem on:click={() => filterByEstadoId(10)}>Pedidos Ingresados 
 					<Badge rounded class="w-4 h-4 ms-2 p-0 font-semibold text-primary-900 bg-gray-200 dark:text-primary-800 dark:bg-white">{cantIngresados}</Badge></DropdownItem>
