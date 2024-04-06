@@ -1,7 +1,6 @@
 <script>
 	import {goto} from '$app/navigation';
-	import {Input,Button,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
-	import { Dropdown, Checkbox } from 'flowbite-svelte';			
+	import {Dropdown, Checkbox,Input,Button,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';		
 	export let data;
 	export const {productos,productosSearch,sortPrecio,searchSortPrecio,sortNombre,sortProducto_id}=data;
 	import Titulo from '$lib/componentes/titulo.svelte';
@@ -146,7 +145,7 @@ const sortedNombre=(params)=> {
 								<Checkbox bind:checked={visibleColumns.eliminar} on:click={() => toggleColumn('eliminar')}>Checked Eliminar</Checkbox>
 							</li>
 						</Dropdown>
-				</TableHeadCell>
+				    </TableHeadCell>
 
 					{#if visibleColumns.id} 
 					 <TableHeadCell class="py-2" align="left">

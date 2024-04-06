@@ -1,12 +1,11 @@
 <script >
-	
 	import { fade } from 'svelte/transition'
 	import { browser } from '$app/environment';
 	import {formatDate} from '$lib/DateUtils';
 	import { page } from '$app/stores';	
 	import { goto } from '$app/navigation';
-	import {Dropdown, DropdownItem, DropdownDivider, Input, Button, Table, TableBody, TableBodyCell, Span,TableBodyRow, TableHead, TableHeadCell, Badge } from 'flowbite-svelte';
-    import { ChevronDownSolid } from 'flowbite-svelte-icons';
+	import {Checkbox,Dropdown, DropdownItem, DropdownDivider, Input, Button, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Badge } from 'flowbite-svelte';
+	import { ChevronDownSolid } from 'flowbite-svelte-icons';
 	import Titulo from '$lib/componentes/titulo.svelte';
 	
 
@@ -67,7 +66,26 @@
 	    goto(`?${searchParams.toString()}`);
 	}
 
-	 
+	let visibleColumns = {
+	  pedido_cab_id: true,
+	  razon_social: true,
+	  fecha: true,
+	  pedido_estado_id: true,
+	  pedido_estado_nombre: true,
+	  detalle: true,
+	  usuario_id: true,
+	  item: true,
+	  editar: true,
+	  eliminar: true,
+	  total_unidades: true,
+	  total_importe:true
+	};
+  
+	// Función para alternar la visibilidad
+	function toggleColumn(column) {
+	  visibleColumns[column] = !visibleColumns[column];
+	}
+
 </script>
 
 <svelte:head>
@@ -78,7 +96,7 @@
 
 	<main class="bg-gray-50 dark:bg-gray-900 m-0 w-full " in:fade|global>
 		<Titulo {titulo}/>
-	 <div class="bg-white mx-auto p-1 pt-1 rounded-lg border border-gray-300 shadow-md w-full xl:w-4/5 "> <!--Div contenedor: tabla + add + Filtro--------->
+	 <div class="bg-white mx-auto p-1 pt-1 rounded-lg border border-gray-400 shadow-md w-full xl:w-4/5 "> <!--Div contenedor: tabla + add + Filtro--------->
 		<div class="flex flex-col sm:flex-row justify-between items-center mx-auto w-full"><!-----cabecera Add + Filtro---------> 
 			<div class="mb-2 sm:mb-0 w-full sm:w-auto"><!-------Boton nuevo pedido-------------->
 				<Button href='/pedidos/0' data-sveltekit-preload-code="hover" size="xs" class="bg-primary-500 rounded-lg m-0 h-7 px-3 w-full sm:w-auto">
@@ -114,75 +132,214 @@
 			</div>			    
 		 </div> <!-----fin cabecera Add + Filtro--------->
 	  <div class="border-gray-900">
-		<Table hoverable={true} class="mx-auto mt-1 border text-xs">  <!-------Table-------------->
+		<Table hoverable={true} class="mx-auto mt-1 border border-gray-400 text-xs">  <!-------Table-------------->
 		  <TableHead class="bg-primary-500 text-white" theadClass='text-xs' style="text-align: right;">
-			<TableHeadCell class="py-2 px-0 ">Pedido Id</TableHeadCell>
-			<TableHeadCell class="py-2" style="text-align: left;">Cliente</TableHeadCell>
-			<TableHeadCell class="py-2" style="text-align: center;">Fecha</TableHeadCell>			
-			<TableHeadCell class="py-2 px-0">Estado Id</TableHeadCell>
-			<TableHeadCell class="py-2">Estado Pedido</TableHeadCell>
-			<TableHeadCell class="py-2" >Detalle</TableHeadCell>
-			<TableHeadCell class="py-2 px-0" style="text-align: center;">Us id</TableHeadCell>
-			<TableHeadCell class="py-2">Items</TableHeadCell>
-			<TableHeadCell class="py-2">Editar</TableHeadCell>
-			<TableHeadCell class="py-2">Eliminar</TableHeadCell>
-			<TableHeadCell class="py-2" style="text-align: right;">Tot. Uds</TableHeadCell>
-			<TableHeadCell class="py-2" style="text-align: right;">Total</TableHeadCell>	
+
+			<TableHeadCell class="p-0 m-0 w-0 border-r " >
+				<Button class="bg-primary-500 w-0 h-0">👀</Button>
+				<Dropdown class="w-52 p-1 space-y-0 text-sm divide-y border border-gray-400 rounded">
+					<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+						<Checkbox  bind:checked={visibleColumns.pedido_cab_id} on:click={() => toggleColumn('pedido_cab_id')}>Checked Id</Checkbox>
+					</li>
+					<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+						<Checkbox bind:checked={visibleColumns.razon_social} on:click={() => toggleColumn('razon_social')}>Checked Cliente</Checkbox>
+					</li>
+					<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+						<Checkbox bind:checked={visibleColumns.fecha} on:click={() => toggleColumn('fecha')}>Checked Fecha</Checkbox>
+					</li>
+					<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+						<Checkbox bind:checked={visibleColumns.pedido_estado_id} on:click={() => toggleColumn('pedido_estado_id')}>Checked Estado Pedido</Checkbox>
+					</li>
+					<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600 ">
+						<Checkbox bind:checked={visibleColumns.pedido_estado_nombre} on:click={() => toggleColumn('pedido_estado_nombre')}>Checked Estado Nombre</Checkbox>
+					</li>
+					<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+						<Checkbox bind:checked={visibleColumns.detalle} on:click={() => toggleColumn('detalle')}>Checked Detalle</Checkbox>
+					</li>
+					<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+						<Checkbox bind:checked={visibleColumns.usuario_id} on:click={() => toggleColumn('usuario_id')}>Checked Usuario Id</Checkbox>
+					</li>
+					<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+						<Checkbox bind:checked={visibleColumns.item} on:click={() => toggleColumn('item')}>Checked Item</Checkbox>
+					</li>
+					<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+						<Checkbox bind:checked={visibleColumns.editar} on:click={() => toggleColumn('editar')}>Checked Editar</Checkbox>
+					</li>
+					<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+						<Checkbox bind:checked={visibleColumns.eliminar} on:click={() => toggleColumn('eliminar')}>Checked Eliminar</Checkbox>
+					</li>
+					<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+						<Checkbox bind:checked={visibleColumns.total_unidades} on:click={() => toggleColumn('total_unidades')}>Checked Total Unidades</Checkbox>
+					</li>
+					<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+						<Checkbox bind:checked={visibleColumns.total_importe} on:click={() => toggleColumn('total_importe')}>Checked Importe Total</Checkbox>
+					</li>
+				</Dropdown>
+			</TableHeadCell>
+			  {#if visibleColumns.pedido_cab_id}
+			    <TableHeadCell class="py-2 px-0">Pedido Id</TableHeadCell>
+			  {/if}
+
+			  {#if visibleColumns.razon_social}
+			    <TableHeadCell class="py-2" style="text-align: left;">Cliente</TableHeadCell>
+			  {/if}
+
+			  {#if visibleColumns.fecha}
+			    <TableHeadCell class="py-2" style="text-align: center;">Fecha</TableHeadCell>
+			  {/if}
+
+			  {#if visibleColumns.pedido_estado_id}			
+			    <TableHeadCell class="py-2 px-0">Estado Id</TableHeadCell>
+			  {/if}
+
+			  {#if visibleColumns.pedido_estado_nombre}
+			   <TableHeadCell class="py-2 px-0" style="text-align: center;">Estado Pedido</TableHeadCell>
+			  {/if}
+
+			  {#if visibleColumns.detalle}
+			   <TableHeadCell class="py-2" >Detalle</TableHeadCell>
+			  {/if}
+
+			  {#if visibleColumns.usuario_id}
+			   <TableHeadCell class="py-2 px-0" style="text-align: center;">Us id</TableHeadCell>
+			  {/if}
+
+			  {#if visibleColumns.item}
+			    <TableHeadCell class="py-2">Items</TableHeadCell>
+			  {/if}
+
+			{#if visibleColumns.editar}
+			  <TableHeadCell class="py-2">Editar</TableHeadCell>
+			{/if}
+
+			{#if visibleColumns.eliminar}
+			  <TableHeadCell class="py-2">Eliminar</TableHeadCell>
+			{/if}
+
+			{#if visibleColumns.total_unidades}
+			  <TableHeadCell class="py-2" style="text-align: right;">Tot. Uds</TableHeadCell>
+			{/if}
+
+			{#if visibleColumns.total_importe}
+			  <TableHeadCell class="py-2" style="text-align: right;">Total</TableHeadCell>	
+			{/if}
+
 		</TableHead>
-		<TableBody class="divide-y">
-			{#each mutatedData as pe }  
-			 <TableBodyRow class="hover:bg-hover-gray-light" style="text-align: center;">
-				<TableBodyCell class="py-2"> {pe.pedido_cab_id}</TableBodyCell>
+		  <TableBody class="divide-y">
+			{#each mutatedData as pe}  
+			 <TableBodyRow class="hover:bg-hover-gray-light" align="left">
+				<TableBodyCell class="w-0 p-0 m-0" align="right"></TableBodyCell>
+				{#if visibleColumns.pedido_cab_id}
+				 <TableBodyCell class="py-2">{pe.pedido_cab_id}</TableBodyCell>
+                {/if}
+                {#if visibleColumns.razon_social}
 				<TableBodyCell class="py-2" style="text-align: left;">{pe.razon_social}</TableBodyCell>
-				<TableBodyCell class="py-2" style="text-align: right;">{ formatDate(pe.fecha)}</TableBodyCell>			
+				{/if}
+				{#if visibleColumns.fecha}
+				<TableBodyCell class="py-2" style="text-align: right;">{formatDate(pe.fecha)}</TableBodyCell>	
+				{/if}
+				{#if visibleColumns.pedido_estado_id}
 				<TableBodyCell class="py-2">  
 					<a href={`/pedidos_estado/${pe.pedido_estado_id}`} class="font-medium text-primary-600 hover:underline dark:text-primary-500">{pe.pedido_estado_id}</a>
 				   </TableBodyCell>
-				<TableBodyCell class="py-2" >
-					<div class="pedido-estado pedido-estado-{pe.pedido_estado_nombre.toLowerCase().replace(/\s/g, '-')}">
+				{/if}
+				{#if visibleColumns.pedido_estado_nombre}
+				<TableBodyCell class="py-2">
+					<div class="pedido-estado pedido-estado-{pe.pedido_estado_nombre.toLowerCase().replace(/\s/g,'-')}">
 						{pe.pedido_estado_nombre}
 					</div>
 				</TableBodyCell>
-				<TableBodyCell class="py-2"> 
+                {/if}
+				{#if visibleColumns.detalle}
+				 <TableBodyCell class="py-2"> 
 					<a href={`/pedidos/${pe.pedido_cab_id}/detalle`}  
-					class="font-medium text-primary-600 hover:underline dark:text-primary-500"> Detalle</a>
-				</TableBodyCell> <!--detalle pedido-->
+					class="font-medium text-primary-600 hover:underline dark:text-primary-500">Detalle</a>
+				 </TableBodyCell> <!--detalle pedido-->
+                {/if}
+				{#if visibleColumns.usuario_id}
 				<TableBodyCell class="py-2">{pe.usuario_id}</TableBodyCell>
+				{/if}
+				{#if visibleColumns.item}
 				<TableBodyCell class="py-2">{pe.items}</TableBodyCell>
+				{/if}
+				{#if visibleColumns.editar}
 				<TableBodyCell class="py-2">{pe.editar}</TableBodyCell>
+                {/if}
+				{#if visibleColumns.eliminar}
 				<TableBodyCell class="py-2">{pe.eliminar}</TableBodyCell>
+                {/if}
+				{#if visibleColumns.total_unidades}
 				<TableBodyCell class="py-2" style="text-align: right;">{pe.total_unidades}</TableBodyCell>
+                {/if}
+				{#if visibleColumns.total_importe}
 				<TableBodyCell class="py-2" style="text-align: right;">
-					${pe.total_importe.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableBodyCell>		
+					${pe.total_importe.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableBodyCell>	
+					{/if}
 				</TableBodyRow>
-			{/each}
+				{/each}
 			</TableBody>
-			<tfoot >
+			<tfoot>
 				<tr class="bg-gray-300 font-semibold text-gray-900 dark:text-white divide-y hover:bg-hover-gray-light ">
-				  <th scope="row" class="py-2 text-center ps-3"></th>
-				  <td class="py-2"> </td>
-				  <td class="py-2"></td>
-				  <td class="py-2"></td>
-				  <td class="py-2"></td>
-				  <td class="py-2"></td>
-				  <td class="py-2 ps-6">{mutatedData.length}</td>
-				  <td class="py-2"></td>
-				  <td class="py-2"></td>
-				  <td class="py-2"></td>
-				  <td class="py-2 pe-6" style="text-align: right;">{ mutatedData.reduce((total, item) => total + item.total_unidades, 0)}</td>
-				  <td class="py-2 text-right pe-6">$ { mutatedData.reduce((total, item) => total + item.total_importe, 0).toFixed(2)}</td> 
+					<th scope="row" class="py-2 text-center ps-3"></th>
+					{#if visibleColumns.pedido_cab_id}
+					  <td class="py-2"> </td>
+					{/if}
+					
+					{#if visibleColumns.razon_social}
+					 <td class="py-2"></td>
+					{/if}
+					
+				    {#if visibleColumns.fecha}
+					 <td class="py-2"></td>
+				    {/if}
+				
+				    {#if visibleColumns.pedido_estado_id}			
+				     <td class="py-2"></td>
+				    {/if}
+				
+				    {#if visibleColumns.pedido_estado_nombre}
+				     <td class="py-2"></td>
+				    {/if}
+				
+				    {#if visibleColumns.detalle}
+				     <td class="py-2 ps-6">{mutatedData.length}</td>
+				    {/if}
+  
+				    {#if visibleColumns.usuario_id} 
+				     <td class="py-2"></td>
+				    {/if}
+  
+				    {#if visibleColumns.item}
+				     <td class="py-2"></td>
+				    {/if}
+
+                    {#if visibleColumns.editar}
+			         <td class="py-2 pe-6" style="text-align: right;">{ mutatedData.reduce((total, item) => total + item.total_unidades, 0)}</td>
+			        {/if}
+  
+			        {#if visibleColumns.eliminar}
+			         <td class="py-2"></td>
+			        {/if}
+  
+			        {#if visibleColumns.total_unidades}
+			         <td class="py-2"></td>	
+			        {/if}
+  
+			       {#if visibleColumns.total_importe}
+			        <td class="py-2 text-right pe-6">$ { mutatedData.reduce((total, item) => total + item.total_importe, 0).toFixed(2)}</td> 				
+			       {/if}  
 				</tr>
 			  </tfoot>
 			</Table>
-		</div>
-	  </div><!------------ -Div contenedor: tabla + add + Filtro-->
-	</main> 
-
+		 </div>
+	   </div><!------------ -Div contenedor: tabla + add + Filtro-->
+	 </main> 
 	{/key}
 
 
 	<style>
 		.pedido-estado {
+		  text-align: center;
 		  padding: 6px 3px 6px 3px; 
 		  margin: 0;
 		  border: 1px solid #e3e2e2;
