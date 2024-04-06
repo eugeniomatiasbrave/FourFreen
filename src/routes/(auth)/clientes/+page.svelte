@@ -1,7 +1,6 @@
 <script>
-
 import {goto} from '$app/navigation';
-import {Input,Button,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
+import {Dropdown,Checkbox,Input,Button,Table,TableBody,TableBodyCell,TableBodyRow,TableHead,TableHeadCell} from 'flowbite-svelte';
 import Titulo from '$lib/componentes/titulo.svelte';
 export let data;
 export const {clientes,sortrazonsocial,searchclientes,sortCliente_id} = data;
@@ -63,7 +62,23 @@ const SortedRazonSocial=(params)=>{
 	SortedRazonSocial(sortOrder === 1 ? -1 : 1);
 }
 
+let visibleColumns = {
+	cliente_id:true, 
+	razon_social: true, 
+	cuit:true,
+	domicilio_calle: true, 
+	domicilio_altura: true, 
+	localidad: true, 
+	codigo_postal: true,
+    telefono: true, 
+    email: true,
+	editar: true,
+	eliminar: true
+};
 
+function toggleColumn(column) {
+  visibleColumns[column] = !visibleColumns[column];
+}
 
 </script>
 
@@ -94,78 +109,159 @@ const SortedRazonSocial=(params)=>{
 			<div>
 			 <Table hoverable={true} class="mx-auto mt-1 border text-xs">
 				<TableHead class="bg-primary-500 text-white" align="center" theadClass='text-xs'>
+					<TableHeadCell class="p-0 m-0 w-0 border-r " >
+						<Button class="bg-primary-500 w-0 h-0">👀</Button>
+						<Dropdown class="w-52 p-1 space-y-1 text-sm ">
+							<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+								<Checkbox  bind:checked={visibleColumns.cliente_id} on:click={() => toggleColumn('cliente_id')}>Checked Cliente Id</Checkbox>
+							</li>
+							<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+								<Checkbox bind:checked={visibleColumns.razon_social} on:click={() => toggleColumn('razon_social')}>Checked Nombre</Checkbox>
+							</li>
+							<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+								<Checkbox bind:checked={visibleColumns.cuit} on:click={() => toggleColumn('cuit')}>Checked Cuit</Checkbox>
+							</li>
+							<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+								<Checkbox bind:checked={visibleColumns.domicilio_calle} on:click={() => toggleColumn('cuit')}>Checked Calle</Checkbox>
+							</li>
+							<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+								<Checkbox bind:checked={visibleColumns.domicilio_altura} on:click={() => toggleColumn('domicilio_altura')}>Checked Domicilio</Checkbox>
+							</li>
+							<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+								<Checkbox bind:checked={visibleColumns.localidad} on:click={() => toggleColumn('localidad')}>Checked Localidad</Checkbox>
+							</li>
+							<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+								<Checkbox bind:checked={visibleColumns.codigo_postal} on:click={() => toggleColumn('codigo_postal')}>Checked Codigo Postal</Checkbox>
+							</li>
+							<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+								<Checkbox bind:checked={visibleColumns.telefono} on:click={() => toggleColumn('telefono')}>Checked Telefono</Checkbox>
+							</li>
+							<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+								<Checkbox bind:checked={visibleColumns.email} on:click={() => toggleColumn('email')}>Checked Email</Checkbox>
+							</li>
+							<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+								<Checkbox bind:checked={visibleColumns.editar} on:click={() => toggleColumn('editar')}>Checked Editar</Checkbox>
+							</li>
+							<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+								<Checkbox bind:checked={visibleColumns.eliminar} on:click={() => toggleColumn('eliminar')}>Checked Eliminar</Checkbox>
+							</li>
+						</Dropdown>
+					</TableHeadCell>
+					
+					{#if visibleColumns.cliente_id}
 					<TableHeadCell class="py-2" >
 						<div class="flex items-center justify-end">
-						  Id<button on:click={alternarSortId} class="bg-primary-500 hover:bg-primary-500 rounded">	
-							  {#if sortOrder === 1}
-							  <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
-							  <path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
-							  </svg>
-							  {:else}
-							  <svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
-							  <path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
-							  </svg>		
-							  {/if}
-						   </button>			      
+							Id<button on:click={alternarSortId} class="bg-primary-500 hover:bg-primary-500 rounded">	
+								{#if sortOrder === 1}
+								<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+									<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
+								</svg>
+								{:else}
+								<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+									<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
+								</svg>		
+								{/if}
+							</button>			      
 						</div>
-					  </TableHeadCell>
+					</TableHeadCell>
+					{/if}
+					
+					{#if visibleColumns.razon_social}
 					<TableHeadCell class="py-2">
 						<div class="flex items-center">	
 							Nombre
 							<button on:click={alternarSortRS} class="bg-primary-500 hover:bg-primary-500 rounded">	
-										{#if sortOrder === 1}
-										<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
-										<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
-										</svg>
-										{:else}
-										<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
-										<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
-										</svg>	
-										{/if}
-									 </button>
-								  </div>
-							</TableHeadCell>
-							<TableHeadCell class="py-2">Cuit</TableHeadCell>
-							<TableHeadCell class="py-2">Calle</TableHeadCell>
-							<TableHeadCell class="py-2">Altura</TableHeadCell>
-							<TableHeadCell class="py-2">Localidad</TableHeadCell>
-							<TableHeadCell class="py-2">C. P.</TableHeadCell>
-							<TableHeadCell class="py-2">Telefono</TableHeadCell>
-							<TableHeadCell class="py-2">Email</TableHeadCell>
-							<TableHeadCell class="py-2">Editar
-								<span class="sr-only">Editar</span>
-							</TableHeadCell>
-							<TableHeadCell class="py-2">Eliminar								
-                                <span class="sr-only">Eliminar</span>
-							</TableHeadCell>
-						    </TableHead>
-					    	<TableBody class="divide-y">
-								{#each filteredSortCliente_id as {cliente_id,razon_social,cuit,domicilio_calle,domicilio_altura,localidad,telefono,email, codigo_postal}}
-								<TableBodyRow class="hover:bg-hover-gray-light">
+								{#if sortOrder === 1}
+								<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+									<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"/>
+								</svg>
+								{:else}
+								<svg class="w-2.5 h-4 ms-1.5 text-white-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 8">
+									<path stroke="currentColor" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
+								</svg>	
+								{/if}
+							</button>
+						</div>
+					</TableHeadCell>
+					{/if}
+					{#if visibleColumns.cuit}
+					 <TableHeadCell class="py-2">Cuit</TableHeadCell>
+					{/if}
+					{#if visibleColumns.domicilio_calle}
+					 <TableHeadCell class="py-2">Calle</TableHeadCell>
+					{/if}
+					{#if visibleColumns.domicilio_altura}
+					 <TableHeadCell class="py-2">Altura</TableHeadCell>
+					{/if}
+					{#if visibleColumns.localidad}
+					 <TableHeadCell class="py-2">Localidad</TableHeadCell>
+					{/if}
+					{#if visibleColumns.codigo_postal}
+					<TableHeadCell class="py-2">C. P.</TableHeadCell>
+					{/if}
+					{#if visibleColumns.telefono}
+					<TableHeadCell class="py-2">Telefono</TableHeadCell>
+					{/if}	
+					{#if visibleColumns.email}
+					<TableHeadCell class="py-2">Email</TableHeadCell>
+					{/if}
+					{#if visibleColumns.editar}		
+					 <TableHeadCell class="py-2">Editar</TableHeadCell>
+					{/if}
+					{#if visibleColumns.eliminar}
+					  <TableHeadCell class="py-2">Eliminar</TableHeadCell>
+					{/if}
+				</TableHead>
+				<TableBody class="divide-y">
+					{#each filteredSortCliente_id as {cliente_id,razon_social,cuit,domicilio_calle,domicilio_altura,localidad,telefono,email, codigo_postal}}
+						<TableBodyRow class="hover:bg-hover-gray-light">
+							<TableBodyCell class="py-2" align="center"> </TableBodyCell>
+									{#if visibleColumns.cliente_id}
 									<TableBodyCell class="py-2" align="center">{cliente_id}</TableBodyCell>
+									{/if}
+									{#if visibleColumns.razon_social}
 									<TableBodyCell class="py-2">{razon_social}</TableBodyCell>
+									{/if}
+									{#if visibleColumns.cuit}
 									<TableBodyCell class="py-2" align="right">{cuit}</TableBodyCell>
+									{/if}
+									{#if visibleColumns.domicilio_calle}
 									<TableBodyCell class="py-2">{domicilio_calle}</TableBodyCell>
+									{/if}
+									{#if visibleColumns.domicilio_altura}
 									<TableBodyCell class="py-2" align="right">{domicilio_altura}</TableBodyCell>
+									{/if}
+									{#if visibleColumns.localidad}
 									<TableBodyCell class="py-2">{localidad}</TableBodyCell>
+									{/if}
+									{#if visibleColumns.codigo_postal}
 									<TableBodyCell class="py-2" align="right">{codigo_postal}</TableBodyCell>
+									{/if}
+									{#if visibleColumns.telefono}
 									<TableBodyCell class="py-2" align="right">{telefono}</TableBodyCell>
+									{/if}
+									{#if visibleColumns.email}
 									<TableBodyCell class="py-2">{email}</TableBodyCell>
+									{/if}
+									{#if visibleColumns.editar}
 									<TableBodyCell class="py-2" align="center">
 										<a href={`/clientes/${cliente_id}?action=editar`} data-sveltekit-preload-code="hover"
 											    class="font-medium text-primary-600 hover:underline dark:text-primary-500">Editar</a>								
 									</TableBodyCell>
+									{/if}
+									{#if visibleColumns.eliminar}
 									<TableBodyCell class="py-2" align="center"><!---------------------Elimina el cliente--------------------->
 										<a href={`/clientes/${cliente_id}?action=eliminar`} data-sveltekit-preload-code="hover"			
 										   class="font-medium text-primary-600 hover:underline dark:text-primary-500">Eliminar</a>
-				</TableBodyCell>
-			 </TableBodyRow>
-			{/each}
-		 </TableBody>
-	  </Table>
-	</div>		
-  </div>
-</main>
+				                   </TableBodyCell>
+									{/if}
+			             </TableBodyRow>
+			        {/each}
+		       </TableBody>
+	      </Table>
+	   </div>		
+    </div>
+ </main>
 
 <style>
 
