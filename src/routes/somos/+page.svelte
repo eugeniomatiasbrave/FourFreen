@@ -3,4 +3,4 @@
 	let titulo = 'Sobre Nosotros';
 </script>
 
-<Titulo {titulo}/>
+<Titulo {titulo} />

@@ -3,4 +3,4 @@
 	let titulo = 'Sustentabilidad';
 </script>
 
-<Titulo {titulo}/>
+<Titulo {titulo} />

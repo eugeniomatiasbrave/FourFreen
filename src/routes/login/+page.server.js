@@ -1,4 +1,4 @@
-import { error, redirect} from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import { BASE_URL } from '$lib/utils.js';
 //import { date } from 'zod';
 
@@ -8,13 +8,13 @@ export const actions = {
 		const username = formData.get('username');
 		const password = formData.get('password');
 
-		try {			
-			const res = await fetch(BASE_URL+"/usuarios/login", {
-				method: "POST",
-				headers: {"Content-Type": "application/json"},
+		try {
+			const res = await fetch(BASE_URL + '/usuarios/login', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
-					"email": username,
-					"clave": password,			
+					email: username,
+					clave: password
 				})
 			});
 			if (res.status === 200) {
@@ -25,28 +25,29 @@ export const actions = {
 					secure: true,
 					sameSite: 'strict',
 					maxAge: 60 * 60 * 24 // 1 day
-				})
-				cookies.set('Usuario', JSON.stringify({
-					usuario_id: datos.usuario_id,
-					nombre: datos.nombre
-				}), {
-					httpOnly: true,
-					path: '/',
-					secure: true,
-					sameSite: 'strict',
-					maxAge: 60 * 60 * 24 // 1 day
 				});
-			
-				
+				cookies.set(
+					'Usuario',
+					JSON.stringify({
+						usuario_id: datos.usuario_id,
+						nombre: datos.nombre
+					}),
+					{
+						httpOnly: true,
+						path: '/',
+						secure: true,
+						sameSite: 'strict',
+						maxAge: 60 * 60 * 24 // 1 day
+					}
+				);
 			} else {
-				return {success: false, message: 'Datos de acceso incorrectos'}						
+				return { success: false, message: 'Datos de acceso incorrectos' };
 			}
 		} catch (err) {
 			console.log('Error: ', err);
 			error(500, 'Something went wrong logging in');
 		}
-		
-		throw redirect(303, '/');   
+
+		throw redirect(303, '/');
 	}
-	
 };

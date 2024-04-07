@@ -2,7 +2,7 @@ import { BASE_URL } from '$lib/utils.js';
 import { fetchApi } from '$lib/fetchApi.js';
 //import { error } from '@sveltejs/kit';
 
-export const load = async ({ locals, params}) => {
+export const load = async ({ locals, params }) => {
 	const { pedido_estado_id } = params;
 
 	const PedidoEstadoId = async () => {
@@ -14,21 +14,20 @@ export const load = async ({ locals, params}) => {
 		return pedidoEstadoId;
 	};
 
-const PedidosEstados = async () => {
-	const pedidosEstados = await fetchApi.get({
-		url: BASE_URL + '/pedidos_estado',
-		token: locals.token,
-		resStatus: 200
-	});
-	return pedidosEstados;
-};
+	const PedidosEstados = async () => {
+		const pedidosEstados = await fetchApi.get({
+			url: BASE_URL + '/pedidos_estado',
+			token: locals.token,
+			resStatus: 200
+		});
+		return pedidosEstados;
+	};
 
 	return {
 		pedidoEstadoId: await PedidoEstadoId(),
 		pedidosEstados: await PedidosEstados()
 	};
 };
-
 
 /*
 export const actions = {
