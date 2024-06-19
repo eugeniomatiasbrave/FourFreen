@@ -9,6 +9,10 @@
 	import { page } from '$app/stores';
 	export let data;
 
+	// para cuando este lista la API..aqui puedo desestructurar 
+	//el objeto menu y obtener un objeto para las paginas principales y otro objeto para las paginas de pedidos.
+	// Con esto logro un menu desplegable con las paginas principales y un desplegable con las de pedidos.
+
 	$: activeUrl = $page.url.pathname;
 
 	let hidden2 = true;

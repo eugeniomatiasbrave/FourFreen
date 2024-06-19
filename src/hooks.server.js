@@ -12,8 +12,8 @@ export const handle = async ({ event, resolve }) => {
 		// es una ruta protegida
 		if (!token || !usuario) {
 			// Correctamente se añade el argumento 'path' al eliminar las cookies
-			event.cookies.delete('AuthorizationToken', { path: '/' });
-			event.cookies.delete('Usuario', { path: '/' });
+			event.cookies.delete('AuthorizationToken', { path: '/' }); 
+			event.cookies.delete('Usuario', { path: '/' }); 
 			// Redirecciona al usuario a la página de inicio de sesión
 			throw redirect(303, '/');
 		}

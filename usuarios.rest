@@ -14,7 +14,7 @@ POST {{baseUrl}}/usuarios/login
 Content-Type: application/json
 
 {
-  "email": "b@b.com",
+  "email": "a@a.com",
   "clave": "123"
 }
 
